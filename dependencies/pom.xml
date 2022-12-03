@@ -12,12 +12,12 @@
 
     <groupId>com.ds.nas</groupId>
     <artifactId>dependencies</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <packaging>pom</packaging>
     <name>dependencies</name>
 
     <properties>
-        <rversion>1.0.0-SNAPSHOT</rversion>
+        <rversion>1.0.0-RELEASE</rversion>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

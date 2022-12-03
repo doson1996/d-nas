@@ -5,19 +5,15 @@
 
     <parent>
         <groupId>com.ds.nas</groupId>
-        <artifactId>dependencies</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <artifactId>nas-hc</artifactId>
+        <version>1.0.0-RELEASE</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>nas-hc</artifactId>
+    <artifactId>hc-api</artifactId>
     <version>${rversion}</version>
-    <packaging>pom</packaging>
-    <name>nas-hc</name>
-
-    <modules>
-        <module></module>
-    </modules>
+    <packaging>jar</packaging>
+    <name>hc-api</name>
 
     <dependencies>
 
