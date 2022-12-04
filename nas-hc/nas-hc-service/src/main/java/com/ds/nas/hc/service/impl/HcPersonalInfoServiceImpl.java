@@ -28,7 +28,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         hcPersonalInfo.setHealth(1);
         boolean save = save(hcPersonalInfo);
         if (!save) {
-            Result.fail("申领健康码失败!");
+            return Result.fail("申领健康码失败!");
         }
         return Result.ok("申领健康码成功!");
     }
