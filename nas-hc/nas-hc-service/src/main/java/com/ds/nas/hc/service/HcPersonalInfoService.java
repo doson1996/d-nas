@@ -21,4 +21,12 @@ public interface HcPersonalInfoService extends IService<HcPersonalInfo> {
      */
     Result<ApplyHealthCodeResponse> apply(ApplyHealthCodeRequest request);
 
+    /**
+     * 查询健康码
+     *
+     * @param idCard
+     * @return
+     */
+    Result<ApplyHealthCodeResponse> queryByIdCard(String idCard);
+
 }

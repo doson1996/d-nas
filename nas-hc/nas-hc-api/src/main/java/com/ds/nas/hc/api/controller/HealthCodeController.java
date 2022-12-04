@@ -4,10 +4,7 @@ import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.ApplyHealthCodeRequest;
 import com.ds.nas.hc.dao.response.ApplyHealthCodeResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -34,5 +31,16 @@ public class HealthCodeController {
         return hcPersonalInfoService.apply(request);
     }
 
+    /**
+     * 查询健康码
+     * //todo 可以单独拆分成服务部署
+     *
+     * @param idCard
+     * @return
+     */
+    @GetMapping("query/{idCard}")
+    public Result<ApplyHealthCodeResponse> query(@PathVariable String idCard) {
+        return hcPersonalInfoService.queryByIdCard(idCard);
+    }
 
 }
