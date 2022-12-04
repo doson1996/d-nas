@@ -2,6 +2,7 @@ package com.ds.nas.hc.common.result;
 
 /**
  * 返回消息
+ *
  * @author ds
  */
 public class ResultMsg {

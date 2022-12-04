@@ -1,9 +1,8 @@
 package com.ds.nas.hc.common.result;
 
 /**
- *
- * @see org.springframework.http.HttpStatus
  * @author ds
+ * @see org.springframework.http.HttpStatus
  */
 public enum ResultEnum {
 

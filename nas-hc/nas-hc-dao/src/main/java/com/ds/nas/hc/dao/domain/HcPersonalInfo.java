@@ -3,6 +3,7 @@ package com.ds.nas.hc.dao.domain;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,9 +12,10 @@ import lombok.Data;
 
 /**
  * 人员信息
+ *
  * @TableName hc_personal_info
  */
-@TableName(value ="hc_personal_info")
+@TableName(value = "hc_personal_info")
 @Data
 public class HcPersonalInfo extends BaseDomain implements Serializable {
 
