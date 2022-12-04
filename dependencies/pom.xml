@@ -26,7 +26,7 @@
         <httpclient.version>4.5.12</httpclient.version>
         <swagger.version>2.9.2</swagger.version>
         <swagger-ui.version>1.9.6</swagger-ui.version>
-        <mybatis-plus.version>3.4.2</mybatis-plus.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <fastjson.version>1.2.78</fastjson.version>
         <redisson.version>3.16.1</redisson.version>
 
@@ -38,6 +38,13 @@
     <modules>
         <module>../nas-hc</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 
     <!-- 依赖管理 -->
     <dependencyManagement>
