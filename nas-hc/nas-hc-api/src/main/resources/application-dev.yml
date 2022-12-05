@@ -18,6 +18,13 @@ spring:
       maximum-pool-size: 20
       # 监控
       register-mbeans: true
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: dy.com:8848
+        username: nacos
+        password: nacos
 
 mybatis-plus:
   global-config:

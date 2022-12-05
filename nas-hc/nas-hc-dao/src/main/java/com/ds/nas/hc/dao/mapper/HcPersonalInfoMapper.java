@@ -2,6 +2,7 @@ package com.ds.nas.hc.dao.mapper;
 
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author ds
@@ -10,6 +11,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @Entity com.ds.nas.hc.dao.domain.HcPersonalInfo
  */
 public interface HcPersonalInfoMapper extends BaseMapper<HcPersonalInfo> {
+
+    /**
+     * 根据身份证号查询
+     * @param idCard
+     * @return
+     */
+    HcPersonalInfo queryByIdCard(String idCard);
 
 }
 

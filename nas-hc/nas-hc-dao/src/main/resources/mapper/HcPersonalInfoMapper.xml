@@ -26,4 +26,18 @@
         last_nucleic_acid_time,create_time,update_time,
         cretae_by,update_by,delete_flag
     </sql>
+
+    <select id="queryByIdCard" resultType="com.ds.nas.hc.dao.domain.HcPersonalInfo">
+        select
+            name,
+            id_card,
+            address,
+            phone,
+            health,
+            last_nucleic_acid_time
+        from
+            hc_personal_info t
+        where
+            t.id_card = #{idCard}
+    </select>
 </mapper>

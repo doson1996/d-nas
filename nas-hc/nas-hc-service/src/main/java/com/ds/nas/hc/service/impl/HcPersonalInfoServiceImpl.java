@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.hc.common.base.db.DBUtils;
+import com.ds.nas.hc.common.constant.HealthCodeState;
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
@@ -33,9 +34,9 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         BeanUtil.copyProperties(request, hcPersonalInfo);
         hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().commonFieldAssignments(hcPersonalInfo);
-        hcPersonalInfo.setHealth(1);
-        boolean save = save(hcPersonalInfo);
-        if (!save) {
+        hcPersonalInfo.setHealth(HealthCodeState.GREEN);
+
+        if (!save(hcPersonalInfo)) {
             return Result.fail("申领健康码失败!");
         }
         return Result.ok("申领健康码成功!");
@@ -43,9 +44,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     @Override
     public Result<ApplyHealthCodeResponse> queryByIdCard(String idCard) {
-        LambdaQueryWrapper<HcPersonalInfo> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(HcPersonalInfo::getIdCard, idCard);
-        HcPersonalInfo hcPersonalInfo = hcPersonalInfoMapper.selectOne(wrapper);
+        HcPersonalInfo hcPersonalInfo = hcPersonalInfoMapper.queryByIdCard(idCard);
         ApplyHealthCodeResponse response = new ApplyHealthCodeResponse();
         BeanUtil.copyProperties(hcPersonalInfo, response);
 
@@ -57,13 +56,13 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         BeanUtil.copyProperties(request, hcPersonalInfo);
         hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().commonFieldAssignments(hcPersonalInfo);
-        hcPersonalInfo.setHealth(1);
-        boolean save = save(hcPersonalInfo);
-        if (!save) {
+        hcPersonalInfo.setHealth(HealthCodeState.GREEN);
+
+        if (!save(hcPersonalInfo)) {
             return Result.fail("注册失败!");
         }
         PersonalInfoRegisterResponse response = new PersonalInfoRegisterResponse();
-        response.setHealth(1);
+        response.setHealth(HealthCodeState.GREEN);
         response.setName(hcPersonalInfo.getName());
         response.setPhone(hcPersonalInfo.getPhone());
         response.setIdCard(hcPersonalInfo.getIdCard());
