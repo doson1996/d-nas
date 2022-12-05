@@ -26,6 +26,15 @@
         cretae_by,update_by,delete_flag
     </sql>
 
+    <update id="updateByIdCard">
+        update
+            hc_personal_info
+        set
+            health = 1
+        where
+            id_card = #{idCard}
+    </update>
+
     <select id="queryByIdCard" resultType="com.ds.nas.hc.dao.domain.HcPersonalInfo">
         select
             name,
@@ -35,8 +44,8 @@
             health,
             last_nucleic_acid_time
         from
-            hc_personal_info t
+            hc_personal_info
         where
-            t.id_card = #{idCard}
+            id_card = #{idCard}
     </select>
 </mapper>

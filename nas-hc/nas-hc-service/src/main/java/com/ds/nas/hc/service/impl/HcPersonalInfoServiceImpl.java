@@ -1,7 +1,6 @@
 package com.ds.nas.hc.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.hc.common.base.db.DBUtils;
 import com.ds.nas.hc.common.constant.HealthCodeState;
@@ -10,7 +9,7 @@ import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
-import com.ds.nas.hc.dao.response.ApplyHealthCodeResponse;
+import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import org.springframework.stereotype.Service;
@@ -30,25 +29,21 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     private HcPersonalInfoMapper hcPersonalInfoMapper;
 
     @Override
-    public Result<ApplyHealthCodeResponse> apply(HealthCodeApplyRequest request) {
-        HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
-        BeanUtil.copyProperties(request, hcPersonalInfo);
-        hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().commonFieldAssignments(hcPersonalInfo);
-        hcPersonalInfo.setHealth(HealthCodeState.GREEN);
-
-        if (!save(hcPersonalInfo)) {
-            return Result.fail("申领健康码失败!");
+    public Result<String> apply(HealthCodeApplyRequest request) {
+        if (hcPersonalInfoMapper.updateByIdCard(request.getIdCard()) == 1) {
+            return Result.ok("申领健康码成功!");
         }
-        return Result.ok("申领健康码成功!");
+
+        return Result.fail("申领健康码失败!");
     }
 
     @Override
-    public Result<ApplyHealthCodeResponse> queryByIdCard(String idCard) {
+    public Result<HealthCodeQueryResponse> queryByIdCard(String idCard) {
         HcPersonalInfo hcPersonalInfo = hcPersonalInfoMapper.queryByIdCard(idCard);
-        ApplyHealthCodeResponse response = new ApplyHealthCodeResponse();
+        HealthCodeQueryResponse response = new HealthCodeQueryResponse();
         BeanUtil.copyProperties(hcPersonalInfo, response);
 
-        return Result.ok("", response);
+        return Result.ok("查询成功", response);
     }
 
     @Override
@@ -69,6 +64,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         response.setAddress(hcPersonalInfo.getAddress());
         return Result.ok("注册成功!", response);
     }
+
 }
 
 

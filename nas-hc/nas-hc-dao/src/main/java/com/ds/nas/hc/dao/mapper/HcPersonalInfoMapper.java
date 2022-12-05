@@ -17,8 +17,14 @@ public interface HcPersonalInfoMapper extends BaseMapper<HcPersonalInfo> {
      * @param idCard
      * @return
      */
-    HcPersonalInfo queryByIdCard(String idCard);
+    int updateByIdCard(String idCard);
 
+    /**
+     * 根据身份证号更新
+     * @param idCard
+     * @return
+     */
+    HcPersonalInfo queryByIdCard(String idCard);
 }
 
 

@@ -2,7 +2,7 @@ package com.ds.nas.hc.api.controller;
 
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
-import com.ds.nas.hc.dao.response.ApplyHealthCodeResponse;
+import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +23,11 @@ public class HealthCodeController {
     /**
      * 申领健康码
      *
-     * @return
+     * @param request 入参
+     * @return 出参
      */
     @PostMapping("apply")
-    public Result<ApplyHealthCodeResponse> apply(@RequestBody HealthCodeApplyRequest request) {
-
+    public Result<String> apply(@RequestBody HealthCodeApplyRequest request) {
         return hcPersonalInfoService.apply(request);
     }
 
@@ -35,11 +35,11 @@ public class HealthCodeController {
      * 查询健康码
      * //todo 可以单独拆分成服务部署
      *
-     * @param idCard
-     * @return
+     * @param idCard 身份证号
+     * @return 出参
      */
     @GetMapping("query/{idCard}")
-    public Result<ApplyHealthCodeResponse> query(@PathVariable String idCard) {
+    public Result<HealthCodeQueryResponse> query(@PathVariable String idCard) {
         return hcPersonalInfoService.queryByIdCard(idCard);
     }
 

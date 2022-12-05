@@ -5,7 +5,7 @@ import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
-import com.ds.nas.hc.dao.response.ApplyHealthCodeResponse;
+import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 
 /**
@@ -16,23 +16,23 @@ import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 public interface HcPersonalInfoService extends IService<HcPersonalInfo> {
 
     /**
-     * 健康码申领
+     * 根据身份证号申领健康码
      *
      * @param request
      * @return
      */
-    Result<ApplyHealthCodeResponse> apply(HealthCodeApplyRequest request);
+    Result<String> apply(HealthCodeApplyRequest request);
 
     /**
-     * 查询健康码
+     * 根据身份证号查询健康码
      *
      * @param idCard
      * @return
      */
-    Result<ApplyHealthCodeResponse> queryByIdCard(String idCard);
+    Result<HealthCodeQueryResponse> queryByIdCard(String idCard);
 
     /**
-     * 注册
+     * 用户注册
      * @param request
      * @return
      */

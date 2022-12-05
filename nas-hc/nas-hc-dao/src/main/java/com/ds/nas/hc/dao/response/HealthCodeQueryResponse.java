@@ -11,7 +11,7 @@ import java.util.Date;
  * @description 申领健康码出参
  */
 @Data
-public class ApplyHealthCodeResponse extends BaseResponse {
+public class HealthCodeQueryResponse extends BaseResponse {
 
     /**
      * 姓名
