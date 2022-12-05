@@ -2,7 +2,7 @@ package com.ds.nas.hc.api.controller;
 
 import com.ds.nas.hc.api.HcApplication;
 import com.ds.nas.hc.common.util.DataGenerateUtil;
-import com.ds.nas.hc.dao.request.ApplyHealthCodeRequest;
+import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +26,7 @@ public class HealthCodeServiceTest {
     @Test
     public void test_batch_apply() {
 
-        ApplyHealthCodeRequest request = new ApplyHealthCodeRequest();
+        HealthCodeApplyRequest request = new HealthCodeApplyRequest();
         for (int i = 0; i < 10000; i++) {
             request.setName(DataGenerateUtil.generateName());
             request.setPhone(DataGenerateUtil.getTel());

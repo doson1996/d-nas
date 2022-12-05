@@ -7,8 +7,10 @@ import com.ds.nas.hc.common.base.db.DBUtils;
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
-import com.ds.nas.hc.dao.request.ApplyHealthCodeRequest;
+import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
+import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
 import com.ds.nas.hc.dao.response.ApplyHealthCodeResponse;
+import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     private HcPersonalInfoMapper hcPersonalInfoMapper;
 
     @Override
-    public Result<ApplyHealthCodeResponse> apply(ApplyHealthCodeRequest request) {
+    public Result<ApplyHealthCodeResponse> apply(HealthCodeApplyRequest request) {
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         BeanUtil.copyProperties(request, hcPersonalInfo);
         hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().commonFieldAssignments(hcPersonalInfo);
@@ -48,6 +50,25 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         BeanUtil.copyProperties(hcPersonalInfo, response);
 
         return Result.ok("", response);
+    }
+
+    @Override
+    public Result<PersonalInfoRegisterResponse> register(PersonalInfoRegisterRequest request) {
+        HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
+        BeanUtil.copyProperties(request, hcPersonalInfo);
+        hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().commonFieldAssignments(hcPersonalInfo);
+        hcPersonalInfo.setHealth(1);
+        boolean save = save(hcPersonalInfo);
+        if (!save) {
+            return Result.fail("注册失败!");
+        }
+        PersonalInfoRegisterResponse response = new PersonalInfoRegisterResponse();
+        response.setHealth(1);
+        response.setName(hcPersonalInfo.getName());
+        response.setPhone(hcPersonalInfo.getPhone());
+        response.setIdCard(hcPersonalInfo.getIdCard());
+        response.setAddress(hcPersonalInfo.getAddress());
+        return Result.ok("注册成功!", response);
     }
 }
 

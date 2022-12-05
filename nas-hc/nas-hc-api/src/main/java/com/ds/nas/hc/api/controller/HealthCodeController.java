@@ -1,7 +1,7 @@
 package com.ds.nas.hc.api.controller;
 
 import com.ds.nas.hc.common.result.Result;
-import com.ds.nas.hc.dao.request.ApplyHealthCodeRequest;
+import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.response.ApplyHealthCodeResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ public class HealthCodeController {
      * @return
      */
     @PostMapping("apply")
-    public Result<ApplyHealthCodeResponse> apply(@RequestBody ApplyHealthCodeRequest request) {
+    public Result<ApplyHealthCodeResponse> apply(@RequestBody HealthCodeApplyRequest request) {
 
         return hcPersonalInfoService.apply(request);
     }

@@ -1,14 +1,15 @@
 package com.ds.nas.hc.dao.request;
 
+import com.ds.nas.hc.common.base.request.BaseRequest;
 import lombok.Data;
 
 /**
  * @author ds
- * @date 2022/12/4
- * @description 申领健康码入参
+ * @date 2022/12/5
+ * @description 注册入参
  */
 @Data
-public class ApplyHealthCodeRequest {
+public class PersonalInfoRegisterRequest extends BaseRequest {
 
     /**
      * 姓名

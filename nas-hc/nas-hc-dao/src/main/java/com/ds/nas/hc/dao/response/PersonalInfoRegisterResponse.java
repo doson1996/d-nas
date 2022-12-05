@@ -7,11 +7,11 @@ import java.util.Date;
 
 /**
  * @author ds
- * @date 2022/12/4
- * @description 申领健康码出参
+ * @date 2022/12/5
+ * @description 注册出参
  */
 @Data
-public class ApplyHealthCodeResponse extends BaseResponse {
+public class PersonalInfoRegisterResponse extends BaseResponse {
 
     /**
      * 姓名
