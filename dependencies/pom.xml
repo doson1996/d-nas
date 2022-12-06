@@ -37,6 +37,7 @@
     <!-- 模块 -->
     <modules>
         <module>../nas-hc</module>
+        <module>../nas-nat</module>
     </modules>
 
     <dependencies>

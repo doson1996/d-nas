@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ds.nas</groupId>
+        <artifactId>dependencies</artifactId>
+        <version>1.0.0-RELEASE</version>
+        <relativePath>../dependencies/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>nas-nat</artifactId>
+    <version>${rversion}</version>
+    <packaging>pom</packaging>
+    <name>nas-nat</name>
+    <description></description>
+
+    <modules>
+        <module>nas-nat-api</module>
+        <module>nas-nat-client</module>
+        <module>nas-nat-common</module>
+        <module>nas-nat-dao</module>
+        <module>nas-nat-service</module>
+    </modules>
+
+    <dependencies>
+
+    </dependencies>
+</project>
