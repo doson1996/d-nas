@@ -2,7 +2,9 @@ package com.ds.nas.hc.api.controller;
 
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
+import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
+import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +25,24 @@ public class PersonalInfoController {
     @Resource
     private HcPersonalInfoService hcPersonalInfoService;
 
+    /**
+     * 注册
+     * @param request 入参
+     * @return
+     */
     @PostMapping("register")
     public Result<PersonalInfoRegisterResponse> register(@RequestBody PersonalInfoRegisterRequest request) {
         return hcPersonalInfoService.register(request);
+    }
+
+    /**
+     * 根据主键更新
+     * @param request 入参
+     * @return
+     */
+    @PostMapping("update")
+    public Result<PersonalInfoUpdateResponse> update(@RequestBody PersonalInfoUpdateRequest request) {
+        return hcPersonalInfoService.updateByPk(request);
     }
 
 }

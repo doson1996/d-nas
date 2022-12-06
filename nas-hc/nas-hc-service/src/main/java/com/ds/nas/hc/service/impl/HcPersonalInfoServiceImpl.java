@@ -9,8 +9,10 @@ import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
+import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
+import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import org.springframework.stereotype.Service;
 
@@ -39,9 +41,8 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     @Override
     public Result<HealthCodeQueryResponse> queryByIdCard(String idCard) {
-        HcPersonalInfo hcPersonalInfo = hcPersonalInfoMapper.queryByIdCard(idCard);
         HealthCodeQueryResponse response = new HealthCodeQueryResponse();
-        BeanUtil.copyProperties(hcPersonalInfo, response);
+        BeanUtil.copyProperties(hcPersonalInfoMapper.queryByIdCard(idCard), response);
 
         return Result.ok("查询成功", response);
     }
@@ -63,6 +64,19 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         response.setIdCard(hcPersonalInfo.getIdCard());
         response.setAddress(hcPersonalInfo.getAddress());
         return Result.ok("注册成功!", response);
+    }
+
+    @Override
+    public Result<PersonalInfoUpdateResponse> updateByPk(PersonalInfoUpdateRequest request) {
+        HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
+        BeanUtil.copyProperties(request, hcPersonalInfo);
+
+        if (updateById(hcPersonalInfo)) {
+            PersonalInfoUpdateResponse response = new PersonalInfoUpdateResponse();
+            BeanUtil.copyProperties(hcPersonalInfoMapper.queryByIdCard(hcPersonalInfo.getIdCard()), response);
+            return Result.ok("更新成功!", response);
+        }
+        return Result.fail("更新失败!");
     }
 
 }

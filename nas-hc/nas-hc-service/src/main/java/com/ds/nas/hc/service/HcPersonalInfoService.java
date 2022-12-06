@@ -5,8 +5,10 @@ import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
+import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
+import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 
 /**
  * @author ds
@@ -37,5 +39,12 @@ public interface HcPersonalInfoService extends IService<HcPersonalInfo> {
      * @return
      */
     Result<PersonalInfoRegisterResponse> register(PersonalInfoRegisterRequest request);
+
+    /**
+     * 根据主键更新
+     * @param request
+     * @return
+     */
+    Result<PersonalInfoUpdateResponse> updateByPk(PersonalInfoUpdateRequest request);
 
 }
