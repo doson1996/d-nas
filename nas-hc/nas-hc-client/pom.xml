@@ -16,6 +16,15 @@
     <name>nas-hc-client</name>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>com.ds.nas</groupId>
+            <artifactId>nas-hc-dao</artifactId>
+            <version>${rversion}</version>
+        </dependency>
     </dependencies>
 </project>
