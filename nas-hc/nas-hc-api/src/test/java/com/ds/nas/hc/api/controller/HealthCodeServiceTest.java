@@ -28,8 +28,6 @@ public class HealthCodeServiceTest {
 
         HealthCodeApplyRequest request = new HealthCodeApplyRequest();
         for (int i = 0; i < 10000; i++) {
-            request.setName(DataGenerateUtil.generateName());
-            request.setPhone(DataGenerateUtil.getTel());
             request.setIdCard(DataGenerateUtil.getIdNo());
             hcPersonalInfoService.apply(request);
         }

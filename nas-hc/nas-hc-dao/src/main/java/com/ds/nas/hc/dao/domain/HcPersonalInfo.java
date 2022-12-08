@@ -13,6 +13,7 @@ import lombok.Data;
 /**
  * 人员信息
  *
+ * @author ds
  * @TableName hc_personal_info
  */
 @TableName(value = "hc_personal_info")
