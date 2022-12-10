@@ -20,14 +20,15 @@ public class PersistenceController {
     @Resource
     private PersistenceService persistenceService;
 
-    @PostMapping("create-table-nat")
-    public Result<String> createTableNat(@RequestParam String tableName) {
-        return persistenceService.createTableNat(tableName);
-    }
-
     @PostMapping("create-table")
     public Result<String> createTable(@RequestBody TableInfo tableInfo) {
         return persistenceService.createTable(tableInfo);
     }
+
+    @PostMapping("create-table-dpi")
+    public Result<String> createTableDpi() {
+        return persistenceService.createTableDpi();
+    }
+
 
 }

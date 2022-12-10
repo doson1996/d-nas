@@ -11,15 +11,15 @@ import org.apache.ibatis.annotations.Param;
 public interface PersistenceMapper {
 
     /**
-     * 创建表
-     * @param tableName
-     */
-    void createTableNat(String tableName);
-
-    /**
      * 动态建表
      * @param tableInfo
      */
-    void createTable(@Param("tableInfo") TableInfo tableInfo);
+    int createTable(@Param("tableInfo") TableInfo tableInfo);
+
+    /**
+     * 创建固定表
+     * @param tableName
+     */
+    int createTableDpi(String tableName);
 
 }

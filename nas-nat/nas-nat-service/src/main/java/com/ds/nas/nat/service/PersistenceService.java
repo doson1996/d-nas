@@ -14,15 +14,17 @@ public interface PersistenceService {
 
     /**
      * 创建表
-     * @param tableName
-     * @return
-     */
-    Result<String> createTableNat(String tableName);
-
-    /**
-     * 创建表
+     *
      * @param tableInfo
      * @return
      */
     Result<String> createTable(TableInfo tableInfo);
+
+    /**
+     * 根据日期创建表 detection_personal_info_yyyyMMdd
+     *
+     * @return
+     */
+    Result<String> createTableDpi();
+
 }
