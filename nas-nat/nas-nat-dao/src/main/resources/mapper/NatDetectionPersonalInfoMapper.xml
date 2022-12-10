@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="batchNo" column="batch_no" jdbcType="VARCHAR"/>
+            <result property="idCard" column="id_card" jdbcType="VARCHAR"/>
+            <result property="deleteFlag" column="delete_flag" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,batch_no,id_card,
+        delete_flag
+    </sql>
+</mapper>
