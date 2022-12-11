@@ -40,13 +40,6 @@
         <module>../nas-nat</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-    </dependencies>
-
     <!-- 依赖管理 -->
     <dependencyManagement>
         <dependencies>

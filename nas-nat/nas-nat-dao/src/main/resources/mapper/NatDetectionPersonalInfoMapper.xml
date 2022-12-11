@@ -5,14 +5,19 @@
 <mapper namespace="com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper">
 
     <resultMap id="BaseResultMap" type="com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="batchNo" column="batch_no" jdbcType="VARCHAR"/>
-            <result property="idCard" column="id_card" jdbcType="VARCHAR"/>
-            <result property="deleteFlag" column="delete_flag" jdbcType="TINYINT"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="batchNo" column="batch_no" jdbcType="VARCHAR"/>
+        <result property="idCard" column="id_card" jdbcType="VARCHAR"/>
+        <result property="deleteFlag" column="delete_flag" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,batch_no,id_card,
         delete_flag
     </sql>
+
+    <update id="detection">
+        insert into `${tableName}` (`batch_no`, `id_card`)
+        values ('${personalInfo.batchNo}', '${personalInfo.idCard}');
+    </update>
 </mapper>

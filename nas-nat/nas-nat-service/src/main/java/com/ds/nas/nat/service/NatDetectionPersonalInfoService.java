@@ -1,7 +1,9 @@
 package com.ds.nas.nat.service;
 
+import com.ds.nas.nat.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ds.nas.nat.dao.request.DetectionPersonalInfoRequest;
 
 /**
 * @author ds
@@ -9,5 +11,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2022-12-10 23:58:31
 */
 public interface NatDetectionPersonalInfoService extends IService<NatDetectionPersonalInfo> {
+
+    /**
+     * 信息录入
+     * @param request 入参
+     * @return 录入结果
+     */
+    Result<String> detection(DetectionPersonalInfoRequest request);
 
 }

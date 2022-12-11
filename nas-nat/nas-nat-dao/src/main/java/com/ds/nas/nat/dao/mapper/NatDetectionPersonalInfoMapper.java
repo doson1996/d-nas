@@ -11,6 +11,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface NatDetectionPersonalInfoMapper extends BaseMapper<NatDetectionPersonalInfo> {
 
+    /**
+     * 录入
+     * @param tableName
+     * @param personalInfo
+     * @return
+     */
+    int detection(String tableName, NatDetectionPersonalInfo personalInfo);
 }
 
 
