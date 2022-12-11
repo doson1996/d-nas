@@ -19,7 +19,7 @@ import java.util.Map;
 @Service
 public class PersistenceServiceImpl implements PersistenceService {
 
-    @Value("table-name:dpi")
+    @Value("${table-name.dpi}")
     private String dpiTableName;
 
     @Resource
@@ -27,7 +27,7 @@ public class PersistenceServiceImpl implements PersistenceService {
 
     @Override
     public Result<String> createTableDpi() {
-        String tableName = dpiTableName + DateUtil.now();
+        String tableName = dpiTableName + "_" + DateUtil.today().replaceAll("-", "");
         int res = persistenceMapper.createTableDpi(tableName);
         if (res == 1) {
             Result.ok("创建表[" + tableName + "]成功!");
