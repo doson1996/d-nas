@@ -12,8 +12,8 @@
         </foreach>
             ,PRIMARY KEY (`${tableInfo.pk}`)
         ) ENGINE = InnoDB
-        CHARACTER SET = utf8
-        COMMENT = '${tableInfo.comment}';
+          CHARACTER SET = utf8
+          COMMENT = '${tableInfo.comment}';
     </update>
 
     <!--根据日期创建表 detection_personal_info_yyyyMMdd的 SQL 语句-->
@@ -27,7 +27,7 @@
             PRIMARY KEY (`id`)
         ) ENGINE = InnoDB
           CHARACTER SET = utf8
-            COMMENT ='用于测试的用户表';
+          COMMENT ='检测用户信息表';
     </update>
 
 </mapper>

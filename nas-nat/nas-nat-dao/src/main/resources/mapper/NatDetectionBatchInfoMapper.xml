@@ -21,4 +21,9 @@
         entry_time,entry_mechanism,detection_time,
         detection_result,detection_mechanism,delete_flag
     </sql>
+
+    <update id="create">
+        insert into `${tableName}` (`batch_no`, `entry_mechanism`)
+        values ('${detectionBatchInfo.batchNo}', '${detectionBatchInfo.entryMechanism}');
+    </update>
 </mapper>

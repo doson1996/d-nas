@@ -18,6 +18,7 @@ public interface NatDetectionPersonalInfoMapper extends BaseMapper<NatDetectionP
      * @return
      */
     int detection(String tableName, NatDetectionPersonalInfo personalInfo);
+
 }
 
 

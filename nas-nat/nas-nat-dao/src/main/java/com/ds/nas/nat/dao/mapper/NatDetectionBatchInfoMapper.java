@@ -11,6 +11,15 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface NatDetectionBatchInfoMapper extends BaseMapper<NatDetectionBatchInfo> {
 
+    /**
+     * 创建
+     *
+     * @param detectionBatchInfo
+     * @param tableName
+     * @return
+     */
+    int create(NatDetectionBatchInfo detectionBatchInfo, String tableName);
+
 }
 
 

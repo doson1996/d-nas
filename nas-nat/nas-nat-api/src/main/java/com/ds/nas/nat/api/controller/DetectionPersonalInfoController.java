@@ -27,5 +27,4 @@ public class DetectionPersonalInfoController {
         return detectionPersonalInfoService.detection(request);
     }
 
-
 }

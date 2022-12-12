@@ -28,7 +28,7 @@ public class TableNameUtil {
      * 生成带明天日期的表名
      *
      * @param tableName 表名
-     * @return 返回当前日期表名 tableName_yyyyMMdd
+     * @return 返回明天日期表名 tableName_yyyyMMdd
      */
     public static String generateTomorrowTableName(String tableName) {
         return tableName + "_" + DateUtil.tomorrow().toDateStr().replaceAll("-", "");

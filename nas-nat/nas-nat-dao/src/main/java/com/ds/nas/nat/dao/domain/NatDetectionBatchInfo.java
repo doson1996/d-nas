@@ -10,6 +10,7 @@ import lombok.Data;
 
 /**
  * 
+ * @author ds
  * @TableName nat_detection_batch_info
  */
 @TableName(value ="nat_detection_batch_info")
@@ -61,6 +62,4 @@ public class NatDetectionBatchInfo implements Serializable {
      */
     private Integer deleteFlag;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }

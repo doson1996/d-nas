@@ -34,7 +34,7 @@ public class PersistenceServiceImpl implements PersistenceService {
         if (res == 1) {
             Result.ok("创建表[" + tableName + "]成功!");
         }
-        return Result.ok("创建表[" + tableName + "]失败!");
+        return Result.fail("创建表[" + tableName + "]失败!");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class PersistenceServiceImpl implements PersistenceService {
         if (res == 1) {
             Result.ok("创建表[" + tableInfo.getName() + "]成功!");
         }
-        return Result.ok("创建表[" + tableInfo.getName() + "]失败!");
+        return Result.fail("创建表[" + tableInfo.getName() + "]失败!");
     }
 
 }

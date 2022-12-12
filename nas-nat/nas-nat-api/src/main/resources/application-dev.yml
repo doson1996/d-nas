@@ -39,4 +39,4 @@ mybatis-plus:
 
 
 table-name:
-  dpi: detection_personal_info
+  dpi: nat_detection_personal_info

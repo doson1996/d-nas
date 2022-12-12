@@ -1,7 +1,10 @@
 package com.ds.nas.nat.service;
 
+import com.ds.nas.nat.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ds.nas.nat.dao.request.DetectionPersonalInfoCreateRequest;
+import com.ds.nas.nat.dao.request.DetectionPersonalInfoSubmitRequest;
 
 /**
 * @author ds
@@ -9,5 +12,19 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2022-12-10 23:55:13
 */
 public interface NatDetectionBatchInfoService extends IService<NatDetectionBatchInfo> {
+
+    /**
+     * 新增批次
+     * @param request
+     * @return
+     */
+    Result<String> create(DetectionPersonalInfoCreateRequest request);
+
+    /**
+     * 提交批次
+     * @param request
+     * @return
+     */
+    Result<String> submit(DetectionPersonalInfoSubmitRequest request);
 
 }

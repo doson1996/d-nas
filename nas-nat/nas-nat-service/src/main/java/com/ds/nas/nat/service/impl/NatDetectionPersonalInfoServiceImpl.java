@@ -38,8 +38,12 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
         personalInfo.setIdCard(request.getIdCard());
         String tableName = TableNameUtil.generateTodayTableName(dpiTableName);
         int res = personalInfoMapper.detection(tableName, personalInfo);
-        return null;
+        if (res == 0) {
+            return Result.fail("录入信息失败!");
+        }
+        return Result.ok("录入信息成功!");
     }
+
 }
 
 
