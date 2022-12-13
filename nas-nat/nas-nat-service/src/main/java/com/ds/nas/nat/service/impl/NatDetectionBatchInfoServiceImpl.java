@@ -53,7 +53,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
         detectionBatchInfo.setBatchNo(request.getBatchNo());
         detectionBatchInfo.setDetectionTime(new Date());
-        detectionBatchInfo.setDetectionResult(1);
+        detectionBatchInfo.setDetectionResult(request.getDetectionResult());
         detectionBatchInfo.setDetectionMechanism(request.getDetectionMechanism());
 
         LambdaUpdateWrapper<NatDetectionBatchInfo> wrapper = new LambdaUpdateWrapper<>();

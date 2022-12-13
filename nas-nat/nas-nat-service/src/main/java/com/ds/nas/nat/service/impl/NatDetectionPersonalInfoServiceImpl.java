@@ -28,9 +28,6 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
     @Resource
     private NatDetectionPersonalInfoMapper personalInfoMapper;
 
-    @Resource
-    private NatDetectionBatchInfoMapper batchInfoMapper;
-
     @Override
     public Result<String> entry(DetectionPersonalInfoEntryRequest request) {
         NatDetectionPersonalInfo personalInfo = new NatDetectionPersonalInfo();

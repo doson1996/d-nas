@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>nas-nat-service</artifactId>
-    <version>${rversion}</version>
+     <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
     <name>nas-nat-service</name>
 
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-nat-dao</artifactId>
-            <version>${rversion}</version>
+             <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>
 </project>

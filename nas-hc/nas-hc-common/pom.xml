@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>nas-hc-common</artifactId>
-    <version>${rversion}</version>
+     <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
     <name>nas-hc-common</name>
 

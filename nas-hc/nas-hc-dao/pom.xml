@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>nas-hc-dao</artifactId>
-    <version>${rversion}</version>
+     <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
     <name>nas-hc-dao</name>
 
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-hc-common</artifactId>
-            <version>${rversion}</version>
+             <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>
 </project>

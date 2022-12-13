@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>nas-hc-client</artifactId>
-    <version>${rversion}</version>
+     <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
     <name>nas-hc-client</name>
 
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-hc-dao</artifactId>
-            <version>${rversion}</version>
+             <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>
 </project>
