@@ -38,7 +38,7 @@ public class NatDetectionBatchInfo implements Serializable {
     private Date entryTime;
 
     /**
-     * 检测机构
+     * 录入机构
      */
     private String entryMechanism;
 

@@ -9,7 +9,7 @@ import lombok.Data;
  * @description 提交
  */
 @Data
-public class DetectionPersonalInfoSubmitRequest extends BaseRequest {
+public class DetectionBatchInfoDetectionRequest extends BaseRequest {
 
     /**
      * 批次号
@@ -17,8 +17,13 @@ public class DetectionPersonalInfoSubmitRequest extends BaseRequest {
     private String batchNo;
 
     /**
-     * 检测类型: 0.混检 1.单检
+     * 检测结果: 0.未检测 1.正常 2.异常
      */
-    private Integer type;
+    private Integer detectionResult;
+
+    /**
+     * 检测机构
+     */
+    private String detectionMechanism;
 
 }

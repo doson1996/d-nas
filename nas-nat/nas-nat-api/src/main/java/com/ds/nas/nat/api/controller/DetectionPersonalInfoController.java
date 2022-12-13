@@ -1,7 +1,7 @@
 package com.ds.nas.nat.api.controller;
 
 import com.ds.nas.nat.common.result.Result;
-import com.ds.nas.nat.dao.request.DetectionPersonalInfoRequest;
+import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,9 +22,9 @@ public class DetectionPersonalInfoController {
     @Resource
     private NatDetectionPersonalInfoService detectionPersonalInfoService;
 
-    @PostMapping("detection")
-    public Result<String> detection(@RequestBody DetectionPersonalInfoRequest request) {
-        return detectionPersonalInfoService.detection(request);
+    @PostMapping("entry")
+    public Result<String> entry(@RequestBody DetectionPersonalInfoEntryRequest request) {
+        return detectionPersonalInfoService.entry(request);
     }
 
 }

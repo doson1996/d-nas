@@ -5,7 +5,7 @@ import com.ds.nas.nat.common.result.Result;
 import com.ds.nas.nat.common.util.TableNameUtil;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import com.ds.nas.nat.dao.mapper.NatDetectionBatchInfoMapper;
-import com.ds.nas.nat.dao.request.DetectionPersonalInfoRequest;
+import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
 import com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,7 +32,7 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
     private NatDetectionBatchInfoMapper batchInfoMapper;
 
     @Override
-    public Result<String> detection(DetectionPersonalInfoRequest request) {
+    public Result<String> entry(DetectionPersonalInfoEntryRequest request) {
         NatDetectionPersonalInfo personalInfo = new NatDetectionPersonalInfo();
         personalInfo.setBatchNo(request.getBatchNo());
         personalInfo.setIdCard(request.getIdCard());

@@ -9,7 +9,7 @@ import lombok.Data;
  * @description
  */
 @Data
-public class DetectionPersonalInfoRequest extends BaseRequest {
+public class DetectionPersonalInfoEntryRequest extends BaseRequest {
 
     /**
      * 批次号

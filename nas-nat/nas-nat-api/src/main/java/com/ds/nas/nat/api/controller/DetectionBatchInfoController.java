@@ -1,8 +1,9 @@
 package com.ds.nas.nat.api.controller;
 
 import com.ds.nas.nat.common.result.Result;
-import com.ds.nas.nat.dao.request.DetectionPersonalInfoCreateRequest;
-import com.ds.nas.nat.dao.request.DetectionPersonalInfoSubmitRequest;
+import com.ds.nas.nat.dao.request.DetectionBatchInfoCreateRequest;
+import com.ds.nas.nat.dao.request.DetectionBatchInfoDetectionRequest;
+import com.ds.nas.nat.dao.request.DetectionBatchInfoSubmitRequest;
 import com.ds.nas.nat.service.NatDetectionBatchInfoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,15 +26,18 @@ public class DetectionBatchInfoController {
 
 
     @PostMapping("create")
-    public Result<String> create(@RequestBody DetectionPersonalInfoCreateRequest request) {
+    public Result<String> create(@RequestBody DetectionBatchInfoCreateRequest request) {
         return detectionBatchInfoService.create(request);
     }
 
     @PostMapping("submit")
-    public Result<String> submit(@RequestBody DetectionPersonalInfoSubmitRequest request) {
+    public Result<String> submit(@RequestBody DetectionBatchInfoSubmitRequest request) {
         return detectionBatchInfoService.submit(request);
     }
 
-
+    @PostMapping("detection")
+    public Result<String> detection(@RequestBody DetectionBatchInfoDetectionRequest request) {
+        return detectionBatchInfoService.detection(request);
+    }
 
 }

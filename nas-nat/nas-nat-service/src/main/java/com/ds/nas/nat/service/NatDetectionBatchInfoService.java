@@ -3,8 +3,9 @@ package com.ds.nas.nat.service;
 import com.ds.nas.nat.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ds.nas.nat.dao.request.DetectionPersonalInfoCreateRequest;
-import com.ds.nas.nat.dao.request.DetectionPersonalInfoSubmitRequest;
+import com.ds.nas.nat.dao.request.DetectionBatchInfoCreateRequest;
+import com.ds.nas.nat.dao.request.DetectionBatchInfoDetectionRequest;
+import com.ds.nas.nat.dao.request.DetectionBatchInfoSubmitRequest;
 
 /**
 * @author ds
@@ -18,13 +19,20 @@ public interface NatDetectionBatchInfoService extends IService<NatDetectionBatch
      * @param request
      * @return
      */
-    Result<String> create(DetectionPersonalInfoCreateRequest request);
+    Result<String> create(DetectionBatchInfoCreateRequest request);
 
     /**
      * 提交批次
      * @param request
      * @return
      */
-    Result<String> submit(DetectionPersonalInfoSubmitRequest request);
+    Result<String> submit(DetectionBatchInfoSubmitRequest request);
+
+    /**
+     * 检测
+     * @param request
+     * @return
+     */
+    Result<String> detection(DetectionBatchInfoDetectionRequest request);
 
 }
