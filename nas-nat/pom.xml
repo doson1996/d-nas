@@ -24,7 +24,4 @@
         <module>nas-nat-service</module>
     </modules>
 
-    <dependencies>
-
-    </dependencies>
 </project>

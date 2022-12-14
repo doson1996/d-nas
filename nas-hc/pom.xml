@@ -24,7 +24,4 @@
         <module>nas-hc-service</module>
     </modules>
 
-    <dependencies>
-
-    </dependencies>
 </project>
