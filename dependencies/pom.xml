@@ -23,7 +23,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <hutool.version>5.7.12</hutool.version>
-        <httpclient.version>4.5.12</httpclient.version>
         <swagger.version>2.9.2</swagger.version>
         <swagger-ui.version>1.9.6</swagger-ui.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
@@ -73,11 +72,6 @@
                 <version>${fastjson.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>${httpclient.version}</version>
-            </dependency>
             <!-- DB -->
             <dependency>
                 <groupId>com.baomidou</groupId>

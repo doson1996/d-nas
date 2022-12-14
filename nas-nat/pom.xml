@@ -14,7 +14,7 @@
      <version>1.0.0-RELEASE</version>
     <packaging>pom</packaging>
     <name>nas-nat</name>
-    <description></description>
+    <description>nat</description>
 
     <modules>
         <module>nas-nat-api</module>
