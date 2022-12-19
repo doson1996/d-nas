@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @description
  */
 @Service
-public class HealthCodeClientFallBack implements HealthCodeClient {
+public class HealthCodeClientFallback implements HealthCodeClient {
 
     @Override
     public Result<String> apply(HealthCodeApplyRequest request) {

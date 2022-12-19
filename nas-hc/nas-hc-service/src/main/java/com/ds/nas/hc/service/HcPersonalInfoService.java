@@ -41,10 +41,10 @@ public interface HcPersonalInfoService extends IService<HcPersonalInfo> {
     Result<PersonalInfoRegisterResponse> register(PersonalInfoRegisterRequest request);
 
     /**
-     * 根据主键更新
+     * 根据idCard更新
      * @param request
      * @return
      */
-    Result<PersonalInfoUpdateResponse> updateByPk(PersonalInfoUpdateRequest request);
+    Result<PersonalInfoUpdateResponse> updateByIdCard(PersonalInfoUpdateRequest request);
 
 }

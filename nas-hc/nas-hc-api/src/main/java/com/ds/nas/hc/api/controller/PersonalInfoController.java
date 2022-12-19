@@ -40,9 +40,9 @@ public class PersonalInfoController {
      * @param request 入参
      * @return
      */
-    @PostMapping("update")
-    public Result<PersonalInfoUpdateResponse> update(@RequestBody PersonalInfoUpdateRequest request) {
-        return hcPersonalInfoService.updateByPk(request);
+    @PostMapping("updateByIdCard")
+    public Result<PersonalInfoUpdateResponse> updateByIdCard(@RequestBody PersonalInfoUpdateRequest request) {
+        return hcPersonalInfoService.updateByIdCard(request);
     }
 
 }

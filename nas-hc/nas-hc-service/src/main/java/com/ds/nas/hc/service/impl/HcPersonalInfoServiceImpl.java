@@ -1,6 +1,7 @@
 package com.ds.nas.hc.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.hc.common.base.db.DBUtils;
 import com.ds.nas.hc.common.constant.HealthCodeState;
@@ -67,11 +68,13 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     }
 
     @Override
-    public Result<PersonalInfoUpdateResponse> updateByPk(PersonalInfoUpdateRequest request) {
+    public Result<PersonalInfoUpdateResponse> updateByIdCard(PersonalInfoUpdateRequest request) {
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         BeanUtil.copyProperties(request, hcPersonalInfo);
 
-        if (updateById(hcPersonalInfo)) {
+        LambdaUpdateWrapper<HcPersonalInfo> wrapper = new LambdaUpdateWrapper<>();
+        wrapper.eq(HcPersonalInfo::getIdCard, request.getIdCard());
+        if (update(hcPersonalInfo, wrapper)) {
             PersonalInfoUpdateResponse response = new PersonalInfoUpdateResponse();
             BeanUtil.copyProperties(hcPersonalInfoMapper.queryByIdCard(hcPersonalInfo.getIdCard()), response);
             return Result.ok("更新成功!", response);

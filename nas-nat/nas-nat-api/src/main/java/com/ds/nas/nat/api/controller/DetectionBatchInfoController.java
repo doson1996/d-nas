@@ -24,7 +24,6 @@ public class DetectionBatchInfoController {
     @Resource
     private NatDetectionBatchInfoService detectionBatchInfoService;
 
-
     @PostMapping("create")
     public Result<String> create(@RequestBody DetectionBatchInfoCreateRequest request) {
         return detectionBatchInfoService.create(request);
