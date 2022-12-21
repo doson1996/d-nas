@@ -5,6 +5,7 @@ import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
@@ -20,6 +21,7 @@ public interface PersonalInfoClient {
      * @param request
      * @return
      */
+    @PostMapping("updateByIdCard")
     Result<PersonalInfoUpdateResponse> updateByIdCard(@RequestBody PersonalInfoUpdateRequest request);
 
 }

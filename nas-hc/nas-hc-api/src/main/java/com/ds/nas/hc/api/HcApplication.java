@@ -11,7 +11,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @description
  */
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"com.ds.nas.hc.api", "com.ds.nas.hc.service", "com.ds.nas.hc.dao"})
+@SpringBootApplication(scanBasePackages = {
+        "com.ds.nas.hc.api",
+        "com.ds.nas.hc.service",
+        "com.ds.nas.hc.dao"})
 public class HcApplication {
     public static void main(String[] args) {
         SpringApplication.run(HcApplication.class, args);

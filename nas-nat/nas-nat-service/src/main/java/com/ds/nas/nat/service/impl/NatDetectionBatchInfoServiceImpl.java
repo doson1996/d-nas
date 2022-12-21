@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.hc.client.PersonalInfoClient;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
+import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.nat.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoCreateRequest;
@@ -74,7 +75,8 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
     private void updateHealthCode(String batchNo) {
         PersonalInfoUpdateRequest request = new PersonalInfoUpdateRequest();
         request.setIdCard("1");
-        personalInfoClient.updateByIdCard(request);
+        com.ds.nas.hc.common.result.Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCard(request);
+        System.out.println("personalInfoUpdateResponseResult = " + personalInfoUpdateResponseResult);
     }
 
 }
