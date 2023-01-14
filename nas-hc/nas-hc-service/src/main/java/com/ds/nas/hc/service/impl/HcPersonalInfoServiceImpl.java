@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.hc.common.base.db.DBUtils;
 import com.ds.nas.hc.common.constant.HealthCodeState;
+import com.ds.nas.hc.common.exception.BusinessException;
 import com.ds.nas.hc.common.result.Result;
+import com.ds.nas.hc.common.util.StringUtils;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
@@ -51,6 +53,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     @Override
     public Result<PersonalInfoRegisterResponse> register(PersonalInfoRegisterRequest request) {
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
+        checkRegisterRequest(request);
         BeanUtil.copyProperties(request, hcPersonalInfo);
         hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().commonFieldAssignments(hcPersonalInfo);
         hcPersonalInfo.setHealth(HealthCodeState.GREEN);
@@ -81,6 +84,23 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         }
         return Result.fail("更新失败!");
     }
+
+    /**
+     * 注册参数校验
+     * @param request
+     */
+    private void checkRegisterRequest(PersonalInfoRegisterRequest request) {
+        String idCard = request.getIdCard();
+        if (StringUtils.isBlank(idCard, request.getName(), request.getPhone())) {
+            throw new BusinessException("身份证号、姓名、手机不能为空!");
+        }
+
+        HcPersonalInfo queryByIdCard = hcPersonalInfoMapper.queryByIdCard(idCard);
+        if (queryByIdCard != null) {
+            throw new BusinessException("此身份证已注册!");
+        }
+    }
+
 
 }
 

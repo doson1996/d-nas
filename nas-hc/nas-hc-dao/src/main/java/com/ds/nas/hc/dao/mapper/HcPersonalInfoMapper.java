@@ -12,18 +12,19 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface HcPersonalInfoMapper extends BaseMapper<HcPersonalInfo> {
 
     /**
-     * 根据身份证号查询
+     * 根据身份证号更新
      * @param idCard
      * @return
      */
     int updateByIdCard(String idCard);
 
     /**
-     * 根据身份证号更新
+     * 根据身份证号查询
      * @param idCard
      * @return
      */
     HcPersonalInfo queryByIdCard(String idCard);
+
 }
 
 

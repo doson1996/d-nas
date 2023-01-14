@@ -2,8 +2,10 @@ package com.ds.nas.nat.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ds.nas.hc.api.fegin.client.HealthCodeClient;
 import com.ds.nas.hc.api.fegin.client.PersonalInfoClient;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
+import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.nat.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
@@ -30,6 +32,9 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Resource
     private PersonalInfoClient personalInfoClient;
+
+    @Resource
+    private HealthCodeClient healthCodeClient;
 
     @Override
     public Result<String> create(DetectionBatchInfoCreateRequest request) {
@@ -79,6 +84,8 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         request.setIdCard("1");
         com.ds.nas.hc.common.result.Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCard(request);
         log.info("personalInfoUpdateResponseResult = {}", personalInfoUpdateResponseResult);
+        com.ds.nas.hc.common.result.Result<HealthCodeQueryResponse> query = healthCodeClient.query("1");
+        log.info("query = {}", query);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ds.nas.nat.common.base.request;
 
+import com.sun.org.apache.xpath.internal.operations.String;
 import lombok.Data;
 
 /**
@@ -14,6 +15,11 @@ public class BaseRequest {
      * 请求id
      */
     private String requestId;
+
+    /**
+     * token
+     */
+    private String token;
 
     /**
      * 请求时间

@@ -14,8 +14,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {
         "com.ds.nas.nat.app",
-        "com.ds.nas.nat.service",
         "com.ds.nas.nat.dao",
+        "com.ds.nas.nat.service",
         "com.ds.nas.hc.api"})
 public class NatApplication {
     public static void main(String[] args) {
