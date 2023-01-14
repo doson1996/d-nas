@@ -12,6 +12,7 @@ import com.ds.nas.nat.dao.request.DetectionBatchInfoDetectionRequest;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoSubmitRequest;
 import com.ds.nas.nat.service.NatDetectionBatchInfoService;
 import com.ds.nas.nat.dao.mapper.NatDetectionBatchInfoMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ import java.util.Date;
  * @description 针对表【nat_detection_batch_info】的数据库操作Service实现
  * @createDate 2022-12-10 23:55:13
  */
+@Slf4j
 @Service
 public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBatchInfoMapper, NatDetectionBatchInfo>
         implements NatDetectionBatchInfoService {
@@ -76,7 +78,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         PersonalInfoUpdateRequest request = new PersonalInfoUpdateRequest();
         request.setIdCard("1");
         com.ds.nas.hc.common.result.Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCard(request);
-        System.out.println("personalInfoUpdateResponseResult = " + personalInfoUpdateResponseResult);
+        log.info("personalInfoUpdateResponseResult = {}", personalInfoUpdateResponseResult);
     }
 
 }

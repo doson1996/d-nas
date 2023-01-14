@@ -17,7 +17,7 @@ spring:
       #最大连接数 <类似于线程池的最大线程数>
       maximum-pool-size: 20
       # 监控
-      register-mbeans: true
+      register-mbeans: false
   cloud:
     nacos:
       discovery:
