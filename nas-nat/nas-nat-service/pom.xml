@@ -24,7 +24,7 @@
 
         <dependency>
             <groupId>com.ds.nas</groupId>
-            <artifactId>nas-hc-client</artifactId>
+            <artifactId>nas-hc-api</artifactId>
             <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>

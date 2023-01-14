@@ -1,7 +1,6 @@
-package com.ds.nas.hc.api;
+package com.ds.nas.hc.app;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
@@ -12,7 +11,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {
-        "com.ds.nas.hc.api",
+        "com.ds.nas.hc.app",
         "com.ds.nas.hc.service",
         "com.ds.nas.hc.dao"})
 public class HcApplication {

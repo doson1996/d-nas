@@ -1,6 +1,6 @@
 package com.ds.nas.hc.api.controller;
 
-import com.ds.nas.hc.api.HcApplication;
+import com.ds.nas.hc.app.HcApplication;
 import com.ds.nas.hc.common.util.DataGenerateUtil;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.service.HcPersonalInfoService;

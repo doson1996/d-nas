@@ -1,6 +1,6 @@
-package com.ds.nas.hc.client;
+package com.ds.nas.hc.fegin.client;
 
-import com.ds.nas.hc.client.fallback.HealthCodeClientFallback;
+import com.ds.nas.hc.fegin.client.fallback.HealthCodeClientFallback;
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import org.springframework.cloud.openfeign.FeignClient;

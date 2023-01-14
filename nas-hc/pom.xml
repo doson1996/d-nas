@@ -17,8 +17,8 @@
     <description>健康码系统</description>
 
     <modules>
+        <module>nas-hc-app</module>
         <module>nas-hc-api</module>
-        <module>nas-hc-client</module>
         <module>nas-hc-common</module>
         <module>nas-hc-dao</module>
         <module>nas-hc-service</module>

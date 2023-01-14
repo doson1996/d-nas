@@ -1,4 +1,4 @@
-package com.ds.nas.hc.api.controller;
+package com.ds.nas.hc.app.controller;
 
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;

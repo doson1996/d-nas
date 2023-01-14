@@ -1,6 +1,6 @@
-package com.ds.nas.hc.client.fallback;
+package com.ds.nas.hc.fegin.client.fallback;
 
-import com.ds.nas.hc.client.HealthCodeClient;
+import com.ds.nas.hc.fegin.client.HealthCodeClient;
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import org.springframework.stereotype.Service;
