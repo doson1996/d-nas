@@ -2,7 +2,6 @@ package com.ds.nas.hc.dao.mapper;
 
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * @author ds
