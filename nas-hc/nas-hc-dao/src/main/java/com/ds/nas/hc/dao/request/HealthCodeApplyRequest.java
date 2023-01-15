@@ -12,8 +12,23 @@ import lombok.Data;
 public class HealthCodeApplyRequest extends BaseRequest {
 
     /**
+     * 姓名
+     */
+    private String name;
+
+    /**
      * 身份证号码
      */
     private String idCard;
+
+    /**
+     * 住址
+     */
+    private String address;
+
+    /**
+     * 手机号
+     */
+    private String phone;
 
 }

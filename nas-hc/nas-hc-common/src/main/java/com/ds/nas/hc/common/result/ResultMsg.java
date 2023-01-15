@@ -71,4 +71,9 @@ public class ResultMsg {
      * 参数错误返回信息
      */
     public static final String BUSINESS_EXCEPTION_MSG = "业务异常";
+
+    /**
+     * 认证错误返回信息
+     */
+    public static final String AUTH_EXCEPTION_MSG = "认证异常";
 }

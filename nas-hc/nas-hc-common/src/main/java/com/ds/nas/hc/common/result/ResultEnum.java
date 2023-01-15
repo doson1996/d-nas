@@ -22,6 +22,11 @@ public enum ResultEnum {
     INTERNAL_SERVER_ERROR(500, "系统繁忙，请稍后重试"),
 
     /**
+     * 访问未经授权
+     */
+    UNAUTHORIZED(401, "Unauthorized"),
+
+    /**
      * 用户端错误 1000 - 1999
      */
     USER_CLIENT_ERROR(1000, "用户端错误"),
