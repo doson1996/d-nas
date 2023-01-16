@@ -40,6 +40,7 @@ public class HealthCodeController {
      * @param idCard 身份证号
      * @return 出参
      */
+    @AuthCheck
     @GetMapping("query/{idCard}")
     public Result<HealthCodeQueryResponse> query(@PathVariable String idCard) {
         return hcPersonalInfoService.queryByIdCard(idCard);

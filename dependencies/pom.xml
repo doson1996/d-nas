@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <hutool.version>5.7.12</hutool.version>
+        <hutool.version>5.8.11</hutool.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <fastjson.version>1.2.78</fastjson.version>
         <redisson.version>3.16.1</redisson.version>
@@ -34,6 +34,7 @@
     <!-- 模块 -->
     <modules>
         <module>../nas-hc</module>
+        <module>../nas-lib</module>
         <module>../nas-nat</module>
     </modules>
 

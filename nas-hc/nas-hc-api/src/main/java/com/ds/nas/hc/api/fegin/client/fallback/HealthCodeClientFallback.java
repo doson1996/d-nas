@@ -4,14 +4,17 @@ import com.ds.nas.hc.api.fegin.client.HealthCodeClient;
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author ds
  * @date 2022/12/8
  * @description
  */
-@Service
+@Component
 public class HealthCodeClientFallback implements HealthCodeClient {
 
     @Override

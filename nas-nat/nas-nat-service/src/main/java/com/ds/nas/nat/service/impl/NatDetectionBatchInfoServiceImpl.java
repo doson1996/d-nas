@@ -64,6 +64,9 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Override
     public Result<String> detection(DetectionBatchInfoDetectionRequest request) {
+        com.ds.nas.hc.common.result.Result<HealthCodeQueryResponse> query = healthCodeClient.query("1");
+        log.info("query = {}", query);
+
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
         detectionBatchInfo.setBatchNo(request.getBatchNo());
         detectionBatchInfo.setDetectionTime(new Date());
@@ -84,8 +87,6 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         request.setIdCard("1");
         com.ds.nas.hc.common.result.Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCard(request);
         log.info("personalInfoUpdateResponseResult = {}", personalInfoUpdateResponseResult);
-        com.ds.nas.hc.common.result.Result<HealthCodeQueryResponse> query = healthCodeClient.query("1");
-        log.info("query = {}", query);
     }
 
 }
