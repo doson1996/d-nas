@@ -57,21 +57,21 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 业务异常捕获
+     * 认证异常捕获
      *
      * @param e
      * @return
      */
     @ExceptionHandler(AuthException.class)
     public Result<Object> handlerAuthException(AuthException e) {
-        String msg = ResultMsg.BUSINESS_EXCEPTION_MSG;
+        String msg = ResultEnum.UNAUTHORIZED.getMessage();
         if (StrUtil.isNotBlank(e.getMessage())) {
             msg = e.getMessage();
         }
 
         return Result.builder()
                 .withCode(ResultEnum.UNAUTHORIZED.getCode())
-                .withMessage(ResultEnum.UNAUTHORIZED.getMessage())
+                .withMessage(msg)
                 .build();
     }
 
