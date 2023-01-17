@@ -1,8 +1,8 @@
-package com.ds.nas.hc.api.fegin.client;
+package com.ds.nas.hc.api.fegin;
 
+import com.ds.nas.hc.api.fegin.fallback.HealthCodeClientFallback;
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
-import com.ds.nas.hc.api.fegin.client.fallback.HealthCodeClientFallback;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

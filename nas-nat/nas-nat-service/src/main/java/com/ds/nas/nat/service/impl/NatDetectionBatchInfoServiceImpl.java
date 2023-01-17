@@ -2,8 +2,8 @@ package com.ds.nas.nat.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ds.nas.hc.api.fegin.client.HealthCodeClient;
-import com.ds.nas.hc.api.fegin.client.PersonalInfoClient;
+import com.ds.nas.hc.api.dubbo.HealthCodeProvider;
+import com.ds.nas.hc.api.fegin.PersonalInfoClient;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
@@ -15,6 +15,7 @@ import com.ds.nas.nat.dao.request.DetectionBatchInfoSubmitRequest;
 import com.ds.nas.nat.service.NatDetectionBatchInfoService;
 import com.ds.nas.nat.dao.mapper.NatDetectionBatchInfoMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,8 +34,8 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
     @Resource
     private PersonalInfoClient personalInfoClient;
 
-    @Resource
-    private HealthCodeClient healthCodeClient;
+    @DubboReference
+    private HealthCodeProvider healthCodeProvider;
 
     @Override
     public Result<String> create(DetectionBatchInfoCreateRequest request) {
@@ -64,7 +65,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Override
     public Result<String> detection(DetectionBatchInfoDetectionRequest request) {
-        com.ds.nas.hc.common.result.Result<HealthCodeQueryResponse> query = healthCodeClient.query("1");
+        com.ds.nas.hc.common.result.Result<HealthCodeQueryResponse> query = healthCodeProvider.query("420900199611280071");
         log.info("query = {}", query);
 
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();

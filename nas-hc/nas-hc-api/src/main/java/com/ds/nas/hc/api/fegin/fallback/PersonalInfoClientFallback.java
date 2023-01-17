@@ -1,6 +1,6 @@
-package com.ds.nas.hc.api.fegin.client.fallback;
+package com.ds.nas.hc.api.fegin.fallback;
 
-import com.ds.nas.hc.api.fegin.client.PersonalInfoClient;
+import com.ds.nas.hc.api.fegin.PersonalInfoClient;
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;

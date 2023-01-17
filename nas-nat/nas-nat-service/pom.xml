@@ -18,8 +18,8 @@
     <dependencies>
         <dependency>
             <groupId>com.ds.nas</groupId>
-            <artifactId>nas-nat-dao</artifactId>
-             <version>1.0.0-RELEASE</version>
+            <artifactId>nas-nat-api</artifactId>
+            <version>1.0.0-RELEASE</version>
         </dependency>
 
         <dependency>

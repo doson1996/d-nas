@@ -29,6 +29,7 @@
 
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.9.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud-dubbo.version>2.2.7.RELEASE</spring-cloud-dubbo.version>
     </properties>
 
     <!-- 模块 -->
@@ -37,6 +38,20 @@
         <module>../nas-lib</module>
         <module>../nas-nat</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-x-discovery</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+    </dependencies>
 
     <!-- 依赖管理 -->
     <dependencyManagement>
@@ -56,6 +71,12 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-dubbo</artifactId>
+                <version>${spring-cloud-dubbo.version}</version>
             </dependency>
 
             <!-- 工具 -->

@@ -1,13 +1,10 @@
-package com.ds.nas.hc.api.fegin.client.fallback;
+package com.ds.nas.hc.api.fegin.fallback;
 
-import com.ds.nas.hc.api.fegin.client.HealthCodeClient;
+import com.ds.nas.hc.api.fegin.HealthCodeClient;
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * @author ds

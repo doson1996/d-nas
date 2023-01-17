@@ -20,5 +20,16 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-dubbo</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ds.nas</groupId>
+            <artifactId>nas-nat-dao</artifactId>
+            <version>1.0.0-RELEASE</version>
+        </dependency>
     </dependencies>
 </project>

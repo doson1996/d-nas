@@ -18,7 +18,7 @@
 
     <modules>
         <module>nas-lib-common</module>
-        <module>nas-lib-redis</module>
+        <module>nas-lib-cache</module>
     </modules>
 
 </project>

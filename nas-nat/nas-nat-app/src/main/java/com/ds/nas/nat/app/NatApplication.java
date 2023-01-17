@@ -1,5 +1,6 @@
 package com.ds.nas.nat.app;
 
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -10,6 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @date 2022/12/9
  * @description
  */
+@EnableDubbo
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {

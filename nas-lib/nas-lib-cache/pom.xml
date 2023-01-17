@@ -10,7 +10,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>nas-lib-redis</artifactId>
+    <artifactId>nas-lib-cache</artifactId>
      <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
     <name>nas-lib-redis</name>
