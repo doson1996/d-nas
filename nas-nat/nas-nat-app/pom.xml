@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>nas-nat-app</artifactId>
-     <version>1.0.0-RELEASE</version>
+    <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
     <name>nas-nat-app</name>
 

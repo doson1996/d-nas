@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>nas-nat</artifactId>
-     <version>1.0.0-RELEASE</version>
+    <version>1.0.0-RELEASE</version>
     <packaging>pom</packaging>
     <name>nas-nat</name>
     <description>nat</description>
