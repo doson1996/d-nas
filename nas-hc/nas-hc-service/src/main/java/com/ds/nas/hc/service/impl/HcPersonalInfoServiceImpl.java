@@ -17,6 +17,7 @@ import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,6 +27,7 @@ import javax.annotation.Resource;
  * @description 针对表【hc_personal_info】的数据库操作Service实现
  * @createDate 2022-12-04 13:28:57
  */
+@Slf4j
 @Service
 public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper, HcPersonalInfo>
         implements HcPersonalInfoService {
@@ -72,6 +74,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     @Override
     public Result<PersonalInfoUpdateResponse> updateByIdCard(PersonalInfoUpdateRequest request) {
+        log.info("req = {}", request);
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         BeanUtil.copyProperties(request, hcPersonalInfo);
 

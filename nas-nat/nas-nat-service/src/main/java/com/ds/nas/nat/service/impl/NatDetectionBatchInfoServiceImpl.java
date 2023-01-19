@@ -65,8 +65,8 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Override
     public Result<String> detection(DetectionBatchInfoDetectionRequest request) {
-        com.ds.nas.hc.common.result.Result<HealthCodeQueryResponse> query = healthCodeProvider.query("420900199611280071");
-        log.info("query = {}", query);
+//        com.ds.nas.hc.common.result.Result<HealthCodeQueryResponse> query = healthCodeProvider.query("420900199611280071");
+//        log.info("query = {}", query);
 
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
         detectionBatchInfo.setBatchNo(request.getBatchNo());
@@ -83,6 +83,10 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         return Result.fail("检测批次[" + request.getBatchNo() + "]失败!");
     }
 
+    /**
+     * 根据批次号更新 todo 改消息队列
+     * @param batchNo
+     */
     private void updateHealthCode(String batchNo) {
         PersonalInfoUpdateRequest request = new PersonalInfoUpdateRequest();
         request.setIdCard("1");
