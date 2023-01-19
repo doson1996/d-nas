@@ -34,7 +34,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
     @Resource
     private PersonalInfoClient personalInfoClient;
 
-    @DubboReference
+    @DubboReference(version = "1.0.0")
     private HealthCodeProvider healthCodeProvider;
 
     @Override

@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: nas-hc
+  main:
+    allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
@@ -35,12 +37,8 @@ dubbo:
   registry:
     #dubbo服务注册端口，注册中心服务器地址，如果地址没有端口缺省为9090，同一集群内的多个地址用逗号分隔，如：ip:port,ip:port
     #其中前缀spring-cloud说明：挂载到 Spring Cloud注册中心
-    address: zookeeper://dy.com:2181
+    address: nacos://dy.com:8848
     #check: false  #关闭注册中心是否启动的相关检查,false表示不检查注册中心是否启动，就不会报错
-  config-center:
-    address: zookeeper://dy.com:2181
-  metadata-report:
-    address: zookeeper://dy.com:2181
   cloud:
     subscribed-services: nas-nat
   consumer:
