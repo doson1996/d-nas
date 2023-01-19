@@ -13,7 +13,7 @@
     <artifactId>nas-lib-common</artifactId>
      <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
-    <name>nas-lib-redis</name>
+    <name>nas-lib-common</name>
 
     <dependencies>
         <dependency>

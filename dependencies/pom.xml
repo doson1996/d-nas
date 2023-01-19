@@ -65,6 +65,82 @@
                 <version>${spring-cloud-dubbo.version}</version>
             </dependency>
 
+            <!-- 模块 -->
+            <!-- lib -->
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-lib-cache</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-lib-common</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <!-- hc -->
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-hc-api</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-hc-app</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-hc-common</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-hc-dao</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-hc-service</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <!-- nat -->
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-nat-api</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-nat-app</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-nat-common</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-nat-dao</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-nat-service</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
             <!-- 工具 -->
             <dependency>
                 <groupId>cn.hutool</groupId>
