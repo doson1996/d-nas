@@ -19,13 +19,11 @@
         <dependency>
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-nat-api</artifactId>
-            <version>1.0.0-RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-hc-api</artifactId>
-            <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>
 </project>

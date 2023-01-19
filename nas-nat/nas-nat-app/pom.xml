@@ -13,7 +13,7 @@
     <artifactId>nas-nat-app</artifactId>
      <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
-    <name>nas-nat-api</name>
+    <name>nas-nat-app</name>
 
     <dependencies>
         <dependency>
@@ -34,7 +34,6 @@
         <dependency>
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-nat-service</artifactId>
-             <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>
 

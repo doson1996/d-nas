@@ -13,7 +13,7 @@
     <artifactId>nas-hc-app</artifactId>
      <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
-    <name>nas-hc-api</name>
+    <name>nas-hc-app</name>
 
     <dependencies>
         <dependency>
@@ -39,7 +39,6 @@
         <dependency>
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-hc-service</artifactId>
-             <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>
 

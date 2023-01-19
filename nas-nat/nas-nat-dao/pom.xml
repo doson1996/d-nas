@@ -30,7 +30,6 @@
         <dependency>
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-nat-common</artifactId>
-             <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>
 </project>

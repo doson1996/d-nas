@@ -17,8 +17,8 @@
     <description>nat</description>
 
     <modules>
-        <module>nas-nat-app</module>
         <module>nas-nat-api</module>
+        <module>nas-nat-app</module>
         <module>nas-nat-common</module>
         <module>nas-nat-dao</module>
         <module>nas-nat-service</module>
