@@ -65,8 +65,14 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Override
     public Result<String> detection(DetectionBatchInfoDetectionRequest request) {
-//        com.ds.nas.hc.common.result.Result<HealthCodeQueryResponse> query = healthCodeProvider.query("420900199611280071");
-//        log.info("query = {}", query);
+        com.ds.nas.hc.common.result.Result<HealthCodeQueryResponse> query = null;
+        try {
+            query = healthCodeProvider.query("420900199611280071");
+        } catch (Exception e) {
+            //throw new RuntimeException(e);
+            log.error("{}", e.getMessage());
+        }
+        log.info("query = {}", query);
 
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
         detectionBatchInfo.setBatchNo(request.getBatchNo());

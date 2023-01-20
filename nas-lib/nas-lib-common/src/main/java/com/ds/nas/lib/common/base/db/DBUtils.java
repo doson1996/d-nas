@@ -1,6 +1,6 @@
 package com.ds.nas.lib.common.base.db;
 
-import com.ds.nas.hc.common.base.domain.BaseDomain;
+import com.ds.nas.lib.common.base.domain.BaseDomain;
 
 import java.util.Date;
 

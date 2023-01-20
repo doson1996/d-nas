@@ -1,5 +1,6 @@
 package com.ds.nas.hc.app.aspect;
 
+import com.ds.nas.hc.common.annotation.AuthCheck;
 import com.ds.nas.hc.common.exception.AuthException;
 import com.ds.nas.hc.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +8,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @description
  */
 @Slf4j
+@Order(1)
 @Aspect
 @Component
 public class AuthAspect {
@@ -29,8 +32,8 @@ public class AuthAspect {
     public void pointcut() {
     }
 
-    @Before("pointcut()")
-    public void authCheck(JoinPoint joinPoint) {
+    @Before("@annotation(authCheck)")
+    public void authCheck(JoinPoint joinPoint, AuthCheck authCheck) {
         String method = joinPoint.getSignature().getName();
         String token = request.getHeader("token");
         log.info("method = {}, token = {}", method, token);

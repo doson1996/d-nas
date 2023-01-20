@@ -4,7 +4,6 @@ import com.ds.nas.hc.api.fegin.PersonalInfoClient;
 import com.ds.nas.hc.common.result.Result;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @date 2022/12/19
  * @description
  */
-@Component
+@Service
 public class PersonalInfoClientFallback implements PersonalInfoClient {
 
     @Override
