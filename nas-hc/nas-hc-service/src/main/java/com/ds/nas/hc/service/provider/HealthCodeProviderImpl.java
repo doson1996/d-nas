@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * @date 2023/1/17
  * @description
  */
-@DubboService(version = "1.0.0")
+@DubboService(version = "1.0")
 public class HealthCodeProviderImpl implements HealthCodeProvider {
 
     @Resource

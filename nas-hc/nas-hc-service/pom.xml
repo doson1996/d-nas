@@ -20,5 +20,10 @@
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-hc-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.ds.nas</groupId>
+            <artifactId>nas-nat-api</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -3,6 +3,7 @@ package com.ds.nas.hc.dao.response;
 import com.ds.nas.hc.common.base.response.BaseResponse;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,9 @@ import java.util.Date;
  * @description 申领健康码出参
  */
 @Data
-public class HealthCodeQueryResponse extends BaseResponse {
+public class HealthCodeQueryResponse extends BaseResponse implements Serializable {
+
+    private static final long serialVersionUID = 6222718300217486763L;
 
     /**
      * 姓名

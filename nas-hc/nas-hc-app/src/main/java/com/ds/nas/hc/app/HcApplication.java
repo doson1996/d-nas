@@ -1,5 +1,6 @@
 package com.ds.nas.hc.app;
 
+import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableFeignClients
 @EnableDiscoveryClient
 @EnableAspectJAutoProxy
+@DubboComponentScan(basePackages = "com.ds.nas.hc.service.provider")
 @SpringBootApplication(scanBasePackages = {
         "com.ds.nas.hc.app",
         "com.ds.nas.hc.dao",
