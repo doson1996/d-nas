@@ -3,7 +3,7 @@ package com.ds.nas.hc.api.api.controller;
 import com.ds.nas.hc.app.HcApplication;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.service.HcPersonalInfoService;
-import com.ds.nas.lib.common.util.DataGenerateUtil;
+import com.ds.nas.lib.common.util.DataGenerateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,7 +28,7 @@ public class HealthCodeServiceTest {
 
         HealthCodeApplyRequest request = new HealthCodeApplyRequest();
         for (int i = 0; i < 10000; i++) {
-            request.setIdCard(DataGenerateUtil.getIdNo());
+            request.setIdCard(DataGenerateUtils.getIdNo());
             hcPersonalInfoService.apply(request);
         }
 
