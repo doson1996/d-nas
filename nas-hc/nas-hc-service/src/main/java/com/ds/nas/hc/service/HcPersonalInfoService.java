@@ -1,7 +1,7 @@
 package com.ds.nas.hc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ds.nas.hc.common.result.Result;
+import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;

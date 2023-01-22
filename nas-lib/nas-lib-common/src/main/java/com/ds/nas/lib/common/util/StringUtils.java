@@ -10,7 +10,7 @@ import cn.hutool.core.util.StrUtil;
 public class StringUtils extends StrUtil {
 
     private StringUtils() {
-        throw new AssertionError("No com.ds.nas.hc.common.util.StringUtils instances for you!");
+        throw new AssertionError("No com.ds.nas.lib.common.util.StringUtils instances for you!");
     }
 
     /**

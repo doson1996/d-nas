@@ -1,10 +1,9 @@
 package com.ds.nas.nat.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ds.nas.nat.common.result.Result;
+import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.common.util.TableNameUtil;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
-import com.ds.nas.nat.dao.mapper.NatDetectionBatchInfoMapper;
 import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
 import com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper;

@@ -1,6 +1,6 @@
 package com.ds.nas.nat.service;
 
-import com.ds.nas.nat.common.result.Result;
+import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;

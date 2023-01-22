@@ -1,6 +1,6 @@
 package com.ds.nas.nat.app.controller;
 
-import com.ds.nas.nat.common.result.Result;
+import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
 import org.springframework.web.bind.annotation.PostMapping;

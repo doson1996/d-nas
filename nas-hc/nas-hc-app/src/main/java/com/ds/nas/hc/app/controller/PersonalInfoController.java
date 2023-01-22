@@ -1,6 +1,6 @@
 package com.ds.nas.hc.app.controller;
 
-import com.ds.nas.hc.common.result.Result;
+import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;

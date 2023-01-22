@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.ds.nas.hc.common.base.domain.BaseDomain;
+import com.ds.nas.lib.common.base.domain.BaseDomain;
 import lombok.Data;
 
 /**

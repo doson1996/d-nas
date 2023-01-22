@@ -1,6 +1,6 @@
 package com.ds.nas.hc.dao.response;
 
-import com.ds.nas.hc.common.base.response.BaseResponse;
+import com.ds.nas.lib.common.base.response.BaseResponse;
 import lombok.Data;
 
 import java.util.Date;

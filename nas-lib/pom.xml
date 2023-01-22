@@ -19,7 +19,6 @@
     <modules>
         <module>nas-lib-common</module>
         <module>nas-lib-cache</module>
-        <module>nas-lib-log</module>
     </modules>
 
 </project>

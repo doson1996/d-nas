@@ -7,7 +7,7 @@ import com.ds.nas.hc.api.fegin.PersonalInfoClient;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
-import com.ds.nas.nat.common.result.Result;
+import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoCreateRequest;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoDetectionRequest;
@@ -65,7 +65,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Override
     public Result<String> detection(DetectionBatchInfoDetectionRequest request) {
-        com.ds.nas.hc.common.result.Result<HealthCodeQueryResponse> query = null;
+        Result<HealthCodeQueryResponse> query = null;
         try {
             query = healthCodeProvider.query("420900199611280071");
         } catch (Exception e) {
@@ -96,7 +96,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
     private void updateHealthCode(String batchNo) {
         PersonalInfoUpdateRequest request = new PersonalInfoUpdateRequest();
         request.setIdCard("1");
-        com.ds.nas.hc.common.result.Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCard(request);
+        Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCard(request);
         log.info("personalInfoUpdateResponseResult = {}", personalInfoUpdateResponseResult);
     }
 

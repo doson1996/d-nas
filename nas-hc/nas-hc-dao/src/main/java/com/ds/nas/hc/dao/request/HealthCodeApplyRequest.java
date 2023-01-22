@@ -1,6 +1,6 @@
 package com.ds.nas.hc.dao.request;
 
-import com.ds.nas.hc.common.base.request.BaseRequest;
+import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;
 
 /**

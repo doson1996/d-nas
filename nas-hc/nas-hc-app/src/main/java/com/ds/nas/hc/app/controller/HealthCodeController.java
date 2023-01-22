@@ -1,7 +1,6 @@
 package com.ds.nas.hc.app.controller;
 
-import com.ds.nas.hc.common.annotation.AuthCheck;
-import com.ds.nas.hc.common.result.Result;
+import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
@@ -27,7 +26,6 @@ public class HealthCodeController {
      * @param request 入参
      * @return 出参
      */
-    @AuthCheck
     @PostMapping("apply")
     public Result<String> apply(@RequestBody HealthCodeApplyRequest request) {
         return hcPersonalInfoService.apply(request);
@@ -40,7 +38,6 @@ public class HealthCodeController {
      * @param idCard 身份证号
      * @return 出参
      */
-    @AuthCheck
     @GetMapping("query/{idCard}")
     public Result<HealthCodeQueryResponse> query(@PathVariable String idCard) {
         return hcPersonalInfoService.queryByIdCard(idCard);

@@ -2,12 +2,12 @@ package com.ds.nas.hc.app.controller.advice;
 
 import cn.hutool.core.util.StrUtil;
 
-import com.ds.nas.hc.common.exception.AuthException;
-import com.ds.nas.hc.common.exception.BusinessException;
-import com.ds.nas.hc.common.result.Result;
-import com.ds.nas.hc.common.result.ResultCode;
-import com.ds.nas.hc.common.result.ResultEnum;
-import com.ds.nas.hc.common.result.ResultMsg;
+import com.ds.nas.lib.common.exception.AuthException;
+import com.ds.nas.lib.common.exception.BusinessException;
+import com.ds.nas.lib.common.result.Result;
+import com.ds.nas.lib.common.result.ResultCode;
+import com.ds.nas.lib.common.result.ResultEnum;
+import com.ds.nas.lib.common.result.ResultMsg;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
