@@ -2,6 +2,7 @@ package com.ds.nas.lib.common.base.domain;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,9 @@ import java.util.Date;
  * @description
  */
 @Data
-public class BaseDomain {
+public class BaseDomain implements Serializable {
+
+    private static final long serialVersionUID = -1140713925674274985L;
 
     /**
      * 创建时间

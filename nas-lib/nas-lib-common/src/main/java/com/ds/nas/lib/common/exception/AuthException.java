@@ -1,7 +1,7 @@
 package com.ds.nas.lib.common.exception;
 
 /**
- * 自定义业务异常
+ * 自定义认证异常
  * @author ds
  */
 public class AuthException extends RuntimeException {

@@ -1,7 +1,8 @@
 package com.ds.nas.lib.common.base.request;
 
-import com.sun.org.apache.xpath.internal.operations.String;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * @author ds
@@ -9,7 +10,9 @@ import lombok.Data;
  * @description
  */
 @Data
-public class BaseRequest {
+public class BaseRequest  implements Serializable {
+
+    private static final long serialVersionUID = 737016089980834810L;
 
     /**
      * 请求id
