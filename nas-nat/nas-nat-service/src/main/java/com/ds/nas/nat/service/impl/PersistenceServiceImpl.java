@@ -1,8 +1,6 @@
 package com.ds.nas.nat.service.impl;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.db.meta.Table;
-import com.ds.nas.nat.common.result.Result;
+import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.common.util.TableNameUtil;
 import com.ds.nas.nat.dao.domain.TableInfo;
 import com.ds.nas.nat.dao.mapper.PersistenceMapper;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Map;
 
 /**
  * @author ds
