@@ -2,6 +2,7 @@ package com.ds.nas.nat.dao.mapper;
 
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
 * @author ds
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2022-12-10 23:55:13
 * @Entity com.ds.nas.nat.dao.domain.NatDetectionBatchInfo
 */
+@Repository
 public interface NatDetectionBatchInfoMapper extends BaseMapper<NatDetectionBatchInfo> {
 
     /**

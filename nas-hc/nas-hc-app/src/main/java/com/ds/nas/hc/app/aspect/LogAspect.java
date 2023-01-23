@@ -2,6 +2,7 @@ package com.ds.nas.hc.app.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -30,9 +31,11 @@ public class LogAspect {
     }
 
     @Around("pointcut()")
-    public void log(JoinPoint joinPoint) {
-        String name = joinPoint.getSignature().getName();
-        String method = request.getMethod();
-        log.info("name = {}, method = {}", name, method);
+    public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
+        String path = request.getServletPath();
+        long start = System.currentTimeMillis();
+        Object proceed = joinPoint.proceed();
+        log.info("path = {}, execution time = {}ms", path, System.currentTimeMillis() - start);
+        return proceed;
     }
 }

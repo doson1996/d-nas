@@ -12,13 +12,16 @@ import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
+import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.ds.nas.nat.dao.mapper.NatDetectionBatchInfoMapper;
+import com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoCreateRequest;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoDetectionRequest;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoSubmitRequest;
 import com.ds.nas.nat.service.NatDetectionBatchInfoService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,18 +38,24 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         implements NatDetectionBatchInfoService {
 
     @Resource
+    RedisUtil redisUtil;
+
+    @Value("${table-name.dpi}")
+    private String dpiTableName;
+
+    @Resource
     private PersonalInfoClient personalInfoClient;
 
     @Resource
-    RedisUtil redisUtil;
+    private NatDetectionPersonalInfoMapper detectionPersonalInfoMapper;
 
     private static final String BATCH_SEQUENCE_KEY = "batch:sequence";
 
     @Override
     public Result<StringResponse> getBatchNo() {
-        StringResponse response = new StringResponse();
         String batchNo = generateBatchNo();
-        return Result.ok("获取批次号[" + batchNo + "]成功!", response);
+        return Result.ok("获取批次号[" + batchNo + "]成功!",
+                StringResponse.builder().withData(batchNo).build());
     }
 
     @Override
@@ -97,7 +106,8 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
             return Result.ok("检测批次[" + request.getBatchNo() + "]成功!",
                     StringResponse.builder().withData(request.getBatchNo()).build());
         }
-        return Result.fail("检测批次[" + request.getBatchNo() + "]失败!");
+        return Result.fail("检测批次[" + request.getBatchNo() + "]失败!",
+                StringResponse.builder().withData(request.getBatchNo()).build());
     }
 
     /**
@@ -107,10 +117,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
      */
     private void updateHealthCode(String batchNo) {
         PersonalInfoUpdateRequest request = new PersonalInfoUpdateRequest();
-        LambdaQueryWrapper<NatDetectionBatchInfo> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(NatDetectionBatchInfo::getBatchNo, batchNo);
-        NatDetectionBatchInfo batchInfo = getOne(wrapper);
-
+        detectionPersonalInfoMapper.getIdCards(TableNameUtils.generateTodayTableName(dpiTableName), batchNo);
         Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCard(request);
         log.info("personalInfoUpdateResponseResult = {}", personalInfoUpdateResponseResult);
     }

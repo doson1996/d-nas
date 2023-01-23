@@ -15,6 +15,12 @@
         id,batch_no,id_card,
         delete_flag
     </sql>
+    
+    <select id="getIdCards" resultType="string">
+        select id_card
+        from `${tableName}`
+        where batch_no = #{batchNo}
+    </select>
 
     <update id="detection">
         insert into `${tableName}` (`batch_no`, `id_card`)
