@@ -1,12 +1,16 @@
 package com.ds.nas.nat.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ds.lib.cache.redis.RedisUtil;
 import com.ds.nas.hc.api.fegin.PersonalInfoClient;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
+import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.result.Result;
+import com.ds.nas.lib.common.util.StringUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.ds.nas.nat.dao.mapper.NatDetectionBatchInfoMapper;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoCreateRequest;
@@ -32,14 +36,27 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
     @Resource
     private PersonalInfoClient personalInfoClient;
 
+    @Resource
+    RedisUtil redisUtil;
+
+    private static final String BATCH_SEQUENCE_KEY = "batch:sequence";
+
+    @Override
+    public Result<String> getBatchNo() {
+        String batchNo = generateBatchNo();
+        return Result.ok("获取批次号[" + batchNo + "]成功!", batchNo);
+    }
+
     @Override
     public Result<String> create(DetectionBatchInfoCreateRequest request) {
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
-        detectionBatchInfo.setBatchNo(request.getBatchNo());
-        if (save(detectionBatchInfo)) {
-            return Result.ok("创建批次[" + request.getBatchNo() + "]成功!", request.getBatchNo());
+        String batchNo = generateBatchNo();
+        detectionBatchInfo.setBatchNo(batchNo);
+        detectionBatchInfo = (NatDetectionBatchInfo) DBUtils.getCurrentDBUtils().onCreate(detectionBatchInfo);
+        if (StringUtils.isNotBlank(batchNo) && save(detectionBatchInfo)) {
+            return Result.ok("创建批次[" + batchNo + "]成功!", batchNo);
         }
-        return Result.fail("创建批次[" + request.getBatchNo() + "]失败!");
+        return Result.fail("创建批次[" + batchNo + "]失败!");
     }
 
     @Override
@@ -77,6 +94,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     /**
      * 根据批次号更新 todo 改消息队列
+     *
      * @param batchNo
      */
     private void updateHealthCode(String batchNo) {
@@ -87,6 +105,29 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
         Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCard(request);
         log.info("personalInfoUpdateResponseResult = {}", personalInfoUpdateResponseResult);
+    }
+
+    /**
+     * 生成批次号
+     *
+     * @return 批次号
+     */
+    private String generateBatchNo() {
+        String batchNo = "";
+        try {
+            String sequence = redisUtil.get(BATCH_SEQUENCE_KEY);
+            if (StringUtils.isBlank(sequence)) {
+                // 初始化序列号
+                String initSequence = DateUtil.today().replaceAll("-", "") + "0000000000";
+                redisUtil.set(BATCH_SEQUENCE_KEY, initSequence);
+            }
+            sequence = String.valueOf(redisUtil.incrBy(BATCH_SEQUENCE_KEY, 1));
+            batchNo = "cd" + sequence;
+        } catch (Exception e) {
+            log.error("生成批次号异常：{}", e.getMessage());
+        }
+
+        return batchNo;
     }
 
 }

@@ -1,6 +1,5 @@
 package com.ds.nas.nat.common.util;
 
-
 import cn.hutool.core.date.DateUtil;
 
 /**
@@ -8,9 +7,14 @@ import cn.hutool.core.date.DateUtil;
  * @date 2022/12/11
  * @description 表名生成工具
  */
-public class TableNameUtil {
+public class TableNameUtils {
 
-    private TableNameUtil() {
+    /**
+     * 日期分割符
+     */
+    public static final String DATE_SEPARATOR = "-";
+
+    private TableNameUtils() {
         throw new AssertionError("No com.ds.nas.nat.common.util.TableNameUtil instances for you!");
     }
 
@@ -21,7 +25,7 @@ public class TableNameUtil {
      * @return 返回当前日期表名 tableName_yyyyMMdd
      */
     public static String generateTodayTableName(String tableName) {
-        return tableName + "_" + DateUtil.today().replaceAll("-", "");
+        return tableName + DATE_SEPARATOR + DateUtil.today().replaceAll(DATE_SEPARATOR, "");
     }
 
     /**
@@ -31,7 +35,7 @@ public class TableNameUtil {
      * @return 返回明天日期表名 tableName_yyyyMMdd
      */
     public static String generateTomorrowTableName(String tableName) {
-        return tableName + "_" + DateUtil.tomorrow().toDateStr().replaceAll("-", "");
+        return tableName + DATE_SEPARATOR + DateUtil.tomorrow().toDateStr().replaceAll(DATE_SEPARATOR, "");
     }
 
 }

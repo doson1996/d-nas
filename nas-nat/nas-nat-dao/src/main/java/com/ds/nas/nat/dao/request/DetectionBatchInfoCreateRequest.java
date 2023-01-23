@@ -12,11 +12,6 @@ import lombok.Data;
 public class DetectionBatchInfoCreateRequest extends BaseRequest {
 
     /**
-     * 批次号
-     */
-    private String batchNo;
-
-    /**
      * 检测机构
      */
     private String entryMechanism;

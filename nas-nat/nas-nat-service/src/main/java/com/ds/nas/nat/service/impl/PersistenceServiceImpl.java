@@ -1,7 +1,7 @@
 package com.ds.nas.nat.service.impl;
 
 import com.ds.nas.lib.common.result.Result;
-import com.ds.nas.nat.common.util.TableNameUtil;
+import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.TableInfo;
 import com.ds.nas.nat.dao.mapper.PersistenceMapper;
 import com.ds.nas.nat.service.PersistenceService;
@@ -26,7 +26,7 @@ public class PersistenceServiceImpl implements PersistenceService {
 
     @Override
     public Result<String> createTableDpi() {
-        String tableName = TableNameUtil.generateTodayTableName(dpiTableName);
+        String tableName = TableNameUtils.generateTodayTableName(dpiTableName);
         int res = persistenceMapper.createTableDpi(tableName);
         if (res == 1) {
             Result.ok("创建表[" + tableName + "]成功!");

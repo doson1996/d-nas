@@ -15,6 +15,12 @@ import com.ds.nas.nat.dao.request.DetectionBatchInfoSubmitRequest;
 public interface NatDetectionBatchInfoService extends IService<NatDetectionBatchInfo> {
 
     /**
+     * 获取batchNo
+     * @return 批次号
+     */
+    Result<String> getBatchNo();
+
+    /**
      * 新增批次
      * @param request
      * @return

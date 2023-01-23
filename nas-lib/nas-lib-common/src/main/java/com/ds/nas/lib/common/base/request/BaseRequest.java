@@ -1,5 +1,6 @@
 package com.ds.nas.lib.common.base.request;
 
+import cn.hutool.core.date.DateUtil;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -27,7 +28,7 @@ public class BaseRequest  implements Serializable {
     /**
      * 请求时间
      */
-    private String requestTime;
+    private String requestTime = DateUtil.now();
 
     /**
      * 请求ip

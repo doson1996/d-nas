@@ -2,7 +2,7 @@ package com.ds.nas.nat.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.lib.common.result.Result;
-import com.ds.nas.nat.common.util.TableNameUtil;
+import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
@@ -32,7 +32,7 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
         NatDetectionPersonalInfo personalInfo = new NatDetectionPersonalInfo();
         personalInfo.setBatchNo(request.getBatchNo());
         personalInfo.setIdCard(request.getIdCard());
-        String tableName = TableNameUtil.generateTodayTableName(dpiTableName);
+        String tableName = TableNameUtils.generateTodayTableName(dpiTableName);
         int res = personalInfoMapper.detection(tableName, personalInfo);
         if (res == 0) {
             return Result.fail("录入信息失败!");

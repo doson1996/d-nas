@@ -17,6 +17,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients(basePackages = {"com.ds.nas.hc.api"})
 @DubboComponentScan(basePackages = "com.ds.nas.nat.service.provider")
 @SpringBootApplication(scanBasePackages = {
+        "com.ds.lib.cache",
         "com.ds.nas.nat.app",
         "com.ds.nas.nat.dao",
         "com.ds.nas.nat.service"})
