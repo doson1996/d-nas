@@ -7,14 +7,16 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 
+import com.ds.nas.lib.common.base.domain.BaseDomain;
 import lombok.Data;
 
 /**
+ * @author ds
  * @TableName nat_detection_personal_info
  */
 @TableName(value = "nat_detection_personal_info")
 @Data
-public class NatDetectionPersonalInfo implements Serializable {
+public class NatDetectionPersonalInfo extends BaseDomain {
 
     /**
      * id
@@ -31,10 +33,5 @@ public class NatDetectionPersonalInfo implements Serializable {
      * 身份证号码
      */
     private String idCard;
-
-    /**
-     * 逻辑删除标志: 0.未删除 1.已删除
-     */
-    private Integer deleteFlag;
 
 }

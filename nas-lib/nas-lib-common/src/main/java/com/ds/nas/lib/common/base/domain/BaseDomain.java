@@ -28,7 +28,7 @@ public class BaseDomain implements Serializable {
     /**
      * 创建人
      */
-    private String cretaeBy;
+    private String createBy;
 
     /**
      * 更新人

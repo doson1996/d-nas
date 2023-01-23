@@ -10,9 +10,11 @@ create table if not exists d_nas_hc.hc_personal_info
     last_nucleic_acid_time datetime             null comment '最后一次核酸时间',
     create_time            datetime             not null comment '创建时间',
     update_time            datetime             not null comment '更新时间',
-    cretae_by              varchar(255)         not null comment '创建人',
+    create_by              varchar(255)         not null comment '创建人',
     update_by              varchar(255)         not null comment '更新人',
-    delete_flag            tinyint(1) default 0 not null comment '逻辑删除标志 0.未删除 1.已删除'
+    delete_flag            tinyint(1) default 0 not null comment '逻辑删除标志 0.未删除 1.已删除',
+    constraint uk_id_card
+        unique (id_card)
 );
 
 CREATE UNIQUE INDEX uk_id_card ON hc_personal_info(id_card);
@@ -29,6 +31,10 @@ create table if not exists d_nas_nat.nat_detection_batch_info
     detection_result    int(1)               null comment '检测结果: 0.未检测 1.正常 2.异常',
     detection_mechanism varchar(200)         null comment '检测机构',
     delete_flag         tinyint(1) default 0 not null comment '逻辑删除标志: 0.未删除 1.已删除',
+    create_time         datetime             null comment '创建时间',
+    update_time         datetime             null comment '更新时间',
+    create_by           varchar(255)         not null comment '创建人',
+    update_by           varchar(255)         not null comment '更新人',
     constraint uk_batch_no
         unique (batch_no)
 );
@@ -39,5 +45,9 @@ create table if not exists d_nas_nat.nat_detection_personal_info
     id          bigint(11) auto_increment comment 'id' primary key,
     batch_no    varchar(20)          not null comment '批次号',
     id_card     varchar(18)          not null comment '身份证号码',
-    delete_flag tinyint(1) default 0 not null comment '逻辑删除标志: 0.未删除 1.已删除'
+    delete_flag tinyint(1) default 0 not null comment '逻辑删除标志: 0.未删除 1.已删除',
+    create_time datetime             not null comment '创建时间',
+    update_time datetime             not null comment '更新时间',
+    create_by   varchar(255)         not null comment '创建人',
+    update_by   varchar(255)         not null comment '更新人'
 );

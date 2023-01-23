@@ -1,21 +1,19 @@
 package com.ds.nas.nat.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ds.nas.hc.api.dubbo.HealthCodeProvider;
 import com.ds.nas.hc.api.fegin.PersonalInfoClient;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
-import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
+import com.ds.nas.nat.dao.mapper.NatDetectionBatchInfoMapper;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoCreateRequest;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoDetectionRequest;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoSubmitRequest;
 import com.ds.nas.nat.service.NatDetectionBatchInfoService;
-import com.ds.nas.nat.dao.mapper.NatDetectionBatchInfoMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,9 +31,6 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Resource
     private PersonalInfoClient personalInfoClient;
-
-    @DubboReference(version = "1.0")
-    private HealthCodeProvider healthCodeProvider;
 
     @Override
     public Result<String> create(DetectionBatchInfoCreateRequest request) {
@@ -65,15 +60,6 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Override
     public Result<String> detection(DetectionBatchInfoDetectionRequest request) {
-        Result<HealthCodeQueryResponse> query = null;
-        try {
-            query = healthCodeProvider.query("420900199611280071");
-        } catch (Exception e) {
-            //throw new RuntimeException(e);
-            log.error("{}", e.getMessage());
-        }
-        log.info("query = {}", query);
-
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
         detectionBatchInfo.setBatchNo(request.getBatchNo());
         detectionBatchInfo.setDetectionTime(new Date());
@@ -95,7 +81,10 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
      */
     private void updateHealthCode(String batchNo) {
         PersonalInfoUpdateRequest request = new PersonalInfoUpdateRequest();
-        request.setIdCard("1");
+        LambdaQueryWrapper<NatDetectionBatchInfo> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(NatDetectionBatchInfo::getBatchNo, batchNo);
+        NatDetectionBatchInfo batchInfo = getOne(wrapper);
+
         Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCard(request);
         log.info("personalInfoUpdateResponseResult = {}", personalInfoUpdateResponseResult);
     }

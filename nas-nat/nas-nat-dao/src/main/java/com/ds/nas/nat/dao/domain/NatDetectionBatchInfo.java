@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import com.ds.nas.lib.common.base.domain.BaseDomain;
 import lombok.Data;
 
 /**
@@ -15,7 +17,8 @@ import lombok.Data;
  */
 @TableName(value ="nat_detection_batch_info")
 @Data
-public class NatDetectionBatchInfo implements Serializable {
+public class NatDetectionBatchInfo extends BaseDomain {
+
     /**
      * id
      */
@@ -56,10 +59,5 @@ public class NatDetectionBatchInfo implements Serializable {
      * 检测机构
      */
     private String detectionMechanism;
-
-    /**
-     * 逻辑删除标志: 0.未删除 1.已删除
-     */
-    private Integer deleteFlag;
 
 }

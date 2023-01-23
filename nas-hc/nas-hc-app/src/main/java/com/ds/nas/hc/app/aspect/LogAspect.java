@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * @author ds
@@ -34,7 +33,6 @@ public class LogAspect {
     public void log(JoinPoint joinPoint) {
         String name = joinPoint.getSignature().getName();
         String method = request.getMethod();
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        log.info("name = {}, method = {}, parameterMap = {} ", name, method, parameterMap);
+        log.info("name = {}, method = {}", name, method);
     }
 }
