@@ -22,11 +22,12 @@ public class HealthCodeController {
     private HcPersonalInfoService hcPersonalInfoService;
 
     /**
-     * 申领健康码
+     * 申领健康码(废弃)
      *
      * @param request 入参
      * @return 出参
      */
+    @Deprecated
     @PostMapping("apply")
     public Result<String> apply(@RequestBody HealthCodeApplyRequest request) {
         return hcPersonalInfoService.apply(request);

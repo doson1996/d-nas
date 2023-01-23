@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * @author ds
  * @date 2022/12/5
- * @description
+ * @description 通用请求
  */
 @Data
 public class BaseRequest  implements Serializable {
@@ -38,4 +38,5 @@ public class BaseRequest  implements Serializable {
      * mac地址
      */
     private String mac;
+
 }

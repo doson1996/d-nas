@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @description
  */
 @DubboService(version = "1.0")
-public class HealthCodeProviderImpl implements HealthCodeProvider {
+public class HealthCodeProviderImplV1 implements HealthCodeProvider {
 
     @Resource
     private HcPersonalInfoService personalInfoService;

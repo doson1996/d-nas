@@ -5,7 +5,7 @@ package com.ds.nas.lib.common.result;
  *
  * @author ds
  */
-public class ResultMsg {
+public final class ResultMsg {
 
     /**
      * 返回成功消息

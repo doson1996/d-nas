@@ -5,7 +5,7 @@ package com.ds.nas.lib.common.result;
  *
  * @author ds
  */
-public class ResultCode {
+public final class ResultCode {
 
     /**
      * 成功

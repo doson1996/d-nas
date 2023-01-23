@@ -16,6 +16,7 @@ public interface HcPersonalInfoMapper extends BaseMapper<HcPersonalInfo> {
      * @param idCard
      * @return
      */
+    @Deprecated
     int updateByIdCard(String idCard);
 
     /**

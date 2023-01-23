@@ -2,6 +2,7 @@ package com.ds.nas.hc.api.api.controller;
 
 import com.ds.nas.hc.app.HcApplication;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
+import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import com.ds.nas.lib.common.util.DataGenerateUtils;
 import org.junit.Test;
@@ -24,14 +25,25 @@ public class HealthCodeServiceTest {
     private HcPersonalInfoService hcPersonalInfoService;
 
     @Test
+    @Deprecated
     public void test_batch_apply() {
-
         HealthCodeApplyRequest request = new HealthCodeApplyRequest();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 100; i++) {
             request.setIdCard(DataGenerateUtils.getIdNo());
             hcPersonalInfoService.apply(request);
         }
 
+    }
+
+    @Test
+    public void test_batch_register() {
+        PersonalInfoRegisterRequest request = new PersonalInfoRegisterRequest();
+        for (int i = 0; i < 100; i++) {
+            request.setName(DataGenerateUtils.generateName());
+            request.setIdCard(DataGenerateUtils.getIdNo());
+            request.setPhone(DataGenerateUtils.getTel());
+            hcPersonalInfoService.register(request);
+        }
     }
 
 }

@@ -36,19 +36,18 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     private HcPersonalInfoMapper hcPersonalInfoMapper;
 
     @Override
+    @Deprecated
     public Result<String> apply(HealthCodeApplyRequest request) {
-        if (hcPersonalInfoMapper.updateByIdCard(request.getIdCard()) == 1) {
-            return Result.ok("申领健康码成功!");
-        }
-
-        return Result.fail("申领健康码失败!");
+        return Result.fail("此方法已废弃!");
     }
 
     @Override
     public Result<HealthCodeQueryResponse> queryByIdCard(String idCard) {
+        if (StringUtils.isBlank(idCard)) {
+            throw new BusinessException("身份证号不能为空!");
+        }
         HealthCodeQueryResponse response = new HealthCodeQueryResponse();
         BeanUtil.copyProperties(hcPersonalInfoMapper.queryByIdCard(idCard), response);
-
         return Result.ok("查询成功", response);
     }
 
@@ -57,7 +56,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         checkRegisterRequest(request);
         BeanUtil.copyProperties(request, hcPersonalInfo);
-        hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().commonFieldAssignments(hcPersonalInfo);
+        hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().onCreate(hcPersonalInfo);
         hcPersonalInfo.setHealth(HealthCodeState.GREEN);
 
         if (!save(hcPersonalInfo)) {
@@ -74,10 +73,9 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     @Override
     public Result<PersonalInfoUpdateResponse> updateByIdCard(PersonalInfoUpdateRequest request) {
-        log.info("req = {}", request);
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         BeanUtil.copyProperties(request, hcPersonalInfo);
-
+        hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().onUpdate(hcPersonalInfo);
         LambdaUpdateWrapper<HcPersonalInfo> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(HcPersonalInfo::getIdCard, request.getIdCard());
         if (update(hcPersonalInfo, wrapper)) {
@@ -90,6 +88,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     /**
      * 注册参数校验
+     *
      * @param request
      */
     private void checkRegisterRequest(PersonalInfoRegisterRequest request) {
@@ -97,13 +96,11 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         if (StringUtils.isBlank(idCard, request.getName(), request.getPhone())) {
             throw new BusinessException("身份证号、姓名、手机不能为空!");
         }
-
-        HcPersonalInfo queryByIdCard = hcPersonalInfoMapper.queryByIdCard(idCard);
-        if (queryByIdCard != null) {
+        HcPersonalInfo hcPersonalInfo = hcPersonalInfoMapper.queryByIdCard(idCard);
+        if (hcPersonalInfo != null) {
             throw new BusinessException("此身份证已注册!");
         }
     }
-
 
 }
 

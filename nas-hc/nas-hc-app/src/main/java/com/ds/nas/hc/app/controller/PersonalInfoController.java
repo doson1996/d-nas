@@ -36,7 +36,7 @@ public class PersonalInfoController {
     }
 
     /**
-     * 根据主键更新
+     * 根据身份证号更新
      * @param request 入参
      * @return
      */

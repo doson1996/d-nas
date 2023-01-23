@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author ds
  */
-public class Result<T> implements Serializable {
+public final class Result<T> implements Serializable {
 
     private static final long serialVersionUID = 6625888347761546266L;
 
