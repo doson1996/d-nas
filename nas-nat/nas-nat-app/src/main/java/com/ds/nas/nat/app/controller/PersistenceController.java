@@ -1,5 +1,6 @@
 package com.ds.nas.nat.app.controller;
 
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.domain.TableInfo;
 import com.ds.nas.nat.service.PersistenceService;
@@ -20,12 +21,12 @@ public class PersistenceController {
     private PersistenceService persistenceService;
 
     @PostMapping("create-table")
-    public Result<String> createTable(@RequestBody TableInfo tableInfo) {
+    public Result<StringResponse> createTable(@RequestBody TableInfo tableInfo) {
         return persistenceService.createTable(tableInfo);
     }
 
     @PostMapping("create-table-dpi")
-    public Result<String> createTableDpi() {
+    public Result<StringResponse> createTableDpi() {
         return persistenceService.createTableDpi();
     }
 

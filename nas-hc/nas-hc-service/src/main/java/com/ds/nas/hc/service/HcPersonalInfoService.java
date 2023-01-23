@@ -1,6 +1,7 @@
 package com.ds.nas.hc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
@@ -23,7 +24,7 @@ public interface HcPersonalInfoService extends IService<HcPersonalInfo> {
      * @param request
      * @return
      */
-    Result<String> apply(HealthCodeApplyRequest request);
+    Result<StringResponse> apply(HealthCodeApplyRequest request);
 
     /**
      * 根据身份证号查询健康码

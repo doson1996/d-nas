@@ -1,5 +1,6 @@
 package com.ds.nas.nat.service;
 
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -18,27 +19,27 @@ public interface NatDetectionBatchInfoService extends IService<NatDetectionBatch
      * 获取batchNo
      * @return 批次号
      */
-    Result<String> getBatchNo();
+    Result<StringResponse> getBatchNo();
 
     /**
      * 新增批次
      * @param request
      * @return
      */
-    Result<String> create(DetectionBatchInfoCreateRequest request);
+    Result<StringResponse> create(DetectionBatchInfoCreateRequest request);
 
     /**
      * 提交批次
      * @param request
      * @return
      */
-    Result<String> submit(DetectionBatchInfoSubmitRequest request);
+    Result<StringResponse> submit(DetectionBatchInfoSubmitRequest request);
 
     /**
      * 检测
      * @param request
      * @return
      */
-    Result<String> detection(DetectionBatchInfoDetectionRequest request);
+    Result<StringResponse> detection(DetectionBatchInfoDetectionRequest request);
 
 }

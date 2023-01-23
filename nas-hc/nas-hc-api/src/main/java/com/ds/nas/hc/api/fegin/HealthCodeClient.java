@@ -1,6 +1,7 @@
 package com.ds.nas.hc.api.fegin;
 
 import com.ds.nas.hc.api.fegin.fallback.HealthCodeClientFallback;
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
@@ -34,6 +35,6 @@ public interface HealthCodeClient {
      * @return 出参
      */
     @PostMapping("apply")
-    Result<String> apply(@RequestBody HealthCodeApplyRequest request);
+    Result<StringResponse> apply(@RequestBody HealthCodeApplyRequest request);
 
 }

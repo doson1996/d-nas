@@ -1,6 +1,7 @@
 package com.ds.nas.hc.app.controller;
 
 import com.ds.nas.lib.common.auth.AuthCheck;
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
@@ -29,7 +30,7 @@ public class HealthCodeController {
      */
     @Deprecated
     @PostMapping("apply")
-    public Result<String> apply(@RequestBody HealthCodeApplyRequest request) {
+    public Result<StringResponse> apply(@RequestBody HealthCodeApplyRequest request) {
         return hcPersonalInfoService.apply(request);
     }
 

@@ -1,5 +1,6 @@
 package com.ds.nas.nat.app.controller;
 
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoCreateRequest;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoDetectionRequest;
@@ -27,22 +28,22 @@ public class DetectionBatchInfoController {
     private NatDetectionBatchInfoService detectionBatchInfoService;
 
     @PostMapping("getBatchNo")
-    public Result<String> getBatchNo() {
+    public Result<StringResponse> getBatchNo() {
         return detectionBatchInfoService.getBatchNo();
     }
 
     @PostMapping("create")
-    public Result<String> create(@RequestBody DetectionBatchInfoCreateRequest request) {
+    public Result<StringResponse> create(@RequestBody DetectionBatchInfoCreateRequest request) {
         return detectionBatchInfoService.create(request);
     }
 
     @PostMapping("submit")
-    public Result<String> submit(@RequestBody DetectionBatchInfoSubmitRequest request) {
+    public Result<StringResponse> submit(@RequestBody DetectionBatchInfoSubmitRequest request) {
         return detectionBatchInfoService.submit(request);
     }
 
     @PostMapping("detection")
-    public Result<String> detection(@RequestBody DetectionBatchInfoDetectionRequest request) {
+    public Result<StringResponse> detection(@RequestBody DetectionBatchInfoDetectionRequest request) {
         return detectionBatchInfoService.detection(request);
     }
 

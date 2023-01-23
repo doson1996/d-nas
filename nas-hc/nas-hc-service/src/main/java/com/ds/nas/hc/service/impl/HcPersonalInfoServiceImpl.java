@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.lib.common.base.db.DBUtils;
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.constant.HealthCodeState;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
@@ -37,7 +38,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     @Override
     @Deprecated
-    public Result<String> apply(HealthCodeApplyRequest request) {
+    public Result<StringResponse> apply(HealthCodeApplyRequest request) {
         return Result.fail("此方法已废弃!");
     }
 

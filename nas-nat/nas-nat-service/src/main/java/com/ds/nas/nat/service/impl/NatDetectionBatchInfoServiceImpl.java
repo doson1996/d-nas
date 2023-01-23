@@ -9,6 +9,7 @@ import com.ds.nas.hc.api.fegin.PersonalInfoClient;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.lib.common.base.db.DBUtils;
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
@@ -42,25 +43,29 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
     private static final String BATCH_SEQUENCE_KEY = "batch:sequence";
 
     @Override
-    public Result<String> getBatchNo() {
+    public Result<StringResponse> getBatchNo() {
+        StringResponse response = new StringResponse();
         String batchNo = generateBatchNo();
-        return Result.ok("获取批次号[" + batchNo + "]成功!", batchNo);
+        return Result.ok("获取批次号[" + batchNo + "]成功!", response);
     }
 
     @Override
-    public Result<String> create(DetectionBatchInfoCreateRequest request) {
+    public Result<StringResponse> create(DetectionBatchInfoCreateRequest request) {
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
         String batchNo = generateBatchNo();
         detectionBatchInfo.setBatchNo(batchNo);
         detectionBatchInfo = (NatDetectionBatchInfo) DBUtils.getCurrentDBUtils().onCreate(detectionBatchInfo);
+
         if (StringUtils.isNotBlank(batchNo) && save(detectionBatchInfo)) {
-            return Result.ok("创建批次[" + batchNo + "]成功!", batchNo);
+            return Result.ok("创建批次[" + batchNo + "]成功!",
+                    StringResponse.builder().withData(batchNo).build());
         }
-        return Result.fail("创建批次[" + batchNo + "]失败!");
+        return Result.fail("创建批次[" + batchNo + "]失败!",
+                StringResponse.builder().withData(batchNo).build());
     }
 
     @Override
-    public Result<String> submit(DetectionBatchInfoSubmitRequest request) {
+    public Result<StringResponse> submit(DetectionBatchInfoSubmitRequest request) {
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
         detectionBatchInfo.setBatchNo(request.getBatchNo());
         detectionBatchInfo.setEntryTime(new Date());
@@ -70,13 +75,15 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         LambdaUpdateWrapper<NatDetectionBatchInfo> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(NatDetectionBatchInfo::getBatchNo, request.getBatchNo());
         if (update(detectionBatchInfo, wrapper)) {
-            return Result.ok("提交批次[" + request.getBatchNo() + "]成功!", request.getBatchNo());
+            return Result.ok("提交批次[" + request.getBatchNo() + "]成功!",
+                    StringResponse.builder().withData(request.getBatchNo()).build());
         }
-        return Result.fail("提交批次[" + request.getBatchNo() + "]失败!");
+        return Result.fail("提交批次[" + request.getBatchNo() + "]失败!",
+                StringResponse.builder().withData(request.getBatchNo()).build());
     }
 
     @Override
-    public Result<String> detection(DetectionBatchInfoDetectionRequest request) {
+    public Result<StringResponse> detection(DetectionBatchInfoDetectionRequest request) {
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
         detectionBatchInfo.setBatchNo(request.getBatchNo());
         detectionBatchInfo.setDetectionTime(new Date());
@@ -87,7 +94,8 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         wrapper.eq(NatDetectionBatchInfo::getBatchNo, request.getBatchNo());
         if (update(detectionBatchInfo, wrapper)) {
             updateHealthCode(request.getBatchNo());
-            return Result.ok("检测批次[" + request.getBatchNo() + "]成功!", request.getBatchNo());
+            return Result.ok("检测批次[" + request.getBatchNo() + "]成功!",
+                    StringResponse.builder().withData(request.getBatchNo()).build());
         }
         return Result.fail("检测批次[" + request.getBatchNo() + "]失败!");
     }

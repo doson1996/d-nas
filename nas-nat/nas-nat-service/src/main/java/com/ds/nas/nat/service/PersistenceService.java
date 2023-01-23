@@ -1,5 +1,6 @@
 package com.ds.nas.nat.service;
 
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.domain.TableInfo;
 
@@ -18,13 +19,13 @@ public interface PersistenceService {
      * @param tableInfo
      * @return
      */
-    Result<String> createTable(TableInfo tableInfo);
+    Result<StringResponse> createTable(TableInfo tableInfo);
 
     /**
      * 根据日期创建表 detection_personal_info_yyyyMMdd
      *
      * @return
      */
-    Result<String> createTableDpi();
+    Result<StringResponse> createTableDpi();
 
 }

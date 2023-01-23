@@ -1,5 +1,6 @@
 package com.ds.nas.nat.app.controller;
 
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
@@ -23,7 +24,7 @@ public class DetectionPersonalInfoController {
     private NatDetectionPersonalInfoService detectionPersonalInfoService;
 
     @PostMapping("entry")
-    public Result<String> entry(@RequestBody DetectionPersonalInfoEntryRequest request) {
+    public Result<StringResponse> entry(@RequestBody DetectionPersonalInfoEntryRequest request) {
         return detectionPersonalInfoService.entry(request);
     }
 

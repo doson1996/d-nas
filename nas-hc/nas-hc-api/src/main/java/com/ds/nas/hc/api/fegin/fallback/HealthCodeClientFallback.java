@@ -1,6 +1,7 @@
 package com.ds.nas.hc.api.fegin.fallback;
 
 import com.ds.nas.hc.api.fegin.HealthCodeClient;
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
@@ -20,7 +21,7 @@ public class HealthCodeClientFallback implements HealthCodeClient {
     }
 
     @Override
-    public Result<String> apply(HealthCodeApplyRequest request) {
+    public Result<StringResponse> apply(HealthCodeApplyRequest request) {
         return Result.fail("申领健康码失败!");
     }
 

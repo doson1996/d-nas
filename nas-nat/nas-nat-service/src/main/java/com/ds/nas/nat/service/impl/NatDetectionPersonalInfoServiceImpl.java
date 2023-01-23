@@ -1,6 +1,7 @@
 package com.ds.nas.nat.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
@@ -28,7 +29,7 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
     private NatDetectionPersonalInfoMapper personalInfoMapper;
 
     @Override
-    public Result<String> entry(DetectionPersonalInfoEntryRequest request) {
+    public Result<StringResponse> entry(DetectionPersonalInfoEntryRequest request) {
         NatDetectionPersonalInfo personalInfo = new NatDetectionPersonalInfo();
         personalInfo.setBatchNo(request.getBatchNo());
         personalInfo.setIdCard(request.getIdCard());
