@@ -28,11 +28,21 @@
 
     <update id="entry">
         insert into `${tableName}` (`batch_no`, `id_card`,
-
                                     `create_by`, `update_by`)
         values ('${personalInfo.batchNo}',
                 '${personalInfo.idCard}',
+                '${personalInfo.createBy}',
+                '${personalInfo.updateBy}');
+    </update>
 
+    <update id="entry1">
+        insert into `${tableName}` (`batch_no`, `id_card`,
+                                    `create_time`,`update_time`,
+                                    `create_by`, `update_by`)
+        values ('${personalInfo.batchNo}',
+                '${personalInfo.idCard}',
+                '${personalInfo.createTime}',
+                '${personalInfo.updateTime}',
                 '${personalInfo.createBy}',
                 '${personalInfo.updateBy}');
     </update>
