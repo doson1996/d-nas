@@ -4,6 +4,7 @@ import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public interface NatDetectionPersonalInfoMapper extends BaseMapper<NatDetectionP
      * @param personalInfo
      * @return
      */
-    int detection(String tableName, NatDetectionPersonalInfo personalInfo);
+    int entry(String tableName, NatDetectionPersonalInfo personalInfo);
 
     /**
      * 根据批次号获取身份证号

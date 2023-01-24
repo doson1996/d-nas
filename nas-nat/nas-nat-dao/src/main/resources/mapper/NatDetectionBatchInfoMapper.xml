@@ -14,6 +14,10 @@
             <result property="detectionResult" column="detection_result" jdbcType="INTEGER"/>
             <result property="detectionMechanism" column="detection_mechanism" jdbcType="VARCHAR"/>
             <result property="deleteFlag" column="delete_flag" jdbcType="TINYINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">

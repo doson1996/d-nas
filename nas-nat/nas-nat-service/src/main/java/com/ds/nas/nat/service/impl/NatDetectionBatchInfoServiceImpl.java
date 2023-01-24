@@ -1,7 +1,6 @@
 package com.ds.nas.nat.service.impl;
 
 import cn.hutool.core.date.DateUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.lib.cache.redis.RedisUtil;
@@ -49,7 +48,10 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
     @Resource
     private NatDetectionPersonalInfoMapper detectionPersonalInfoMapper;
 
-    private static final String BATCH_SEQUENCE_KEY = "batch:sequence";
+    /**
+     * 批量序号redis key
+     */
+    private static final String BATCH_SEQUENCE_KEY = "batch:sequence:";
 
     @Override
     public Result<StringResponse> getBatchNo() {
@@ -63,7 +65,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
         String batchNo = generateBatchNo();
         detectionBatchInfo.setBatchNo(batchNo);
-        detectionBatchInfo = (NatDetectionBatchInfo) DBUtils.getCurrentDBUtils().onCreate(detectionBatchInfo);
+        DBUtils.getCurrentDBUtils().onCreate(detectionBatchInfo);
 
         if (StringUtils.isNotBlank(batchNo) && save(detectionBatchInfo)) {
             return Result.ok("创建批次[" + batchNo + "]成功!",
@@ -129,19 +131,20 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
      */
     private String generateBatchNo() {
         String batchNo = "";
+        String today = DateUtil.today().replaceAll("-", "");
+        String key = BATCH_SEQUENCE_KEY + today;
         try {
-            String sequence = redisUtil.get(BATCH_SEQUENCE_KEY);
+            String sequence = redisUtil.get(key);
             if (StringUtils.isBlank(sequence)) {
                 // 初始化序列号
-                String initSequence = DateUtil.today().replaceAll("-", "") + "0000000000";
-                redisUtil.set(BATCH_SEQUENCE_KEY, initSequence);
+                String initSequence = today + "0000000000";
+                redisUtil.set(key, initSequence);
             }
-            sequence = String.valueOf(redisUtil.incrBy(BATCH_SEQUENCE_KEY, 1));
+            sequence = String.valueOf(redisUtil.incrBy(key, 1));
             batchNo = "cd" + sequence;
         } catch (Exception e) {
             log.error("生成批次号异常：{}", e.getMessage());
         }
-
         return batchNo;
     }
 

@@ -42,7 +42,7 @@ public class HealthCodeController {
      * @param request 入参
      * @return 出参
      */
-    @GetMapping("query/{idCard}")
+    @PostMapping("query")
     public Result<HealthCodeQueryResponse> query(@RequestBody HealthCodeQueryRequest request) {
         return hcPersonalInfoService.queryByIdCard(request);
     }

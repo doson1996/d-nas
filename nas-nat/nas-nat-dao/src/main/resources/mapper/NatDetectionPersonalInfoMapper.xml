@@ -9,6 +9,10 @@
         <result property="batchNo" column="batch_no" jdbcType="VARCHAR"/>
         <result property="idCard" column="id_card" jdbcType="VARCHAR"/>
         <result property="deleteFlag" column="delete_flag" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -22,8 +26,14 @@
         where batch_no = #{batchNo}
     </select>
 
-    <update id="detection">
-        insert into `${tableName}` (`batch_no`, `id_card`)
-        values ('${personalInfo.batchNo}', '${personalInfo.idCard}');
+    <update id="entry">
+        insert into `${tableName}` (`batch_no`, `id_card`,
+
+                                    `create_by`, `update_by`)
+        values ('${personalInfo.batchNo}',
+                '${personalInfo.idCard}',
+
+                '${personalInfo.createBy}',
+                '${personalInfo.updateBy}');
     </update>
 </mapper>

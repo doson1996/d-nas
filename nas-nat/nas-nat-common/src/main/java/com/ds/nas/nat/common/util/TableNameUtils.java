@@ -1,6 +1,7 @@
 package com.ds.nas.nat.common.util;
 
 import cn.hutool.core.date.DateUtil;
+import com.ds.nas.lib.common.util.StringUtils;
 
 /**
  * @author ds
@@ -14,6 +15,16 @@ public class TableNameUtils {
      */
     public static final String DATE_SEPARATOR = "-";
 
+    /**
+     * 表名分割符
+     */
+    public static final String TABLE_SEPARATOR = "_";
+
+    /**
+     * 批次表名 redis key
+     */
+    public static final String BATCH_TABLE_KEY = "batch:tableName:";
+
     private TableNameUtils() {
         throw new AssertionError("No com.ds.nas.nat.common.util.TableNameUtil instances for you!");
     }
@@ -25,7 +36,7 @@ public class TableNameUtils {
      * @return 返回当前日期表名 tableName_yyyyMMdd
      */
     public static String generateTodayTableName(String tableName) {
-        return tableName + DATE_SEPARATOR + DateUtil.today().replaceAll(DATE_SEPARATOR, "");
+        return tableName + TABLE_SEPARATOR + DateUtil.today().replaceAll(DATE_SEPARATOR, "");
     }
 
     /**
@@ -35,7 +46,7 @@ public class TableNameUtils {
      * @return 返回明天日期表名 tableName_yyyyMMdd
      */
     public static String generateTomorrowTableName(String tableName) {
-        return tableName + DATE_SEPARATOR + DateUtil.tomorrow().toDateStr().replaceAll(DATE_SEPARATOR, "");
+        return tableName + TABLE_SEPARATOR + DateUtil.tomorrow().toDateStr().replaceAll(DATE_SEPARATOR, "");
     }
 
 }
