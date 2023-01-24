@@ -3,6 +3,7 @@ package com.ds.nas.hc.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.constant.HealthCodeState;
@@ -43,12 +44,12 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     }
 
     @Override
-    public Result<HealthCodeQueryResponse> queryByIdCard(String idCard) {
-        if (StringUtils.isBlank(idCard)) {
+    public Result<HealthCodeQueryResponse> queryByIdCard(HealthCodeQueryRequest request) {
+        if (StringUtils.isBlank(request.getIdCard())) {
             throw new BusinessException("身份证号不能为空!");
         }
         HealthCodeQueryResponse response = new HealthCodeQueryResponse();
-        BeanUtil.copyProperties(hcPersonalInfoMapper.queryByIdCard(idCard), response);
+        BeanUtil.copyProperties(hcPersonalInfoMapper.queryByIdCard(request.getIdCard()), response);
         return Result.ok("查询成功", response);
     }
 

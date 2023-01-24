@@ -1,6 +1,7 @@
 package com.ds.nas.hc.service.provider;
 
 import com.ds.nas.hc.api.dubbo.HealthCodeProvider;
+import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
@@ -21,6 +22,8 @@ public class HealthCodeProviderImplV1 implements HealthCodeProvider {
 
     @Override
     public Result<HealthCodeQueryResponse> query(String idCard) {
-        return personalInfoService.queryByIdCard(idCard);
+        HealthCodeQueryRequest request = new HealthCodeQueryRequest();
+        request.setIdCard(idCard);
+        return personalInfoService.queryByIdCard(request);
     }
 }

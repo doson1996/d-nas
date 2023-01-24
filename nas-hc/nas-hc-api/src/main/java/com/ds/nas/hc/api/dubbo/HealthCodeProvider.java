@@ -9,6 +9,11 @@ import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
  */
 public interface HealthCodeProvider {
 
+    /**
+     * 查询健康码
+     * @param idCard
+     * @return
+     */
     Result<HealthCodeQueryResponse> query(String idCard);
 
 }

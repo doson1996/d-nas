@@ -1,5 +1,6 @@
 package com.ds.nas.hc.app.controller;
 
+import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
 import com.ds.nas.lib.common.auth.AuthCheck;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
@@ -38,13 +39,12 @@ public class HealthCodeController {
      * 查询健康码
      * //todo 可以单独拆分成服务部署
      *
-     * @param idCard 身份证号
+     * @param request 入参
      * @return 出参
      */
-    @AuthCheck
     @GetMapping("query/{idCard}")
-    public Result<HealthCodeQueryResponse> query(@PathVariable String idCard) {
-        return hcPersonalInfoService.queryByIdCard(idCard);
+    public Result<HealthCodeQueryResponse> query(@RequestBody HealthCodeQueryRequest request) {
+        return hcPersonalInfoService.queryByIdCard(request);
     }
 
 }

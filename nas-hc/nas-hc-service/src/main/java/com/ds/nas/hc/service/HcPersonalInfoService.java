@@ -1,6 +1,7 @@
 package com.ds.nas.hc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
@@ -29,10 +30,10 @@ public interface HcPersonalInfoService extends IService<HcPersonalInfo> {
     /**
      * 根据身份证号查询健康码
      *
-     * @param idCard
+     * @param request
      * @return
      */
-    Result<HealthCodeQueryResponse> queryByIdCard(String idCard);
+    Result<HealthCodeQueryResponse> queryByIdCard(HealthCodeQueryRequest request);
 
     /**
      * 用户注册
