@@ -4,9 +4,10 @@ import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.lib.cache.redis.RedisUtil;
+import com.ds.nas.hc.api.dubbo.PersonalInfoProvider;
 import com.ds.nas.hc.api.fegin.PersonalInfoClient;
 import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
-import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
+import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
@@ -21,6 +22,7 @@ import com.ds.nas.nat.dao.request.DetectionBatchInfoDetectionRequest;
 import com.ds.nas.nat.dao.request.DetectionBatchInfoSubmitRequest;
 import com.ds.nas.nat.service.NatDetectionBatchInfoService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +48,9 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Resource
     private PersonalInfoClient personalInfoClient;
+
+    @DubboReference(version = "1.0")
+    private PersonalInfoProvider personalInfoProvider;
 
     @Resource
     private NatDetectionPersonalInfoMapper detectionPersonalInfoMapper;
@@ -120,16 +125,18 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
      * @param batchNo
      */
     private void updateHealthCode(String batchNo, Integer health) {
-        String key = TableNameUtils.BATCH_TABLE_KEY + batchNo;
-        List<String> idCards = detectionPersonalInfoMapper.getIdCards(redisUtil.get(key), batchNo);
-
-        PersonalInfoBatchUpdateRequest request = new PersonalInfoBatchUpdateRequest();
-        request.setHealth(health);
-        request.setLastNucleicAcidTime(new Date());
-        request.setIdCards(idCards);
-        log.info("idCards = {}, {}", idCards.size(), idCards);
-        Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCards(request);
-        log.info("personalInfoUpdateResponseResult = {}", personalInfoUpdateResponseResult);
+        try {
+            String key = TableNameUtils.BATCH_TABLE_KEY + batchNo;
+            List<String> idCards = detectionPersonalInfoMapper.getIdCards(redisUtil.get(key), batchNo);
+            PersonalInfoBatchUpdateRequest request = new PersonalInfoBatchUpdateRequest();
+            request.setHealth(health);
+            request.setLastNucleicAcidTime(new Date());
+            request.setIdCards(idCards);
+            Result<PersonalInfoBatchUpdateResponse> result = personalInfoProvider.updateByIdCards(request);
+            log.info("updateHealthCode result = {}", result);
+        } catch (Exception e) {
+            log.error("根据批次号更新异常: {}", e.getMessage());
+        }
     }
 
     /**

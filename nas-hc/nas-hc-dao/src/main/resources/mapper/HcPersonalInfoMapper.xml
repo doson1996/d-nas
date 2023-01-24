@@ -14,7 +14,7 @@
         <result property="lastNucleicAcidTime" column="last_nucleic_acid_time" jdbcType="TIMESTAMP"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-        <result property="cretaeBy" column="cretae_by" jdbcType="VARCHAR"/>
+        <result property="createBy" column="cretae_by" jdbcType="VARCHAR"/>
         <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
         <result property="deleteFlag" column="delete_flag" jdbcType="TINYINT"/>
     </resultMap>
@@ -33,6 +33,21 @@
             health = 1
         where
             id_card = #{idCard}
+    </update>
+
+
+    <update id="updateByIdCards" parameterType="com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest">
+        update
+            hc_personal_info
+        <set>
+            health = #{request.health, jdbcType=TINYINT},
+            last_nucleic_acid_time = #{request.lastNucleicAcidTime, jdbcType=TIMESTAMP}
+        </set>
+        where
+            id_card in
+        <foreach  item="item" index="index" collection="request.idCards" open="(" separator="," close=" )">
+            #{item}
+        </foreach>
     </update>
 
     <select id="queryByIdCard" resultType="com.ds.nas.hc.dao.domain.HcPersonalInfo">

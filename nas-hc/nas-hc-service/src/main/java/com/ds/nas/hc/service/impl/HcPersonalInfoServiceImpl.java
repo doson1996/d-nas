@@ -88,7 +88,14 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     @Override
     public Result<PersonalInfoBatchUpdateResponse> updateByIdCards(PersonalInfoBatchUpdateRequest request) {
-        return Result.fail("方法还未实现!");
+        if (request.getIdCards().isEmpty()) {
+            return Result.fail("未执行批量更新!");
+        }
+        int res = hcPersonalInfoMapper.updateByIdCards(request);
+        if (res > 0) {
+            return Result.ok("批量更新成功!");
+        }
+        return Result.fail("批量更新失败!");
     }
 
     /**
