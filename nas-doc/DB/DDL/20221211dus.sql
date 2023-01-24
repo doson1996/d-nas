@@ -19,6 +19,21 @@ create table if not exists d_nas_hc.hc_personal_info
 
 CREATE UNIQUE INDEX uk_id_card ON hc_personal_info(id_card);
 
+# hc_system_log
+create table if not exists d_nas_hc.hc_system_log
+(
+    id                     bigint(11) auto_increment comment 'id' primary key,
+    path                   varchar(200)         not null comment '请求路径',
+    request_data           varchar(500)         not null comment '请求参数',
+    response_data          varchar(255)         null comment '响应参数',
+    execution_time         int(11)              null comment '执行时间(ms)',
+    create_time            datetime             not null comment '创建时间',
+    update_time            datetime             not null comment '更新时间',
+    create_by              varchar(255)         not null comment '创建人',
+    update_by              varchar(255)         not null comment '更新人',
+    delete_flag            tinyint(1) default 0 not null comment '逻辑删除标志 0.未删除 1.已删除'
+);
+
 # nat_detection_batch_info
 create table if not exists d_nas_nat.nat_detection_batch_info
 (

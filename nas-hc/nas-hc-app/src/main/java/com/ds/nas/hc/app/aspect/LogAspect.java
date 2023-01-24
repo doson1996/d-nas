@@ -1,7 +1,10 @@
 package com.ds.nas.hc.app.aspect;
 
+import com.alibaba.fastjson2.JSON;
+import com.ds.nas.hc.dao.domain.HcSystemLog;
+import com.ds.nas.hc.service.HcSystemLogService;
+import com.ds.nas.lib.common.base.db.DBUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author ds
  * @date 2023/1/22
- * @description
+ * @description 日志记录
  */
 @Slf4j
 @Order(99)
@@ -24,9 +27,12 @@ import javax.servlet.http.HttpServletRequest;
 public class LogAspect {
 
     @Resource
-    HttpServletRequest request;
+    private HttpServletRequest request;
 
-    @Pointcut("execution(* com.ds..controller.*.*(..))")
+    @Resource
+    private HcSystemLogService systemLogService;
+
+    @Pointcut("execution(* com.ds.nas.hc.app.controller.*.*(..))")
     public void pointcut() {
     }
 
@@ -35,7 +41,31 @@ public class LogAspect {
         String path = request.getServletPath();
         long start = System.currentTimeMillis();
         Object proceed = joinPoint.proceed();
-        log.info("path = {}, execution time = {}ms", path, System.currentTimeMillis() - start);
+        long executionTime = System.currentTimeMillis() - start;
+        log(path, "{}", proceed, executionTime);
         return proceed;
     }
+
+    /**
+     * 记录日志
+     *
+     * @param path          请求路径
+     * @param requestData   请求参数
+     * @param responseData  响应参数
+     * @param executionTime 执行时间
+     */
+    public void log(String path, Object requestData, Object responseData, Long executionTime) {
+        try {
+            HcSystemLog log = new HcSystemLog();
+            log.setPath(path);
+            log.setRequestData(JSON.toJSONString(requestData));
+            log.setResponseData(JSON.toJSONString(responseData));
+            log.setExecutionTime(executionTime);
+            DBUtils.getCurrentDBUtils().onCreate(log);
+            systemLogService.save(log);
+        } catch (Exception e) {
+            log.error("记录日志异常: {}", e.getMessage());
+        }
+    }
+
 }

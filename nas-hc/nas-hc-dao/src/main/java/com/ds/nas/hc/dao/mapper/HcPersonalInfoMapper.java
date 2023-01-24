@@ -2,6 +2,7 @@ package com.ds.nas.hc.dao.mapper;
 
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author ds
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @createDate 2022-12-04 13:28:57
  * @Entity com.ds.nas.hc.dao.domain.HcPersonalInfo
  */
+@Repository
 public interface HcPersonalInfoMapper extends BaseMapper<HcPersonalInfo> {
 
     /**

@@ -20,10 +20,5 @@
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-lib-common</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.ds.nas</groupId>
-            <artifactId>nas-lib-cache</artifactId>
-        </dependency>
     </dependencies>
 </project>

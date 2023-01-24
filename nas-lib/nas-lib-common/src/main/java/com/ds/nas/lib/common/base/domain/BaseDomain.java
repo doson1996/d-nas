@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * @author ds
  * @date 2022/12/4
- * @description
+ * @description 基础domain
  */
 @Data
 public class BaseDomain implements Serializable {

@@ -2,15 +2,16 @@ package com.ds.nas.hc.app.aspect;
 
 import com.ds.nas.lib.common.auth.AuthCheck;
 import com.ds.nas.lib.common.exception.AuthException;
+import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author ds
  * @date 2023/1/14
- * @description
+ * @description 权限校验
  */
 @Slf4j
-@Order(1)
+@Order(10)
 @Aspect
 @Component
 public class AuthAspect {
@@ -35,9 +36,13 @@ public class AuthAspect {
 
     @Before("@annotation(authCheck)")
     public void authCheck(JoinPoint joinPoint, AuthCheck authCheck) {
-        String method = joinPoint.getSignature().getName();
+        String name = joinPoint.getSignature().getName();
+        String method = request.getMethod();
+        if (!StringUtils.equals(RequestMethod.POST.name(), method)) {
+            throw new BusinessException("请求方法不支持!");
+        }
         String token = request.getHeader("token");
-        log.info("method = {}, token = {}", method, token);
+        log.info("method-name = {}, token = {}", name, token);
         if (StringUtils.isBlank(token)) {
             throw new AuthException("认证失败!");
         }
