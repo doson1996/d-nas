@@ -3,7 +3,8 @@ package com.ds.nas.hc.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
+import com.ds.nas.hc.dao.request.*;
+import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.constant.HealthCodeState;
@@ -12,10 +13,7 @@ import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
-import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
-import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
-import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
@@ -86,6 +84,11 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
             return Result.ok("更新成功!", response);
         }
         return Result.fail("更新失败!");
+    }
+
+    @Override
+    public Result<PersonalInfoBatchUpdateResponse> updateByIdCards(PersonalInfoBatchUpdateRequest request) {
+        return Result.fail("方法还未实现!");
     }
 
     /**

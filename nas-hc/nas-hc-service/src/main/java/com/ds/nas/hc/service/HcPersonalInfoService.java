@@ -1,16 +1,14 @@
 package com.ds.nas.hc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
+import com.ds.nas.hc.dao.request.*;
+import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
-import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
-import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
-import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 
 /**
  * @author ds
@@ -48,5 +46,12 @@ public interface HcPersonalInfoService extends IService<HcPersonalInfo> {
      * @return
      */
     Result<PersonalInfoUpdateResponse> updateByIdCard(PersonalInfoUpdateRequest request);
+
+    /**
+     * 根据idCard批量更新
+     * @param request
+     * @return
+     */
+    Result<PersonalInfoBatchUpdateResponse> updateByIdCards(PersonalInfoBatchUpdateRequest request);
 
 }

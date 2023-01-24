@@ -1,5 +1,7 @@
 package com.ds.nas.hc.app.controller;
 
+import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
+import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
@@ -43,6 +45,16 @@ public class PersonalInfoController {
     @PostMapping("updateByIdCard")
     public Result<PersonalInfoUpdateResponse> updateByIdCard(@RequestBody PersonalInfoUpdateRequest request) {
         return hcPersonalInfoService.updateByIdCard(request);
+    }
+
+    /**
+     * 根据身份证号批量更新
+     * @param request 入参
+     * @return
+     */
+    @PostMapping("updateByIdCards")
+    public Result<PersonalInfoBatchUpdateResponse> updateByIdCards(@RequestBody PersonalInfoBatchUpdateRequest request) {
+        return hcPersonalInfoService.updateByIdCards(request);
     }
 
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.lib.cache.redis.RedisUtil;
 import com.ds.nas.hc.api.fegin.PersonalInfoClient;
+import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.lib.common.base.db.DBUtils;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author ds
@@ -104,7 +106,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         LambdaUpdateWrapper<NatDetectionBatchInfo> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(NatDetectionBatchInfo::getBatchNo, request.getBatchNo());
         if (update(detectionBatchInfo, wrapper)) {
-            updateHealthCode(request.getBatchNo());
+            updateHealthCode(request.getBatchNo(), request.getDetectionResult());
             return Result.ok("检测批次[" + request.getBatchNo() + "]成功!",
                     StringResponse.builder().withData(request.getBatchNo()).build());
         }
@@ -117,10 +119,16 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
      *
      * @param batchNo
      */
-    private void updateHealthCode(String batchNo) {
-        PersonalInfoUpdateRequest request = new PersonalInfoUpdateRequest();
-        detectionPersonalInfoMapper.getIdCards(TableNameUtils.generateTodayTableName(dpiTableName), batchNo);
-        Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCard(request);
+    private void updateHealthCode(String batchNo, Integer health) {
+        String key = TableNameUtils.BATCH_TABLE_KEY + batchNo;
+        List<String> idCards = detectionPersonalInfoMapper.getIdCards(redisUtil.get(key), batchNo);
+
+        PersonalInfoBatchUpdateRequest request = new PersonalInfoBatchUpdateRequest();
+        request.setHealth(health);
+        request.setLastNucleicAcidTime(new Date());
+        request.setIdCards(idCards);
+        log.info("idCards = {}, {}", idCards.size(), idCards);
+        Result<PersonalInfoUpdateResponse> personalInfoUpdateResponseResult = personalInfoClient.updateByIdCards(request);
         log.info("personalInfoUpdateResponseResult = {}", personalInfoUpdateResponseResult);
     }
 

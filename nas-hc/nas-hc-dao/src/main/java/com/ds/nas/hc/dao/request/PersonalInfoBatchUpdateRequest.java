@@ -4,6 +4,7 @@ import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author ds
@@ -11,32 +12,12 @@ import java.util.Date;
  * @description 更新入参
  */
 @Data
-public class PersonalInfoUpdateRequest extends BaseRequest {
-
-    /**
-     * id
-     */
-    private Integer id;
-
-    /**
-     * 姓名
-     */
-    private String name;
+public class PersonalInfoBatchUpdateRequest extends BaseRequest {
 
     /**
      * 身份证号码
      */
-    private String idCard;
-
-    /**
-     * 住址
-     */
-    private String address;
-
-    /**
-     * 手机号
-     */
-    private String phone;
+    private List<String> idCards;
 
     /**
      * 0.未申领 1.绿码 2.黄码 3.红码 4.弹窗
