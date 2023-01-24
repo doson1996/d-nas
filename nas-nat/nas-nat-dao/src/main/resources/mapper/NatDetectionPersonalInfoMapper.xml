@@ -27,23 +27,15 @@
     </select>
 
     <update id="entry">
-        insert into `${tableName}` (`batch_no`, `id_card`,
-                                    `create_by`, `update_by`)
-        values ('${personalInfo.batchNo}',
-                '${personalInfo.idCard}',
-                '${personalInfo.createBy}',
-                '${personalInfo.updateBy}');
+        insert into `${tableName}` (batch_no,id_card
+                                   ,create_time,update_time
+                                   ,create_by,update_by)
+        values (#{personalInfo.batchNo,jdbcType=VARCHAR},
+                #{personalInfo.idCard,jdbcType=VARCHAR},
+                #{personalInfo.createTime,jdbcType=TIMESTAMP},
+                #{personalInfo.updateTime,jdbcType=TIMESTAMP},
+                #{personalInfo.createBy,jdbcType=VARCHAR},
+                #{personalInfo.updateBy,jdbcType=VARCHAR});
     </update>
 
-    <update id="entry1">
-        insert into `${tableName}` (`batch_no`, `id_card`,
-                                    `create_time`,`update_time`,
-                                    `create_by`, `update_by`)
-        values ('${personalInfo.batchNo}',
-                '${personalInfo.idCard}',
-                '${personalInfo.createTime}',
-                '${personalInfo.updateTime}',
-                '${personalInfo.createBy}',
-                '${personalInfo.updateBy}');
-    </update>
 </mapper>
