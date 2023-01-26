@@ -1,7 +1,6 @@
 package com.ds.nas.nat.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ds.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author ds
@@ -36,6 +36,10 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
         personalInfo.setBatchNo(request.getBatchNo());
         personalInfo.setIdCard(request.getIdCard());
         String tableName = getTableName(request.getBatchNo());
+        List<String> idCards = personalInfoMapper.getIdCards(tableName, request.getBatchNo());
+        if (idCards.contains(request.getIdCard())) {
+            return Result.fail("请勿重复录入!");
+        }
         DBUtils.getCurrentDBUtils().onCreate(personalInfo);
         int res = personalInfoMapper.entry(tableName, personalInfo);
         if (res == 0) {

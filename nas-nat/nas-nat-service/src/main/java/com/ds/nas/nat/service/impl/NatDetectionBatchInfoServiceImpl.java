@@ -5,12 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.lib.cache.redis.RedisUtil;
 import com.ds.nas.hc.api.dubbo.PersonalInfoProvider;
-import com.ds.nas.hc.api.fegin.PersonalInfoClient;
 import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
-import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
+import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
 import com.ds.nas.nat.common.util.TableNameUtils;
@@ -56,6 +55,11 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
      * 批量序号redis key
      */
     private static final String BATCH_SEQUENCE_KEY = "batch:sequence:";
+
+    /**
+     * 每日批次起始值
+     */
+    private static final String BATCH_SEQUENCE_MIN = "0000000000";
 
     @Override
     public Result<StringResponse> getBatchNo() {
@@ -149,13 +153,18 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
             String sequence = redisUtil.get(key);
             if (StringUtils.isBlank(sequence)) {
                 // 初始化序列号
-                String initSequence = today + "0000000000";
+                String initSequence = today + BATCH_SEQUENCE_MIN;
                 redisUtil.set(key, initSequence);
             }
             sequence = String.valueOf(redisUtil.incrBy(key, 1));
+            if (!today.equals(sequence.substring(0, today.length()))) {
+                throw new BusinessException("当日批次号已用完!");
+            }
             batchNo = "cd" + sequence;
         } catch (Exception e) {
             log.error("生成批次号异常：{}", e.getMessage());
+            // 抛出异常给全局异常处理
+            throw e;
         }
         return batchNo;
     }
