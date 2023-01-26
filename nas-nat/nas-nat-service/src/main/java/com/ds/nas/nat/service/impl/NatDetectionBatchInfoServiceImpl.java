@@ -46,9 +46,6 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
     @Value("${table-name.dpi}")
     private String dpiTableName;
 
-    @Resource
-    private PersonalInfoClient personalInfoClient;
-
     @DubboReference(version = "1.0")
     private PersonalInfoProvider personalInfoProvider;
 
@@ -126,8 +123,8 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
      */
     private void updateHealthCode(String batchNo, Integer health) {
         try {
-            String key = TableNameUtils.BATCH_TABLE_KEY + batchNo;
-            List<String> idCards = detectionPersonalInfoMapper.getIdCards(redisUtil.get(key), batchNo);
+            String tableName = TableNameUtils.getByBatchNo(dpiTableName, batchNo);
+            List<String> idCards = detectionPersonalInfoMapper.getIdCards(tableName, batchNo);
             PersonalInfoBatchUpdateRequest request = new PersonalInfoBatchUpdateRequest();
             request.setHealth(health);
             request.setLastNucleicAcidTime(new Date());

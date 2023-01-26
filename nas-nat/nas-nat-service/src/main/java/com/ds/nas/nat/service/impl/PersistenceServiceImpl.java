@@ -28,20 +28,14 @@ public class PersistenceServiceImpl implements PersistenceService {
     @Override
     public Result<StringResponse> createTableDpi() {
         String tableName = TableNameUtils.generateTodayTableName(dpiTableName);
-        int res = persistenceMapper.createTableDpi(tableName);
-        if (res == 1) {
-            Result.ok("创建表[" + tableName + "]成功!");
-        }
-        return Result.fail("创建表[" + tableName + "]失败!");
+        persistenceMapper.createTableDpi(tableName);
+        return Result.ok("创建表[" + tableName + "]成功!");
     }
 
     @Override
     public Result<StringResponse> createTable(TableInfo tableInfo) {
-        int res = persistenceMapper.createTable(tableInfo);
-        if (res == 1) {
-            Result.ok("创建表[" + tableInfo.getName() + "]成功!");
-        }
-        return Result.fail("创建表[" + tableInfo.getName() + "]失败!");
+        persistenceMapper.createTable(tableInfo);
+        return Result.ok("创建表[" + tableInfo.getName() + "]成功!");
     }
 
 }

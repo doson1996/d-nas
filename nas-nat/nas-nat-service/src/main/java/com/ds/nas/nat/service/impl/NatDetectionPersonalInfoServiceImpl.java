@@ -5,12 +5,11 @@ import com.ds.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
-import com.ds.nas.lib.common.util.StringUtils;
 import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
+import com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper;
 import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
-import com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +23,6 @@ import javax.annotation.Resource;
 @Service
 public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectionPersonalInfoMapper, NatDetectionPersonalInfo>
         implements NatDetectionPersonalInfoService {
-
-    @Resource
-    private RedisUtil redisUtil;
 
     @Value("${table-name.dpi}")
     private String dpiTableName;
@@ -50,18 +46,13 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
     }
 
     /**
-     * 获取批次表名
-     * @param batchNo
-     * @return
+     * 获取表名
+     *
+     * @param batchNo 批次号
+     * @return 表名
      */
     private String getTableName(String batchNo) {
-        String key = TableNameUtils.BATCH_TABLE_KEY + batchNo;
-        String tableName = redisUtil.get(key);
-        if (StringUtils.isBlank(tableName)) {
-            tableName = TableNameUtils.generateTodayTableName(dpiTableName);
-            redisUtil.set(key, tableName);
-        }
-        return tableName;
+        return TableNameUtils.getByBatchNo(dpiTableName, batchNo);
     }
 
 }

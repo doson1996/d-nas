@@ -15,12 +15,14 @@ public interface PersistenceMapper {
     /**
      * 动态建表
      * @param tableInfo
+     * @return
      */
     int createTable(@Param("tableInfo") TableInfo tableInfo);
 
     /**
      * 创建固定表
      * @param tableName
+     * @return
      */
     int createTableDpi(String tableName);
 

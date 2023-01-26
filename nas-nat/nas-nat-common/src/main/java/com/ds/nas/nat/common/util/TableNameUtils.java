@@ -49,4 +49,15 @@ public class TableNameUtils {
         return tableName + TABLE_SEPARATOR + DateUtil.tomorrow().toDateStr().replaceAll(DATE_SEPARATOR, "");
     }
 
+    /**
+     * 根据批次号生成带日期的表名
+     *
+     * @param tableName 表名
+     * @param batchNo   批次号
+     * @return 返回明天日期表名 tableName_yyyyMMdd
+     */
+    public static String getByBatchNo(String tableName, String batchNo) {
+        return tableName + TABLE_SEPARATOR + batchNo.substring(2, 10);
+    }
+
 }
