@@ -35,11 +35,6 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     @Resource
     private HcPersonalInfoMapper hcPersonalInfoMapper;
 
-    @Override
-    @Deprecated
-    public Result<StringResponse> apply(HealthCodeApplyRequest request) {
-        return Result.fail("此方法已废弃!");
-    }
 
     @Override
     public Result<HealthCodeQueryResponse> queryByIdCard(HealthCodeQueryRequest request) {

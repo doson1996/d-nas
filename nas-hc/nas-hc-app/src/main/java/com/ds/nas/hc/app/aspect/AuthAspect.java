@@ -2,7 +2,6 @@ package com.ds.nas.hc.app.aspect;
 
 import com.ds.nas.lib.common.auth.AuthCheck;
 import com.ds.nas.lib.common.exception.AuthException;
-import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -11,7 +10,6 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @description 权限校验
  */
 @Slf4j
-@Order(10)
+@Order(20)
 @Aspect
 @Component
 public class AuthAspect {
@@ -37,10 +35,6 @@ public class AuthAspect {
     @Before("@annotation(authCheck)")
     public void authCheck(JoinPoint joinPoint, AuthCheck authCheck) {
         String name = joinPoint.getSignature().getName();
-        String method = request.getMethod();
-        if (!StringUtils.equals(RequestMethod.POST.name(), method)) {
-            throw new BusinessException("请求方法不支持!");
-        }
         String token = request.getHeader("token");
         log.info("method-name = {}, token = {}", name, token);
         if (StringUtils.isBlank(token)) {

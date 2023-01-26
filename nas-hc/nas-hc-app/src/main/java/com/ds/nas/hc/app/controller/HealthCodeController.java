@@ -30,9 +30,9 @@ public class HealthCodeController {
      * @return 出参
      */
     @Deprecated
-    @PostMapping("apply")
+    @GetMapping("apply")
     public Result<StringResponse> apply(@RequestBody HealthCodeApplyRequest request) {
-        return hcPersonalInfoService.apply(request);
+        return Result.fail("此方法已废弃");
     }
 
     /**

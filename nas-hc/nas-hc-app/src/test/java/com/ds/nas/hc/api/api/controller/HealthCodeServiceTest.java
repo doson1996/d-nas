@@ -25,17 +25,6 @@ public class HealthCodeServiceTest {
     private HcPersonalInfoService hcPersonalInfoService;
 
     @Test
-    @Deprecated
-    public void test_batch_apply() {
-        HealthCodeApplyRequest request = new HealthCodeApplyRequest();
-        for (int i = 0; i < 100; i++) {
-            request.setIdCard(DataGenerateUtils.getIdNo());
-            hcPersonalInfoService.apply(request);
-        }
-
-    }
-
-    @Test
     public void test_batch_register() {
         PersonalInfoRegisterRequest request = new PersonalInfoRegisterRequest();
         for (int i = 0; i < 100; i++) {
