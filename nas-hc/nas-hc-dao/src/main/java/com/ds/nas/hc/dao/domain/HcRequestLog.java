@@ -11,13 +11,13 @@ import com.ds.nas.lib.common.base.domain.BaseDomain;
 import lombok.Data;
 
 /**
- * 系统日志
+ * 
  * @author ds
- * @TableName hc_system_log
+ * @TableName hc_request_log
  */
-@TableName(value ="hc_system_log")
+@TableName(value ="hc_request_log")
 @Data
-public class HcSystemLog extends BaseDomain {
+public class HcRequestLog extends BaseDomain {
     /**
      * id
      */
@@ -28,6 +28,11 @@ public class HcSystemLog extends BaseDomain {
      * 请求路径
      */
     private String path;
+
+    /**
+     * 返回码
+     */
+    private String returnCode;
 
     /**
      * 请求参数

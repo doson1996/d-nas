@@ -1,8 +1,9 @@
 package com.ds.nas.hc.app.aspect;
 
 import com.alibaba.fastjson2.JSON;
-import com.ds.nas.hc.dao.domain.HcSystemLog;
-import com.ds.nas.hc.service.HcSystemLogService;
+import com.alibaba.fastjson2.JSONObject;
+import com.ds.nas.hc.dao.domain.HcRequestLog;
+import com.ds.nas.hc.service.HcRequestLogService;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -30,7 +31,7 @@ public class LogAspect {
     private HttpServletRequest request;
 
     @Resource
-    private HcSystemLogService systemLogService;
+    private HcRequestLogService requestLogService;
 
     @Pointcut("execution(* com.ds.nas.hc.app.controller.*.*(..))")
     public void pointcut() {
@@ -56,13 +57,16 @@ public class LogAspect {
      */
     public void log(String path, Object requestData, Object responseData, Long executionTime) {
         try {
-            HcSystemLog log = new HcSystemLog();
+            JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(responseData));
+            String code = jsonObject.getString("code");
+            HcRequestLog log = new HcRequestLog();
             log.setPath(path);
+            log.setReturnCode(code);
             log.setRequestData(JSON.toJSONString(requestData));
             log.setResponseData(JSON.toJSONString(responseData));
             log.setExecutionTime(executionTime);
             DBUtils.getCurrentDBUtils().onCreate(log);
-            systemLogService.save(log);
+            requestLogService.save(log);
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());
         }
