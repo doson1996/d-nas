@@ -45,7 +45,7 @@ public class LogAspect {
         long start = System.currentTimeMillis();
         Object responseData = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
-        log(path, requestData, responseData, executionTime);
+       // log(path, requestData, responseData, executionTime);
         return responseData;
     }
 

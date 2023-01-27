@@ -1,5 +1,6 @@
 package com.ds.nas.nat.service.impl;
 
+import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -12,6 +13,7 @@ import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
+import com.ds.nas.nat.common.constant.CacheKey;
 import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.ds.nas.nat.dao.mapper.NatDetectionBatchInfoMapper;
@@ -50,11 +52,6 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Resource
     private NatDetectionPersonalInfoMapper detectionPersonalInfoMapper;
-
-    /**
-     * 批量序号redis key
-     */
-    private static final String BATCH_SEQUENCE_KEY = "batch:sequence:";
 
     /**
      * 每日批次起始值
@@ -148,13 +145,13 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
     private String generateBatchNo() {
         String batchNo = "";
         String today = DateUtil.today().replaceAll("-", "");
-        String key = BATCH_SEQUENCE_KEY + today;
+        String key = CacheKey.BATCH_SEQUENCE_KEY + today;
         try {
             String sequence = redisUtil.get(key);
             if (StringUtils.isBlank(sequence)) {
                 // 初始化序列号
                 String initSequence = today + BATCH_SEQUENCE_MIN;
-                redisUtil.set(key, initSequence);
+                redisUtil.set(key, initSequence, 2 * DateUnit.DAY.getMillis());
             }
             sequence = String.valueOf(redisUtil.incrBy(key, 1));
             if (!today.equals(sequence.substring(0, today.length()))) {

@@ -20,6 +20,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 @DubboComponentScan(basePackages = "com.ds.nas.hc.service.provider")
 @SpringBootApplication(scanBasePackages = {
+        "com.ds.lib.cache",
         "com.ds.nas.hc.app",
         "com.ds.nas.hc.dao",
         "com.ds.nas.hc.service"})

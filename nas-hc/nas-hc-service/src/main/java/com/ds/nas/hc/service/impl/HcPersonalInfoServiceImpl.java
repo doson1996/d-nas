@@ -1,22 +1,29 @@
 package com.ds.nas.hc.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.util.IdcardUtil;
+import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ds.nas.hc.dao.request.*;
+import com.ds.lib.cache.redis.RedisUtil;
+import com.ds.nas.hc.common.constant.CacheKey;
+import com.ds.nas.hc.dao.domain.HcPersonalInfo;
+import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
+import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
+import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
+import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
+import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
+import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
+import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
+import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
+import com.ds.nas.hc.service.HcPersonalInfoService;
 import com.ds.nas.lib.common.base.db.DBUtils;
-import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.constant.HealthCodeState;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
-import com.ds.nas.hc.dao.domain.HcPersonalInfo;
-import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
-import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
-import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
-import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
-import com.ds.nas.hc.service.HcPersonalInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +40,9 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         implements HcPersonalInfoService {
 
     @Resource
+    private RedisUtil redisUtil;
+
+    @Resource
     private HcPersonalInfoMapper hcPersonalInfoMapper;
 
 
@@ -42,7 +52,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
             throw new BusinessException("身份证号不能为空!");
         }
         HealthCodeQueryResponse response = new HealthCodeQueryResponse();
-        BeanUtil.copyProperties(hcPersonalInfoMapper.queryByIdCard(request.getIdCard()), response);
+        BeanUtil.copyProperties(qryHcPersonalInfo(request.getIdCard()), response);
         return Result.ok("查询成功", response);
     }
 
@@ -79,6 +89,28 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
             return Result.ok("更新成功!", response);
         }
         return Result.fail("更新失败!");
+    }
+
+    /**
+     * 根据身份证号查询健康信息
+     *
+     * @param idCard
+     * @return
+     */
+    private HcPersonalInfo qryHcPersonalInfo(String idCard) {
+        if (!IdcardUtil.isValidCard(idCard)) {
+            throw new BusinessException("身份证号码无效!");
+        }
+        String key = CacheKey.HEALTH_CODE_KEY + idCard;
+        HcPersonalInfo hcPersonalInfo;
+        String hcPersonalInfoJson = redisUtil.get(key);
+        if (StringUtils.isBlank(hcPersonalInfoJson)) {
+            hcPersonalInfo = hcPersonalInfoMapper.queryByIdCard(idCard);
+            redisUtil.set(key, JSON.toJSONString(hcPersonalInfo), 2 * DateUnit.HOUR.getMillis());
+        } else {
+            hcPersonalInfo = JSON.parseObject(hcPersonalInfoJson, HcPersonalInfo.class);
+        }
+        return hcPersonalInfo;
     }
 
     @Override

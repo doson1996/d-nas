@@ -25,5 +25,10 @@
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-nat-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.ds.nas</groupId>
+            <artifactId>nas-lib-cache</artifactId>
+        </dependency>
     </dependencies>
 </project>
