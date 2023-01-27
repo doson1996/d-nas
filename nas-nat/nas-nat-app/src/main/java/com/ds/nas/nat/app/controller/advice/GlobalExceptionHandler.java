@@ -7,6 +7,7 @@ import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.result.ResultEnum;
 import com.ds.nas.lib.common.result.ResultMsg;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,6 +100,20 @@ public class GlobalExceptionHandler {
     public Result<Void> handlerMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
         String msg = "文件大小超出最大上传限制";
         return Result.fail(msg);
+    }
+
+    /**
+     * 请求方式异常，只支持POST请求
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public Result<Object> handlerHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        return Result.builder()
+                .withCode(ResultEnum.UNLAWFUL_REQUEST.getCode())
+                .withMessage(ResultEnum.UNLAWFUL_REQUEST.getMessage())
+                .build();
     }
 
 }

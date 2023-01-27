@@ -12,12 +12,10 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.util.Map;
 
 /**
  * @author ds
@@ -43,10 +41,11 @@ public class LogAspect {
     @Around("pointcut()")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         String path = request.getServletPath();
+        Object requestData = joinPoint.getArgs()[0];
         long start = System.currentTimeMillis();
         Object responseData = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
-        log(path, "{}", responseData, executionTime);
+        log(path, requestData, responseData, executionTime);
         return responseData;
     }
 
