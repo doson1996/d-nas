@@ -36,8 +36,8 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
         personalInfo.setBatchNo(request.getBatchNo());
         personalInfo.setIdCard(request.getIdCard());
         String tableName = getTableName(request.getBatchNo());
-        List<String> idCards = personalInfoMapper.getIdCards(tableName, request.getBatchNo());
-        if (idCards.contains(request.getIdCard())) {
+        int countByBatchNo = personalInfoMapper.countByBatchNo(tableName, request.getBatchNo(), request.getIdCard());
+        if (countByBatchNo > 0) {
             return Result.fail("请勿重复录入!");
         }
         DBUtils.getCurrentDBUtils().onCreate(personalInfo);

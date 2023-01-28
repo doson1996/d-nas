@@ -26,6 +26,13 @@
         where batch_no = #{batchNo}
     </select>
 
+    <select id="countByBatchNo" resultType="int">
+        select count(*)
+        from `${tableName}`
+        where batch_no = #{batchNo}
+        and   id_card = #{idCard}
+    </select>
+
     <update id="entry">
         insert into `${tableName}` (batch_no,id_card
                                    ,create_time,update_time
