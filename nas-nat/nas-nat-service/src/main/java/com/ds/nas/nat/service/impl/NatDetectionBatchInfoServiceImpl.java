@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ds.lib.cache.redis.RedisUtil;
+import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.hc.api.dubbo.PersonalInfoProvider;
 import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;

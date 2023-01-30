@@ -3,8 +3,8 @@ package com.ds.nas.hc.app.aspect;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.ds.nas.hc.dao.domain.HcRequestLog;
-import com.ds.nas.hc.service.HcRequestLogService;
 import com.ds.nas.lib.common.base.db.DBUtils;
+import com.ds.nas.lib.mq.kafka.KafkaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * @author ds
@@ -32,7 +31,7 @@ public class LogAspect {
     private HttpServletRequest request;
 
     @Resource
-    private HcRequestLogService requestLogService;
+    private KafkaUtils kafkaUtils;
 
     @Pointcut("execution(* com.ds.nas.hc.app.controller.*.*(..))")
     public void pointcut() {
@@ -45,19 +44,19 @@ public class LogAspect {
         long start = System.currentTimeMillis();
         Object responseData = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
-       // log(path, requestData, responseData, executionTime);
+        log2Kafka(path, requestData, responseData, executionTime);
         return responseData;
     }
 
     /**
-     * 记录日志
+     * 记录日志到kafka
      *
      * @param path          请求路径
      * @param requestData   请求参数
      * @param responseData  响应参数
      * @param executionTime 执行时间
      */
-    public void log(String path, Object requestData, Object responseData, Long executionTime) {
+    public void log2Kafka(String path, Object requestData, Object responseData, Long executionTime) {
         try {
             JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(responseData));
             String code = jsonObject.getString("code");
@@ -68,7 +67,7 @@ public class LogAspect {
             log.setResponseData(JSON.toJSONString(responseData));
             log.setExecutionTime(executionTime);
             DBUtils.getCurrentDBUtils().onCreate(log);
-            requestLogService.save(log);
+            kafkaUtils.send("log-test", JSON.toJSONString(log));
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());
         }

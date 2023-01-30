@@ -6,7 +6,7 @@ import cn.hutool.core.util.IdcardUtil;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ds.lib.cache.redis.RedisUtil;
+import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.hc.common.constant.CacheKey;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;

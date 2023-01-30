@@ -1,4 +1,4 @@
-package com.ds.lib.cache.config;
+package com.ds.nas.lib.cache.config;
 
 import org.springframework.context.annotation.ComponentScan;
 
