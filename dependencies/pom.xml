@@ -26,6 +26,7 @@
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <fastjson.version>2.0.19</fastjson.version>
         <redisson.version>3.16.1</redisson.version>
+        <kafka.version>3.2.3</kafka.version>
 
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.9.RELEASE</spring-cloud-alibaba.version>
@@ -76,6 +77,12 @@
             <dependency>
                 <groupId>com.ds.nas</groupId>
                 <artifactId>nas-lib-common</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-lib-mq</artifactId>
                 <version>${rversion}</version>
             </dependency>
 
@@ -171,6 +178,13 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson.version}</version>
+            </dependency>
+
+            <!-- mq -->
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
             </dependency>
 
         </dependencies>

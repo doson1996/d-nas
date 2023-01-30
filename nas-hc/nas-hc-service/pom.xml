@@ -30,5 +30,10 @@
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-lib-cache</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.ds.nas</groupId>
+            <artifactId>nas-lib-mq</artifactId>
+        </dependency>
     </dependencies>
 </project>
