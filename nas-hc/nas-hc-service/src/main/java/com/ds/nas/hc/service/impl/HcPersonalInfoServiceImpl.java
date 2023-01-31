@@ -1,12 +1,10 @@
 package com.ds.nas.hc.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.util.IdcardUtil;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.hc.common.constant.CacheKey;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
@@ -19,6 +17,7 @@ import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
+import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.constant.HealthCodeState;
 import com.ds.nas.lib.common.exception.BusinessException;
@@ -106,7 +105,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         String hcPersonalInfoJson = redisUtil.get(key);
         if (StringUtils.isBlank(hcPersonalInfoJson)) {
             hcPersonalInfo = hcPersonalInfoMapper.queryByIdCard(idCard);
-            redisUtil.set(key, JSON.toJSONString(hcPersonalInfo), 2 * DateUnit.HOUR.getMillis());
+            redisUtil.set(key, JSON.toJSONString(hcPersonalInfo), 2 * 60 * 60);
         } else {
             hcPersonalInfo = JSON.parseObject(hcPersonalInfoJson, HcPersonalInfo.class);
         }

@@ -4,6 +4,8 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.ds.nas.hc.dao.domain.HcRequestLog;
 import com.ds.nas.lib.common.base.db.DBUtils;
+import com.ds.nas.lib.common.constant.MqTopic;
+import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.mq.kafka.KafkaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -67,7 +69,7 @@ public class LogAspect {
             log.setResponseData(JSON.toJSONString(responseData));
             log.setExecutionTime(executionTime);
             DBUtils.getCurrentDBUtils().onCreate(log);
-            kafkaUtils.send("log-test", JSON.toJSONString(log));
+            kafkaUtils.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(log));
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());
         }
