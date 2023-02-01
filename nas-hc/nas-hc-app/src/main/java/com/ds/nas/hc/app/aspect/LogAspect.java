@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSONObject;
 import com.ds.nas.hc.dao.domain.HcRequestLog;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.constant.MqTopic;
-import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.mq.kafka.KafkaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  * @description 日志记录
  */
 @Slf4j
-@Order(99)
+@Order(50)
 @Aspect
 @Component
 public class LogAspect {
@@ -44,6 +43,7 @@ public class LogAspect {
         String path = request.getServletPath();
         Object requestData = joinPoint.getArgs()[0];
         long start = System.currentTimeMillis();
+        //todo 有全局异常处理{@see GlobalExceptionHandler} 执行中抛出异常时不往下走
         Object responseData = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
         log2Kafka(path, requestData, responseData, executionTime);

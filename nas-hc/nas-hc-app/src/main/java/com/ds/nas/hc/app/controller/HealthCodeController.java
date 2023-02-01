@@ -1,12 +1,11 @@
 package com.ds.nas.hc.app.controller;
 
-import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
-import com.ds.nas.lib.common.auth.AuthCheck;
-import com.ds.nas.lib.common.base.response.StringResponse;
-import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
+import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
 import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
+import com.ds.nas.lib.common.base.response.StringResponse;
+import com.ds.nas.lib.common.result.Result;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
