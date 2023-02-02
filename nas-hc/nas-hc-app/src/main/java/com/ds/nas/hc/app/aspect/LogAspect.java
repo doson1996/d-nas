@@ -43,7 +43,7 @@ public class LogAspect {
         String path = request.getServletPath();
         Object requestData = joinPoint.getArgs()[0];
         long start = System.currentTimeMillis();
-        //todo 有全局异常处理{@see GlobalExceptionHandler} 执行中抛出异常时不往下走
+        //todo 有全局异常处理时{@see GlobalExceptionHandler} 执行中抛出异常会导致不往下走
         Object responseData = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
         log2Kafka(path, requestData, responseData, executionTime);
