@@ -6,11 +6,13 @@ import com.ds.nas.hc.dao.domain.HcRequestLog;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.constant.MqTopic;
 import com.ds.nas.lib.mq.kafka.KafkaUtils;
+import com.ds.nas.lib.mq.producer.Producer;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +35,10 @@ public class LogAspect {
 
     @Resource
     private KafkaUtils kafkaUtils;
+
+    @Resource
+    @Qualifier("kafkaProducer")
+    private Producer producer;
 
     @Pointcut("execution(* com.ds.nas.hc.app.controller.*.*(..))")
     public void pointcut() {
@@ -69,6 +75,7 @@ public class LogAspect {
             log.setResponseData(JSON.toJSONString(responseData));
             log.setExecutionTime(executionTime);
             DBUtils.getCurrentDBUtils().onCreate(log);
+          //  producer.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(log));
             kafkaUtils.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(log));
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());
