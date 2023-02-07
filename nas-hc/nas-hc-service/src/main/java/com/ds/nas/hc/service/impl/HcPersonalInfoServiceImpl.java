@@ -62,7 +62,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         checkRegisterRequest(request);
         BeanUtil.copyProperties(request, hcPersonalInfo);
-        hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().onCreate(hcPersonalInfo);
+        DBUtils.onCreate(hcPersonalInfo);
         hcPersonalInfo.setHealth(HealthCodeState.GREEN);
 
         if (!save(hcPersonalInfo)) {
@@ -81,7 +81,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     public Result<PersonalInfoUpdateResponse> updateByIdCard(PersonalInfoUpdateRequest request) {
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         BeanUtil.copyProperties(request, hcPersonalInfo);
-        hcPersonalInfo = (HcPersonalInfo) DBUtils.getCurrentDBUtils().onUpdate(hcPersonalInfo);
+        DBUtils.onUpdate(hcPersonalInfo);
         LambdaUpdateWrapper<HcPersonalInfo> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(HcPersonalInfo::getIdCard, request.getIdCard());
         if (update(hcPersonalInfo, wrapper)) {

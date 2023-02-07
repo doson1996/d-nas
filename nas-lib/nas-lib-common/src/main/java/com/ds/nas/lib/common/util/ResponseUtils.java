@@ -13,14 +13,13 @@ public class ResponseUtils {
 
     /**
      * 请求返回时
+     *
      * @param request
      * @param response
-     * @return
      */
-    public static BaseResponse onReturn(BaseRequest request, BaseResponse response) {
+    public static void onReturn(BaseRequest request, BaseResponse response) {
         response.setRequestId(request.getRequestId());
         response.setResponseTime(DateUtil.now());
-        return response;
     }
 
 }

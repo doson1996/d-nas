@@ -39,7 +39,7 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
         if (countByBatchNo > 0) {
             return Result.fail("请勿重复录入!");
         }
-        DBUtils.getCurrentDBUtils().onCreate(personalInfo);
+        DBUtils.onCreate(personalInfo);
         int res = personalInfoMapper.entry(tableName, personalInfo);
         if (res == 0) {
             return Result.fail("录入信息失败!");

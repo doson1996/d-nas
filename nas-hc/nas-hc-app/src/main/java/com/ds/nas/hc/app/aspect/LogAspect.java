@@ -74,8 +74,8 @@ public class LogAspect {
             log.setRequestData(JSON.toJSONString(requestData));
             log.setResponseData(JSON.toJSONString(responseData));
             log.setExecutionTime(executionTime);
-            DBUtils.getCurrentDBUtils().onCreate(log);
-          //  producer.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(log));
+            DBUtils.onCreate(log);
+            //  producer.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(log));
             kafkaUtils.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(log));
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());

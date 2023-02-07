@@ -9,13 +9,7 @@ import java.util.Date;
  * @date 2022/12/4
  * @description db操作工具类
  */
-public class DBUtils<T extends BaseDomain> {
-
-    private static DBUtils currentDBUtils = new DBUtils();
-
-    public static DBUtils getCurrentDBUtils() {
-        return currentDBUtils;
-    }
+public class DBUtils {
 
     /**
      * 操作人 - 系统
@@ -31,8 +25,8 @@ public class DBUtils<T extends BaseDomain> {
      * @param bean
      * @return
      */
-    public T onCreate(T bean) {
-        return onCreate(bean, SYSTEM_OPERATOR);
+    public static void onCreate(BaseDomain bean) {
+        onCreate(bean, SYSTEM_OPERATOR);
     }
 
     /**
@@ -42,12 +36,11 @@ public class DBUtils<T extends BaseDomain> {
      * @param operator 操作人
      * @return
      */
-    public T onCreate(T bean, String operator) {
+    public static void onCreate(BaseDomain bean, String operator) {
         bean.setCreateTime(new Date());
         bean.setCreateBy(operator);
         bean.setUpdateTime(new Date());
         bean.setUpdateBy(operator);
-        return bean;
     }
 
     /**
@@ -56,8 +49,8 @@ public class DBUtils<T extends BaseDomain> {
      * @param bean
      * @return
      */
-    public T onUpdate(T bean) {
-       return onUpdate(bean, SYSTEM_OPERATOR);
+    public static void onUpdate(BaseDomain bean) {
+        onUpdate(bean, SYSTEM_OPERATOR);
     }
 
     /**
@@ -67,10 +60,9 @@ public class DBUtils<T extends BaseDomain> {
      * @param operator 操作人
      * @return
      */
-    public T onUpdate(T bean, String operator) {
+    public static void onUpdate(BaseDomain bean, String operator) {
         bean.setUpdateTime(new Date());
         bean.setUpdateBy(operator);
-        return bean;
     }
 
 }
