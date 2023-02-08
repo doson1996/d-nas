@@ -70,7 +70,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         NatDetectionBatchInfo detectionBatchInfo = new NatDetectionBatchInfo();
         String batchNo = generateBatchNo();
         detectionBatchInfo.setBatchNo(batchNo);
-        DBUtils.getCurrentDBUtils().onCreate(detectionBatchInfo);
+        DBUtils.onCreate(detectionBatchInfo);
 
         if (StringUtils.isNotBlank(batchNo) && save(detectionBatchInfo)) {
             return Result.ok("创建批次[" + batchNo + "]成功!",
