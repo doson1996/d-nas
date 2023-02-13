@@ -68,15 +68,15 @@ public class LogAspect {
         try {
             JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(responseData));
             String code = jsonObject.getString("code");
-            HcRequestLog log = new HcRequestLog();
-            log.setPath(path);
-            log.setReturnCode(code);
-            log.setRequestData(JSON.toJSONString(requestData));
-            log.setResponseData(JSON.toJSONString(responseData));
-            log.setExecutionTime(executionTime);
-            DBUtils.onCreate(log);
+            HcRequestLog hcLog = new HcRequestLog();
+            hcLog.setPath(path);
+            hcLog.setReturnCode(code);
+            hcLog.setRequestData(JSON.toJSONString(requestData));
+            hcLog.setResponseData(JSON.toJSONString(responseData));
+            hcLog.setExecutionTime(executionTime);
+            DBUtils.onCreate(hcLog);
             //  producer.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(log));
-            kafkaUtils.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(log));
+            kafkaUtils.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(hcLog));
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());
         }
