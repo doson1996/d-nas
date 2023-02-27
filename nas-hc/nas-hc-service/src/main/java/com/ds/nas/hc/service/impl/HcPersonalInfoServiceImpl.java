@@ -28,6 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author ds
@@ -85,6 +87,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         LambdaUpdateWrapper<HcPersonalInfo> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(HcPersonalInfo::getIdCard, request.getIdCard());
         if (update(hcPersonalInfo, wrapper)) {
+            deleteHcCache(Collections.singletonList(hcPersonalInfo.getIdCard()));
             PersonalInfoUpdateResponse response = new PersonalInfoUpdateResponse();
             BeanUtil.copyProperties(hcPersonalInfoMapper.queryByIdCard(hcPersonalInfo.getIdCard()), response);
             return Result.ok("更新成功!", response);
@@ -121,6 +124,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         }
         int res = hcPersonalInfoMapper.updateByIdCards(request);
         if (res > 0) {
+            deleteHcCache(request.getIdCards());
             return Result.ok("批量更新成功!");
         }
         return Result.fail("批量更新失败!");
@@ -139,6 +143,13 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         HcPersonalInfo hcPersonalInfo = hcPersonalInfoMapper.queryByIdCard(idCard);
         if (hcPersonalInfo != null) {
             throw new BusinessException("此身份证已注册!");
+        }
+    }
+
+    private void deleteHcCache(List<String> idCards) {
+        for (String idCard : idCards) {
+            //删除缓存
+            redisUtil.delete(CacheKey.HEALTH_CODE_KEY + idCard);
         }
     }
 
