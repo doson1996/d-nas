@@ -28,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -146,11 +147,17 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         }
     }
 
+    /**
+     * 删除hc缓存
+     * @param idCards
+     */
     private void deleteHcCache(List<String> idCards) {
+        List<String> keys = new ArrayList<>();
         for (String idCard : idCards) {
-            //删除缓存
-            redisUtil.delete(CacheKey.HEALTH_CODE_KEY + idCard);
+            keys.add(CacheKey.HEALTH_CODE_KEY + idCard);
         }
+        //删除缓存
+        redisUtil.delete(keys);
     }
 
 }
