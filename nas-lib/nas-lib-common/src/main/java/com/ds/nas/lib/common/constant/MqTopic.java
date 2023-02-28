@@ -21,4 +21,12 @@ public class MqTopic {
      * nat 请求日志
      */
     public static final String NAT_REQUEST_LOG_TOPIC = "nat-request-log";
+
+    /*--------------------- cloud topic ---------------------*/
+
+    /**
+     * canal发送消息topic
+     */
+    public static final String CANAL_MYSQL_TOPIC = "mysql-canal-test";
+
 }

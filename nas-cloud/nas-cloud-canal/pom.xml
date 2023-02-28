@@ -28,6 +28,16 @@
         </dependency>
 
         <dependency>
+            <groupId>com.ds.nas</groupId>
+            <artifactId>nas-lib-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ds.nas</groupId>
+            <artifactId>nas-lib-mq</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.alibaba.otter</groupId>
             <artifactId>canal.client</artifactId>
         </dependency>
