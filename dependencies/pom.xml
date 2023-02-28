@@ -27,6 +27,7 @@
         <fastjson.version>2.0.19</fastjson.version>
         <redisson.version>3.16.1</redisson.version>
         <kafka.version>3.2.3</kafka.version>
+        <canal.version>1.1.4</canal.version>
         <log4j2.version>2.19.0</log4j2.version>
 
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
@@ -180,6 +181,13 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson.version}</version>
+            </dependency>
+
+            <!--canal-->
+            <dependency>
+                <groupId>com.alibaba.otter</groupId>
+                <artifactId>canal.client</artifactId>
+                <version>${canal.version}</version>
             </dependency>
 
             <!-- mq -->

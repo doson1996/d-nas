@@ -17,6 +17,7 @@
     <description>nas cloud</description>
 
     <modules>
+        <module>nas-cloud-canal</module>
         <module>nas-cloud-mq</module>
     </modules>
 
