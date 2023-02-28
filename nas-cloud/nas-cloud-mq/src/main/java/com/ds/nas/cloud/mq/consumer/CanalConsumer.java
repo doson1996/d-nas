@@ -1,7 +1,5 @@
 package com.ds.nas.cloud.mq.consumer;
 
-import com.alibaba.fastjson2.JSON;
-import com.ds.nas.hc.dao.domain.HcRequestLog;
 import com.ds.nas.lib.common.constant.MqTopic;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

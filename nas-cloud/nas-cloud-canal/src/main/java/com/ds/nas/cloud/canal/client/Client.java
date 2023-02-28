@@ -5,7 +5,6 @@ import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.alibaba.otter.canal.protocol.Message;
-import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.constant.MqTopic;
 import com.ds.nas.lib.mq.producer.Producer;
 import lombok.extern.slf4j.Slf4j;
@@ -26,9 +25,6 @@ import java.util.List;
 @Slf4j
 @Component
 public class Client implements ApplicationRunner {
-
-    @Resource
-    RedisUtil redisUtil;
 
     @Resource
     @Qualifier("kafkaProducer")
@@ -113,9 +109,9 @@ public class Client implements ApplicationRunner {
                             entry.getHeader().getTableName(),
                             eventType,
                             rowData.getAfterColumnsList());
-                    System.out.println("-------&gt; before");
+                    log.info("-------更新之前数据-------");
                     printColumn(rowData.getBeforeColumnsList());
-                    System.out.println("-------&gt; after");
+                    log.info("-------更新之后数据-------");
                     printColumn(rowData.getAfterColumnsList());
                 }
             }
@@ -129,7 +125,7 @@ public class Client implements ApplicationRunner {
      */
     private void printColumn(List<CanalEntry.Column> columns) {
         for (CanalEntry.Column column : columns) {
-            System.out.println(column.getName() + " : " + column.getValue() + "    update=" + column.getUpdated());
+            log.info(column.getName() + " : " + column.getValue() + "    update=" + column.getUpdated());
         }
     }
 
@@ -143,7 +139,6 @@ public class Client implements ApplicationRunner {
     private void sendMsg(String db, String table, CanalEntry.EventType eventType, List<CanalEntry.Column> columns) {
         JSONObject data = new JSONObject();
         for (CanalEntry.Column column : columns) {
-            // System.out.println(column.getName() + " : " + column.getValue() + "    update=" + column.getUpdated());
             data.put(column.getName(), column.getValue());
         }
         JSONObject msg = new JSONObject();
