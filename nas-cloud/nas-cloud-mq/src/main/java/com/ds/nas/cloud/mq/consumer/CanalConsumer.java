@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class CanalConsumer {
 
     @KafkaListener(topics = {MqTopic.CANAL_MYSQL_TOPIC}, groupId = "gid-cloud-canal")
-    public void listenLogMsg(ConsumerRecord<String, String> record, Acknowledgment ack) {
+    public void listenCanalMsg(ConsumerRecord<String, String> record, Acknowledgment ack) {
         String value = record.value();
         log.info("消费到canal日志消息: {}", value);
         if (true) {

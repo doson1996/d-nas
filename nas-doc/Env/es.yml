@@ -1,0 +1,27 @@
+version: '3.2'
+services:
+  elasticsearch:
+    image: elasticsearch:7.17.1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    container_name: "elasticsearch"
+    environment:
+      # 单节点     
+      - discovery.type=single-node
+      - ES_JAVA_OPTS="-Xms2G -Xmx4G"
+    volumes:
+      - /usr/local/bin/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /usr/local/bin/elasticsearch/data:/usr/share/elasticsearch/data
+      - /usr/local/bin/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+  kibana:
+    image: kibana:7.17.1
+    ports:
+      - "5601:5601"
+    container_name: "kibana"
+    #restart: always
+    depends_on:
+      - elasticsearh
+    volumes:
+      - /usr/local/bin/elasticsearch/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+  
