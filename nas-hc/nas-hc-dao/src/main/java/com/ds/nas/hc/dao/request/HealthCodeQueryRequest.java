@@ -1,5 +1,6 @@
 package com.ds.nas.hc.dao.request;
 
+import com.ds.nas.lib.common.base.annotation.Check;
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ public class HealthCodeQueryRequest extends BaseRequest {
     /**
      * 身份证号码
      */
+    @Check(require = true)
     private String idCard;
 
 }

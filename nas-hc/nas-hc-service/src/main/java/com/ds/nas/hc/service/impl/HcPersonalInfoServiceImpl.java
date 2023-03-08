@@ -19,6 +19,7 @@ import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.base.db.DBUtils;
+import com.ds.nas.lib.common.base.request.RequestCheck;
 import com.ds.nas.lib.common.constant.HealthCodeState;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
@@ -51,9 +52,8 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     @Override
     public Result<HealthCodeQueryResponse> queryByIdCard(HealthCodeQueryRequest request) {
-        if (StringUtils.isBlank(request.getIdCard())) {
-            throw new BusinessException("身份证号不能为空!");
-        }
+        // 基本参数校验
+        RequestCheck.check(request);
         HealthCodeQueryResponse response = new HealthCodeQueryResponse();
         BeanUtil.copyProperties(qryHcPersonalInfo(request.getIdCard()), response);
         ResponseUtils.onReturn(request, response);
@@ -149,6 +149,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     /**
      * 删除hc缓存
+     *
      * @param idCards
      */
     private void deleteHcCache(List<String> idCards) {
