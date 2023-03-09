@@ -40,7 +40,7 @@ public class LogAspect {
     @Qualifier("kafkaProducer")
     private Producer producer;
 
-    @Pointcut("execution(* com.ds.nas.hc.app.controller.*.*(..))")
+    @Pointcut("execution(* com.ds.nas.hc.app.controller.*Controller.*(..))")
     public void pointcut() {
     }
 

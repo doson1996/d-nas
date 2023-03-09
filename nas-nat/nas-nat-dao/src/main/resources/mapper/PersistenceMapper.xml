@@ -26,9 +26,10 @@
             `delete_flag` tinyint(1) default 0 not null comment '逻辑删除标志: 0.未删除 1.已删除',
             `create_time` datetime             not null comment '创建时间',
             `update_time` datetime             not null comment '更新时间',
-            `create_by`   varchar(255)         not null comment '创建人',
-            `update_by`   varchar(255)         not null comment '更新人',
-            PRIMARY KEY (`id`)
+            `create_by`   varchar(50)         not null comment '创建人',
+            `update_by`   varchar(50)         not null comment '更新人',
+            PRIMARY KEY (`id`),
+            CONSTRAINT uk_batch_no_id_card UNIQUE (batch_no,id_card)
         ) ENGINE = InnoDB
           CHARACTER SET = utf8
           COMMENT ='检测用户信息表';
