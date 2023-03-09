@@ -7,5 +7,10 @@ package com.ds.nas.lib.mq.consumer;
  */
 public interface Consumer {
 
+    /**
+     * 接收消息
+     * @param topic
+     */
+    void receive(String topic);
 
 }

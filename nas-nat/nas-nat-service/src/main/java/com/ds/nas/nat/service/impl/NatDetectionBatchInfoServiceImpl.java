@@ -154,6 +154,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
                 redisUtil.set(key, initSequence, 2 * DateUnit.DAY.getMillis());
             }
             sequence = String.valueOf(redisUtil.incrBy(key, 1));
+            // 日期不是今天，说明今天的批次号已经生成完
             if (!today.equals(sequence.substring(0, today.length()))) {
                 throw new BusinessException("当日批次号已用完!");
             }

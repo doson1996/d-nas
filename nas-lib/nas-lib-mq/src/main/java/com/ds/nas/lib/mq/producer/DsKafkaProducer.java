@@ -16,7 +16,7 @@ import java.util.Properties;
 @Component("kafkaProducer")
 public class DsKafkaProducer implements Producer {
 
-    private static KafkaProducer<String, String> producer = new KafkaProducer<>(defineDefaultConfiguration());
+    private static final KafkaProducer<String, String> producer = new KafkaProducer<>(defineDefaultConfiguration());
 
     @Override
     public boolean send(String topic, String msg) {
