@@ -10,7 +10,10 @@ import com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper;
 import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
 
 import javax.annotation.Resource;
 
@@ -27,15 +30,39 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
     private String dpiTableName;
 
     @Resource
+    private DataSourceTransactionManager transactionManager;
+
+    @Resource
+    private TransactionDefinition transactionDefinition;
+
+    @Resource
     private NatDetectionPersonalInfoMapper personalInfoMapper;
 
+    /**
+     * 使用for update需要开启事务（可以避免重复录入,性能下降）
+     *  事务  请求次数   平均值(ms)  中位数    90%      95%     99%    最小值   最大值    吞吐量
+     *  无     500       232	    226 	290	    342	    522 	35  	755     168/s
+     *  注解   500	    1990	    1973	2435	2566	2615	325	    2640    24/s
+     *  编程   500	    1933	    2026	2058	2063	2073	738	    3370    24/s
+     *
+     * @param request 入参
+     * @return
+     */
+    // @Transactional(rollbackFor = Exception.class)
     @Override
     public Result<StringResponse> entry(DetectionPersonalInfoEntryRequest request) {
         NatDetectionPersonalInfo personalInfo = new NatDetectionPersonalInfo();
         personalInfo.setBatchNo(request.getBatchNo());
         personalInfo.setIdCard(request.getIdCard());
         String tableName = getTableName(request.getBatchNo());
+
+        // 开启事务（获取事务）
+        TransactionStatus transactionStatus = transactionManager.getTransaction(transactionDefinition);
         int countByBatchNo = personalInfoMapper.countByBatchNo(tableName, request.getBatchNo(), request.getIdCard());
+        // 提交事务
+        transactionManager.commit(transactionStatus);
+        // 回滚事务
+        // transactionManager.rollback(transactionStatus);
         if (countByBatchNo > 0) {
             return Result.fail("请勿重复录入!");
         }
