@@ -4,6 +4,7 @@
 /target
 target
 *.iml
+*-dev.yml
 
 # Compiled class file
 *.class
