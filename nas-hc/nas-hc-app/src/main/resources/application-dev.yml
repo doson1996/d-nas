@@ -3,7 +3,7 @@ server:
 
 #开发环境
 env:
-  host: 47.98.217.92
+  host: ds.com
 
 spring:
   application:
