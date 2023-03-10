@@ -1,5 +1,6 @@
 package com.ds.nas.lib.mq.kafka;
 
+import com.ds.nas.lib.mq.producer.Producer;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -10,14 +11,15 @@ import javax.annotation.Resource;
  * @date 2023/1/30
  * @description kafka工具类
  */
-@Component
-public class KafkaUtils {
+@Component("kafka")
+public class KafkaUtils implements Producer {
 
     @Resource
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    public void send(String topic, String msg) {
+    public boolean send(String topic, String msg) {
         kafkaTemplate.send(topic, msg);
+        return true;
     }
 
 }

@@ -1,33 +1,23 @@
 server:
   port: 8101
 
+#开发环境
+env:
+  host: 47.98.217.92
+
 spring:
   application:
     name: nas-cloud-mq
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://dy.com:3306/d_nas_hc?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: test@123
-    hikari:
-      pool-name: nas-hc-pool
-      #最小空闲连接数 <类似于线程池的核心线程数>
-      minimum-idle: 5
-      #最大连接数 <类似于线程池的最大线程数>
-      maximum-pool-size: 20
-      # 监控
-      register-mbeans: false
   #Redis 配置
   redis:
     # Redis服务器地址
-    host: dy.com
+    host: ${env.host}
     # Redis数据库索引（默认为0）
     database: 0
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
-    password: test@123
+    password: msj@ks12d3
     # 链接超时时间 单位 ms（毫秒）
     timeout: 3000
     # Redis 线程池设置
@@ -42,7 +32,7 @@ spring:
         # 连接池中的最小空闲连接 默认 0
         min-idle: 0
   kafka:
-    bootstrap-servers: dy.com:9092
+    bootstrap-servers: ${env.host}:9092
     producer: # 生产者
       retries: 3 # 设置大于0的值，则客户端会将发送失败的记录重新发送
       batch-size: 16384
@@ -58,26 +48,12 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     listener:
-      # 当每一条记录被消费者监听器（ListenerConsumer）处理之后提交
-      # RECORD
-      # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后提交
-      # BATCH
-      # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后，距离上次提交时间大于TIME时提交
-      # TIME
-      # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后，被处理record数量大于等于COUNT时提交
-      # COUNT
-      # TIME |　COUNT　有一个条件满足时提交
-      # COUNT_TIME
-      # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后, 手动调用Acknowledgment.acknowledge()后提交
-      # MANUAL
-      # 手动调用Acknowledgment.acknowledge()后立即提交，一般使用这种
-      # MANUAL_IMMEDIATE
       ack-mode: manual_immediate
   cloud:
     nacos:
       discovery:
         enabled: true
-        server-addr: dy.com:8848
+        server-addr: ${env.host}:8848
         username: nacos
         password: nacos
 
@@ -90,7 +66,7 @@ dubbo:
   registry:
     #dubbo服务注册端口，注册中心服务器地址，如果地址没有端口缺省为9090，同一集群内的多个地址用逗号分隔，如：ip:port,ip:port
     #其中前缀spring-cloud说明：挂载到 Spring Cloud注册中心
-    address: spring-cloud://dy.com:8848/?username=nacos&password=nacos
+    address: spring-cloud://${env.host}:8848/?username=nacos&password=nacos
     #check: false  #关闭注册中心是否启动的相关检查,false表示不检查注册中心是否启动，就不会报错
   cloud:
     subscribed-services: nas-hc,nas-nat

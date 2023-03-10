@@ -27,7 +27,7 @@ import java.util.List;
 public class Client implements ApplicationRunner {
 
     @Resource
-    @Qualifier("kafkaProducer")
+    @Qualifier("kafka")
     private Producer producer;
 
     @Override

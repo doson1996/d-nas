@@ -13,7 +13,7 @@ import java.util.Properties;
  * @date 2023/1/28
  * @description kafka生产者实现
  */
-@Component("kafkaProducer")
+//@Component("kafkaProducer")
 public class DsKafkaProducer implements Producer {
 
     private static final KafkaProducer<String, String> producer = new KafkaProducer<>(defineDefaultConfiguration());

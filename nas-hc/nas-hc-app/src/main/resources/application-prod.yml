@@ -1,25 +1,17 @@
 server:
-  port: 8091
-
-#开发环境
-env:
-  host: 47.98.217.92
-
-#业务配置
-table-name:
-  dpi: nat_detection_personal_info
+  port: 8081
 
 spring:
   application:
-    name: nas-nat
+    name: nas-hc
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${env.host}:3306/d_nas_nat?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://dy.com:3306/d_nas_hc?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: test@123
     hikari:
-      pool-name: nas-nat-pool
+      pool-name: nas-hc-pool
       #最小空闲连接数 <类似于线程池的核心线程数>
       minimum-idle: 5
       #最大连接数 <类似于线程池的最大线程数>
@@ -29,7 +21,7 @@ spring:
   #Redis 配置
   redis:
     # Redis服务器地址
-    host: ${env.host}
+    host: dy.com
     # Redis数据库索引（默认为0）
     database: 0
     # Redis服务器连接端口
@@ -49,11 +41,29 @@ spring:
         max-idle: 8
         # 连接池中的最小空闲连接 默认 0
         min-idle: 0
+  kafka:
+    bootstrap-servers: dy.com:9092
+    producer: # 生产者
+      retries: 3 # 设置大于0的值，则客户端会将发送失败的记录重新发送
+      batch-size: 16384
+      buffer-memory: 33554432
+      acks: 1
+      # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: gid-hc
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual_immediate
   cloud:
     nacos:
       discovery:
         enabled: true
-        server-addr: ${env.host}:8848
+        server-addr: dy.com:8848
         username: nacos
         password: nacos
 
@@ -66,10 +76,10 @@ dubbo:
   registry:
     #dubbo服务注册端口，注册中心服务器地址，如果地址没有端口缺省为9090，同一集群内的多个地址用逗号分隔，如：ip:port,ip:port
     #其中前缀spring-cloud说明：挂载到 Spring Cloud注册中心
-    address: spring-cloud://${env.host}:8848/?username=nacos&password=nacos
+    address: spring-cloud://dy.com:8848/?username=nacos&password=nacos
     #check: false  #关闭注册中心是否启动的相关检查,false表示不检查注册中心是否启动，就不会报错
   cloud:
-    subscribed-services: nas-hc
+    subscribed-services: nas-nat
   consumer:
     check: false  #关闭订阅服务是否启动的检查【检查时，没有服务提供者会报错】
 
@@ -79,9 +89,9 @@ mybatis-plus:
       logic-delete-field: deleteFlag  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
-#mybatis-plus配置控制台打印完整带参数SQL语句
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #mybatis-plus配置控制台打印完整带参数SQL语句
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 management:
   endpoints:

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ds.nas.hc.dao.mapper.HcSystemLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.ds.nas.hc.dao.domain.HcSystemLog">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="path" column="path" jdbcType="VARCHAR"/>
+            <result property="requestIp" column="request_ip" jdbcType="VARCHAR"/>
+            <result property="requestData" column="request_data" jdbcType="VARCHAR"/>
+            <result property="responseIp" column="response_ip" jdbcType="VARCHAR"/>
+            <result property="responseData" column="response_data" jdbcType="VARCHAR"/>
+            <result property="executionTime" column="execution_time" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="deleteFlag" column="delete_flag" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,path,request_ip,
+        request_data,response_ip,response_data,
+        execution_time,create_time,update_time,
+        create_by,update_by,delete_flag
+    </sql>
+</mapper>

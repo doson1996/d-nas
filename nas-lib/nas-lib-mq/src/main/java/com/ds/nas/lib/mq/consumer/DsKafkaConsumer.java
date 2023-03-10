@@ -3,7 +3,7 @@ package com.ds.nas.lib.mq.consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -14,7 +14,7 @@ import java.util.Properties;
  * @date 2023/1/28
  * @description kafka消费者实现
  */
-@Component("kafkaConsumer")
+//@Component("kafkaConsumer")
 public class DsKafkaConsumer implements Consumer {
 
     private static final KafkaConsumer<String, String> consumer = new KafkaConsumer<>(defineDefaultConfiguration());
@@ -27,8 +27,8 @@ public class DsKafkaConsumer implements Consumer {
     private static Properties defineDefaultConfiguration() {
         Properties properties = new Properties();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "dy.com:9092");
-        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         return properties;
     }
 

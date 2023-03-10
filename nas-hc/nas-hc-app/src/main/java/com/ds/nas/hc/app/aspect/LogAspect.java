@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSONObject;
 import com.ds.nas.hc.dao.domain.HcRequestLog;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.constant.MqTopic;
-import com.ds.nas.lib.mq.kafka.KafkaUtils;
 import com.ds.nas.lib.mq.producer.Producer;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -34,10 +33,7 @@ public class LogAspect {
     private HttpServletRequest request;
 
     @Resource
-    private KafkaUtils kafkaUtils;
-
-    @Resource
-    @Qualifier("kafkaProducer")
+    @Qualifier("kafka")
     private Producer producer;
 
     @Pointcut("execution(* com.ds.nas.hc.app.controller.*Controller.*(..))")
@@ -75,8 +71,7 @@ public class LogAspect {
             hcLog.setResponseData(JSON.toJSONString(responseData));
             hcLog.setExecutionTime(executionTime);
             DBUtils.onCreate(hcLog);
-            //  producer.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(log));
-            kafkaUtils.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(hcLog));
+            producer.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(hcLog));
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());
         }
