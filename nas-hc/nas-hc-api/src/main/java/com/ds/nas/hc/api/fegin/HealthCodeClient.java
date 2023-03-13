@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @date 2022/12/8
  * @description
  */
-@FeignClient(value = "nas-hc", path = "health-code", fallback = HealthCodeClientFallback.class)
+@FeignClient(value = "nas-hc", path = "health-code", contextId = "hc-health-code", fallback = HealthCodeClientFallback.class)
 public interface HealthCodeClient {
 
     /**

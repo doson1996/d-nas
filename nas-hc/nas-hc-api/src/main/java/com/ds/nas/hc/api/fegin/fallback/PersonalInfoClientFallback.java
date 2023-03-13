@@ -3,13 +3,12 @@ package com.ds.nas.hc.api.fegin.fallback;
 import com.ds.nas.hc.api.fegin.PersonalInfoClient;
 import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
 import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
+import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
-import com.ds.nas.lib.common.result.Result;
-import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
+import com.ds.nas.lib.common.result.Result;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 /**
  * @author ds

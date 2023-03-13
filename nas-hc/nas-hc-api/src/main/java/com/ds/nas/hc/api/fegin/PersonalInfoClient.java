@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * @author ds
  * @date 2022/12/19
- * @description
+ * @descriptio contextId = "hc-personal-info" 避免
  */
-@FeignClient(value = "nas-hc", path = "personal-info", fallback = HealthCodeClientFallback.class)
+@FeignClient(value = "nas-hc", path = "personal-info", contextId = "hc-personal-info", fallback = HealthCodeClientFallback.class)
 public interface PersonalInfoClient {
 
     /**
      * 根据idCard更新
+     *
      * @param request
      * @return
      */
@@ -30,6 +31,7 @@ public interface PersonalInfoClient {
 
     /**
      * 根据idCard批量更新
+     *
      * @param request
      * @return
      */
@@ -38,10 +40,11 @@ public interface PersonalInfoClient {
 
     /**
      * 注册
+     *
      * @param request
      * @return
      */
-    @PostMapping("updateByIdCards")
+    @PostMapping("register")
     Result<PersonalInfoRegisterResponse> register(@RequestBody PersonalInfoRegisterRequest request);
 
 }

@@ -14,10 +14,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @EnableScheduling
 @EnableDiscoveryClient
-@EnableFeignClients
-@SpringBootApplication(
-        exclude = {DataSourceAutoConfiguration.class},
-        scanBasePackages = {"com.ds.nas.hc.api","com.ds.nas.cloud.batch.mock"})
+@EnableFeignClients(basePackages = {"com.ds.nas.hc.api.fegin"})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class BatchApplication {
     public static void main(String[] args) {
         SpringApplication.run(BatchApplication.class, args);
