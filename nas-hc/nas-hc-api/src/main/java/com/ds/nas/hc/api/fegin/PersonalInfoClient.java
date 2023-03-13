@@ -2,7 +2,9 @@ package com.ds.nas.hc.api.fegin;
 
 import com.ds.nas.hc.api.fegin.fallback.HealthCodeClientFallback;
 import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
+import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
+import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
@@ -33,5 +35,13 @@ public interface PersonalInfoClient {
      */
     @PostMapping("updateByIdCards")
     Result<PersonalInfoBatchUpdateResponse> updateByIdCards(@RequestBody PersonalInfoBatchUpdateRequest request);
+
+    /**
+     * 注册
+     * @param request
+     * @return
+     */
+    @PostMapping("updateByIdCards")
+    Result<PersonalInfoRegisterResponse> register(@RequestBody PersonalInfoRegisterRequest request);
 
 }

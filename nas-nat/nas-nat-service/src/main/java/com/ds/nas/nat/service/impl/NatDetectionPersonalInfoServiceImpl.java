@@ -56,16 +56,16 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
         personalInfo.setIdCard(request.getIdCard());
         String tableName = getTableName(request.getBatchNo());
 
-        // 开启事务（获取事务）
-        TransactionStatus transactionStatus = transactionManager.getTransaction(transactionDefinition);
-        int countByBatchNo = personalInfoMapper.countByBatchNo(tableName, request.getBatchNo(), request.getIdCard());
-        // 提交事务
-        transactionManager.commit(transactionStatus);
-        // 回滚事务
-        // transactionManager.rollback(transactionStatus);
-        if (countByBatchNo > 0) {
-            return Result.fail("请勿重复录入!");
-        }
+//        // 开启事务（获取事务）
+//        TransactionStatus transactionStatus = transactionManager.getTransaction(transactionDefinition);
+//        int countByBatchNo = personalInfoMapper.countByBatchNo(tableName, request.getBatchNo(), request.getIdCard());
+//        // 提交事务
+//        transactionManager.commit(transactionStatus);
+//        // 回滚事务
+//        // transactionManager.rollback(transactionStatus);
+//        if (countByBatchNo > 0) {
+//            return Result.fail("请勿重复录入!");
+//        }
         DBUtils.onCreate(personalInfo);
         int res = personalInfoMapper.entry(tableName, personalInfo);
         if (res == 0) {

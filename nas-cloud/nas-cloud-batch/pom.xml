@@ -9,23 +9,18 @@
         <version>1.0.0-RELEASE</version>
     </parent>
 
-    <artifactId>nas-cloud-canal</artifactId>
+    <artifactId>nas-cloud-batch</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.ds.nas</groupId>
-            <artifactId>nas-lib-common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ds.nas</groupId>
-            <artifactId>nas-lib-mq</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.otter</groupId>
-            <artifactId>canal.client</artifactId>
+            <artifactId>nas-hc-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.alibaba.cloud</groupId>
+                    <artifactId>spring-cloud-starter-dubbo</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
-
 </project>

@@ -35,7 +35,7 @@ spring:
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
-    password: test@123
+    password: msj@ks12d3
     # 链接超时时间 单位 ms（毫秒）
     timeout: 3000
     # Redis 线程池设置

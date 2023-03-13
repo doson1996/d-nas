@@ -1,0 +1,13 @@
+server:
+  port: 8111
+
+spring:
+  application:
+    name: nas-cloud-batch
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: dy.com:8848
+        username: nacos
+        password: nacos
