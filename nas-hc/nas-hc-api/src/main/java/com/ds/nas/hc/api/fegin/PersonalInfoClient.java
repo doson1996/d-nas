@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * @author ds
  * @date 2022/12/19
- * @descriptio contextId = "hc-personal-info" 避免
+ * @descriptio contextId = "hc-personal-info" 避免 The bean 'nas-hc.FeignClientSpecification'
+ * could not be registered. A bean with that name has already been defined and overriding is disabled.
  */
 @FeignClient(value = "nas-hc", path = "personal-info", contextId = "hc-personal-info", fallback = HealthCodeClientFallback.class)
 public interface PersonalInfoClient {

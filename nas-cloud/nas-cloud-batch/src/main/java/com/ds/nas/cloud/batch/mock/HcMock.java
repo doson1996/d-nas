@@ -6,7 +6,6 @@ import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.DataGenerateUtils;
 import com.ds.nas.lib.common.util.DataGenerateUtilsV1;
-import lombok.SneakyThrows;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -23,20 +22,16 @@ public class HcMock {
     @Resource
     private PersonalInfoClient personalInfoClient;
 
-    @SneakyThrows
     @Scheduled(fixedDelay = 500)
     public void regMock() {
         PersonalInfoRegisterRequest request = new PersonalInfoRegisterRequest();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             request.setName(DataGenerateUtils.generateName());
             request.setAddress(DataGenerateUtilsV1.getRandomAddress());
             request.setIdCard(DataGenerateUtils.getIdNo());
             request.setPhone(DataGenerateUtilsV1.getRandomPhone());
             Result<PersonalInfoRegisterResponse> result = personalInfoClient.register(request);
             System.out.println("result = " + result);
-            if (900 == result.getCode()) {
-                Thread.sleep(5000);
-            }
         }
     }
 
