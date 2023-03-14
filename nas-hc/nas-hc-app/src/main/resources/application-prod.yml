@@ -66,6 +66,11 @@ spring:
         server-addr: dy.com:8848
         username: nacos
         password: nacos
+    #sentinel
+    sentinel:
+      transport:
+        port: ${server.port}
+        dashboard: dy.com:8800
   # json 时间格式化
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

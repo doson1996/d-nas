@@ -1,6 +1,11 @@
 server:
   port: 8111
 
+
+#开发环境
+env:
+  host: ds.com
+
 spring:
   application:
     name: nas-cloud-canal
