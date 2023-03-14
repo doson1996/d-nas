@@ -20,11 +20,6 @@ public class TableNameUtils {
      */
     public static final String TABLE_SEPARATOR = "_";
 
-    /**
-     * 批次表名 redis key
-     */
-    public static final String BATCH_TABLE_KEY = "batch:tableName:";
-
     private TableNameUtils() {
         throw new AssertionError("No com.ds.nas.nat.common.util.TableNameUtil instances for you!");
     }
@@ -54,7 +49,7 @@ public class TableNameUtils {
      *
      * @param tableName 表名
      * @param batchNo   批次号
-     * @return 返回明天日期表名 tableName_yyyyMMdd
+     * @return tableName_yyyyMMdd
      */
     public static String getByBatchNo(String tableName, String batchNo) {
         return tableName + TABLE_SEPARATOR + batchNo.substring(2, 10);
