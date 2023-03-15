@@ -22,10 +22,10 @@ public class HcMock {
     @Resource
     private PersonalInfoClient personalInfoClient;
 
-    @Scheduled(fixedDelay = 500)
+    @Scheduled(fixedDelay = 1000)
     public void regMock() {
         PersonalInfoRegisterRequest request = new PersonalInfoRegisterRequest();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             request.setName(DataGenerateUtils.generateName());
             request.setAddress(DataGenerateUtilsV1.getRandomAddress());
             request.setIdCard(DataGenerateUtils.getIdNo());
