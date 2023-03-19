@@ -5,6 +5,7 @@
 target
 *.iml
 *-dev.yml
+*-gray.yml
 
 # Compiled class file
 *.class
