@@ -39,6 +39,7 @@
     <!-- 模块 -->
     <modules>
         <module>../nas-cloud</module>
+        <module>../nas-gateway</module>
         <module>../nas-hc</module>
         <module>../nas-lib</module>
         <module>../nas-nat</module>
