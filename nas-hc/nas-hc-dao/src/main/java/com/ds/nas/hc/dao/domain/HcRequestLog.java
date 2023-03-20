@@ -45,6 +45,17 @@ public class HcRequestLog extends BaseDomain {
     private String responseData;
 
     /**
+     * 请求ip
+     */
+    private String requestIp;
+
+
+    /**
+     * 响应ip
+     */
+    private String responseIp;
+
+    /**
      * 执行时间(ms)
      */
     private Long executionTime;

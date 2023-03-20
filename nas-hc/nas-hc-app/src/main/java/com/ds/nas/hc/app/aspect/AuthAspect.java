@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @Order(20)
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class AuthAspect {
 
     @Resource

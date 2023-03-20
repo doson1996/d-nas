@@ -25,6 +25,7 @@
     </dependencies>
 
     <modules>
+        <module>nas-lib-cache</module>
         <module>nas-lib-common</module>
         <module>nas-lib-cache</module>
         <module>nas-lib-mq</module>
