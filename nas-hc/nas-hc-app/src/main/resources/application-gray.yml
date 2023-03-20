@@ -21,6 +21,8 @@ spring:
       maximum-pool-size: 20
       # 监控
       register-mbeans: false
+      # 项目启动时就建立连接，避免第一次使用数据库时过慢
+      connection-init-sql: select 1 from dual;
   #Redis 配置
   redis:
     # Redis服务器地址
