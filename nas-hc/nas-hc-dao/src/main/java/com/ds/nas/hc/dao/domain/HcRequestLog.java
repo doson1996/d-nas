@@ -32,7 +32,7 @@ public class HcRequestLog extends BaseDomain {
     /**
      * 返回码
      */
-    private String returnCode;
+    private Integer returnCode;
 
     /**
      * 请求参数

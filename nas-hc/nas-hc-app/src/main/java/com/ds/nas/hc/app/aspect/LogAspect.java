@@ -6,6 +6,8 @@ import com.ds.nas.hc.api.dubbo.HcRequestLogProvider;
 import com.ds.nas.hc.dao.domain.HcRequestLog;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.constant.MqTopic;
+import com.ds.nas.lib.common.result.ResultCode;
+import com.ds.nas.lib.common.result.ResultEnum;
 import com.ds.nas.lib.mq.producer.Producer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -52,9 +54,17 @@ public class LogAspect {
         Object requestData = joinPoint.getArgs()[0];
         long start = System.currentTimeMillis();
         //todo 有全局异常处理时{@see GlobalExceptionHandler} 执行中抛出异常会导致不往下走
-        Object responseData = joinPoint.proceed();
-        long executionTime = System.currentTimeMillis() - start;
-        saveLog(path, requestData, responseData, executionTime);
+        Object responseData = null;
+        try {
+            responseData = joinPoint.proceed();
+        } catch (Throwable e) {
+            // 继续抛出异常，交给GlobalExceptionHandler处理
+            throw e;
+        } finally {
+            // 执行时长(ms)
+            long executionTime = System.currentTimeMillis() - start;
+            saveLog(path, requestData, responseData, executionTime);
+        }
         return responseData;
     }
 
@@ -68,8 +78,11 @@ public class LogAspect {
      */
     private void saveLog(String path, Object requestData, Object responseData, Long executionTime) {
         try {
-            JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(responseData));
-            String code = jsonObject.getString("code");
+            int code = ResultCode.FAIL;
+            if (responseData != null) {
+                JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(responseData));
+                code = jsonObject.getInteger("code");
+            }
             HcRequestLog hcLog = new HcRequestLog();
             hcLog.setPath(path);
             hcLog.setReturnCode(code);
@@ -91,6 +104,7 @@ public class LogAspect {
 
     /**
      * 直接记录到数据库
+     *
      * @param hcLog
      */
     private void toDB(HcRequestLog hcLog) {
@@ -99,6 +113,7 @@ public class LogAspect {
 
     /**
      * 记录到消息队列
+     *
      * @param hcLog
      */
     private void toMQ(HcRequestLog hcLog) {
