@@ -6,8 +6,8 @@ import com.ds.nas.hc.api.dubbo.HcRequestLogProvider;
 import com.ds.nas.hc.dao.domain.HcRequestLog;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.constant.MqTopic;
+import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.result.ResultCode;
-import com.ds.nas.lib.common.result.ResultEnum;
 import com.ds.nas.lib.mq.producer.Producer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -53,17 +53,19 @@ public class LogAspect {
         String path = request.getServletPath();
         Object requestData = joinPoint.getArgs()[0];
         long start = System.currentTimeMillis();
-        //todo 有全局异常处理时{@see GlobalExceptionHandler} 执行中抛出异常会导致不往下走
-        Object responseData = null;
+        Object responseData;
+        long executionTime;
         try {
+            // 有全局异常处理时{@see GlobalExceptionHandler} 执行中抛出异常会导致不往下走
             responseData = joinPoint.proceed();
+            // 执行时长(ms)
+            executionTime = System.currentTimeMillis() - start;
+            saveLog(path, requestData, responseData, executionTime);
         } catch (Throwable e) {
+            executionTime = System.currentTimeMillis() - start;
+            saveLog(path, requestData, e.getMessage(), executionTime);
             // 继续抛出异常，交给GlobalExceptionHandler处理
             throw e;
-        } finally {
-            // 执行时长(ms)
-            long executionTime = System.currentTimeMillis() - start;
-            saveLog(path, requestData, responseData, executionTime);
         }
         return responseData;
     }
@@ -79,7 +81,8 @@ public class LogAspect {
     private void saveLog(String path, Object requestData, Object responseData, Long executionTime) {
         try {
             int code = ResultCode.FAIL;
-            if (responseData != null) {
+            // 如果是正常返回，获取返回码
+            if (responseData instanceof Result) {
                 JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(responseData));
                 code = jsonObject.getInteger("code");
             }
@@ -92,31 +95,35 @@ public class LogAspect {
             hcLog.setResponseIp(InetAddress.getLocalHost().getHostAddress());
             hcLog.setExecutionTime(executionTime);
             DBUtils.onCreate(hcLog);
-            toFile(hcLog);
+            logToDB(hcLog);
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());
         }
     }
 
-    private void toFile(HcRequestLog hcLog) {
+    /**
+     * 记录日志到日志文件
+     * @param hcLog
+     */
+    private void logToFile(HcRequestLog hcLog) {
         log.info("请求日志: {}", hcLog);
     }
 
     /**
-     * 直接记录到数据库
+     * 记录日志到数据库
      *
      * @param hcLog
      */
-    private void toDB(HcRequestLog hcLog) {
+    private void logToDB(HcRequestLog hcLog) {
         hcRequestLogProvider.save(hcLog);
     }
 
     /**
-     * 记录到消息队列
+     * 记录日志到消息队列
      *
      * @param hcLog
      */
-    private void toMQ(HcRequestLog hcLog) {
+    private void logToMQ(HcRequestLog hcLog) {
         producer.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(hcLog));
     }
 
