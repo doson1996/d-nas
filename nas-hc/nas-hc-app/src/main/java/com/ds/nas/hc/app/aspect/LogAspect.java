@@ -2,11 +2,13 @@ package com.ds.nas.hc.app.aspect;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.ds.nas.hc.api.dubbo.HcRequestLogProvider;
 import com.ds.nas.hc.dao.domain.HcRequestLog;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.constant.MqTopic;
 import com.ds.nas.lib.mq.producer.Producer;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -33,6 +35,9 @@ public class LogAspect {
     @Resource
     private HttpServletRequest request;
 
+    @DubboReference(version = "1.0")
+    private HcRequestLogProvider hcRequestLogProvider;
+
     @Resource
     @Qualifier("kafka")
     private Producer producer;
@@ -49,7 +54,7 @@ public class LogAspect {
         //todo 有全局异常处理时{@see GlobalExceptionHandler} 执行中抛出异常会导致不往下走
         Object responseData = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
-        log2Kafka(path, requestData, responseData, executionTime);
+        saveLog(path, requestData, responseData, executionTime);
         return responseData;
     }
 
@@ -61,7 +66,7 @@ public class LogAspect {
      * @param responseData  响应参数
      * @param executionTime 执行时间
      */
-    public void log2Kafka(String path, Object requestData, Object responseData, Long executionTime) {
+    private void saveLog(String path, Object requestData, Object responseData, Long executionTime) {
         try {
             JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(responseData));
             String code = jsonObject.getString("code");
@@ -74,10 +79,30 @@ public class LogAspect {
             hcLog.setResponseIp(InetAddress.getLocalHost().getHostAddress());
             hcLog.setExecutionTime(executionTime);
             DBUtils.onCreate(hcLog);
-            producer.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(hcLog));
+            toFile(hcLog);
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());
         }
+    }
+
+    private void toFile(HcRequestLog hcLog) {
+        log.info("请求日志: {}", hcLog);
+    }
+
+    /**
+     * 直接记录到数据库
+     * @param hcLog
+     */
+    private void toDB(HcRequestLog hcLog) {
+        hcRequestLogProvider.save(hcLog);
+    }
+
+    /**
+     * 记录到消息队列
+     * @param hcLog
+     */
+    private void toMQ(HcRequestLog hcLog) {
+        producer.send(MqTopic.HC_REQUEST_LOG_TOPIC, JSON.toJSONString(hcLog));
     }
 
     /**
