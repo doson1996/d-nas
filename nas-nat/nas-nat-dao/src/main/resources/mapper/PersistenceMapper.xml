@@ -12,7 +12,6 @@
         </foreach>
             ,PRIMARY KEY (`${tableInfo.pk}`)
         ) ENGINE = InnoDB
-          CHARACTER SET = utf8
           COMMENT = '${tableInfo.comment}';
     </update>
 
@@ -20,7 +19,7 @@
     <update id="createTableDpi" parameterType="java.lang.String">
         CREATE TABLE IF NOT EXISTS `${tableName}`
         (
-            `id`          bigint(11) auto_increment comment 'id',
+            `id`          int(11) unsigned auto_increment comment 'id',
             `batch_no`    varchar(20)          not null comment '批次号',
             `id_card`     varchar(18)          not null comment '身份证号码',
             `delete_flag` tinyint(1) default 0 not null comment '逻辑删除标志: 0.未删除 1.已删除',
@@ -31,7 +30,6 @@
             PRIMARY KEY (`id`),
             CONSTRAINT uk_batch_no_id_card UNIQUE (batch_no,id_card)
         ) ENGINE = InnoDB
-          CHARACTER SET = utf8
           COMMENT ='检测用户信息表';
     </update>
 

@@ -1,0 +1,22 @@
+# m1 mysql mac
+docker run -p 3306:3306 --name mysql  \
+ -v /Users/ds/docker/mysql/conf:/etc/mysql  \
+ -v /Users/ds/docker/mysql/logs:/var/log/mysql  \
+ -v /Users/ds/docker/mysql/data:/var/lib/mysql  \
+ -e MYSQL_ROOT_PASSWORD=123456  \
+ -d --restart=always mysql/mysql-server
+
+# m1 linux
+docker run -p 3306:3306 --name mysql  \
+ -v /usr/local/docker/mysql/conf:/etc/mysql  \
+ -v /usr/local/docker/mysql/logs:/var/log/mysql  \
+ -v /usr/local/docker/mysql/data:/var/lib/mysql  \
+ -e MYSQL_ROOT_PASSWORD=123456  \
+ -d --restart=always mysql/mysql-server
+
+
+# 第一次启动后外部连接不上
+docker exec -it mysql /bin/bash
+mysql -u root -p
+use mysql;
+update user set host = '%' where user = 'root' and host='localhost';
