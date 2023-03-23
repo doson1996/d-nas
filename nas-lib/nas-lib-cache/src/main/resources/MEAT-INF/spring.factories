@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.ds.lib.cache.CacheAutoConfiguration
+com.ds.nas.lib.cache.config.CacheAutoConfiguration

@@ -31,26 +31,6 @@ spring:
         max-idle: 8
         # 连接池中的最小空闲连接 默认 0
         min-idle: 0
-  kafka:
-    bootstrap-servers: ${env.host}:9092
-    producer: # 生产者
-      retries: 3 # 设置大于0的值，则客户端会将发送失败的记录重新发送
-      batch-size: 16384
-      buffer-memory: 33554432
-      acks: 1
-      # 指定消息key和消息体的编解码方式
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    consumer:
-      group-id: gid-gateway
-      enable-auto-commit: false
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    listener:
-      # 手动调用Acknowledgment.acknowledge()后立即提交，一般使用这种
-      # MANUAL_IMMEDIATE
-      ack-mode: manual_immediate
   cloud:
     nacos:
       discovery:
@@ -83,10 +63,6 @@ spring:
             - Path=/api/nat/**
           filters:
             - StripPrefix=2
-  # json 时间格式化
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT+8
 
 management:
   endpoints:

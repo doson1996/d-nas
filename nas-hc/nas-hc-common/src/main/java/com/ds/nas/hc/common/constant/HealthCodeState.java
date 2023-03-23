@@ -1,4 +1,4 @@
-package com.ds.nas.lib.common.constant;
+package com.ds.nas.hc.common.constant;
 
 /**
  * @author ds
