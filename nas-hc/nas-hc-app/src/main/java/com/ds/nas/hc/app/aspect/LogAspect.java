@@ -95,7 +95,7 @@ public class LogAspect {
             hcLog.setResponseIp(InetAddress.getLocalHost().getHostAddress());
             hcLog.setExecutionTime(executionTime);
             DBUtils.onCreate(hcLog);
-            logToDB(hcLog);
+            logToMQ(hcLog);
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());
         }

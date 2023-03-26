@@ -1,0 +1,44 @@
+version: '2'
+services:
+  zookeeper:
+    image: zookeeper:3.6
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    volumes:
+      - ./zookeeper/data:/data
+      - ./zookeeper/data/datalog:/data/datalog
+      - ./zookeeper/datalog:/datalog
+    restart: always
+  kafka:
+    image: cppla/kafka-docker:arm
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      # 192.168.64.4 换成虚拟机ip
+      - KAFKA_ADVERTISED_HOST_NAME=192.168.64.4
+      - KAFKA_ZOOKEEPER_CONNECT=192.168.64.4:2181
+      - KAFKA_ADVERTISED_PORT=9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.64.4:9092
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./kafka:/kafka
+    restart: always
+    depends_on:
+      - zookeeper
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    ports:
+      - "9091:8080"
+    restart: always
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=192.168.64.4:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=192.168.64.4:2181
+      - KAFKA_CLUSTERS_0_READONLY=true
+    depends_on:
+      - kafka
+      - zookeeper
