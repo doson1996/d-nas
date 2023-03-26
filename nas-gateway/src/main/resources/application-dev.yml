@@ -1,0 +1,71 @@
+server:
+  port: 9001
+
+#开发环境
+env:
+  host: ds.com
+
+spring:
+  application:
+    name: nas-gateway
+  #Redis 配置
+  redis:
+    # Redis服务器地址
+    host: ${env.host}
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 123456
+    # 链接超时时间 单位 ms（毫秒）
+    timeout: 3000
+    # Redis 线程池设置
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: 3000
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 0
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: ${env.host}:8848
+        username: nacos
+        password: nacos
+    #sentinel
+    sentinel:
+      transport:
+        port: ${server.port}
+        dashboard: ${env.host}:8800
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+      routes:
+        # hc
+        - id: nas-hc-route
+          uri: lb://nas-hc
+          predicates:
+            - Path=/api/hc/**
+          filters:
+            - StripPrefix=2
+        # nat
+        - id: nas-nat-route
+          uri: lb://nas-nat
+          predicates:
+            - Path=/api/nat/**
+          filters:
+            - StripPrefix=2
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

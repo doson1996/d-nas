@@ -1,0 +1,17 @@
+server:
+  port: 8121
+
+#开发环境
+env:
+  host: ds.com
+
+spring:
+  application:
+    name: nas-cloud-batch
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: ${env.host}:8848
+        username: nacos
+        password: nacos

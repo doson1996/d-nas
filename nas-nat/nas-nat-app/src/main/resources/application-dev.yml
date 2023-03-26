@@ -17,7 +17,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://${env.host}:3306/d_nas_nat?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: test@123
+    password: 123456
     hikari:
       pool-name: nas-nat-pool
       #最小空闲连接数 <类似于线程池的核心线程数>
@@ -37,7 +37,7 @@ spring:
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
-    password: msj@ks12d3
+    password: 123456
     # 链接超时时间 单位 ms（毫秒）
     timeout: 3000
     # Redis 线程池设置
