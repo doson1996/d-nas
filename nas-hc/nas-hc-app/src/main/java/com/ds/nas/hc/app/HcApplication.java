@@ -34,6 +34,7 @@ public class HcApplication {
         log.info("HcApplication initiate...");
         SpringApplication.run(HcApplication.class, args);
     }
+
 }
 
 

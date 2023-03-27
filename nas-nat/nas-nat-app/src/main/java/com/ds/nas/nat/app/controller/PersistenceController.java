@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 /**
  * @author ds
  * @date 2022/12/9
- * @description
+ * @description todo 拆分，与业务隔离,（职责、db nat_dml）
  */
 @RestController
 @RequestMapping("persistence")
@@ -29,6 +29,5 @@ public class PersistenceController {
     public Result<StringResponse> createTableDpi() {
         return persistenceService.createTableDpi();
     }
-
 
 }
