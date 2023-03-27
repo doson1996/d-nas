@@ -281,19 +281,4 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <!-- 发布maven私服 -->
-    <distributionManagement>
-        <repository>
-            <id>maven-releases</id>
-            <name>nexus-releases</name>
-            <url>http://dy.com:8011/nexus/repository/maven-releases/</url>
-        </repository>
-
-        <snapshotRepository>
-            <id>maven-snapshots</id>
-            <name>nexus-snapshots</name>
-            <url>http://dy.com:8011/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
 </project>
