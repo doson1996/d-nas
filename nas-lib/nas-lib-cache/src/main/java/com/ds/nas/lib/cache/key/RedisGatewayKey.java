@@ -22,6 +22,6 @@ public interface RedisGatewayKey extends RedisAppKey {
     /**
      * 忽略认证请求路径key
      */
-    String GATEWAY_IGNORE_PATH_SET_KEY = GATEWAY_KEY_PREFIX + "ignorePath" + SEPARATOR;
+    String GATEWAY_IGNORE_PATH_SET_KEY = GATEWAY_KEY_PREFIX + "ignorePath";
 
 }

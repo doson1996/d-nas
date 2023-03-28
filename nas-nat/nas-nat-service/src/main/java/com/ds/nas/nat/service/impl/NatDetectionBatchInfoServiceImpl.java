@@ -85,7 +85,9 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         detectionBatchInfo.setType(request.getType());
 
         LambdaUpdateWrapper<NatDetectionBatchInfo> wrapper = new LambdaUpdateWrapper<>();
-        wrapper.eq(NatDetectionBatchInfo::getBatchNo, request.getBatchNo());
+        wrapper.eq(NatDetectionBatchInfo::getBatchNo, request.getBatchNo())
+                // 用于判断批次是否提交，禁止重复提交
+                .isNull(NatDetectionBatchInfo::getType);
         if (update(detectionBatchInfo, wrapper)) {
             return Result.ok("提交批次[" + request.getBatchNo() + "]成功!",
                     StringResponse.builder().withData(request.getBatchNo()).build());
@@ -103,7 +105,11 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
         detectionBatchInfo.setDetectionMechanism(request.getDetectionMechanism());
 
         LambdaUpdateWrapper<NatDetectionBatchInfo> wrapper = new LambdaUpdateWrapper<>();
-        wrapper.eq(NatDetectionBatchInfo::getBatchNo, request.getBatchNo());
+        wrapper.eq(NatDetectionBatchInfo::getBatchNo, request.getBatchNo())
+                // 用于判断批次是否提交，提交->检测
+                .isNotNull(NatDetectionBatchInfo::getType)
+                // 用户判断批次是否已检测，禁止重复检测
+                .isNull(NatDetectionBatchInfo::getDetectionTime);
         if (update(detectionBatchInfo, wrapper)) {
             updateHealthCode(request.getBatchNo(), request.getDetectionResult());
             return Result.ok("检测批次[" + request.getBatchNo() + "]成功!",
@@ -127,9 +133,10 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
             request.setLastNucleicAcidTime(new Date());
             request.setIdCards(idCards);
             Result<PersonalInfoBatchUpdateResponse> result = personalInfoProvider.updateByIdCards(request);
-            log.info("updateHealthCode result = {}", result);
+            log.info("{}.updateHealthCode result = {}", this.getClass().getSimpleName(), result);
         } catch (Exception e) {
-            log.error("根据批次号更新异常: {}", e.getMessage());
+            log.error("{}.updateHealthCode ex, data: {}, ex: {}",
+                    this.getClass().getSimpleName(), batchNo, e.getMessage());
         }
     }
 
@@ -139,7 +146,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
      * @return 批次号
      */
     private String generateBatchNo() {
-        String batchNo = "";
+        String batchNo;
         String today = DateUtil.today().replaceAll("-", "");
         String key = RedisNatKey.BATCH_SEQUENCE_KEY + today;
         try {

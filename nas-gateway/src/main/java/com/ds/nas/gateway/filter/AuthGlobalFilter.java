@@ -48,7 +48,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered, AuthGlobalConsta
         String path = request.getURI().getPath();
         // 忽略鉴权路径判断
         boolean ignorePath = ignorePath(path);
-        if (!ignorePath){
+        if (!ignorePath) {
             List<String> list = headers.get("token");
             if (list == null) {
                 return intercept(exchange);
@@ -61,7 +61,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered, AuthGlobalConsta
                 return intercept(exchange);
             }
             //如果是管理员用户
-            if (token.startsWith("ADMIN-TOKEN")){
+            if (token.startsWith("ADMIN-TOKEN")) {
                 JSONObject jsonObject = JSONUtil.parseObj(userJson);
             }
         }
@@ -70,16 +70,23 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered, AuthGlobalConsta
     }
 
     /**
-     * 忽略路径
+     * 是否忽略认证路径
+     *
      * @param path
      * @return
      */
     private boolean ignorePath(String path) {
+        // 当配置有 /*时，所有请求均不认证
+        if (redisUtil.sIsMember(GATEWAY_IGNORE_PATH_SET_KEY, "/*")) {
+            return true;
+        }
+
         return redisUtil.sIsMember(GATEWAY_IGNORE_PATH_SET_KEY, path);
     }
 
     /**
      * 拦截请求，直接返回
+     *
      * @param exchange
      * @return
      */
