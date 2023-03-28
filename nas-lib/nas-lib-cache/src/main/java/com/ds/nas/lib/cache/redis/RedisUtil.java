@@ -255,9 +255,8 @@ public class RedisUtil {
     /**
      * 设置ASCII码, 字符串'a'的ASCII码是97, 转为二进制是'01100001', 此方法是将二进制第offset位值变为value
      *
-     * @param key 位置
-     * @param value
-     *            值,true为1, false为0
+     * @param key   位置
+     * @param value 值,true为1, false为0
      * @return
      */
     public boolean setBit(String key, long offset, boolean value) {
@@ -269,11 +268,9 @@ public class RedisUtil {
      *
      * @param key
      * @param value
-     * @param timeout
-     *            过期时间
-     * @param unit
-     *            时间单位, 天:TimeUnit.DAYS 小时:TimeUnit.HOURS 分钟:TimeUnit.MINUTES
-     *            秒:TimeUnit.SECONDS 毫秒:TimeUnit.MILLISECONDS
+     * @param timeout 过期时间
+     * @param unit    时间单位, 天:TimeUnit.DAYS 小时:TimeUnit.HOURS 分钟:TimeUnit.MINUTES
+     *                秒:TimeUnit.SECONDS 毫秒:TimeUnit.MILLISECONDS
      */
     public void setEx(String key, String value, long timeout, TimeUnit unit) {
         stringRedisTemplate.opsForValue().set(key, value, timeout, unit);
@@ -284,7 +281,7 @@ public class RedisUtil {
      *
      * @param key
      * @param value
-     * @return 之前已经存在返回false,不存在返回true
+     * @return 之前已经存在返回false, 不存在返回true
      */
     public boolean setIfAbsent(String key, String value) {
         return stringRedisTemplate.opsForValue().setIfAbsent(key, value);
@@ -295,8 +292,7 @@ public class RedisUtil {
      *
      * @param key
      * @param value
-     * @param offset
-     *            从指定位置开始覆写
+     * @param offset 从指定位置开始覆写
      */
     public void setRange(String key, String value, long offset) {
         stringRedisTemplate.opsForValue().set(key, value, offset);
@@ -325,7 +321,7 @@ public class RedisUtil {
      * 同时设置一个或多个 key-value 对，当且仅当所有给定 key 都不存在
      *
      * @param maps
-     * @return 之前已经存在返回false,不存在返回true
+     * @return 之前已经存在返回false, 不存在返回true
      */
     public boolean multiSetIfAbsent(Map<String, String> maps) {
         return stringRedisTemplate.opsForValue().multiSetIfAbsent(maps);
@@ -553,7 +549,6 @@ public class RedisUtil {
     }
 
     /**
-     *
      * @param key
      * @param value
      * @return
@@ -563,7 +558,6 @@ public class RedisUtil {
     }
 
     /**
-     *
      * @param key
      * @param value
      * @return
@@ -596,7 +590,6 @@ public class RedisUtil {
     }
 
     /**
-     *
      * @param key
      * @param value
      * @return
@@ -606,7 +599,6 @@ public class RedisUtil {
     }
 
     /**
-     *
      * @param key
      * @param value
      * @return
@@ -616,7 +608,6 @@ public class RedisUtil {
     }
 
     /**
-     *
      * @param key
      * @param value
      * @return
@@ -652,8 +643,7 @@ public class RedisUtil {
      * 通过索引设置列表元素的值
      *
      * @param key
-     * @param index
-     *            位置
+     * @param index 位置
      * @param value
      */
     public void lSet(String key, long index, String value) {
@@ -674,8 +664,8 @@ public class RedisUtil {
      * 移出并获取列表的第一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止
      *
      * @param key
-     * @param timeout  等待时间
-     * @param unit     时间单位
+     * @param timeout 等待时间
+     * @param unit    时间单位
      * @return
      */
     public String lBLeftPop(String key, long timeout, TimeUnit unit) {
@@ -696,8 +686,8 @@ public class RedisUtil {
      * 移出并获取列表的最后一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止
      *
      * @param key
-     * @param timeout  等待时间
-     * @param unit     时间单位
+     * @param timeout 等待时间
+     * @param unit    时间单位
      * @return
      */
     public String lBRightPop(String key, long timeout, TimeUnit unit) {
@@ -735,9 +725,8 @@ public class RedisUtil {
      * 删除集合中值等于value得元素
      *
      * @param key
-     * @param index
-     *            index=0, 删除所有值等于value的元素; index>0, 从头部开始删除第一个值等于value的元素;
-     *            index<0, 从尾部开始删除第一个值等于value的元素;
+     * @param index index=0, 删除所有值等于value的元素; index>0, 从头部开始删除第一个值等于value的元素;
+     *              index<0, 从尾部开始删除第一个值等于value的元素;
      * @param value
      * @return
      */
@@ -1021,7 +1010,6 @@ public class RedisUtil {
     }
 
     /**
-     *
      * @param key
      * @param options
      * @return
@@ -1104,10 +1092,8 @@ public class RedisUtil {
      * 获取集合的元素, 从小到大排序
      *
      * @param key
-     * @param start
-     *            开始位置
-     * @param end
-     *            结束位置, -1查询所有
+     * @param start 开始位置
+     * @param end   结束位置, -1查询所有
      * @return
      */
     public Set<String> zRange(String key, long start, long end) {
@@ -1130,10 +1116,8 @@ public class RedisUtil {
      * 根据Score值查询集合元素
      *
      * @param key
-     * @param min
-     *            最小值
-     * @param max
-     *            最大值
+     * @param min 最小值
+     * @param max 最大值
      * @return
      */
     public Set<String> zRangeByScore(String key, double min, double max) {
@@ -1144,10 +1128,8 @@ public class RedisUtil {
      * 根据Score值查询集合元素, 从小到大排序
      *
      * @param key
-     * @param min
-     *            最小值
-     * @param max
-     *            最大值
+     * @param min 最小值
+     * @param max 最大值
      * @return
      */
     public Set<ZSetOperations.TypedTuple<String>> zRangeByScoreWithScores(String key, double min, double max) {
@@ -1155,7 +1137,6 @@ public class RedisUtil {
     }
 
     /**
-     *
      * @param key
      * @param min
      * @param max
@@ -1216,7 +1197,6 @@ public class RedisUtil {
     }
 
     /**
-     *
      * @param key
      * @param min
      * @param max
@@ -1344,15 +1324,12 @@ public class RedisUtil {
     }
 
     /**
-     * 匹配获取键值对，ScanOptions.NONE为获取全部键值对；ScanOptions.scanOptions().match("C").build()匹配获取键位map1的键值对,不能模糊匹配。
-     *
-     * @param key
-     * @param options
-     * @return
+     * redis 发布
+     * @param channel
+     * @param message
      */
-    public Cursor<ZSetOperations.TypedTuple<String>> zScan(String key, ScanOptions options) {
-        return stringRedisTemplate.opsForZSet().scan(key, options);
-
+    public void publish(String channel, Object message) {
+        stringRedisTemplate.convertAndSend(channel, message);
     }
 
 }

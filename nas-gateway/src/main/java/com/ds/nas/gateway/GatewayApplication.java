@@ -11,7 +11,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @description 网关
  */
 @EnableDiscoveryClient
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class},
+        scanBasePackages = {
+                "com.ds.nas.gateway",
+                "com.ds.nas.lib.cache"})
 public class GatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
