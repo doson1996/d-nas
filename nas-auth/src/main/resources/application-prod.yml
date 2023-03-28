@@ -1,0 +1,110 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: nas-auth
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://dy.com:3306/d_nas_auth?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: test@123
+    hikari:
+      pool-name: nas-auth-pool
+      #最小空闲连接数 <类似于线程池的核心线程数>
+      minimum-idle: 5
+      #最大连接数 <类似于线程池的最大线程数>
+      maximum-pool-size: 20
+      # 监控
+      register-mbeans: false
+      # 项目启动时就建立连接，避免第一次使用数据库时过慢
+      connection-init-sql: select 1 from dual;
+  #Redis 配置
+  redis:
+    # Redis服务器地址
+    host: dy.com
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: test@123
+    # 链接超时时间 单位 ms（毫秒）
+    timeout: 3000
+    # Redis 线程池设置
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: 3000
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 0
+  kafka:
+    bootstrap-servers: dy.com:9092
+    producer: # 生产者
+      retries: 3 # 设置大于0的值，则客户端会将发送失败的记录重新发送
+      batch-size: 16384
+      buffer-memory: 33554432
+      acks: 1
+      # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: gid-auth
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual_immediate
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: dy.com:8848
+        username: nacos
+        password: nacos
+    #sentinel
+    sentinel:
+      transport:
+        port: ${server.port}
+        dashboard: dy.com:8800
+  # json 时间格式化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+dubbo:
+  application:
+    name: ${spring.application.name}
+  protocol:    #Dubbo 服务暴露的协议配置，其中子属性 name 为协议名称，port 为协议端口（ -1 表示自增端口，从 20880 开始）
+    name: dubbo
+    port: -1  #dubbo协议缺省端口为20880，rmi协议缺省端口为1099，http和hessian协议缺省端口为80；如果没有配置port，则自动采用默认端口，如果配置为-1，则会分配一个没有被占用的端口。Dubbo 2.4.0+，分配的端口在协议缺省端口的基础上增长，确保端口段可控
+  registry:
+    #dubbo服务注册端口，注册中心服务器地址，如果地址没有端口缺省为9090，同一集群内的多个地址用逗号分隔，如：ip:port,ip:port
+    #其中前缀spring-cloud说明：挂载到 Spring Cloud注册中心
+    address: spring-cloud://dy.com:8848/?username=nacos&password=nacos
+    #check: false  #关闭注册中心是否启动的相关检查,false表示不检查注册中心是否启动，就不会报错
+  cloud:
+    subscribed-services: nas-nat
+  consumer:
+    check: false  #关闭订阅服务是否启动的检查【检查时，没有服务提供者会报错】
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleteFlag  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  #mybatis-plus配置控制台打印完整带参数SQL语句
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

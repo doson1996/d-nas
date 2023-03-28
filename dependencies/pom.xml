@@ -38,6 +38,7 @@
 
     <!-- 模块 -->
     <modules>
+        <module>../nas-auth</module>
         <module>../nas-cloud</module>
         <module>../nas-gateway</module>
         <module>../nas-hc</module>

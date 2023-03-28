@@ -3,7 +3,7 @@ package com.ds.nas.gateway.filter;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.ds.nas.lib.cache.redis.RedisKey;
+import com.ds.nas.lib.cache.key.RedisGatewayKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.result.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,6 @@ import reactor.core.publisher.Mono;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,19 +31,13 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class AuthGlobalFilter implements GlobalFilter, Ordered, AuthGlobalConstant, RedisKey {
+public class AuthGlobalFilter implements GlobalFilter, Ordered, AuthGlobalConstant, RedisGatewayKey {
 
     @Resource
     private RedisUtil redisUtil;
 
-    private List<String> ignorePathList;
-
     @PostConstruct
     private void init() {
-        ignorePathList = new ArrayList<>();
-        ignorePathList.add(ADMIN_LOGIN_PATH);
-        ignorePathList.add(USER_LOGIN_PATH);
-
         redisUtil.sAdd(GATEWAY_IGNORE_PATH_SET_KEY, ADMIN_LOGIN_PATH, USER_LOGIN_PATH);
     }
 
@@ -83,7 +76,6 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered, AuthGlobalConsta
      */
     private boolean ignorePath(String path) {
         return redisUtil.sIsMember(GATEWAY_IGNORE_PATH_SET_KEY, path);
-      //  return ignorePathList.contains(path);
     }
 
     /**

@@ -5,7 +5,6 @@ import cn.hutool.core.util.IdcardUtil;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ds.nas.hc.common.constant.CacheKey;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
 import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
@@ -17,6 +16,7 @@ import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
+import com.ds.nas.lib.cache.key.RedisHcKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.request.RequestCheck;
@@ -106,7 +106,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         if (!IdcardUtil.isValidCard(idCard)) {
             throw new BusinessException("身份证号码无效!");
         }
-        String key = CacheKey.HEALTH_CODE_KEY + idCard;
+        String key = RedisHcKey.HEALTH_CODE_KEY + idCard;
         HcPersonalInfo hcPersonalInfo;
         String hcPersonalInfoJson = redisUtil.get(key);
         if (StringUtils.isBlank(hcPersonalInfoJson)) {
@@ -155,7 +155,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     private void deleteHcCache(List<String> idCards) {
         List<String> keys = new ArrayList<>();
         for (String idCard : idCards) {
-            keys.add(CacheKey.HEALTH_CODE_KEY + idCard);
+            keys.add(RedisHcKey.HEALTH_CODE_KEY + idCard);
         }
         //删除缓存
         redisUtil.delete(keys);

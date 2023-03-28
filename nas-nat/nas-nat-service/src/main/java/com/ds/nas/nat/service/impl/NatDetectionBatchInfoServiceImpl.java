@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ds.nas.lib.cache.key.RedisNatKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.hc.api.dubbo.PersonalInfoProvider;
 import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
@@ -13,7 +14,7 @@ import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
-import com.ds.nas.nat.common.constant.CacheKey;
+import com.ds.nas.nat.common.constant.NatConstant;
 import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.ds.nas.nat.dao.mapper.NatDetectionBatchInfoMapper;
@@ -39,7 +40,7 @@ import java.util.List;
 @Slf4j
 @Service
 public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBatchInfoMapper, NatDetectionBatchInfo>
-        implements NatDetectionBatchInfoService {
+        implements NatDetectionBatchInfoService, NatConstant {
 
     @Resource
     RedisUtil redisUtil;
@@ -52,11 +53,6 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
 
     @Resource
     private NatDetectionPersonalInfoMapper detectionPersonalInfoMapper;
-
-    /**
-     * 每日批次起始值
-     */
-    private static final String BATCH_SEQUENCE_MIN = "0000000000";
 
     @Override
     public Result<StringResponse> getBatchNo() {
@@ -145,7 +141,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
     private String generateBatchNo() {
         String batchNo = "";
         String today = DateUtil.today().replaceAll("-", "");
-        String key = CacheKey.BATCH_SEQUENCE_KEY + today;
+        String key = RedisNatKey.BATCH_SEQUENCE_KEY + today;
         try {
             String sequence = redisUtil.get(key);
             if (StringUtils.isBlank(sequence)) {
@@ -158,7 +154,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
             if (!today.equals(sequence.substring(0, today.length()))) {
                 throw new BusinessException("当日批次号已用完!");
             }
-            batchNo = "cd" + sequence;
+            batchNo = BATCH_PREFIX + sequence;
         } catch (Exception e) {
             log.error("生成批次号异常：{}", e.getMessage());
             // 抛出异常给全局异常处理
