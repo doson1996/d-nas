@@ -11,9 +11,17 @@
         <relativePath>../dependencies/pom.xml</relativePath>
     </parent>
 
-    <groupId>org.example</groupId>
     <artifactId>nas-auth</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>nas-auth-api</module>
+        <module>nas-auth-app</module>
+        <module>nas-auth-dao</module>
+        <module>nas-auth-common</module>
+        <module>nas-auth-service</module>
+    </modules>
 
     <dependencies>
         <dependency>
@@ -29,16 +37,6 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ds.nas</groupId>
-            <artifactId>nas-lib-common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ds.nas</groupId>
-            <artifactId>nas-lib-cache</artifactId>
         </dependency>
     </dependencies>
 

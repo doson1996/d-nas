@@ -92,6 +92,37 @@
                 <version>${rversion}</version>
             </dependency>
 
+            <!-- auth -->
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-auth-api</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-auth-app</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-auth-common</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-auth-dao</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-auth-service</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
             <!-- hc -->
             <dependency>
                 <groupId>com.ds.nas</groupId>
