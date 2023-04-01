@@ -20,5 +20,10 @@
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-lib-common</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.ds</groupId>
+            <artifactId>swagger-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 </project>

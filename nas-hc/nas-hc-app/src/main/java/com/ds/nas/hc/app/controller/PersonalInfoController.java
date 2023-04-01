@@ -8,6 +8,7 @@ import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
 import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
 import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class PersonalInfoController {
      * @param request 入参
      * @return
      */
+    @ApiOperation("注册")
     @PostMapping("register")
     public Result<PersonalInfoRegisterResponse> register(@RequestBody PersonalInfoRegisterRequest request) {
         return hcPersonalInfoService.register(request);
@@ -42,6 +44,7 @@ public class PersonalInfoController {
      * @param request 入参
      * @return
      */
+    @ApiOperation("根据身份证号更新")
     @PostMapping("updateByIdCard")
     public Result<PersonalInfoUpdateResponse> updateByIdCard(@RequestBody PersonalInfoUpdateRequest request) {
         return hcPersonalInfoService.updateByIdCard(request);
@@ -52,6 +55,7 @@ public class PersonalInfoController {
      * @param request 入参
      * @return
      */
+    @ApiOperation("根据身份证号批量更新")
     @PostMapping("updateByIdCards")
     public Result<PersonalInfoBatchUpdateResponse> updateByIdCards(@RequestBody PersonalInfoBatchUpdateRequest request) {
         return hcPersonalInfoService.updateByIdCards(request);

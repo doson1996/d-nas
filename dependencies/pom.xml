@@ -249,10 +249,27 @@
                 <artifactId>log4j-slf4j2-impl</artifactId>
                 <version>${log4j2.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.ds</groupId>
+                <artifactId>swagger-spring-boot-starter</artifactId>
+                <version>${rversion}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <repositories>
+        <repository>
+            <id>nexus</id>
+            <url>http://ds.com:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
         <repository>
             <id>public</id>
             <url>https://maven.aliyun.com/repository/public</url>
@@ -311,5 +328,20 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <!-- 发布maven私服 -->
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <name>nexus-releases</name>
+            <url>http://ds.com:8081/repository/maven-releases/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <name>nexus-snapshots</name>
+            <url>http://ds.com:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
