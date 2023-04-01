@@ -17,9 +17,10 @@
     <description>nas cloud</description>
 
     <modules>
+        <module>nas-cloud-batch</module>
         <module>nas-cloud-canal</module>
         <module>nas-cloud-mq</module>
-        <module>nas-cloud-batch</module>
+        <module>nas-cloud-log</module>
     </modules>
 
     <dependencies>

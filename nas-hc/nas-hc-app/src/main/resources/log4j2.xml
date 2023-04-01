@@ -1,42 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <!-- 日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+    <Properties>
+        <!-- 彩色日志,格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符 -->
+        <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
+        <property name="LOG_PATTERN"
+                  value="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx" />
+        <!-- 定义日志存储的路径，不要配置相对路径 -->
+        <property name="FILE_PATH" value="./logs/hc"/>
+    </Properties>
+    <!--Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。-->
+    <!--然后定义loggers，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
-        <!--
-            level指定日志级别，从低到高的优先级：
-                TRACE < DEBUG < INFO < WARN < ERROR < FATAL
-                trace：追踪，是最低的日志级别，相当于追踪程序的执行
-                debug：调试，一般在开发中，都将其设置为最低的日志级别
-                info：信息，输出重要的信息，使用较多
-                warn：警告，输出警告的信息
-                error：错误，输出错误信息
-                fatal：严重错误
-        -->
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息 开启: additivity="false"-->
+        <logger name="org.mybatis" level="info" additivity="false">
+<!--            <AppenderRef ref="console-log"/>-->
+        </logger>
+
         <root level="INFO">
-            <appender-ref ref="hc-log"/>
-            <appender-ref ref="test-log"/>
             <appender-ref ref="console-log"/>
+            <!--app日志-->
+            <appender-ref ref="hc-app"/>
+            <!--测试日志-->
+            <appender-ref ref="hc-test"/>
+            <!--异常日志-->
+            <appender-ref ref="hc-error"/>
         </root>
     </loggers>
 
     <appenders>
         <!--输出日志信息到控制台-->
         <console name="console-log" target="SYSTEM_OUT">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
             <!--控制日志输出的格式-->
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss SSS} [%t] %-3level %logger{1024} - %msg%n"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
         </console>
-
-        <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，适合临时测试用-->
-        <File name="test-log" fileName="../log/hc-app/test.log" append="false">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
-        </File>
 
         <!-- 这个会打印出所有的信息，
             每次大小超过size，
             则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，
             作为存档-->
-        <RollingFile name="hc-log" fileName="../log/hc-app/app.log"
+        <RollingFile name="hc-app" fileName="${FILE_PATH}/hc-app.log"
                      filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
-            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="50MB"/>
+            <!-- DefaultRolloverStrategy属性如不设置，
+            则默认为最多同一文件夹下7个文件，这里设置了20 -->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <!-- 这个会打印出所有的信息，
+            每次大小超过size，
+            则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，
+            作为存档-->
+        <RollingFile name="hc-request" fileName="${FILE_PATH}/hc-request.log"
+                     filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="50MB"/>
+            <!-- DefaultRolloverStrategy属性如不设置，
+            则默认为最多同一文件夹下7个文件，这里设置了20 -->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+
+        <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，适合临时测试用-->
+        <File name="hc-test" fileName="${FILE_PATH}/hc-test.log" append="false">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </File>
+
+        <!-- 这个会打印出所有的error信息，
+            每次大小超过size，
+            则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，
+            作为存档-->
+        <RollingFile name="hc-error" fileName="${FILE_PATH}/hc-error.log"
+                     filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
             <SizeBasedTriggeringPolicy size="50MB"/>
             <!-- DefaultRolloverStrategy属性如不设置，
             则默认为最多同一文件夹下7个文件，这里设置了20 -->

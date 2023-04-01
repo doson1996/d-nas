@@ -1,5 +1,6 @@
 package com.ds.nas.hc.app;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @date 2022/12/4
  * @description
  */
+@Slf4j
 @EnableDubbo
 @EnableFeignClients
 @EnableDiscoveryClient
@@ -28,10 +30,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
         "com.ds.nas.hc.service"})
 public class HcApplication {
 
-    private static final Logger log = LoggerFactory.getLogger("app");
-
     public static void main(String[] args) {
-        log.info("HcApplication initiate...");
+        log.info("HcApplication Starting...");
         SpringApplication.run(HcApplication.class, args);
     }
 

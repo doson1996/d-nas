@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 /**
  * @author ds
  * @date 2022/12/4
- * @description 健康码
+ * @description health-code
  */
 @RestController
 @RequestMapping("health-code")
@@ -23,7 +23,7 @@ public class HealthCodeController {
     private HcPersonalInfoService hcPersonalInfoService;
 
     /**
-     * 申领健康码(废弃)
+     * 申领(废弃)
      *
      * @param request 入参
      * @return 出参
@@ -35,7 +35,7 @@ public class HealthCodeController {
     }
 
     /**
-     * 查询健康码
+     * 查询
      * //todo 可以单独拆分成服务部署
      *
      * @param request 入参

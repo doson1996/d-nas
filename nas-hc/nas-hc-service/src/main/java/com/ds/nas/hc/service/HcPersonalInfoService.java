@@ -20,7 +20,7 @@ import com.ds.nas.lib.common.result.Result;
 public interface HcPersonalInfoService extends IService<HcPersonalInfo> {
 
     /**
-     * 根据身份证号查询健康码
+     * 根据身份证号查询
      *
      * @param request
      * @return

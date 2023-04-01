@@ -9,13 +9,13 @@ import com.ds.nas.lib.common.constant.MqTopic;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.result.ResultCode;
 import com.ds.nas.lib.mq.producer.Producer;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.dubbo.container.spring.SpringContainer;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -29,11 +29,12 @@ import java.net.InetAddress;
  * @date 2023/1/22
  * @description 日志记录
  */
-@Slf4j
 @Order(50)
 @Aspect
 @Component
 public class LogAspect {
+
+    private static final Logger log = LoggerFactory.getLogger("hc-request");
 
     @Resource
     private HttpServletRequest request;
