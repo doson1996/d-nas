@@ -3,7 +3,7 @@ package com.ds.nas.lib.common.log;
 /**
  * @author ds
  * @date 2023/1/20
- * @description
+ * @description 记录日志类型
  */
 public enum LogType {
 
@@ -15,5 +15,10 @@ public enum LogType {
     /**
      * 文件
      */
-    FILE
+    FILE,
+
+    /**
+     * 消息队列
+     */
+    MQ
 }

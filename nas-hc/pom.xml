@@ -14,7 +14,7 @@
     <version>1.0.0-RELEASE</version>
     <packaging>pom</packaging>
     <name>nas-hc</name>
-    <description>健康码系统</description>
+    <description>hc</description>
 
     <modules>
         <module>nas-hc-app</module>

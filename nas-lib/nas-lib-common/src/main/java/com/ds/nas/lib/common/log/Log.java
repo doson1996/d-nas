@@ -15,6 +15,12 @@ import java.lang.annotation.Target;
 public @interface Log {
 
     /**
+     * 日志内容
+     * @return
+     */
+    String value() default "";
+
+    /**
      * 记录日志备注
      * @return
      */
@@ -24,7 +30,14 @@ public @interface Log {
      * 记录日志类型
      * @return DB 数据库
      *         FILE 文件
+     *         MQ 消息队列
      */
-    LogType type() default LogType.DB;
+    LogType type() default LogType.FILE;
+
+    /**
+     * 指定打印的日志 logger name
+     * @return
+     */
+    String name() default  "";
 
 }

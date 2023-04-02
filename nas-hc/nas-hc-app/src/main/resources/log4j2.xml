@@ -6,8 +6,9 @@
         <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
         <property name="LOG_PATTERN"
                   value="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx" />
+        <property name="MODULE_NAME" value="hc"/>
         <!-- 定义日志存储的路径，不要配置相对路径 -->
-        <property name="FILE_PATH" value="./logs/hc"/>
+        <property name="FILE_PATH" value="./logs/${MODULE_NAME}"/>
     </Properties>
     <!--Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。-->
     <!--然后定义loggers，只有定义了logger并引入的appender，appender才会生效-->
@@ -20,12 +21,18 @@
         <root level="INFO">
             <appender-ref ref="console-log"/>
             <!--app日志-->
-            <appender-ref ref="hc-app"/>
+            <appender-ref ref="${MODULE_NAME}-app"/>
             <!--测试日志-->
-            <appender-ref ref="hc-test"/>
+            <appender-ref ref="${MODULE_NAME}-test"/>
             <!--异常日志-->
-            <appender-ref ref="hc-error"/>
+            <appender-ref ref="${MODULE_NAME}-error"/>
         </root>
+
+        <!-- 自定义logger，用于代码中的日志单独打印 -->
+        <logger name="${MODULE_NAME}-request" additivity="true" level="info">
+            <appender-ref ref="${MODULE_NAME}-request" level="INFO" />
+        </logger>
+
     </loggers>
 
     <appenders>
@@ -41,7 +48,7 @@
             每次大小超过size，
             则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，
             作为存档-->
-        <RollingFile name="hc-app" fileName="${FILE_PATH}/hc-app.log"
+        <RollingFile name="${MODULE_NAME}-app" fileName="${FILE_PATH}/${MODULE_NAME}-app.log"
                      filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
@@ -56,7 +63,7 @@
             每次大小超过size，
             则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，
             作为存档-->
-        <RollingFile name="hc-request" fileName="${FILE_PATH}/hc-request.log"
+        <RollingFile name="${MODULE_NAME}-request" fileName="${FILE_PATH}/${MODULE_NAME}-request.log"
                      filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
@@ -69,7 +76,7 @@
 
 
         <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，适合临时测试用-->
-        <File name="hc-test" fileName="${FILE_PATH}/hc-test.log" append="false">
+        <File name="${MODULE_NAME}-test" fileName="${FILE_PATH}/${MODULE_NAME}-test.log" append="false">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
@@ -79,7 +86,7 @@
             每次大小超过size，
             则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，
             作为存档-->
-        <RollingFile name="hc-error" fileName="${FILE_PATH}/hc-error.log"
+        <RollingFile name="${MODULE_NAME}-error" fileName="${FILE_PATH}/${MODULE_NAME}-error.log"
                      filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
