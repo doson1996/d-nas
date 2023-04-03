@@ -11,14 +11,14 @@ spring:
   cloud:
     nacos:
       discovery:
-        enabled: true
+        enabled: false
         server-addr: ${env.host}:8848
         username: nacos
         password: nacos
 
 xxl:
   job:
-    accessToken: uc834JPL1DB5uH4
+    accessToken: default_token
     admin:
       addresses: http://localhost:8080/xxl-job-admin
     executor:
@@ -27,4 +27,4 @@ xxl:
       ip:
       logpath:
       logretentiondays: 30
-      port: 9999
+      port: 9998
