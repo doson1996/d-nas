@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @date 2023/3/13
  * @description
  */
-@Component
+//@Component
 public class HcMock {
 
     @Resource

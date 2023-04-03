@@ -20,7 +20,16 @@
                     <groupId>com.alibaba.cloud</groupId>
                     <artifactId>spring-cloud-starter-dubbo</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>com.ds</groupId>
+                    <artifactId>swagger-spring-boot-starter</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
         </dependency>
     </dependencies>
 

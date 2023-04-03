@@ -15,3 +15,16 @@ spring:
         server-addr: ${env.host}:8848
         username: nacos
         password: nacos
+
+xxl:
+  job:
+    accessToken: uc834JPL1DB5uH4
+    admin:
+      addresses: http://localhost:8080/xxl-job-admin
+    executor:
+      address:
+      appname: ${spring.application.name}
+      ip:
+      logpath:
+      logretentiondays: 30
+      port: 9999
