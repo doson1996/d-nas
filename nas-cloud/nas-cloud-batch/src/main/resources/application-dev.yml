@@ -1,5 +1,5 @@
 server:
-  port: 8121
+  port: 8122
 
 #开发环境
 env:
@@ -27,4 +27,4 @@ xxl:
       ip:
       logpath:
       logretentiondays: 30
-      port: 9998
+      port: 9999
