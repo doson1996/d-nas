@@ -1,5 +1,5 @@
 server:
-  port: 8122
+  port: 8121
 
 #开发环境
 env:
