@@ -20,11 +20,11 @@ xxl:
   job:
     accessToken: default_token
     admin:
-      addresses: http://localhost:8080/xxl-job-admin
+      addresses: http://${env.host}:8082/xxl-job-admin
     executor:
       address:
       appname: ${spring.application.name}
       ip:
       logpath:
-      logretentiondays: 30
+      logretentiondays: 3
       port: 9999

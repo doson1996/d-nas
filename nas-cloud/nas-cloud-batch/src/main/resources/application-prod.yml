@@ -1,6 +1,9 @@
 server:
   port: 8111
 
+env:
+  host: ds.com
+
 spring:
   application:
     name: nas-cloud-batch
@@ -11,3 +14,16 @@ spring:
         server-addr: dy.com:8848
         username: nacos
         password: nacos
+
+xxl:
+  job:
+    accessToken: default_token
+    admin:
+      addresses: http://${env.host}:8082/xxl-job-admin
+    executor:
+      address:
+      appname: ${spring.application.name}
+      ip:
+      logpath:
+      logretentiondays: 3
+      port: 9999
