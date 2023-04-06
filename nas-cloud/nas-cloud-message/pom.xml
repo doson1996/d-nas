@@ -32,7 +32,6 @@
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-sdk-java</artifactId>
-            <version>3.1.730</version>
         </dependency>
     </dependencies>
 
@@ -43,7 +42,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.ds.nas.cloud.message.SmsApplication</mainClass>
+                    <mainClass>com.ds.nas.cloud.message.MessageApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

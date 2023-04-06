@@ -31,6 +31,7 @@
         <log4j2.version>2.19.0</log4j2.version>
         <testdata.version>1.1.2</testdata.version>
         <xxl-job.version>2.4.1-SNAPSHOT</xxl-job.version>
+        <tencentcloud.version>3.1.730</tencentcloud.version>
 
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.9.RELEASE</spring-cloud-alibaba.version>
@@ -203,6 +204,12 @@
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>java-testdata-generator</artifactId>
                 <version>${testdata.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java</artifactId>
+                <version>${tencentcloud.version}</version>
             </dependency>
 
             <!-- DB -->

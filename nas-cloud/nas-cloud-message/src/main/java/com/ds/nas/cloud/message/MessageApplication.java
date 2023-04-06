@@ -12,8 +12,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-public class SmsApplication {
+public class MessageApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SmsApplication.class, args);
+        SpringApplication.run(MessageApplication.class, args);
     }
 }

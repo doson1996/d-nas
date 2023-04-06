@@ -1,0 +1,28 @@
+server:
+  port: 8131
+
+# 开发环境
+env:
+  host: ds.com
+# 配置
+config:
+  mail:
+    from: doson1996@vip.qq.com
+
+spring:
+  application:
+    name: nas-cloud-mail
+  # 邮件
+  mail:
+    host: smtp.qq.com
+    username: doson1996@vip.qq.com
+    password:
+    default-encoding: utf-8
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: ${env.host}:8848
+        username: nacos
+        password: nacos
+
