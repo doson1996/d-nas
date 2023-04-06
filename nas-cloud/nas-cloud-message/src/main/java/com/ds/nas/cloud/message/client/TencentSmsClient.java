@@ -7,6 +7,10 @@ package com.ds.nas.cloud.message.client;
  */
 public class TencentSmsClient extends SmsClient {
 
+    public TencentSmsClient() {
+        register("tencent", this);
+    }
+
     @Override
     public boolean send(String phone, String... params) {
         return false;
