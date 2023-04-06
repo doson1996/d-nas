@@ -7,19 +7,26 @@
         <groupId>com.ds.nas</groupId>
         <artifactId>nas-cloud</artifactId>
         <version>1.0.0-RELEASE</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>nas-cloud-canal</artifactId>
+    <groupId>com.ds</groupId>
+    <artifactId>nas-cloud-mail</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.ds.nas</groupId>
-            <artifactId>nas-lib-mq</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.alibaba.otter</groupId>
-            <artifactId>canal.client</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ds</groupId>
+            <artifactId>swagger-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
@@ -30,7 +37,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.ds.nas.cloud.canal.CanalApplication</mainClass>
+                    <mainClass>com.ds.nas.cloud.mail.MailApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
