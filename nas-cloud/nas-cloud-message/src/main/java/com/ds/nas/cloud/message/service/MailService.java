@@ -1,6 +1,6 @@
-package com.ds.nas.cloud.mail.service;
+package com.ds.nas.cloud.message.service;
 
-import com.ds.nas.cloud.mail.dto.SendMailParam;
+import com.ds.nas.cloud.message.dto.SendMailParam;
 
 /**
  * @author ds

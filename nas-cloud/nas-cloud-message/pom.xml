@@ -28,6 +28,12 @@
             <groupId>com.ds</groupId>
             <artifactId>swagger-spring-boot-starter</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java</artifactId>
+            <version>3.1.730</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -37,7 +43,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.ds.nas.cloud.mail.SmsApplication</mainClass>
+                    <mainClass>com.ds.nas.cloud.message.SmsApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

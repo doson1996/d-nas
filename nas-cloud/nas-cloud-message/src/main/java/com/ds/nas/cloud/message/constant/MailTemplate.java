@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.mail.constant;
+package com.ds.nas.cloud.message.constant;
 
 /**
  * @author ds

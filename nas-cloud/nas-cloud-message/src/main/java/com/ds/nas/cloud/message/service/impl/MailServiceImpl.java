@@ -1,7 +1,7 @@
-package com.ds.nas.cloud.mail.service.impl;
+package com.ds.nas.cloud.message.service.impl;
 
-import com.ds.nas.cloud.mail.dto.SendMailParam;
-import com.ds.nas.cloud.mail.service.MailService;
+import com.ds.nas.cloud.message.dto.SendMailParam;
+import com.ds.nas.cloud.message.service.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;

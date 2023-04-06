@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * @author ds
  * @date 2023/3/13
- * @description batch
+ * @description 批量调度平台
  */
 @EnableScheduling
 @EnableDiscoveryClient

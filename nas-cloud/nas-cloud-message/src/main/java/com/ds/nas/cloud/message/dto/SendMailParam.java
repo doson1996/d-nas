@@ -1,6 +1,5 @@
-package com.ds.nas.cloud.mail.dto;
+package com.ds.nas.cloud.message.dto;
 
-import com.ds.nas.lib.common.base.annotation.Check;
 import lombok.Data;
 
 import java.util.Map;
