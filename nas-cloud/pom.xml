@@ -20,7 +20,7 @@
         <module>nas-cloud-batch</module>
         <module>nas-cloud-canal</module>
         <module>nas-cloud-mq</module>
-        <module>nas-cloud-mail</module>
+        <module>nas-cloud-message</module>
         <module>nas-cloud-log</module>
     </modules>
 

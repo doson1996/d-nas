@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * @author ds
  * @date 2023/1/31
- * @description mq消费处理
+ * @description 消息队列平台
  */
 @EnableDubbo
 @EnableDiscoveryClient

@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.ds</groupId>
-    <artifactId>nas-cloud-mail</artifactId>
+    <artifactId>nas-cloud-message</artifactId>
 
     <dependencies>
         <dependency>
@@ -37,7 +37,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.ds.nas.cloud.mail.MailApplication</mainClass>
+                    <mainClass>com.ds.nas.cloud.mail.SmsApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

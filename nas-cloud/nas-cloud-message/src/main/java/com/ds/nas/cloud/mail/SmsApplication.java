@@ -8,12 +8,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * @author ds
  * @date 2023/4/6
- * @description
+ * @description 消息平台
  */
 @EnableDiscoveryClient
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-public class MailApplication {
+public class SmsApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MailApplication.class, args);
+        SpringApplication.run(SmsApplication.class, args);
     }
 }
