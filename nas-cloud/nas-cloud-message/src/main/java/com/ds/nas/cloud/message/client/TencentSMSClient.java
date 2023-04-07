@@ -62,8 +62,8 @@ public class TencentSMSClient implements SMSClient {
         try {
             res = client.SendSms(req);
         } catch (TencentCloudSDKException e) {
-            log.info("发送失败... {}", e.getMessage());
-            throw new RuntimeException(e);
+            log.error("发送失败...", e);
+            return "发送失败!";
         }
 
         log.info("发送成功... {}", res);

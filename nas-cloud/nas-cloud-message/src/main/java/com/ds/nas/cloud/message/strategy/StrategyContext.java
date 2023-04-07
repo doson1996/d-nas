@@ -1,7 +1,5 @@
 package com.ds.nas.cloud.message.strategy;
 
-import com.ds.nas.cloud.message.client.SMSClient;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,25 +11,26 @@ import java.util.concurrent.ConcurrentHashMap;
 public class StrategyContext {
 
     /**
-     * 短信客户端
+     * 发送策略容器
      */
-    protected final Map<String, SMSClient> smsClientMap = new ConcurrentHashMap<>();
+    private static final Map<String, SendStrategy> strategyMap = new ConcurrentHashMap<>();
 
     /**
-     * 注册短信客户端到smsClientMap
+     * 注册策略
      * @param key
-     * @param client
+     * @param strategy
      */
-    void register(String key, SMSClient client) {
-        smsClientMap.putIfAbsent(key, client);
+    static void registerStrategy(String key, SendStrategy strategy) {
+        strategyMap.putIfAbsent(key, strategy);
     }
 
     /**
-     * 注册到smsClientMap
+     * 获取策略
+     *
      * @param key
      */
-    SMSClient get(String key) {
-        return smsClientMap.get(key);
+    SendStrategy getStrategy(String key) {
+        return strategyMap.get(key);
     }
 
 }
