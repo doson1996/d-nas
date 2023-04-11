@@ -1,5 +1,6 @@
 package com.ds.nas.cloud.message.client;
 
+import com.ds.nas.cloud.message.strategy.SmsClientContext;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.common.profile.ClientProfile;
@@ -8,6 +9,7 @@ import com.tencentcloudapi.sms.v20210111.SmsClient;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
  * @author ds
@@ -21,12 +23,17 @@ public class TencentSMSClient implements SMSClient {
 
     private SmsClient client;
 
-    private String secretId;
+    private final String secretId = "";
 
-    private String secretKey;
+    private final String secretKey = "";
+
+    private final String signName = "";
+
+    private final String templateId = "";
 
     private TencentSMSClient() {
         createClient();
+        SmsClientContext.register(TENCENT_CLIENT, this);
     }
 
     public static TencentSMSClient getInstance() {
@@ -40,15 +47,14 @@ public class TencentSMSClient implements SMSClient {
          * 属性可能是基本类型，也可能引用了另一个数据结构
          * 推荐使用IDE进行开发，可以方便的跳转查阅各个接口和数据结构的文档说明 */
         SendSmsRequest req = new SendSmsRequest();
-
-        String sdkAppId = "1400009099";
+        /* 短信应用ID: 短信SdkAppId在 [短信控制台] 添加应用后生成的实际SdkAppId，示例如1400006666 */
+        String sdkAppId = "1400809704";
         req.setSmsSdkAppId(sdkAppId);
-        String signName = "腾讯云";
+        /* 短信签名内容: 使用 UTF-8 编码，必须填写已审核通过的签名 */
         req.setSignName(signName);
-
-        String templateId = "449739";
+        /* 模板 ID: 必须填写已审核通过的模板 ID */
         req.setTemplateId(templateId);
-
+        /* 模板参数: 模板参数的个数需要与 TemplateId 对应模板的变量个数保持一致，若无模板参数，则设置为空 */
         req.setTemplateParamSet(params);
 
         /* 下发手机号码，采用 E.164 标准，+[国家或地区码][手机号]
@@ -72,12 +78,9 @@ public class TencentSMSClient implements SMSClient {
     }
 
     private void createClient() {
-        Credential cred = new Credential(this.secretId, this.secretKey);
+        Credential cred = new Credential(secretId, secretKey);
         // 实例化一个http选项，可选，没有特殊需求可以跳过
         HttpProfile httpProfile = new HttpProfile();
-        // 设置代理（无需要直接忽略）
-        // httpProfile.setProxyHost("真实代理ip");
-        // httpProfile.setProxyPort(真实代理端口);
         /* SDK默认使用POST方法。
          * 如果你一定要使用GET方法，可以在这里设置。GET方法无法处理一些较大的请求 */
         httpProfile.setReqMethod("POST");

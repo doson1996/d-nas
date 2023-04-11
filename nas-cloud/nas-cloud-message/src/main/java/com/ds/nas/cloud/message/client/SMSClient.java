@@ -5,7 +5,7 @@ package com.ds.nas.cloud.message.client;
  * @date 2023/4/6
  * @description 短信客户端
  */
-public interface SMSClient {
+public interface SMSClient extends ClientName {
 
     /**
      * 发送短信

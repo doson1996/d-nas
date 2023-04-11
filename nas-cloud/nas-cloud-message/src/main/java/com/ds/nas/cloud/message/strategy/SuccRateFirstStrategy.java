@@ -4,13 +4,14 @@ import com.ds.nas.cloud.message.client.SMSClient;
 
 /**
  * @author ds
- * @date 2023/4/7
- * @description 价格优先策略
+ * @date 2023/4/11
+ * @description 成功率优先策略
  */
-public class PriceFirstStrategy extends AbstractSendStrategy {
-    
+public class SuccRateFirstStrategy extends AbstractSendStrategy {
+
     @Override
     public SMSClient getClient() {
         return null;
     }
+
 }

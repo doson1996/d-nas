@@ -13,9 +13,8 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) throws Throwable {
         SMSClient smsClient = TencentSMSClient.getInstance();
-        String send = smsClient.send("1", "1");
-
-        SmsClientContext.init();
+        String send = smsClient.send("15023266863", "123136", "测试");
+        System.out.println("send = " + send);
     }
 
 }

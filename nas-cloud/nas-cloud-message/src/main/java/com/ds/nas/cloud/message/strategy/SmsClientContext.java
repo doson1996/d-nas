@@ -4,6 +4,7 @@ import com.ds.nas.cloud.message.client.SMSClient;
 import com.ds.nas.lib.common.util.ClassUtils;
 
 import java.lang.reflect.Constructor;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,12 +22,36 @@ public class SmsClientContext {
     private static final Map<String, SMSClient> clientMap = new ConcurrentHashMap<>();
 
     /**
+     * 注册短信客户端到容器
+     * @param clientName
+     * @param client
+     */
+    public static void register(String clientName, SMSClient client) {
+        clientMap.putIfAbsent(clientName, client);
+    }
+
+    /**
      * 获取短信客户端
      * @param clientName
      * @return
      */
     public static SMSClient get(String clientName) {
         return clientMap.get(clientName);
+    }
+
+    /**
+     * 获取短信客户端
+     * @param
+     * @return
+     */
+    public static Map<String, SMSClient> getAll(int type) {
+        switch (type) {
+            case 0:
+                return clientMap;
+            case 1:
+                return clientMap;
+        }
+        return new HashMap<>();
     }
 
     /**
