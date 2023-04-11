@@ -7,10 +7,10 @@ import com.ds.nas.cloud.message.client.SmsClientContext;
 /**
  * @author ds
  * @date 2023/4/7
- * @description 价格优先策略
+ * @description 默认策略
  */
-public class PriceFirstStrategy extends AbstractSendStrategy {
-    
+public class DefaultStrategy extends AbstractSendStrategy {
+
     @Override
     public SMSClient getClient() {
         return SmsClientContext.get(ClientName.ALI_CLIENT);

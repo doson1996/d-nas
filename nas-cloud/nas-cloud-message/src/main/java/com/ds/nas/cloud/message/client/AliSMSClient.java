@@ -1,7 +1,7 @@
 package com.ds.nas.cloud.message.client;
 
-import com.ds.nas.cloud.message.strategy.SmsClientContext;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
  * @author ds
@@ -9,16 +9,11 @@ import lombok.extern.slf4j.Slf4j;
  * @description
  */
 @Slf4j
+@Component(ClientName.ALI_CLIENT)
 public class AliSMSClient implements SMSClient {
 
-    private static final AliSMSClient INSTANCE = new AliSMSClient();
-
     private AliSMSClient() {
-        SmsClientContext.register(ALI_CLIENT, this);
-    }
-
-    public static AliSMSClient getInstance() {
-        return INSTANCE;
+        SmsClientContext.register(ClientName.ALI_CLIENT, this);
     }
 
     @Override

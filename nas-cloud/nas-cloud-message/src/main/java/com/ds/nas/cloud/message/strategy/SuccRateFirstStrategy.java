@@ -1,6 +1,8 @@
 package com.ds.nas.cloud.message.strategy;
 
+import com.ds.nas.cloud.message.client.ClientName;
 import com.ds.nas.cloud.message.client.SMSClient;
+import com.ds.nas.cloud.message.client.SmsClientContext;
 
 /**
  * @author ds
@@ -11,7 +13,7 @@ public class SuccRateFirstStrategy extends AbstractSendStrategy {
 
     @Override
     public SMSClient getClient() {
-        return null;
+        return SmsClientContext.get(ClientName.TENCENT_CLIENT);
     }
 
 }

@@ -13,7 +13,7 @@ public class StrategyContext {
     /**
      * 发送策略容器
      */
-    private static final Map<String, SendStrategy> strategyMap = new ConcurrentHashMap<>();
+    private static final Map<String, SendStrategy> strategyMap = new ConcurrentHashMap<>(16);
 
     /**
      * 注册策略
@@ -29,8 +29,10 @@ public class StrategyContext {
      *
      * @param key
      */
-    SendStrategy getStrategy(String key) {
-        return strategyMap.get(key);
+    public static SendStrategy getStrategy(String key) {
+        SendStrategy sendStrategy = strategyMap.get(key);
+        // 没有对应发送策略时返回默认策略
+        return sendStrategy != null ? sendStrategy : strategyMap.computeIfAbsent("DefaultStrategy", f -> new DefaultStrategy());
     }
 
 }
