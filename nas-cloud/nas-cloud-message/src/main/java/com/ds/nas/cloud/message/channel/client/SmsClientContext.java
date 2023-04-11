@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.client;
+package com.ds.nas.cloud.message.channel.client;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.strategy;
+package com.ds.nas.cloud.message.channel.strategy;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

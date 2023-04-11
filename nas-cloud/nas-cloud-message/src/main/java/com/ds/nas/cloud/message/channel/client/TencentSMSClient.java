@@ -1,6 +1,5 @@
-package com.ds.nas.cloud.message.client;
+package com.ds.nas.cloud.message.channel.client;
 
-import com.ds.nas.cloud.message.strategy.SmsClientContext;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.common.profile.ClientProfile;
@@ -17,11 +16,14 @@ import org.springframework.stereotype.Component;
  * @description 腾讯短信客户端
  */
 @Slf4j
+@Component(ClientName.TENCENT_CLIENT)
 public class TencentSMSClient implements SMSClient {
 
     private static final TencentSMSClient INSTANCE = new TencentSMSClient();
 
     private SmsClient client;
+
+    private final String sdkAppId = "";
 
     private final String secretId = "";
 
@@ -33,7 +35,7 @@ public class TencentSMSClient implements SMSClient {
 
     private TencentSMSClient() {
         createClient();
-        SmsClientContext.register(TENCENT_CLIENT, this);
+        SmsClientContext.register(ClientName.TENCENT_CLIENT, this);
     }
 
     public static TencentSMSClient getInstance() {
@@ -48,7 +50,6 @@ public class TencentSMSClient implements SMSClient {
          * 推荐使用IDE进行开发，可以方便的跳转查阅各个接口和数据结构的文档说明 */
         SendSmsRequest req = new SendSmsRequest();
         /* 短信应用ID: 短信SdkAppId在 [短信控制台] 添加应用后生成的实际SdkAppId，示例如1400006666 */
-        String sdkAppId = "1400809704";
         req.setSmsSdkAppId(sdkAppId);
         /* 短信签名内容: 使用 UTF-8 编码，必须填写已审核通过的签名 */
         req.setSignName(signName);

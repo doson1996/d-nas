@@ -1,8 +1,8 @@
-package com.ds.nas.cloud.message.strategy;
+package com.ds.nas.cloud.message.channel.strategy;
 
-import com.ds.nas.cloud.message.client.ClientName;
-import com.ds.nas.cloud.message.client.SMSClient;
-import com.ds.nas.cloud.message.client.SmsClientContext;
+import com.ds.nas.cloud.message.channel.client.ClientName;
+import com.ds.nas.cloud.message.channel.client.SMSClient;
+import com.ds.nas.cloud.message.channel.client.SmsClientContext;
 
 /**
  * @author ds

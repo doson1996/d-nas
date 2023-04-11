@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.client;
+package com.ds.nas.cloud.message.channel.client;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
