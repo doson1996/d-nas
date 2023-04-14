@@ -13,6 +13,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SmsClientContext {
 
     /**
+     * 是否需要代理
+     * todo 可配置
+     */
+    private static final Boolean REQUIRE_PROXY = Boolean.TRUE;
+
+    /**
      * 短信客户端容器
      */
     private static final Map<String, SMSClient> clientMap = new ConcurrentHashMap<>(16);
@@ -24,7 +30,12 @@ public class SmsClientContext {
      * @param client
      */
     public static void register(String clientName, SMSClient client) {
-        clientMap.putIfAbsent(clientName, client);
+        // 如果需要代理
+        if (REQUIRE_PROXY) {
+            clientMap.putIfAbsent(clientName, getClientProxy(client));
+        } else {
+            clientMap.putIfAbsent(clientName, client);
+        }
     }
 
     /**
@@ -34,11 +45,7 @@ public class SmsClientContext {
      * @return
      */
     public static SMSClient get(String clientName) {
-        SMSClient smsClient = clientMap.get(clientName);
-        // 对客户端进行代理，好进行扩展
-        SMSClientProxyFactory proxyFactory = new SMSClientProxyFactory();
-        // 返回代理对象
-        return (SMSClient) proxyFactory.create(smsClient);
+        return clientMap.get(clientName);
     }
 
     /**
@@ -49,6 +56,18 @@ public class SmsClientContext {
      */
     public static Map<String, SMSClient> getAll() {
         return clientMap;
+    }
+
+    /**
+     * 获取代理对象
+     * @param client
+     * @return
+     */
+    private static SMSClient getClientProxy(SMSClient client) {
+        // 对客户端进行代理，方便扩展
+        SMSClientProxyFactory proxyFactory = new SMSClientProxyFactory();
+        // 返回代理对象
+        return (SMSClient) proxyFactory.create(client);
     }
 
 }
