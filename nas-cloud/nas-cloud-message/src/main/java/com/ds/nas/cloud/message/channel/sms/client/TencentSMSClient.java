@@ -20,8 +20,8 @@ import java.util.List;
  * @description 腾讯短信客户端
  */
 @Slf4j
-@Component(ClientName.TENCENT_CLIENT)
-public class TencentSMSClient implements SMSClient {
+@Component
+public class TencentSMSClient extends AbstractSMSClient {
 
     private SmsClient client;
 
@@ -43,45 +43,46 @@ public class TencentSMSClient implements SMSClient {
     @PostConstruct
     private void init() {
         createClient();
-        SmsClientContext.register(ClientName.ALI_CLIENT, this);
+        SmsClientContext.register(getClientName(), this);
     }
 
     @Override
     public boolean send(String phone, List<String> params) {
-        /* 实例化一个请求对象，根据调用的接口和实际情况，可以进一步设置请求参数
-         * 你可以直接查询SDK源码确定接口有哪些属性可以设置
-         * 属性可能是基本类型，也可能引用了另一个数据结构
-         * 推荐使用IDE进行开发，可以方便的跳转查阅各个接口和数据结构的文档说明 */
-        SendSmsRequest req = new SendSmsRequest();
-        /* 短信应用ID: 短信SdkAppId在 [短信控制台] 添加应用后生成的实际SdkAppId，示例如1400006666 */
-        req.setSmsSdkAppId(sdkAppId);
-        /* 短信签名内容: 使用 UTF-8 编码，必须填写已审核通过的签名 */
-        req.setSignName(signName);
-        /* 模板 ID: 必须填写已审核通过的模板 ID */
-        req.setTemplateId(templateId);
-        /* 模板参数: 模板参数的个数需要与 TemplateId 对应模板的变量个数保持一致，若无模板参数，则设置为空 */
-        // todo 待改进
-        String[] templateParam = new String[]{params.get(0), params.get(1)};
-        req.setTemplateParamSet(templateParam);
-
-        /* 下发手机号码，采用 E.164 标准，+[国家或地区码][手机号]
-         * 示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号，最多不要超过200个手机号 */
-        String[] phoneNumberSet = {"+86" + phone};
-        req.setPhoneNumberSet(phoneNumberSet);
-
-        /* 通过 client 对象调用 SendSms 方法发起请求。注意请求方法名与请求对象是对应的
-         * 返回的 res 是一个 SendSmsResponse 类的实例，与请求对象对应 */
-        SendSmsResponse res;
+        boolean sendResult = true;
+        // 返回json格式的字符串回包
+        SendSmsResponse res = new SendSmsResponse();
         try {
+            /* 实例化一个请求对象，根据调用的接口和实际情况，可以进一步设置请求参数
+             * 你可以直接查询SDK源码确定接口有哪些属性可以设置
+             * 属性可能是基本类型，也可能引用了另一个数据结构
+             * 推荐使用IDE进行开发，可以方便的跳转查阅各个接口和数据结构的文档说明 */
+            SendSmsRequest req = new SendSmsRequest();
+            /* 短信应用ID: 短信SdkAppId在 [短信控制台] 添加应用后生成的实际SdkAppId，示例如1400006666 */
+            req.setSmsSdkAppId(sdkAppId);
+            /* 短信签名内容: 使用 UTF-8 编码，必须填写已审核通过的签名 */
+            req.setSignName(signName);
+            /* 模板 ID: 必须填写已审核通过的模板 ID */
+            req.setTemplateId(templateId);
+            /* 模板参数: 模板参数的个数需要与 TemplateId 对应模板的变量个数保持一致，若无模板参数，则设置为空 */
+            // todo 待改进
+            String[] templateParam = new String[]{params.get(0), params.get(1)};
+            req.setTemplateParamSet(templateParam);
+
+            /* 下发手机号码，采用 E.164 标准，+[国家或地区码][手机号]
+             * 示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号，最多不要超过200个手机号 */
+            String[] phoneNumberSet = {"+86" + phone};
+            req.setPhoneNumberSet(phoneNumberSet);
+
+            /* 通过 client 对象调用 SendSms 方法发起请求。注意请求方法名与请求对象是对应的
+             * 返回的 res 是一个 SendSmsResponse 类的实例，与请求对象对应 */
             res = client.SendSms(req);
         } catch (TencentCloudSDKException e) {
-            log.error("发送失败...", e);
-            return false;
+            log.error("{}发送异常...", getClientName(), e);
+            sendResult = false;
         }
 
-        log.info("发送成功... {}", res);
-        // 返回json格式的字符串回包
-        return true;
+        log.info("{}发送成功... {}", getClientName(), res);
+        return sendResult;
     }
 
     private void createClient() {

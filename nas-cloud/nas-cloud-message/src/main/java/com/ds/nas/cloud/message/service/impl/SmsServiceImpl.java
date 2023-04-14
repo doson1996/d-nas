@@ -28,11 +28,9 @@ public class SmsServiceImpl implements SmsService {
     @Override
     public Result<StringResponse> send(Map<String, Object> params) {
         SendStrategy sendStrategy = StrategyContext.getStrategy(getCurrentStrategy());
-        boolean sendResult = sendStrategy
-                .getClient()
-                .send((String) params.get("phone"),
-                        (List) params.get("param"));
-        return Result.ok();
+        boolean sendResult = sendStrategy.getClient()
+                .send((String) params.get("phone"), (List) params.get("param"));
+        return Result.ok("发送成功");
     }
 
     @Override
@@ -52,7 +50,7 @@ public class SmsServiceImpl implements SmsService {
     @Override
     public Result<Set<String>> allStrategy() {
         Map<String, SendStrategy> strategyMap = StrategyContext.allStrategy();
-        return Result.ok("获取成功", strategyMap.keySet());
+        return Result.ok("获取全部策略成功", strategyMap.keySet());
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.ds.nas.cloud.message.channel.sms.client;
 
+import com.ds.nas.cloud.message.channel.sms.client.proxy.SMSClientProxyFactory;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -32,7 +34,11 @@ public class SmsClientContext {
      * @return
      */
     public static SMSClient get(String clientName) {
-        return clientMap.get(clientName);
+        SMSClient smsClient = clientMap.get(clientName);
+        // 对客户端进行代理，好进行扩展
+        SMSClientProxyFactory proxyFactory = new SMSClientProxyFactory();
+        // 返回代理对象
+        return (SMSClient) proxyFactory.create(smsClient);
     }
 
     /**

@@ -18,4 +18,10 @@ public interface SMSClient {
      */
     boolean send(String phone, List<String> params);
 
+    /**
+     * 上送发送结果
+     * @param sendResult
+     */
+    void sendUp(boolean sendResult);
+
 }
