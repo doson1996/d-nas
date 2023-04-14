@@ -11,7 +11,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @description 消息平台
  */
 @EnableDiscoveryClient
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class},
+                       scanBasePackages = {"com.ds.nas.cloud.message",
+                               "com.ds.nas.lib"
+                       }
+)
 public class MessageApplication {
     public static void main(String[] args) {
         SpringApplication.run(MessageApplication.class, args);

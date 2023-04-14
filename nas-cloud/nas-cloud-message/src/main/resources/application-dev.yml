@@ -11,7 +11,7 @@ config:
 
 spring:
   application:
-    name: nas-cloud-mail
+    name: nas-cloud-message
   # 邮件
   mail:
     host: smtp.qq.com

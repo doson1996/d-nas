@@ -1,4 +1,6 @@
-package com.ds.nas.cloud.message.channel.client;
+package com.ds.nas.cloud.message.channel.sms.client;
+
+import java.util.List;
 
 /**
  * @author ds
@@ -14,6 +16,6 @@ public interface SMSClient {
      * @param params 短信参数
      * @return
      */
-    String send(String phone, String... params);
+    boolean send(String phone, List<String> params);
 
 }

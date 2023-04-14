@@ -1,6 +1,6 @@
-package com.ds.nas.cloud.message.channel.strategy;
+package com.ds.nas.cloud.message.channel.sms.strategy;
 
-import com.ds.nas.cloud.message.channel.client.SMSClient;
+import com.ds.nas.cloud.message.channel.sms.client.SMSClient;
 
 /**
  * @author ds

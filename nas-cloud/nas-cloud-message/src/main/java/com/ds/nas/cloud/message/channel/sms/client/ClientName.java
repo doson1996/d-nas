@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.channel.client;
+package com.ds.nas.cloud.message.channel.sms.client;
 
 /**
  * @author ds

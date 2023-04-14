@@ -1,3 +1,5 @@
+package com.ds.nas.cloud.message.tx;
+
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 
@@ -102,7 +104,7 @@ public class SendSms
             String senderid = "";
             req.setSenderId(senderid);
 
-            /* 通过 client 对象调用 SendSms 方法发起请求。注意请求方法名与请求对象是对应的
+            /* 通过 client 对象调用 com.ds.nas.cloud.message.tx.SendSms 方法发起请求。注意请求方法名与请求对象是对应的
              * 返回的 res 是一个 SendSmsResponse 类的实例，与请求对象对应 */
             SendSmsResponse res = client.SendSms(req);
 

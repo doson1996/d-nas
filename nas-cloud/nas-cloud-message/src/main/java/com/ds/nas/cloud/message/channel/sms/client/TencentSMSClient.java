@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.channel.client;
+package com.ds.nas.cloud.message.channel.sms.client;
 
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
@@ -8,7 +8,11 @@ import com.tencentcloudapi.sms.v20210111.SmsClient;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * @author ds
@@ -19,31 +23,31 @@ import org.springframework.stereotype.Component;
 @Component(ClientName.TENCENT_CLIENT)
 public class TencentSMSClient implements SMSClient {
 
-    private static final TencentSMSClient INSTANCE = new TencentSMSClient();
-
     private SmsClient client;
 
-    private final String sdkAppId = "";
+    @Value("${config.sms.tx.sdkAppId}")
+    private String sdkAppId;
 
-    private final String secretId = "";
+    @Value("${config.sms.tx.secretId}")
+    private String secretId;
 
-    private final String secretKey = "";
+    @Value("${config.sms.tx.secretKey}")
+    private String secretKey;
 
-    private final String signName = "";
+    @Value("${config.sms.tx.signName}")
+    private String signName;
 
-    private final String templateId = "";
+    @Value("${config.sms.tx.templateId}")
+    private String templateId;
 
-    private TencentSMSClient() {
+    @PostConstruct
+    private void init() {
         createClient();
-        SmsClientContext.register(ClientName.TENCENT_CLIENT, this);
-    }
-
-    public static TencentSMSClient getInstance() {
-        return INSTANCE;
+        SmsClientContext.register(ClientName.ALI_CLIENT, this);
     }
 
     @Override
-    public String send(String phone, String... params) {
+    public boolean send(String phone, List<String> params) {
         /* 实例化一个请求对象，根据调用的接口和实际情况，可以进一步设置请求参数
          * 你可以直接查询SDK源码确定接口有哪些属性可以设置
          * 属性可能是基本类型，也可能引用了另一个数据结构
@@ -56,7 +60,9 @@ public class TencentSMSClient implements SMSClient {
         /* 模板 ID: 必须填写已审核通过的模板 ID */
         req.setTemplateId(templateId);
         /* 模板参数: 模板参数的个数需要与 TemplateId 对应模板的变量个数保持一致，若无模板参数，则设置为空 */
-        req.setTemplateParamSet(params);
+        // todo 待改进
+        String[] templateParam = new String[]{params.get(0), params.get(1)};
+        req.setTemplateParamSet(templateParam);
 
         /* 下发手机号码，采用 E.164 标准，+[国家或地区码][手机号]
          * 示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号，最多不要超过200个手机号 */
@@ -70,12 +76,12 @@ public class TencentSMSClient implements SMSClient {
             res = client.SendSms(req);
         } catch (TencentCloudSDKException e) {
             log.error("发送失败...", e);
-            return "发送失败!";
+            return false;
         }
 
         log.info("发送成功... {}", res);
         // 返回json格式的字符串回包
-        return SendSmsResponse.toJsonString(res);
+        return true;
     }
 
     private void createClient() {

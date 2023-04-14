@@ -1,3 +1,5 @@
+package com.ds.nas.cloud.message.tx;
+
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 //导入可选配置类
@@ -9,7 +11,7 @@ import com.tencentcloudapi.sms.v20210111.SmsClient;
 import com.tencentcloudapi.sms.v20210111.models.AddSmsTemplateRequest;
 import com.tencentcloudapi.sms.v20210111.models.AddSmsTemplateResponse;
 /**
- * Tencent Cloud Sms AddSmsTemplate
+ * Tencent Cloud Sms com.ds.nas.cloud.message.tx.AddSmsTemplate
  *
  */
 public class AddSmsTemplate
@@ -73,7 +75,7 @@ public class AddSmsTemplate
             /* 模板备注：例如申请原因，使用场景等 */
             String remark = "xxx";
             req.setRemark(remark);
-            /* 通过 client 对象调用 AddSmsTemplate 方法发起请求。注意请求方法名与请求对象是对应的
+            /* 通过 client 对象调用 com.ds.nas.cloud.message.tx.AddSmsTemplate 方法发起请求。注意请求方法名与请求对象是对应的
              * 返回的 res 是一个 AddSmsTemplateResponse 类的实例，与请求对象对应 */
             AddSmsTemplateResponse res = client.AddSmsTemplate(req);
             // 输出 JSON 格式的字符串回包

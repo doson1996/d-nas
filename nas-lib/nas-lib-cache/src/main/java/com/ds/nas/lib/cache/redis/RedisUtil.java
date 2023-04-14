@@ -205,7 +205,13 @@ public class RedisUtil {
      * @return
      */
     public String get(String key) {
-        return stringRedisTemplate.opsForValue().get(key);
+        String value;
+        try {
+            value = stringRedisTemplate.opsForValue().get(key);
+        } catch (Exception e) {
+            value = null;
+        }
+        return value;
     }
 
     /**

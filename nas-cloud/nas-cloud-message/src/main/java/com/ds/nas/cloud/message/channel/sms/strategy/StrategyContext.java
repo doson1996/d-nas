@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.channel.strategy;
+package com.ds.nas.cloud.message.channel.sms.strategy;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,6 +17,7 @@ public class StrategyContext {
 
     /**
      * 注册策略
+     *
      * @param key
      * @param strategy
      */
@@ -32,7 +33,22 @@ public class StrategyContext {
     public static SendStrategy getStrategy(String key) {
         SendStrategy sendStrategy = strategyMap.get(key);
         // 没有对应发送策略时返回默认策略
-        return sendStrategy != null ? sendStrategy : strategyMap.computeIfAbsent("DefaultStrategy", f -> new DefaultStrategy());
+        return sendStrategy != null ? sendStrategy : strategyMap.get(StrategyName.DEFAULT_STRATEGY);
+    }
+
+    /**
+     * 获取默认侧率
+     * @return
+     */
+    public static SendStrategy getDefaultStrategy() {
+        return getStrategy(StrategyName.DEFAULT_STRATEGY);
+    }
+
+    /**
+     * 获取所有策略
+     */
+    public static Map<String, SendStrategy> allStrategy() {
+        return strategyMap;
     }
 
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
-import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author ds
@@ -29,8 +29,27 @@ public class SmsController {
 
     @ApiOperation("发送短信")
     @PostMapping("send")
-    public Result<StringResponse> send(@RequestBody Map<String, Objects> params) {
+    public Result<StringResponse> send(@RequestBody Map<String, Object> params) {
         return smsService.send(params);
     }
+
+    @ApiOperation("设置短信发送策略")
+    @PostMapping("set-strategy")
+    public Result<StringResponse> setStrategy(String strategy) {
+        return smsService.setStrategy(strategy);
+    }
+
+    @ApiOperation("当前短信发送策略")
+    @PostMapping("current-strategy")
+    public Result<StringResponse> currentStrategy() {
+        return smsService.currentStrategy();
+    }
+
+    @ApiOperation("获取所有短信发送策略")
+    @PostMapping("all-strategy")
+    public Result<Set<String>> allStrategy() {
+        return smsService.allStrategy();
+    }
+
 
 }

@@ -1,3 +1,5 @@
+package com.ds.nas.cloud.message.tx;
+
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 
@@ -13,7 +15,7 @@ import com.tencentcloudapi.sms.v20210111.models.SendStatusStatisticsRequest;
 import com.tencentcloudapi.sms.v20210111.models.SendStatusStatisticsResponse;
 
 /**
- * Tencent Cloud Sms SendStatusStatistics
+ * Tencent Cloud Sms com.ds.nas.cloud.message.tx.SendStatusStatistics
  *
  */
 public class SendStatusStatistics {
@@ -84,7 +86,7 @@ public class SendStatusStatistics {
             String endTime = "2019071123";
             req.setEndTime(endTime);
 
-            /* 通过 client 对象调用 SendStatusStatistics 方法发起请求。注意请求方法名与请求对象是对应的
+            /* 通过 client 对象调用 com.ds.nas.cloud.message.tx.SendStatusStatistics 方法发起请求。注意请求方法名与请求对象是对应的
              * 返回的 res 是一个 SendStatusStatisticsResponse 类的实例，与请求对象对应 */
             SendStatusStatisticsResponse res = client.SendStatusStatistics(req);
 

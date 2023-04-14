@@ -1,3 +1,5 @@
+package com.ds.nas.cloud.message.tx;
+
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 
@@ -13,7 +15,7 @@ import com.tencentcloudapi.sms.v20210111.models.PullSmsSendStatusRequest;
 import com.tencentcloudapi.sms.v20210111.models.PullSmsSendStatusResponse;
 
 /**
- * Tencent Cloud Sms PullSmsSendStatus
+ * Tencent Cloud Sms com.ds.nas.cloud.message.tx.PullSmsSendStatus
  * 注：此接口需要联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) 开通
  */
 public class PullSmsSendStatus {
@@ -74,7 +76,7 @@ public class PullSmsSendStatus {
             Long limit = 5L;
             req.setLimit(limit);
 
-            /* 通过 client 对象调用 PullSmsSendStatus 方法发起请求。注意请求方法名与请求对象是对应的
+            /* 通过 client 对象调用 com.ds.nas.cloud.message.tx.PullSmsSendStatus 方法发起请求。注意请求方法名与请求对象是对应的
              * 返回的 res 是一个 PullSmsSendStatusResponse 类的实例，与请求对象对应 */
             PullSmsSendStatusResponse res = client.PullSmsSendStatus(req);
 

@@ -3,7 +3,7 @@ spring:
   swagger:
     enable: true
     base-package: com.ds
-    description: nas-cloud-mail
+    description: nas-cloud-message
     author: ds
     # 响应状态 code：message
     response-messages:
