@@ -1,7 +1,5 @@
 package com.ds.nas.lib.common.base.response;
 
-import cn.hutool.core.date.DateUtil;
-import com.ds.nas.lib.common.result.Result;
 import lombok.Data;
 
 /**
@@ -38,7 +36,6 @@ public class StringResponse extends BaseResponse {
         public StringResponse build() {
             StringResponse response = new StringResponse();
             response.setData(data);
-            response.setResponseTime(DateUtil.now());
             return response;
         }
     }

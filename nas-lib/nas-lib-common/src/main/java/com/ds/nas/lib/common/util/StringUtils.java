@@ -7,7 +7,7 @@ import cn.hutool.core.util.StrUtil;
  * @date 2023/1/14
  * @description 字符串工具类
  */
-public class StringUtils extends StrUtil {
+public final class StringUtils extends StrUtil {
 
     private StringUtils() {
         throw new AssertionError("No com.ds.nas.lib.common.util.StringUtils instances for you!");

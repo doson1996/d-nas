@@ -15,7 +15,7 @@ import java.util.Random;
  * @date 2022/12/4
  * @description
  */
-public class DataGenerateUtils {
+public final class DataGenerateUtils {
 
     private DataGenerateUtils() {
     }

@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2023/4/7
  * @description
  */
-public class ClassUtils {
+public final class ClassUtils {
 
     /**
      * 获取所有接口的实现类

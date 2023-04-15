@@ -1,7 +1,6 @@
 package com.ds.nas.nat.common.util;
 
-import cn.hutool.core.date.DateUtil;
-import com.ds.nas.lib.common.util.StringUtils;
+import com.ds.nas.lib.common.util.DateUtils;
 
 /**
  * @author ds
@@ -31,7 +30,7 @@ public class TableNameUtils {
      * @return 返回当前日期表名 tableName_yyyyMMdd
      */
     public static String generateTodayTableName(String tableName) {
-        return tableName + TABLE_SEPARATOR + DateUtil.today().replaceAll(DATE_SEPARATOR, "");
+        return tableName + TABLE_SEPARATOR + DateUtils.today().replaceAll(DATE_SEPARATOR, "");
     }
 
     /**
@@ -41,7 +40,7 @@ public class TableNameUtils {
      * @return 返回明天日期表名 tableName_yyyyMMdd
      */
     public static String generateTomorrowTableName(String tableName) {
-        return tableName + TABLE_SEPARATOR + DateUtil.tomorrow().toDateStr().replaceAll(DATE_SEPARATOR, "");
+        return tableName + TABLE_SEPARATOR + DateUtils.tomorrow().toDateStr().replaceAll(DATE_SEPARATOR, "");
     }
 
     /**

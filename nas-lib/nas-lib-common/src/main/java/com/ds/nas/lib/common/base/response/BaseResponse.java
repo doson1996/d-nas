@@ -15,13 +15,8 @@ public class BaseResponse implements Serializable {
     private static final long serialVersionUID = 5223590227149117304L;
 
     /**
-     * 请求id
+     * response私有通讯区
      */
-    private String requestId;
-
-    /**
-     * 请求响应时间
-     */
-    private String responseTime;
+    private ResponsePrivate responsePrivate;
 
 }

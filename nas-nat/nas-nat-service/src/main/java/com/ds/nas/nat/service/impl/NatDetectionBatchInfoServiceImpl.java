@@ -1,7 +1,5 @@
 package com.ds.nas.nat.service.impl;
 
-import cn.hutool.core.date.DateUnit;
-import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.lib.cache.key.RedisNatKey;
@@ -13,6 +11,8 @@ import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
+import com.ds.nas.lib.common.util.DateUnit;
+import com.ds.nas.lib.common.util.DateUtils;
 import com.ds.nas.lib.common.util.StringUtils;
 import com.ds.nas.nat.common.constant.NatConstant;
 import com.ds.nas.nat.common.util.TableNameUtils;
@@ -147,7 +147,7 @@ public class NatDetectionBatchInfoServiceImpl extends ServiceImpl<NatDetectionBa
      */
     private String generateBatchNo() {
         String batchNo;
-        String today = DateUtil.today().replaceAll("-", "");
+        String today = DateUtils.today().replaceAll("-", "");
         String key = RedisNatKey.BATCH_SEQUENCE_KEY + today;
         try {
             String sequence = redisUtil.get(key);

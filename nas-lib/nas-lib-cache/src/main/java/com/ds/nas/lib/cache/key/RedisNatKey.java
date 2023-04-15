@@ -8,12 +8,12 @@ package com.ds.nas.lib.cache.key;
 public interface RedisNatKey extends RedisAppKey {
 
     /**
-     * hc key
+     * nat key
      */
     String NAT_KEY = "nat";
 
     /**
-     * hc key 前缀
+     * nat key 前缀
      */
     String NAT_KEY_PREFIX = APP_KEY + SEPARATOR + NAT_KEY + SEPARATOR;
 

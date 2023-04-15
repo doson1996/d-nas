@@ -23,7 +23,7 @@ import com.ds.nas.lib.common.base.request.RequestCheck;
 import com.ds.nas.lib.common.constant.HealthCodeState;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
-import com.ds.nas.lib.common.util.ResponseUtils;
+import com.ds.nas.lib.common.base.response.ResponseBuild;
 import com.ds.nas.lib.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -56,7 +56,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         RequestCheck.check(request);
         HealthCodeQueryResponse response = new HealthCodeQueryResponse();
         BeanUtil.copyProperties(qryHcPersonalInfo(request.getIdCard()), response);
-        ResponseUtils.onReturn(request, response);
+        ResponseBuild.onReturn(request, response);
         return Result.ok("查询成功", response);
     }
 

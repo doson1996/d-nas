@@ -7,7 +7,9 @@ import java.util.Random;
  * @date 2023/3/13
  * @description 生成随机信息
  */
-public class DataGenerateUtilsV1 {
+public final class DataGenerateUtilsV1 {
+
+    private DataGenerateUtilsV1() {}
 
     //复姓出现的几率(0--100)
     private static final int surnameProbability = 5;

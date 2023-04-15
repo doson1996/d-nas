@@ -6,7 +6,11 @@ import java.util.List;
 /**
  * @author ds
  */
-public class SplitUtils {
+public final class SplitUtils {
+
+    private SplitUtils() {
+
+    }
 
     /**
      * 自定义分割函数，返回第一个
