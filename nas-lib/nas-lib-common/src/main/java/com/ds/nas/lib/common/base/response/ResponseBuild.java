@@ -1,8 +1,8 @@
 package com.ds.nas.lib.common.base.response;
 
-import cn.hutool.core.date.DateUtil;
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import com.ds.nas.lib.common.util.DateUtils;
+import com.ds.nas.lib.common.util.UUID;
 
 /**
  * @author ds
@@ -20,10 +20,9 @@ public class ResponseBuild {
     public static void onReturn(BaseRequest request, BaseResponse response) {
         ResponsePrivate responsePrivate = new ResponsePrivate();
         responsePrivate.setResponseTime(DateUtils.now());
-        responsePrivate.setResponseId("");
+        responsePrivate.setResponseId(UUID.fastUUID().toString(true));
         responsePrivate.setRequestId(request.getRequestPrivate().getRequestId());
         response.setResponsePrivate(responsePrivate);
-
     }
 
 }

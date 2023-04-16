@@ -14,15 +14,12 @@
     <version>1.0.0-RELEASE</version>
     <packaging>pom</packaging>
     <name>nas-lib</name>
-    <description>lib</description>
-
-    <dependencies>
-
-    </dependencies>
+    <description>整个各种技术能力模块</description>
 
     <modules>
         <module>nas-lib-cache</module>
         <module>nas-lib-common</module>
+        <module>nas-lib-core</module>
         <module>nas-lib-mq</module>
         <module>nas-lib-ssh</module>
     </modules>

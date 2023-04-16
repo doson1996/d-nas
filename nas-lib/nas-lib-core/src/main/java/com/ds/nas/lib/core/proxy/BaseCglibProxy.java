@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.sms.channel.client.proxy;
+package com.ds.nas.lib.core.proxy;
 
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;

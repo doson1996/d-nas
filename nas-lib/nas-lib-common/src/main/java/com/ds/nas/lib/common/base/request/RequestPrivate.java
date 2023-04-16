@@ -12,14 +12,19 @@ import lombok.Data;
 public class RequestPrivate {
 
     /**
+     * token
+     */
+    private String token;
+
+    /**
      * 请求id
      */
     private String requestId;
 
     /**
-     * token
+     * 请求应用
      */
-    private String token;
+    private String requestApp;
 
     /**
      * 请求时间

@@ -6,6 +6,7 @@ import com.ds.nas.cloud.message.sms.request.SendSMSRequest;
 import com.ds.nas.cloud.message.sms.service.SmsService;
 import com.ds.nas.lib.cache.key.RedisMessageKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
+import com.ds.nas.lib.common.base.response.ResponseBuild;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import org.springframework.stereotype.Service;
@@ -29,17 +30,20 @@ public class SmsServiceImpl implements SmsService {
 
     @Override
     public Result<StringResponse> send(SendSMSRequest request) {
+        String phone = request.getPhone();
         List<String> params = new ArrayList<>();
         params.add(request.getCaptcha());
         params.add(request.getExpire());
 
         SendStrategy sendStrategy = StrategyContext.getStrategy(getCurrentStrategy());
         boolean sendResult = sendStrategy.getClient()
-                .send(request.getPhone(), params);
+                .send(phone, params);
+        StringResponse response = StringResponse.builder().withData(phone).build();
+        ResponseBuild.onReturn(request, response);
         if (sendResult) {
-            return Result.ok("发送成功");
+            return Result.ok("短信发送成功", response);
         }
-        return Result.fail("发送失败");
+        return Result.fail("短信发送失败", response);
     }
 
     @Override

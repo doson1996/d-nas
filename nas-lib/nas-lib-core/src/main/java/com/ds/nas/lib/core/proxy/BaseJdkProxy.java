@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.sms.channel.client.proxy;
+package com.ds.nas.lib.core.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;

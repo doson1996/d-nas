@@ -14,7 +14,7 @@
     <version>1.0.0-RELEASE</version>
     <packaging>pom</packaging>
     <name>nas-cloud</name>
-    <description>nas cloud</description>
+    <description>能力平台</description>
 
     <modules>
         <module>nas-cloud-batch</module>
@@ -26,23 +26,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.ds.nas</groupId>
+            <artifactId>nas-lib-core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-lib-common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 

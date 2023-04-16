@@ -1,5 +1,6 @@
 package com.ds.nas.cloud.message.sms.channel.client.proxy;
 
+import com.ds.nas.lib.core.proxy.BaseCglibProxy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cglib.proxy.MethodProxy;
 

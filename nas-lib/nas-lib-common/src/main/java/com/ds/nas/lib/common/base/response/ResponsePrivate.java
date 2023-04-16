@@ -17,13 +17,22 @@ public class ResponsePrivate {
     private String requestId;
 
     /**
-     * 返回id
+     * 响应id
      */
     private String responseId;
 
+    /**
+     * 响应应用
+     */
+    private String responseApp;
 
     /**
-     * 请求响应时间
+     * 响应服务器ip
+     */
+    private String responseIp;
+
+    /**
+     * 响应时间
      */
     private String responseTime = DateUtils.now();
 
