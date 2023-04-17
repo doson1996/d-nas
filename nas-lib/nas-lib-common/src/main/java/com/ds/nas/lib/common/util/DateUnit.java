@@ -48,6 +48,13 @@ public enum DateUnit {
     }
 
     /**
+     * @return 单位对应的毫秒数
+     */
+    public long getSecond() {
+        return this.millis / 1000;
+    }
+
+    /**
      * 单位兼容转换，将DateUnit转换为对应的{@link ChronoUnit}
      *
      * @return {@link ChronoUnit}

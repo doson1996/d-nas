@@ -27,6 +27,7 @@ public class ResponsePrivate {
     private String responseApp;
 
     /**
+     * todo 外部调用时，返回到网关抹掉
      * 响应服务器ip
      */
     private String responseIp;

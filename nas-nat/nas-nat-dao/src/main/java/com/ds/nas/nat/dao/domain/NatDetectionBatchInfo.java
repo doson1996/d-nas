@@ -9,6 +9,7 @@ import java.util.Date;
 
 import com.ds.nas.lib.common.base.domain.BaseDomain;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 
@@ -17,6 +18,7 @@ import lombok.Data;
  */
 @TableName(value ="nat_detection_batch_info")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class NatDetectionBatchInfo extends BaseDomain {
 
     /**

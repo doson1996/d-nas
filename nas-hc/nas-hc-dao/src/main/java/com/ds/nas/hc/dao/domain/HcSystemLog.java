@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ds.nas.lib.common.base.domain.BaseDomain;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 
@@ -12,6 +13,7 @@ import lombok.Data;
  */
 @TableName(value ="hc_system_log")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class HcSystemLog extends BaseDomain {
     /**
      * id

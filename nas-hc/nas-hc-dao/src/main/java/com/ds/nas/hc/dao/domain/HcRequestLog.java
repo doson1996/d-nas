@@ -9,6 +9,7 @@ import java.util.Date;
 
 import com.ds.nas.lib.common.base.domain.BaseDomain;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 
@@ -17,6 +18,7 @@ import lombok.Data;
  */
 @TableName(value ="hc_request_log")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class HcRequestLog extends BaseDomain {
     /**
      * id

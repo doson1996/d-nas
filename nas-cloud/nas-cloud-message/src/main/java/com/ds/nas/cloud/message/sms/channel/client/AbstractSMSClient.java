@@ -1,5 +1,6 @@
 package com.ds.nas.cloud.message.sms.channel.client;
 
+import com.ds.nas.lib.cache.key.RedisSMSKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.util.StringUtils;
 import com.ds.nas.lib.core.context.SpringContext;
@@ -25,9 +26,21 @@ public abstract class AbstractSMSClient implements SMSClient {
         if (redisUtil == null)
             redisUtil = SpringContext.getContext().getBean(RedisUtil.class);
         String clientName = getClientName();
-        // todo 上送统计
-        redisUtil.set("sendUp:" + clientName, String.valueOf(sendResult));
+        sendUp(clientName, sendResult);
         log.info("{}发送{}...", clientName, sendResult ? "成功" : "失败");
+    }
+
+    /**
+     * 上送统计
+     *
+     * @param clientName
+     * @param sendResult
+     */
+    private void sendUp(String clientName, Boolean sendResult) {
+        if (sendResult) {
+            redisUtil.incrBy(RedisSMSKey.SMS_CLIENT_SEND_SUCCESS_KEY + clientName, 1);
+        }
+        redisUtil.incrBy(RedisSMSKey.SMS_CLIENT_SEND_TOTAL_KEY + clientName, 1);
     }
 
     /**

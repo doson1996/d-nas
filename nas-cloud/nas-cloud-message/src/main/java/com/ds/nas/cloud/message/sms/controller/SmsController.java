@@ -1,6 +1,8 @@
 package com.ds.nas.cloud.message.sms.controller;
 
+import com.ds.nas.cloud.message.sms.io.request.SendCaptchaRequest;
 import com.ds.nas.cloud.message.sms.io.request.SendSMSRequest;
+import com.ds.nas.cloud.message.sms.io.request.VerifyCaptchaRequest;
 import com.ds.nas.cloud.message.sms.io.response.AllStrategyResponse;
 import com.ds.nas.cloud.message.sms.service.SmsService;
 import com.ds.nas.lib.common.base.response.StringResponse;
@@ -28,10 +30,22 @@ public class SmsController {
 
     private final SmsService smsService;
 
-    @ApiOperation("发送短信")
+    @ApiOperation("发送短信[仅支持验证码]")
     @PostMapping("send")
     public Result<StringResponse> send(@RequestBody SendSMSRequest request) {
         return smsService.send(request);
+    }
+
+    @ApiOperation("发送短信验证码")
+    @PostMapping("send-captcha")
+    public Result<StringResponse> sendCaptcha(@RequestBody SendCaptchaRequest request) {
+        return smsService.sendCaptcha(request);
+    }
+
+    @ApiOperation("验证短信验证码")
+    @PostMapping("verify-captcha")
+    public Result<StringResponse> verifyCaptcha(@RequestBody VerifyCaptchaRequest request) {
+        return smsService.verifyCaptcha(request);
     }
 
     @ApiOperation("设置短信发送策略")

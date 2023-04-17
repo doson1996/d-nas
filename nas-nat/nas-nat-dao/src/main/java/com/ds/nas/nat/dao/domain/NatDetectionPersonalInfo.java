@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 import com.ds.nas.lib.common.base.domain.BaseDomain;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author ds
@@ -16,6 +17,7 @@ import lombok.Data;
  */
 @TableName(value = "nat_detection_personal_info")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class NatDetectionPersonalInfo extends BaseDomain {
 
     /**

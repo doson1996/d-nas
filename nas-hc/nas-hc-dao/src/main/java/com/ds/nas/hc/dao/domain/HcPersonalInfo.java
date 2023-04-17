@@ -9,6 +9,7 @@ import java.util.Date;
 
 import com.ds.nas.lib.common.base.domain.BaseDomain;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 人员信息
@@ -18,6 +19,7 @@ import lombok.Data;
  */
 @TableName(value = "hc_personal_info")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class HcPersonalInfo extends BaseDomain implements Serializable {
 
     private static final long serialVersionUID = -7781476491561838266L;
