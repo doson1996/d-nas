@@ -3,8 +3,8 @@ package com.ds.nas.hc.api.fegin.fallback;
 import com.ds.nas.hc.api.fegin.HealthCodeClient;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
-import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
-import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
+import com.ds.nas.hc.api.io.request.HealthCodeApplyRequest;
+import com.ds.nas.hc.api.io.response.HealthCodeQueryResponse;
 import org.springframework.stereotype.Component;
 
 /**

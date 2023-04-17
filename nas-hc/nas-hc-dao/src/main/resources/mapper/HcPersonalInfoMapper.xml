@@ -36,7 +36,7 @@
     </update>
 
 
-    <update id="updateByIdCards" parameterType="com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest">
+    <update id="updateByIdCards" parameterType="com.ds.nas.hc.api.request.PersonalInfoBatchUpdateRequest">
         update
             hc_personal_info
         <set>

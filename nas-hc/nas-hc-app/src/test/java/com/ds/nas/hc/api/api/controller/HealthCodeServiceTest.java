@@ -1,8 +1,7 @@
 package com.ds.nas.hc.api.api.controller;
 
 import com.ds.nas.hc.app.HcApplication;
-import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
-import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
+import com.ds.nas.hc.api.io.request.PersonalInfoRegisterRequest;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import com.ds.nas.lib.common.util.DataGenerateUtils;
 import org.junit.Test;

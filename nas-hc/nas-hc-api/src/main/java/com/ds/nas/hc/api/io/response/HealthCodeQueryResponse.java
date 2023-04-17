@@ -1,4 +1,4 @@
-package com.ds.nas.hc.dao.response;
+package com.ds.nas.hc.api.io.response;
 
 import com.ds.nas.lib.common.base.response.BaseResponse;
 //import io.swagger.annotations.ApiModel;

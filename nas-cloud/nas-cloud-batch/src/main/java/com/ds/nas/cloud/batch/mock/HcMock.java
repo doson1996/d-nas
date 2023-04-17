@@ -1,13 +1,12 @@
 package com.ds.nas.cloud.batch.mock;
 
 import com.ds.nas.hc.api.fegin.PersonalInfoClient;
-import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
-import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
+import com.ds.nas.hc.api.io.request.PersonalInfoRegisterRequest;
+import com.ds.nas.hc.api.io.response.PersonalInfoRegisterResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.DataGenerateUtils;
 import com.ds.nas.lib.common.util.DataGenerateUtilsV1;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 

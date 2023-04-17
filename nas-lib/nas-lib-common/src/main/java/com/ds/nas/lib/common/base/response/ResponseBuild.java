@@ -19,6 +19,8 @@ public class ResponseBuild {
      */
     public static void onReturn(BaseRequest request, BaseResponse response) {
         ResponsePrivate responsePrivate = new ResponsePrivate();
+        responsePrivate.setResponseApp("nas");
+        responsePrivate.setResponseIp("192.168.1.2");
         responsePrivate.setResponseTime(DateUtils.now());
         responsePrivate.setResponseId(UUID.fastUUID().toString(true));
         responsePrivate.setRequestId(request.getRequestPrivate().getRequestId());

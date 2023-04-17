@@ -1,7 +1,7 @@
 package com.ds.nas.cloud.message.sms.channel.client;
 
-import cn.hutool.core.util.StrUtil;
 import com.ds.nas.lib.cache.redis.RedisUtil;
+import com.ds.nas.lib.common.util.StringUtils;
 import com.ds.nas.lib.core.context.SpringContext;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +34,7 @@ public abstract class AbstractSMSClient implements SMSClient {
      * @return
      */
     protected String getClientName() {
-        return StrUtil.lowerFirst(getClass().getSimpleName());
+        return StringUtils.lowerFirst(getClass().getSimpleName());
     }
 
 }

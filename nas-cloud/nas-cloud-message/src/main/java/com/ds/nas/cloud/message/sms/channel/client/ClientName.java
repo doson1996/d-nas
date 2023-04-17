@@ -1,6 +1,6 @@
 package com.ds.nas.cloud.message.sms.channel.client;
 
-import cn.hutool.core.util.StrUtil;
+import com.ds.nas.lib.common.util.StringUtils;
 
 /**
  * @author ds
@@ -14,7 +14,7 @@ public interface ClientName {
     String ALI_CLIENT = getClientName(AliSMSClient.class);
 
     static String getClientName(Class clazz) {
-        return StrUtil.lowerFirst(clazz.getSimpleName());
+        return StringUtils.lowerFirst(clazz.getSimpleName());
     }
 
 }

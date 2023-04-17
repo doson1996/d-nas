@@ -1,12 +1,12 @@
 package com.ds.nas.hc.app.controller;
 
-import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
-import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
+import com.ds.nas.hc.api.io.request.PersonalInfoBatchUpdateRequest;
+import com.ds.nas.hc.api.io.response.PersonalInfoBatchUpdateResponse;
 import com.ds.nas.lib.common.result.Result;
-import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
-import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
-import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
-import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
+import com.ds.nas.hc.api.io.request.PersonalInfoRegisterRequest;
+import com.ds.nas.hc.api.io.request.PersonalInfoUpdateRequest;
+import com.ds.nas.hc.api.io.response.PersonalInfoRegisterResponse;
+import com.ds.nas.hc.api.io.response.PersonalInfoUpdateResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,6 +1,7 @@
 package com.ds.nas.cloud.message.sms.controller;
 
-import com.ds.nas.cloud.message.sms.request.SendSMSRequest;
+import com.ds.nas.cloud.message.sms.io.request.SendSMSRequest;
+import com.ds.nas.cloud.message.sms.io.response.AllStrategyResponse;
 import com.ds.nas.cloud.message.sms.service.SmsService;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
@@ -47,7 +48,7 @@ public class SmsController {
 
     @ApiOperation("获取所有短信发送策略")
     @PostMapping("all-strategy")
-    public Result<Set<String>> allStrategy() {
+    public Result<AllStrategyResponse> allStrategy() {
         return smsService.allStrategy();
     }
 

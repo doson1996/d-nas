@@ -4,7 +4,7 @@ import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;
+import com.ds.nas.nat.api.io.request.DetectionPersonalInfoEntryRequest;
 
 /**
 * @author ds

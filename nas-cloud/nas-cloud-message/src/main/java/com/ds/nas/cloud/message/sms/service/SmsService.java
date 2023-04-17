@@ -1,6 +1,7 @@
 package com.ds.nas.cloud.message.sms.service;
 
-import com.ds.nas.cloud.message.sms.request.SendSMSRequest;
+import com.ds.nas.cloud.message.sms.io.request.SendSMSRequest;
+import com.ds.nas.cloud.message.sms.io.response.AllStrategyResponse;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 
@@ -37,6 +38,6 @@ public interface SmsService {
      * 获取所有短信发送策略
      * @return
      */
-    Result<Set<String>> allStrategy();
+    Result<AllStrategyResponse> allStrategy();
 
 }

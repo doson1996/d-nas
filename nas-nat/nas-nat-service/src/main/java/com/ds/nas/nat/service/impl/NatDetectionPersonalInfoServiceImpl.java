@@ -7,7 +7,7 @@ import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper;
-import com.ds.nas.nat.dao.request.DetectionPersonalInfoEntryRequest;
+import com.ds.nas.nat.api.io.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

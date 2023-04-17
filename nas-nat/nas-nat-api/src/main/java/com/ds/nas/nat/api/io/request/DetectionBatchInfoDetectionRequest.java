@@ -1,4 +1,4 @@
-package com.ds.nas.nat.dao.request;
+package com.ds.nas.nat.api.io.request;
 
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;

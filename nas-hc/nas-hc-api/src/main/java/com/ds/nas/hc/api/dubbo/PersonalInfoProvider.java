@@ -1,7 +1,7 @@
 package com.ds.nas.hc.api.dubbo;
 
-import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
-import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
+import com.ds.nas.hc.api.io.request.PersonalInfoBatchUpdateRequest;
+import com.ds.nas.hc.api.io.response.PersonalInfoBatchUpdateResponse;
 import com.ds.nas.lib.common.result.Result;
 
 /**

@@ -1,11 +1,11 @@
 package com.ds.nas.gateway.filter;
 
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.ds.nas.lib.cache.key.RedisGatewayKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.result.Result;
+import com.ds.nas.lib.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -57,7 +57,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered, AuthGlobalConsta
             // 用户信息json
             String userJson = redisUtil.get(token);
             //token无效或已过期
-            if (StrUtil.isBlank(userJson)) {
+            if (StringUtils.isBlank(userJson)) {
                 return intercept(exchange);
             }
             //如果是管理员用户

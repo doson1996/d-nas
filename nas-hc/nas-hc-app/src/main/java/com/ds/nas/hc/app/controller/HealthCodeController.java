@@ -1,8 +1,8 @@
 package com.ds.nas.hc.app.controller;
 
-import com.ds.nas.hc.dao.request.HealthCodeApplyRequest;
-import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
-import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
+import com.ds.nas.hc.api.io.request.HealthCodeApplyRequest;
+import com.ds.nas.hc.api.io.request.HealthCodeQueryRequest;
+import com.ds.nas.hc.api.io.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;

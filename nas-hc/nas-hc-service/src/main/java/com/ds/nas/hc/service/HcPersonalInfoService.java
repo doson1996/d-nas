@@ -2,14 +2,14 @@ package com.ds.nas.hc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
-import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
-import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
-import com.ds.nas.hc.dao.request.PersonalInfoRegisterRequest;
-import com.ds.nas.hc.dao.request.PersonalInfoUpdateRequest;
-import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
-import com.ds.nas.hc.dao.response.PersonalInfoBatchUpdateResponse;
-import com.ds.nas.hc.dao.response.PersonalInfoRegisterResponse;
-import com.ds.nas.hc.dao.response.PersonalInfoUpdateResponse;
+import com.ds.nas.hc.api.io.request.HealthCodeQueryRequest;
+import com.ds.nas.hc.api.io.request.PersonalInfoBatchUpdateRequest;
+import com.ds.nas.hc.api.io.request.PersonalInfoRegisterRequest;
+import com.ds.nas.hc.api.io.request.PersonalInfoUpdateRequest;
+import com.ds.nas.hc.api.io.response.HealthCodeQueryResponse;
+import com.ds.nas.hc.api.io.response.PersonalInfoBatchUpdateResponse;
+import com.ds.nas.hc.api.io.response.PersonalInfoRegisterResponse;
+import com.ds.nas.hc.api.io.response.PersonalInfoUpdateResponse;
 import com.ds.nas.lib.common.result.Result;
 
 /**

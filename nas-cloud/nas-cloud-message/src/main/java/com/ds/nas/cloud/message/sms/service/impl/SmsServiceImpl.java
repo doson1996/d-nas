@@ -2,7 +2,8 @@ package com.ds.nas.cloud.message.sms.service.impl;
 
 import com.ds.nas.cloud.message.sms.channel.strategy.SendStrategy;
 import com.ds.nas.cloud.message.sms.channel.strategy.StrategyContext;
-import com.ds.nas.cloud.message.sms.request.SendSMSRequest;
+import com.ds.nas.cloud.message.sms.io.request.SendSMSRequest;
+import com.ds.nas.cloud.message.sms.io.response.AllStrategyResponse;
 import com.ds.nas.cloud.message.sms.service.SmsService;
 import com.ds.nas.lib.cache.key.RedisMessageKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
@@ -61,9 +62,11 @@ public class SmsServiceImpl implements SmsService {
     }
 
     @Override
-    public Result<Set<String>> allStrategy() {
+    public Result<AllStrategyResponse> allStrategy() {
         Map<String, SendStrategy> strategyMap = StrategyContext.allStrategy();
-        return Result.ok("获取全部策略成功", strategyMap.keySet());
+        AllStrategyResponse response = new AllStrategyResponse();
+        response.setData(strategyMap.keySet());
+        return Result.ok("获取全部策略成功", response);
     }
 
     /**

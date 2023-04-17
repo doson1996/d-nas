@@ -1,7 +1,8 @@
-package com.ds.nas.cloud.message.sms.request;
+package com.ds.nas.cloud.message.sms.io.request;
 
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author ds
@@ -9,6 +10,7 @@ import lombok.Data;
  * @description
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class SetStrategyRequest extends BaseRequest {
 
     /**

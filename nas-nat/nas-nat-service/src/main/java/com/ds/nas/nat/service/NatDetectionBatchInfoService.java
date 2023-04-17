@@ -4,9 +4,9 @@ import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.dao.domain.NatDetectionBatchInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ds.nas.nat.dao.request.DetectionBatchInfoCreateRequest;
-import com.ds.nas.nat.dao.request.DetectionBatchInfoDetectionRequest;
-import com.ds.nas.nat.dao.request.DetectionBatchInfoSubmitRequest;
+import com.ds.nas.nat.api.io.request.DetectionBatchInfoCreateRequest;
+import com.ds.nas.nat.api.io.request.DetectionBatchInfoDetectionRequest;
+import com.ds.nas.nat.api.io.request.DetectionBatchInfoSubmitRequest;
 
 /**
 * @author ds

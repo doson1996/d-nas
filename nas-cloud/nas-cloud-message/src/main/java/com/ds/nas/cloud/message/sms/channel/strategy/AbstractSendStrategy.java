@@ -1,6 +1,6 @@
 package com.ds.nas.cloud.message.sms.channel.strategy;
 
-import cn.hutool.core.util.StrUtil;
+import com.ds.nas.lib.common.util.StringUtils;
 
 /**
  * @author ds
@@ -13,7 +13,7 @@ public abstract class AbstractSendStrategy implements SendStrategy {
      * 策略注册方法
      */
     public void register() {
-        StrategyContext.registerStrategy(StrUtil.lowerFirst(getClass().getSimpleName()), this);
+        StrategyContext.registerStrategy(StringUtils.lowerFirst(getClass().getSimpleName()), this);
     }
 
 }

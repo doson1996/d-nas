@@ -1,11 +1,11 @@
 package com.ds.nas.nat.app.controller.advice;
 
-import cn.hutool.core.util.StrUtil;
 import com.ds.nas.lib.common.exception.AuthException;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.result.ResultEnum;
 import com.ds.nas.lib.common.result.ResultMsg;
+import com.ds.nas.lib.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -48,7 +48,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public Result<Void> handlerBusinessException(BusinessException e) {
         String msg = ResultMsg.BUSINESS_EXCEPTION_MSG;
-        if (StrUtil.isNotBlank(e.getMessage())) {
+        if (StringUtils.isNotBlank(e.getMessage())) {
             msg = e.getMessage();
         }
 
@@ -64,7 +64,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AuthException.class)
     public Result<Object> handlerAuthException(AuthException e) {
         String msg = ResultEnum.UNAUTHORIZED.getMessage();
-        if (StrUtil.isNotBlank(e.getMessage())) {
+        if (StringUtils.isNotBlank(e.getMessage())) {
             msg = e.getMessage();
         }
 
@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public Result<Void> handlerIllegalArgumentException(IllegalArgumentException e) {
         String msg = ResultMsg.PARAMETER_ERROR_MSG;
-        if (StrUtil.isNotBlank(e.getMessage())) {
+        if (StringUtils.isNotBlank(e.getMessage())) {
             msg = e.getMessage();
         }
 

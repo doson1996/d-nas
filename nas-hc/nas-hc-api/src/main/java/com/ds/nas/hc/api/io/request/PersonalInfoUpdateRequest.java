@@ -1,6 +1,6 @@
-package com.ds.nas.hc.dao.response;
+package com.ds.nas.hc.api.io.request;
 
-import com.ds.nas.lib.common.base.response.BaseResponse;
+import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,10 +8,15 @@ import java.util.Date;
 /**
  * @author ds
  * @date 2022/12/5
- * @description 注册出参
+ * @description 更新入参
  */
 @Data
-public class PersonalInfoUpdateResponse extends BaseResponse {
+public class PersonalInfoUpdateRequest extends BaseRequest {
+
+    /**
+     * id
+     */
+    private Integer id;
 
     /**
      * 姓名

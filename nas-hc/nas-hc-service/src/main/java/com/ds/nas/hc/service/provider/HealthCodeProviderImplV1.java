@@ -1,9 +1,9 @@
 package com.ds.nas.hc.service.provider;
 
 import com.ds.nas.hc.api.dubbo.HealthCodeProvider;
-import com.ds.nas.hc.dao.request.HealthCodeQueryRequest;
+import com.ds.nas.hc.api.io.request.HealthCodeQueryRequest;
 import com.ds.nas.lib.common.result.Result;
-import com.ds.nas.hc.dao.response.HealthCodeQueryResponse;
+import com.ds.nas.hc.api.io.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import org.apache.dubbo.config.annotation.DubboService;
 
