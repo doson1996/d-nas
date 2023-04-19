@@ -6,10 +6,9 @@ import com.ds.nas.lib.cache.key.RedisGatewayKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,9 +28,9 @@ import java.util.List;
  * @author ds
  * @date 2021/12/29 21:54
  */
-@Slf4j
+@Order(10)
 @Component
-public class AuthGlobalFilter implements GlobalFilter, Ordered, AuthGlobalConstant, RedisGatewayKey {
+public class AuthGlobalFilter implements GlobalFilter, AuthGlobalConstant, RedisGatewayKey {
 
     @Resource
     private RedisUtil redisUtil;
@@ -50,16 +49,14 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered, AuthGlobalConsta
         boolean ignorePath = ignorePath(path);
         if (!ignorePath) {
             List<String> list = headers.get("token");
-            if (list == null) {
+            if (list == null)
                 return intercept(exchange);
-            }
             String token = list.get(0);
             // 用户信息json
             String userJson = redisUtil.get(token);
             //token无效或已过期
-            if (StringUtils.isBlank(userJson)) {
+            if (StringUtils.isBlank(userJson))
                 return intercept(exchange);
-            }
             //如果是管理员用户
             if (token.startsWith("ADMIN-TOKEN")) {
                 JSONObject jsonObject = JSONUtil.parseObj(userJson);
@@ -99,11 +96,6 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered, AuthGlobalConsta
         String body = JSONUtil.toJsonStr(Result.fail("无效Token"));
         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(StandardCharsets.UTF_8));
         return response.writeWith(Mono.just(buffer));
-    }
-
-    @Override
-    public int getOrder() {
-        return -1;
     }
 
 }

@@ -44,15 +44,23 @@ spring:
         port: ${server.port}
         dashboard: ${env.host}:8800
     gateway:
+      # 跨域
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: '*'
+            allowedMethods:
+              - GET
+              - POST
       discovery:
         locator:
           lower-case-service-id: true
-          enabled: true
+          enabled: true       # 启用发现客户端网关集成的标志
       routes:
         # hc
-        - id: nas-hc-route
-          uri: lb://nas-hc
-          predicates:
+        - id: nas-hc-route     # 路由唯一标识
+          uri: lb://nas-hc     # 需要转发的地址
+          predicates: # 断言规则，用于路由规则匹配
             - Path=/api/hc/**
           filters:
             - StripPrefix=2
@@ -61,6 +69,13 @@ spring:
           uri: lb://nas-nat
           predicates:
             - Path=/api/nat/**
+          filters:
+            - StripPrefix=2
+        # message
+        - id: nas-cloud-message-route
+          uri: lb://nas-cloud-message
+          predicates:
+            - Path=/api/message/**
           filters:
             - StripPrefix=2
 
