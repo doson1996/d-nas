@@ -11,7 +11,7 @@
         <relativePath>../dependencies/pom.xml</relativePath>
     </parent>
 
-    <groupId>com.ds.nas.gateway</groupId>
+    <groupId>com.ds.nas</groupId>
     <artifactId>nas-gateway</artifactId>
     <version>1.0-SNAPSHOT</version>
 

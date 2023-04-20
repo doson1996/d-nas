@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.email.service;
+package com.ds.nas.cloud.api.message.email.dubbo;
 
 import com.ds.nas.cloud.api.message.email.io.request.SendCaptchaRequest;
 import com.ds.nas.cloud.api.message.email.io.request.SendMailRequest;
@@ -8,24 +8,10 @@ import com.ds.nas.lib.common.result.Result;
 
 /**
  * @author ds
+ * @date 2023/4/20
+ * @description
  */
-public interface MailService {
-
-    /**
-     * 发送简单邮件
-     * @param request
-     * @return
-     */
-    boolean sendSimpleMail(SendMailRequest request);
-
-
-    /**
-     * 发送html邮件
-     *
-     * @param request
-     * @return
-     */
-    boolean sendHtmlMail(SendMailRequest request);
+public interface EmailProvider {
 
     /**
      * 发送验证码

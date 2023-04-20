@@ -28,6 +28,11 @@
 
         <dependency>
             <groupId>com.ds.nas</groupId>
+            <artifactId>nas-cloud-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ds.nas</groupId>
             <artifactId>nas-lib-cache</artifactId>
         </dependency>
 

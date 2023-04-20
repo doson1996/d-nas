@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.sms.io.request;
+package com.ds.nas.cloud.api.message.email.io.request;
 
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import io.swagger.annotations.ApiModel;
@@ -11,21 +11,21 @@ import lombok.EqualsAndHashCode;
  * @date 2023/4/17
  * @description
  */
-@ApiModel("发送验证码入参")
+@ApiModel("验证验证码入参")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class SendCaptchaRequest extends BaseRequest {
+public class VerifyCaptchaRequest extends BaseRequest {
 
     /**
-     * 手机号
+     * 邮箱
      */
-    @ApiModelProperty("手机号")
-    private String phone;
+    @ApiModelProperty("邮箱")
+    private String email;
 
     /**
-     * 有效期(分钟)
+     * 验证码
      */
-    @ApiModelProperty("有效期(分钟)")
-    private String expire;
+    @ApiModelProperty("验证码")
+    private String captcha;
 
 }

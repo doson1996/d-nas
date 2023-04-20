@@ -1,13 +1,11 @@
 package com.ds.nas.cloud.message.sms.service;
 
-import com.ds.nas.cloud.message.sms.io.request.SendCaptchaRequest;
-import com.ds.nas.cloud.message.sms.io.request.SendSMSRequest;
-import com.ds.nas.cloud.message.sms.io.request.VerifyCaptchaRequest;
-import com.ds.nas.cloud.message.sms.io.response.AllStrategyResponse;
+import com.ds.nas.cloud.api.message.sms.io.request.SendCaptchaRequest;
+import com.ds.nas.cloud.api.message.sms.io.request.SendSMSRequest;
+import com.ds.nas.cloud.api.message.sms.io.request.VerifyCaptchaRequest;
+import com.ds.nas.cloud.api.message.sms.io.response.AllStrategyResponse;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
-
-import java.util.Set;
 
 /**
  * @author ds

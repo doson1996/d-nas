@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.sms.io.response;
+package com.ds.nas.cloud.api.message.sms.io.response;
 
 import com.ds.nas.lib.common.base.response.BaseResponse;
 import io.swagger.annotations.ApiModel;

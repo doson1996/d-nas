@@ -1,9 +1,9 @@
 package com.ds.nas.cloud.message.sms.controller;
 
-import com.ds.nas.cloud.message.sms.io.request.SendCaptchaRequest;
-import com.ds.nas.cloud.message.sms.io.request.SendSMSRequest;
-import com.ds.nas.cloud.message.sms.io.request.VerifyCaptchaRequest;
-import com.ds.nas.cloud.message.sms.io.response.AllStrategyResponse;
+import com.ds.nas.cloud.api.message.sms.io.request.SendCaptchaRequest;
+import com.ds.nas.cloud.api.message.sms.io.request.SendSMSRequest;
+import com.ds.nas.cloud.api.message.sms.io.request.VerifyCaptchaRequest;
+import com.ds.nas.cloud.api.message.sms.io.response.AllStrategyResponse;
 import com.ds.nas.cloud.message.sms.service.SmsService;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
@@ -15,14 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
-
 /**
  * @author ds
  * @date 2023/4/6
- * @description 短信服务
+ * @description 短信服务 平台
  */
-@Api("短信服务")
+@Api(tags = "短信服务")
 @RestController
 @AllArgsConstructor
 @RequestMapping("sms")
@@ -65,6 +63,5 @@ public class SmsController {
     public Result<AllStrategyResponse> allStrategy() {
         return smsService.allStrategy();
     }
-
 
 }

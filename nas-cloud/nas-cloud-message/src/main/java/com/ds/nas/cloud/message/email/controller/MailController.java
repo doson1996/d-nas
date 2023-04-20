@@ -1,9 +1,9 @@
 package com.ds.nas.cloud.message.email.controller;
 
+import com.ds.nas.cloud.api.message.email.io.request.SendCaptchaRequest;
+import com.ds.nas.cloud.api.message.email.io.request.SendMailRequest;
+import com.ds.nas.cloud.api.message.email.io.request.VerifyCaptchaRequest;
 import com.ds.nas.cloud.message.email.constant.MailTemplate;
-import com.ds.nas.cloud.message.email.io.request.SendCaptchaRequest;
-import com.ds.nas.cloud.message.email.io.request.SendMailRequest;
-import com.ds.nas.cloud.message.email.io.request.VerifyCaptchaRequest;
 import com.ds.nas.cloud.message.email.service.MailService;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
@@ -16,9 +16,9 @@ import javax.annotation.Resource;
 /**
  * @author ds
  * @date 2023/4/6
- * @description 邮件发送
+ * @description 邮件服务
  */
-@Api("邮件发送")
+@Api(tags = "邮件服务")
 @RestController
 @RequestMapping("mail")
 public class MailController {

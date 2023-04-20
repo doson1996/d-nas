@@ -17,6 +17,7 @@
     <description>能力平台</description>
 
     <modules>
+        <module>nas-cloud-api</module>
         <module>nas-cloud-batch</module>
         <module>nas-cloud-canal</module>
         <module>nas-cloud-mq</module>

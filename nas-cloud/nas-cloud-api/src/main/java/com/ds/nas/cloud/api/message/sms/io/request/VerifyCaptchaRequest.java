@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.email.io.request;
+package com.ds.nas.cloud.api.message.sms.io.request;
 
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import io.swagger.annotations.ApiModel;
@@ -17,10 +17,10 @@ import lombok.EqualsAndHashCode;
 public class VerifyCaptchaRequest extends BaseRequest {
 
     /**
-     * 邮箱
+     * 手机号
      */
-    @ApiModelProperty("邮箱")
-    private String email;
+    @ApiModelProperty("手机号")
+    private String phone;
 
     /**
      * 验证码

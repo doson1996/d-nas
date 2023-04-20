@@ -2,9 +2,9 @@ package com.ds.nas.cloud.message.email.service.impl;
 
 import com.ds.nas.cloud.message.constant.MessageConstant;
 import com.ds.nas.cloud.message.email.constant.MailTemplate;
-import com.ds.nas.cloud.message.email.io.request.SendCaptchaRequest;
-import com.ds.nas.cloud.message.email.io.request.SendMailRequest;
-import com.ds.nas.cloud.message.email.io.request.VerifyCaptchaRequest;
+import com.ds.nas.cloud.api.message.email.io.request.SendCaptchaRequest;
+import com.ds.nas.cloud.api.message.email.io.request.SendMailRequest;
+import com.ds.nas.cloud.api.message.email.io.request.VerifyCaptchaRequest;
 import com.ds.nas.cloud.message.email.service.MailService;
 import com.ds.nas.lib.cache.key.RedisEmailKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;

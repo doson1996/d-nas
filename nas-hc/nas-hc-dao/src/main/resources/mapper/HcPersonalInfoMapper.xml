@@ -36,16 +36,16 @@
     </update>
 
 
-    <update id="updateByIdCards" parameterType="com.ds.nas.hc.api.request.PersonalInfoBatchUpdateRequest">
+    <update id="updateByIdCards">
         update
             hc_personal_info
         <set>
-            health = #{request.health, jdbcType=TINYINT},
+            health = #{health, jdbcType=TINYINT},
             last_nucleic_acid_time = #{request.lastNucleicAcidTime, jdbcType=TIMESTAMP}
         </set>
         where
             id_card in
-        <foreach  item="item" index="index" collection="request.idCards" open="(" separator="," close=" )">
+        <foreach  item="item" index="index" collection="idCards" open="(" separator="," close=" )">
             #{item}
         </foreach>
     </update>

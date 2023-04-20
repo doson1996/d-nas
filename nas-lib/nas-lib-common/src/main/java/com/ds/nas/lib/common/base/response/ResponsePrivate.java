@@ -3,13 +3,17 @@ package com.ds.nas.lib.common.base.response;
 import com.ds.nas.lib.common.util.DateUtils;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author ds
  * @date 2023/4/15
  * @description response私有通讯区
  */
 @Data
-public class ResponsePrivate {
+public class ResponsePrivate implements Serializable {
+
+    private static final long serialVersionUID = -5947779920373539089L;
 
     /**
      * 请求id

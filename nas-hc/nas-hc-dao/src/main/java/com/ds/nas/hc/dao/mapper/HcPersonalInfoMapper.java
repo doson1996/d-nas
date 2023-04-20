@@ -1,10 +1,10 @@
 package com.ds.nas.hc.dao.mapper;
 
-import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ds.nas.hc.dao.request.PersonalInfoBatchUpdateRequest;
-import org.apache.ibatis.annotations.Param;
+import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author ds
@@ -32,11 +32,11 @@ public interface HcPersonalInfoMapper extends BaseMapper<HcPersonalInfo> {
 
     /**
      * 根据批次号更新
-     * @param request
+     * @param health
+     * @param idCards
      * @return
      */
-    int updateByIdCards(@Param("request") PersonalInfoBatchUpdateRequest request);
-
+    int updateByIdCards(Integer health, List<String> idCards);
 }
 
 

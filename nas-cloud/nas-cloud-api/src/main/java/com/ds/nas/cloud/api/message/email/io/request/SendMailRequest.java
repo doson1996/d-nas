@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.email.io.request;
+package com.ds.nas.cloud.api.message.email.io.request;
 
 import lombok.Data;
 

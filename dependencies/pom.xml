@@ -102,6 +102,13 @@
                 <version>${rversion}</version>
             </dependency>
 
+            <!-- cloud -->
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-cloud-api</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
             <!-- auth -->
             <dependency>
                 <groupId>com.ds.nas</groupId>

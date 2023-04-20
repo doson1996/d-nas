@@ -1,10 +1,13 @@
 package com.ds.nas.hc.service.impl;
+import com.ds.nas.lib.common.base.request.RequestPrivate;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.IdcardUtil;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ds.nas.cloud.api.message.sms.dubbo.SmsProvider;
+import com.ds.nas.cloud.api.message.sms.io.request.SendCaptchaRequest;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
 import com.ds.nas.hc.api.io.request.HealthCodeQueryRequest;
@@ -26,6 +29,7 @@ import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.base.response.ResponseBuild;
 import com.ds.nas.lib.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -48,6 +52,9 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     @Resource
     private HcPersonalInfoMapper hcPersonalInfoMapper;
+
+    @DubboReference(version = "1.0")
+    private SmsProvider smsProvider;
 
 
     @Override
@@ -77,6 +84,12 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         response.setPhone(hcPersonalInfo.getPhone());
         response.setIdCard(hcPersonalInfo.getIdCard());
         response.setAddress(hcPersonalInfo.getAddress());
+
+        SendCaptchaRequest sendCaptchaRequest = new SendCaptchaRequest();
+        sendCaptchaRequest.setPhone(request.getPhone());
+        sendCaptchaRequest.setExpire("5");
+        sendCaptchaRequest.setRequestPrivate(new RequestPrivate());
+        smsProvider.sendCaptcha(sendCaptchaRequest);
         return Result.ok("注册成功!", response);
     }
 
@@ -123,7 +136,9 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         if (request.getIdCards().isEmpty()) {
             return Result.fail("未执行批量更新!");
         }
-        int res = hcPersonalInfoMapper.updateByIdCards(request);
+        List<String> idCards = request.getIdCards();
+        Integer health = request.getHealth();
+        int res = hcPersonalInfoMapper.updateByIdCards(health, idCards);
         if (res > 0) {
             deleteHcCache(request.getIdCards());
             return Result.ok("批量更新成功!");

@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.sms.io.request;
+package com.ds.nas.cloud.api.message.sms.io.request;
 
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;
