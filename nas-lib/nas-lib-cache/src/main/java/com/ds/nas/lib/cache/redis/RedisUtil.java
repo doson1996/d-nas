@@ -28,7 +28,7 @@ public class RedisUtil {
      * @param key
      */
     public void delete(String key) {
-        stringRedisTemplate.delete(key);
+        stringRedisTemplate.unlink(key);
     }
 
     /**
@@ -37,7 +37,7 @@ public class RedisUtil {
      * @param keys
      */
     public void delete(Collection<String> keys) {
-        stringRedisTemplate.delete(keys);
+        stringRedisTemplate.unlink(keys);
     }
 
     /**

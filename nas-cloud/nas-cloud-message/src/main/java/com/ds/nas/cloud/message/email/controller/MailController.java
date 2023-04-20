@@ -1,7 +1,9 @@
 package com.ds.nas.cloud.message.email.controller;
 
 import com.ds.nas.cloud.message.email.constant.MailTemplate;
-import com.ds.nas.cloud.message.email.request.SendMailRequest;
+import com.ds.nas.cloud.message.email.io.request.SendCaptchaRequest;
+import com.ds.nas.cloud.message.email.io.request.SendMailRequest;
+import com.ds.nas.cloud.message.email.io.request.VerifyCaptchaRequest;
 import com.ds.nas.cloud.message.email.service.MailService;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
@@ -44,9 +46,14 @@ public class MailController {
 
     @ApiOperation("发送验证码邮件")
     @PostMapping("send-verifyCode")
-    public Result<StringResponse> sendVerifyCode(@RequestBody SendMailRequest request) {
-        request.setTemplate(MailTemplate.VERIFY_CODE);
-        return sendHtml(request);
+    public Result<StringResponse> sendVerifyCode(@RequestBody SendCaptchaRequest request) {
+        return mailService.sendVerifyCode(request);
+    }
+
+    @ApiOperation("验证短信验证码")
+    @PostMapping("verify-captcha")
+    public Result<StringResponse> verifyCaptcha(@RequestBody VerifyCaptchaRequest request) {
+        return mailService.verifyCaptcha(request);
     }
 
     @ApiOperation("发送激活邮件")

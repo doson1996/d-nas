@@ -1,5 +1,6 @@
 package com.ds.nas.cloud.message.sms.service.impl;
 
+import com.ds.nas.cloud.message.constant.MessageConstant;
 import com.ds.nas.cloud.message.sms.channel.strategy.SendStrategy;
 import com.ds.nas.cloud.message.sms.channel.strategy.StrategyContext;
 import com.ds.nas.cloud.message.sms.io.request.SendCaptchaRequest;
@@ -27,7 +28,7 @@ import java.util.Map;
  * @description
  */
 @Service
-public class SmsServiceImpl implements SmsService {
+public class SmsServiceImpl implements SmsService, MessageConstant {
 
     @Resource
     RedisUtil redisUtil;
@@ -38,7 +39,7 @@ public class SmsServiceImpl implements SmsService {
         // 判断是否限制发送频率
         String limitValue = redisUtil.get(getSmsLimitKey(phone));
         if (LIMIT_VALUE.equals(limitValue)) {
-            return Result.fail("短信发送失败", StringResponse.builder().withData("请勿频繁请求发送短信").build());
+            return Result.fail("短信发送失败", StringResponse.builder().withData("请勿频繁请求发送短信验证码").build());
         }
 
         List<String> params = new ArrayList<>();
@@ -134,7 +135,7 @@ public class SmsServiceImpl implements SmsService {
     }
 
     /**
-     * 验证码存 key (key 前缀:手机号 value 验证码)
+     * redis存验证码 key (key 前缀:手机号 value 验证码)
      *
      * @param phone
      * @return
