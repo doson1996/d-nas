@@ -84,12 +84,6 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         response.setPhone(hcPersonalInfo.getPhone());
         response.setIdCard(hcPersonalInfo.getIdCard());
         response.setAddress(hcPersonalInfo.getAddress());
-
-        SendCaptchaRequest sendCaptchaRequest = new SendCaptchaRequest();
-        sendCaptchaRequest.setPhone(request.getPhone());
-        sendCaptchaRequest.setExpire("5");
-        sendCaptchaRequest.setRequestPrivate(new RequestPrivate());
-        smsProvider.sendCaptcha(sendCaptchaRequest);
         return Result.ok("注册成功!", response);
     }
 

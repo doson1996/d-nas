@@ -2,6 +2,7 @@ package com.ds.nas.hc.api.io.response;
 
 import com.ds.nas.lib.common.base.response.BaseResponse;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import java.util.Date;
  * @date 2022/12/5
  * @description 注册出参
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class PersonalInfoRegisterResponse extends BaseResponse {
 
