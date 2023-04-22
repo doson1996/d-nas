@@ -9,7 +9,7 @@ import com.ds.nas.lib.common.result.Result;
 /**
  * @author ds
  */
-public interface MailService {
+public interface EmailService {
 
     /**
      * 发送简单邮件
@@ -32,7 +32,7 @@ public interface MailService {
      * @param request
      * @return
      */
-    Result<StringResponse> sendVerifyCode(SendCaptchaRequest request);
+    Result<StringResponse> sendCaptcha(SendCaptchaRequest request);
 
     /**
      * 验证验证码

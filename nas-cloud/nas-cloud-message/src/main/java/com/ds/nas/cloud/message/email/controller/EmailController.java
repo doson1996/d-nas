@@ -4,7 +4,7 @@ import com.ds.nas.cloud.api.message.email.io.request.SendCaptchaRequest;
 import com.ds.nas.cloud.api.message.email.io.request.SendMailRequest;
 import com.ds.nas.cloud.api.message.email.io.request.VerifyCaptchaRequest;
 import com.ds.nas.cloud.message.email.constant.MailTemplate;
-import com.ds.nas.cloud.message.email.service.MailService;
+import com.ds.nas.cloud.message.email.service.EmailService;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import io.swagger.annotations.Api;
@@ -21,15 +21,15 @@ import javax.annotation.Resource;
 @Api(tags = "邮件服务")
 @RestController
 @RequestMapping("mail")
-public class MailController {
+public class EmailController {
 
     @Resource
-    private MailService mailService;
+    private EmailService emailService;
 
     @ApiOperation("发送简单邮件")
     @PostMapping("send-simple")
     public Result<StringResponse> sendSimple(@RequestBody SendMailRequest request) {
-        if (mailService.sendSimpleMail(request)) {
+        if (emailService.sendSimpleMail(request)) {
             return Result.ok("发送邮件成功!");
         }
         return Result.fail("发送邮件失败!");
@@ -38,22 +38,22 @@ public class MailController {
     @ApiOperation("发送html邮件")
     @PostMapping("send-html")
     public Result<StringResponse> sendHtml(@RequestBody SendMailRequest request) {
-        if (mailService.sendHtmlMail(request)) {
+        if (emailService.sendHtmlMail(request)) {
             return Result.ok("发送邮件成功!");
         }
         return Result.fail("发送邮件失败!");
     }
 
     @ApiOperation("发送验证码邮件")
-    @PostMapping("send-verifyCode")
-    public Result<StringResponse> sendVerifyCode(@RequestBody SendCaptchaRequest request) {
-        return mailService.sendVerifyCode(request);
+    @PostMapping("send-captcha")
+    public Result<StringResponse> sendCaptcha(@RequestBody SendCaptchaRequest request) {
+        return emailService.sendCaptcha(request);
     }
 
     @ApiOperation("验证短信验证码")
     @PostMapping("verify-captcha")
     public Result<StringResponse> verifyCaptcha(@RequestBody VerifyCaptchaRequest request) {
-        return mailService.verifyCaptcha(request);
+        return emailService.verifyCaptcha(request);
     }
 
     @ApiOperation("发送激活邮件")

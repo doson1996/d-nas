@@ -1,4 +1,4 @@
-package com.ds.nas.cloud.message.constant;
+package com.ds.nas.cloud.message.shared.constant;
 
 /**
  * @author ds
@@ -13,13 +13,13 @@ public interface MessageConstant {
     String LIMIT_VALUE = "1";
 
     /**
-     * 限制发送频率（每分钟限制发送一次）
+     * 默认限制发送频率（每分钟限制发送一次）
      */
     Integer LIMIT_VALUE_EXPIRE = 1;
 
     /**
      * 验证码默认有效期(3分钟)
      */
-    String DEFAULT_EXPIRE = "3";
+    Long DEFAULT_EXPIRE = 3L;
 
 }
