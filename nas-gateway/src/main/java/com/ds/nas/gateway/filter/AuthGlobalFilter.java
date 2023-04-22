@@ -46,8 +46,8 @@ public class AuthGlobalFilter implements GlobalFilter, AuthGlobalConstant, Redis
         HttpHeaders headers = request.getHeaders();
         String path = request.getURI().getPath();
         // 忽略鉴权路径判断
-        boolean ignorePath = ignorePath(path);
-        if (!ignorePath) {
+       // boolean ignorePath = ignorePath(path);
+        if (false) {
             List<String> list = headers.get("token");
             if (list == null)
                 return intercept(exchange);

@@ -2,8 +2,6 @@ package com.ds.nas.cloud.message.shared.captcha;
 
 import com.ds.nas.cloud.message.shared.constant.MessageConstant;
 import com.ds.nas.lib.cache.redis.RedisUtil;
-import com.ds.nas.lib.common.base.response.StringResponse;
-import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +60,11 @@ public class CaptchaServiceImpl implements CaptchaService, MessageConstant {
         if (!repeat)
             redisUtil.delete(key);
         return true;
+    }
+
+    @Override
+    public Long getExpire(Integer expire) {
+        return expire == null ? MessageConstant.DEFAULT_EXPIRE : expire;
     }
 
 }

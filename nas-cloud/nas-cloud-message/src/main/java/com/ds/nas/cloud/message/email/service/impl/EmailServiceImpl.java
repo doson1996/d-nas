@@ -108,9 +108,11 @@ public class EmailServiceImpl implements EmailService, RedisEmailKey {
 
         // 生成验证码
         String captcha = captchaService.generate();
+        // 验证码有效期
+        Long expire = captchaService.getExpire(request.getExpire());
         Map<String, Object> variables = new HashMap<>(16);
         variables.put("operate", request.getOperate());
-        variables.put("expire", request.getExpire());
+        variables.put("expire", expire);
         variables.put("verifyCode", captcha);
 
         SendMailRequest sendMailRequest = new SendMailRequest();
@@ -124,7 +126,7 @@ public class EmailServiceImpl implements EmailService, RedisEmailKey {
         sendMailRequest.setSubject(request.getSubject());
         boolean sendSuccess = sendHtmlMail(sendMailRequest);
         if (sendSuccess) {
-            onSendCaptcha(request, captcha, limitKey);
+            onSendCaptchaSuccess(request, captcha, limitKey);
             return Result.ok("发送邮件验证码成功!");
         }
         return Result.fail("发送邮件验证码失败!");
@@ -149,7 +151,7 @@ public class EmailServiceImpl implements EmailService, RedisEmailKey {
      *
      * @param request
      */
-    private void onSendCaptcha(SendCaptchaRequest request, String captcha, String limitKey) {
+    private void onSendCaptchaSuccess(SendCaptchaRequest request, String captcha, String limitKey) {
         String key = captchaService.getCaptchaKey(request.getTo(), EMAIL_CAPTCHA_KEY);
         long keyExpire = request.getExpire() * DateUnit.MINUTE.getSecond();
         // 存放邮箱和验证码到redis并设置过期时间

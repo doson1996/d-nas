@@ -57,7 +57,7 @@ public class SmsServiceImpl implements SmsService, RedisSMSKey {
 
         List<String> params = new ArrayList<>();
         params.add(request.getCaptcha());
-        params.add(request.getExpire());
+        params.add(String.valueOf(request.getExpire()));
         SendStrategy sendStrategy = StrategyContext.getStrategy(getCurrentStrategy());
         boolean sendResult = sendStrategy.getClient()
                 .send(phone, params);
@@ -82,7 +82,8 @@ public class SmsServiceImpl implements SmsService, RedisSMSKey {
         String captcha = captchaService.generate();
         sendSMSRequest.setCaptcha(captcha);
         // 验证码有效期
-        sendSMSRequest.setExpire(getExpire(request.getExpire()));
+        Long expire = captchaService.getExpire(request.getExpire());
+        sendSMSRequest.setExpire(expire);
 
         Result<StringResponse> sendResult = send(sendSMSRequest);
         if (ResultCode.SUCCESS == sendResult.getCode())
@@ -98,7 +99,7 @@ public class SmsServiceImpl implements SmsService, RedisSMSKey {
      */
     private void onSendCaptchaSuccess(SendCaptchaRequest request, String captcha, String limitKey) {
         String key = captchaService.getCaptchaKey(request.getPhone(), SMS_CAPTCHA_KEY);
-        long keyExpire = DateUnit.MINUTE.getSecond();
+        long keyExpire = request.getExpire() * DateUnit.MINUTE.getSecond();
         // 存放手机号和验证码到redis并设置过期时间
         captchaService.save(key, captcha, keyExpire);
         // 存放手机号到发送频率限制key中（发送成功后，一分钟内不可再次发送）
@@ -153,13 +154,13 @@ public class SmsServiceImpl implements SmsService, RedisSMSKey {
     }
 
     /**
-     * 获取短信有效期,没设置则返回默认有效期(3分钟)
+     * 获取短信验证码有效期,没设置则返回默认有效期(3分钟)
      *
      * @param expire
      * @return
      */
-    private String getExpire(String expire) {
-        return StringUtils.isBlank(expire) ? String.valueOf(MessageConstant.DEFAULT_EXPIRE) : expire;
+    private Long getExpire(Integer expire) {
+        return expire == null ? MessageConstant.DEFAULT_EXPIRE : expire;
     }
 
 }

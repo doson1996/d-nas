@@ -26,6 +26,6 @@ public class SendCaptchaRequest extends BaseRequest {
      * 有效期(分钟)
      */
     @ApiModelProperty("有效期(分钟)")
-    private String expire;
+    private Integer expire;
 
 }

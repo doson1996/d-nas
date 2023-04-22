@@ -25,6 +25,7 @@ public interface CaptchaService {
 
     /**
      * 获取验证码
+     *
      * @param key
      * @return
      */
@@ -32,6 +33,7 @@ public interface CaptchaService {
 
     /**
      * 存放验证码
+     *
      * @param key
      * @param captcha
      */
@@ -39,6 +41,7 @@ public interface CaptchaService {
 
     /**
      * 存放验证码
+     *
      * @param key
      * @param captcha
      */
@@ -46,6 +49,7 @@ public interface CaptchaService {
 
     /**
      * 验证验证码（只能成功验证一次）
+     *
      * @param captcha
      * @param key
      * @return
@@ -55,11 +59,19 @@ public interface CaptchaService {
 
     /**
      * 验证验证码
+     *
      * @param captcha
      * @param key
      * @param repeat  是否在有效期内可重复成功验证
      * @return
      */
     boolean verify(String captcha, String key, boolean repeat);
+
+    /**
+     * 获取验证码有效期,没设置则返回默认有效期(3分钟)
+     * @param expire
+     * @return
+     */
+    Long getExpire(Integer expire);
 
 }
