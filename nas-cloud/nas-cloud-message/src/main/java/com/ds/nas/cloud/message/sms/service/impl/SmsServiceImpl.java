@@ -1,6 +1,8 @@
 package com.ds.nas.cloud.message.sms.service.impl;
 
-import com.ds.nas.cloud.message.constant.MessageConstant;
+import com.ds.nas.cloud.message.shared.captcha.CaptchaService;
+import com.ds.nas.cloud.message.shared.constant.MessageConstant;
+import com.ds.nas.cloud.message.shared.limit.LimitService;
 import com.ds.nas.cloud.message.sms.channel.strategy.SendStrategy;
 import com.ds.nas.cloud.message.sms.channel.strategy.StrategyContext;
 import com.ds.nas.cloud.api.message.sms.io.request.SendCaptchaRequest;
@@ -13,6 +15,7 @@ import com.ds.nas.lib.cache.redis.RedisUtil;
 import com.ds.nas.lib.common.base.response.ResponseBuild;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
+import com.ds.nas.lib.common.result.ResultCode;
 import com.ds.nas.lib.common.util.DateUnit;
 import com.ds.nas.lib.common.util.StringUtils;
 import org.springframework.stereotype.Service;
@@ -28,18 +31,28 @@ import java.util.Map;
  * @description
  */
 @Service
-public class SmsServiceImpl implements SmsService, MessageConstant {
+public class SmsServiceImpl implements SmsService, RedisSMSKey {
 
     @Resource
-    RedisUtil redisUtil;
+    private RedisUtil redisUtil;
+
+    @Resource
+    private LimitService limitService;
+
+    @Resource
+    private CaptchaService captchaService;
 
     @Override
     public Result<StringResponse> send(SendSMSRequest request) {
         String phone = request.getPhone();
+        if (StringUtils.isBlank(phone)) {
+            return Result.fail("短信发送失败", StringResponse.builder().withData("手机号不能为空!").build());
+        }
+
+        String limitKey = limitService.getLimitKey(phone, SMS_LIMIT_KEY);
         // 判断是否限制发送频率
-        String limitValue = redisUtil.get(getSmsLimitKey(phone));
-        if (LIMIT_VALUE.equals(limitValue)) {
-            return Result.fail("短信发送失败", StringResponse.builder().withData("请勿频繁请求发送短信验证码").build());
+        if (limitService.getLimit(limitKey)) {
+            return Result.fail("短信发送失败", StringResponse.builder().withData("请勿频繁请求发送短信").build());
         }
 
         List<String> params = new ArrayList<>();
@@ -51,13 +64,6 @@ public class SmsServiceImpl implements SmsService, MessageConstant {
         StringResponse response = StringResponse.builder().withData(phone).build();
         ResponseBuild.onReturn(request, response);
         if (sendResult) {
-            // todo 发送成功，异步处理
-            String key = getCaptchaKey(phone);
-            long keyExpire = Long.parseLong(request.getExpire()) * DateUnit.MINUTE.getSecond();
-            // 存放手机号和验证码到redis并设置过期时间
-            redisUtil.set(key, request.getCaptcha(), keyExpire);
-            // 存放手机号到发送频率限制key中（发送成功后，一分钟内不可再次发送）
-            redisUtil.set(getSmsLimitKey(phone), LIMIT_VALUE, LIMIT_VALUE_EXPIRE * DateUnit.MINUTE.getSecond());
             return Result.ok("短信发送成功", response);
         }
         return Result.fail("短信发送失败", response);
@@ -65,30 +71,51 @@ public class SmsServiceImpl implements SmsService, MessageConstant {
 
     @Override
     public Result<StringResponse> sendCaptcha(SendCaptchaRequest request) {
+        String phone = request.getPhone();
+        if (StringUtils.isBlank(phone)) {
+            return Result.fail("短信发送失败", StringResponse.builder().withData("手机号不能为空!").build());
+        }
         SendSMSRequest sendSMSRequest = new SendSMSRequest();
         sendSMSRequest.setRequestPrivate(request.getRequestPrivate());
-        sendSMSRequest.setPhone(request.getPhone());
+        sendSMSRequest.setPhone(phone);
         // 验证码
-        sendSMSRequest.setCaptcha(getCaptcha());
+        String captcha = captchaService.generate();
+        sendSMSRequest.setCaptcha(captcha);
         // 验证码有效期
         sendSMSRequest.setExpire(getExpire(request.getExpire()));
-        return send(sendSMSRequest);
+
+        Result<StringResponse> sendResult = send(sendSMSRequest);
+        if (ResultCode.SUCCESS == sendResult.getCode())
+            onSendCaptchaSuccess(request, captcha, limitService.getLimitKey(phone, SMS_LIMIT_KEY));
+        return sendResult;
+    }
+
+    /**
+     * 发送验证码成功后
+     *  todo 发送成功，异步处理
+     *
+     * @param request
+     */
+    private void onSendCaptchaSuccess(SendCaptchaRequest request, String captcha, String limitKey) {
+        String key = captchaService.getCaptchaKey(request.getPhone(), SMS_CAPTCHA_KEY);
+        long keyExpire = DateUnit.MINUTE.getSecond();
+        // 存放手机号和验证码到redis并设置过期时间
+        captchaService.save(key, captcha, keyExpire);
+        // 存放手机号到发送频率限制key中（发送成功后，一分钟内不可再次发送）
+        limitService.setLimit(limitKey);
     }
 
     @Override
     public Result<StringResponse> verifyCaptcha(VerifyCaptchaRequest request) {
-        if (StringUtils.isBlank(request.getCaptcha())) {
+        if (StringUtils.isBlank(request.getCaptcha(), request.getPhone())) {
             return Result.fail("验证失败", StringResponse.builder().withData("验证失败").build());
         }
-        String key = getCaptchaKey(request.getPhone());
-        // 获取存在redis中的验证码
-        String captcha = redisUtil.get(key);
-        if (!request.getCaptcha().equals(captcha)) {
-            return Result.fail("验证失败", StringResponse.builder().withData("验证失败").build());
+        String key = captchaService.getCaptchaKey(request.getPhone(), SMS_CAPTCHA_KEY);
+        boolean verifySuccess = captchaService.verify(request.getCaptcha(), key);
+        if (verifySuccess) {
+            return Result.ok("验证成功", StringResponse.builder().withData("验证成功").build());
         }
-        // 验证成功，删除redis中的验证码（只能使用一次）
-        redisUtil.delete(key);
-        return Result.ok("验证成功", StringResponse.builder().withData("验证成功").build());
+        return Result.fail("验证失败", StringResponse.builder().withData("验证失败").build());
     }
 
     @Override
@@ -126,42 +153,13 @@ public class SmsServiceImpl implements SmsService, MessageConstant {
     }
 
     /**
-     * 生成验证码
-     *
-     * @return
-     */
-    private String getCaptcha() {
-        return String.valueOf((int) ((Math.random() * 9 + 1) * Math.pow(10, 5)));
-    }
-
-    /**
-     * redis存验证码 key (key 前缀:手机号 value 验证码)
-     *
-     * @param phone
-     * @return
-     */
-    private String getCaptchaKey(String phone) {
-        return RedisSMSKey.SMS_CAPTCHA_KEY + phone;
-    }
-
-    /**
-     * 短信发送频率 key (key 前缀:手机号 value 验证码)
-     *
-     * @param phone
-     * @return
-     */
-    private String getSmsLimitKey(String phone) {
-        return RedisSMSKey.SMS_LIMIT_KEY + phone;
-    }
-
-    /**
      * 获取短信有效期,没设置则返回默认有效期(3分钟)
      *
      * @param expire
      * @return
      */
     private String getExpire(String expire) {
-        return StringUtils.isBlank(expire) ? DEFAULT_EXPIRE : expire;
+        return StringUtils.isBlank(expire) ? String.valueOf(MessageConstant.DEFAULT_EXPIRE) : expire;
     }
 
 }
