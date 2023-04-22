@@ -184,7 +184,11 @@ public class RedisUtil {
      * @param value
      */
     public void set(String key, String value) {
-        stringRedisTemplate.opsForValue().set(key, value);
+        try {
+            stringRedisTemplate.opsForValue().set(key, value);
+        } catch (Exception e) {
+            // 打印日志
+        }
     }
 
     /**
@@ -195,7 +199,11 @@ public class RedisUtil {
      * @param seconds
      */
     public void set(String key, String value, long seconds) {
-        stringRedisTemplate.opsForValue().set(key, value, seconds, TimeUnit.SECONDS);
+        try {
+            stringRedisTemplate.opsForValue().set(key, value, seconds, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            // 打印日志
+        }
     }
 
     /**
