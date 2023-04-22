@@ -4,6 +4,7 @@ import com.ds.nas.lib.common.base.response.BaseResponse;
 //import io.swagger.annotations.ApiModel;
 //import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  * @date 2022/12/4
  * @description 查询返回
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 //@ApiModel(description = "查询返回")
 public class HealthCodeQueryResponse extends BaseResponse {

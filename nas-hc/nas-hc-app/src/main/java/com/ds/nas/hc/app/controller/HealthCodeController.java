@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @date 2022/12/4
  * @description health-code
  */
-@Api("health-code")
+@Api(tags = "health-code")
 @RestController
 @RequestMapping("health-code")
 public class HealthCodeController {

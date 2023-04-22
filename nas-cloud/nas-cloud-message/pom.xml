@@ -10,8 +10,8 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>com.ds</groupId>
     <artifactId>nas-cloud-message</artifactId>
+    <description>消息平台</description>
 
     <dependencies>
         <dependency>
@@ -22,11 +22,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ds</groupId>
-            <artifactId>swagger-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>

@@ -14,6 +14,7 @@
     <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
     <name>nas-cloud-mq</name>
+    <description>消息队列平台</description>
 
     <dependencies>
         <dependency>

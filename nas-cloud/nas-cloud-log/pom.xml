@@ -7,10 +7,10 @@
         <groupId>com.ds.nas</groupId>
         <artifactId>nas-cloud</artifactId>
         <version>1.0.0-RELEASE</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>com.ds</groupId>
     <artifactId>nas-cloud-log</artifactId>
-
+    <description>日志平台</description>
 
 </project>
