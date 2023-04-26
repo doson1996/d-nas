@@ -26,6 +26,11 @@ public final class Result<T> implements Serializable {
     private String message;
 
     /**
+     * 是否成功返回
+     */
+    private boolean success;
+
+    /**
      * 返回数据
      */
     private T data;
@@ -39,11 +44,18 @@ public final class Result<T> implements Serializable {
         this.data = data;
     }
 
+    public Result(int code, String message, T data, boolean success) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+        this.success = success;
+    }
+
     /**
      * @return 成功返回
      */
     public static <T> Result<T> ok() {
-        return new Result<>(ResultCode.SUCCESS, ResultMsg.SUCCESS_MSG, null);
+        return new Result<>(ResultCode.SUCCESS, ResultMsg.SUCCESS_MSG, null, true);
     }
 
     /**
@@ -51,7 +63,7 @@ public final class Result<T> implements Serializable {
      * @return 带指定数据的成功返回
      */
     public static <T> Result<T> okData(T data) {
-        return new Result<>(ResultCode.SUCCESS, ResultMsg.SUCCESS_MSG, data);
+        return new Result<>(ResultCode.SUCCESS, ResultMsg.SUCCESS_MSG, data, true);
     }
 
     /**
@@ -59,7 +71,7 @@ public final class Result<T> implements Serializable {
      * @return 带指定消息的成功返回
      */
     public static <T> Result<T> ok(String msg) {
-        return new Result<>(ResultCode.SUCCESS, msg, null);
+        return new Result<>(ResultCode.SUCCESS, msg, null, true);
     }
 
     /**
@@ -68,14 +80,14 @@ public final class Result<T> implements Serializable {
      * @return 带指定消息和数据的成功返回
      */
     public static <T> Result<T> ok(String message, T data) {
-        return new Result<>(ResultCode.SUCCESS, message, data);
+        return new Result<>(ResultCode.SUCCESS, message, data, true);
     }
 
     /**
      * @return 失败返回
      */
     public static <T> Result<T> fail() {
-        return new Result<>(ResultCode.FAIL, ResultMsg.FAIL_MSG, null);
+        return new Result<>(ResultCode.FAIL, ResultMsg.FAIL_MSG, null, false);
     }
 
     /**
@@ -83,7 +95,7 @@ public final class Result<T> implements Serializable {
      * @return 带指定数据的失败返回
      */
     public static <T> Result<T> fail(String message) {
-        return new Result<>(ResultCode.FAIL, message, null);
+        return new Result<>(ResultCode.FAIL, message, null, false);
     }
 
     /**
@@ -92,7 +104,7 @@ public final class Result<T> implements Serializable {
      * @return 带指定消息和数据的失败返回
      */
     public static <T> Result<T> fail(String message, T data) {
-        return new Result<>(ResultCode.FAIL, message, data);
+        return new Result<>(ResultCode.FAIL, message, data, false);
     }
 
     public int getCode() {
@@ -119,17 +131,26 @@ public final class Result<T> implements Serializable {
         this.data = data;
     }
 
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
     @Override
     public String toString() {
         return "Result{" +
                 "code=" + code +
                 ", message='" + message + '\'' +
+                ", success=" + success +
                 ", data=" + data +
                 '}';
     }
 
     public static <T> ResultBuilder<T> builder() {
-        return new ResultBuilder<T>();
+        return new ResultBuilder<>();
     }
 
     public static final class ResultBuilder<T> {
@@ -139,6 +160,8 @@ public final class Result<T> implements Serializable {
         private String message;
 
         private T data;
+
+        private boolean success;
 
         private ResultBuilder() {
         }
@@ -158,16 +181,22 @@ public final class Result<T> implements Serializable {
             return this;
         }
 
+        public ResultBuilder<T> withSuccess(boolean success) {
+            this.success = success;
+            return this;
+        }
+
         /**
          * Build Result.
          *
          * @see Result
          */
         public Result<T> build() {
-            Result<T> result = new Result<T>();
+            Result<T> result = new Result<>();
             result.setCode(code);
             result.setMessage(message);
             result.setData(data);
+            result.setSuccess(success);
             return result;
         }
     }
