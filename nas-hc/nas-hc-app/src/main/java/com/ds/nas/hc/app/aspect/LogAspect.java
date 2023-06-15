@@ -73,7 +73,7 @@ public class LogAspect {
     }
 
     /**
-     * 记录日志到kafka
+     * 记录日志
      *
      * @param path          请求路径
      * @param requestData   请求参数

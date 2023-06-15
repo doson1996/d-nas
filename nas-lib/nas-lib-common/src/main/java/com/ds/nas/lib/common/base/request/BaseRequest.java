@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @description 请求入参基类
  */
 @Data
-public class BaseRequest  implements Serializable {
+public class BaseRequest implements Serializable {
 
     private static final long serialVersionUID = 737016089980834810L;
 

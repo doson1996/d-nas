@@ -54,7 +54,7 @@ public class RequestCheck {
                     // 判断是否只能为数字(只针对字符串)
                     if (check.onlyNumber()) {
                         msg = StringUtils.isNotBlank(check.msg()) ? check.msg() : declaredField.getName() + "字段请传入数字!";
-                        if (value instanceof String && !NumberUtil.isNumber((String)value))
+                        if (value instanceof String && !NumberUtil.isNumber((String) value))
                             throw new BusinessException(msg);
                     }
                 }
