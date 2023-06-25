@@ -40,7 +40,7 @@ public class HealthCodeController {
 
     /**
      * 查询
-     * //todo 可以单独拆分成服务部署
+     * todo 可以单独拆分成服务部署
      *
      * @param request 入参
      * @return 出参

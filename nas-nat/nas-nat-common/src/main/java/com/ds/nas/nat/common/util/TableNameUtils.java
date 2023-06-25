@@ -1,6 +1,12 @@
 package com.ds.nas.nat.common.util;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateTime;
 import com.ds.nas.lib.common.util.DateUtils;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author ds
@@ -52,6 +58,22 @@ public class TableNameUtils {
      */
     public static String getByBatchNo(String tableName, String batchNo) {
         return tableName + TABLE_SEPARATOR + batchNo.substring(2, 10);
+    }
+
+    /**
+     * 获取当前日期到前几天的日期集合
+     *
+     * @param days
+     * @return
+     */
+    public static List<String> getPreDays(int days) {
+        List<String> result = new ArrayList<>(days);
+        result.add(DateUtils.today());
+        for (int i = 1; i < days; i++) {
+            DateTime offset = DateUtils.offset(new Date(), DateField.DAY_OF_YEAR, -i);
+            result.add(offset.toDateStr());
+        }
+        return result;
     }
 
 }
