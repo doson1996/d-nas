@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.ds.nas</groupId>
         <artifactId>nas-cloud</artifactId>
-        <version>1.0.0-RELEASE</version>
+        <version>${rversion}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>nas-cloud-mq</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>${rversion}</version>
     <packaging>jar</packaging>
     <name>nas-cloud-mq</name>
     <description>消息队列平台</description>

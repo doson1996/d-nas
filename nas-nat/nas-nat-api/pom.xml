@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.ds.nas</groupId>
         <artifactId>nas-nat</artifactId>
-        <version>1.0.0-RELEASE</version>
+        <version>${rversion}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>nas-nat-api</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>${rversion}</version>
     <packaging>jar</packaging>
     <name>nas-nat-api</name>
 

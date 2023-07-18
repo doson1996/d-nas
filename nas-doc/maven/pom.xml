@@ -12,7 +12,7 @@
 
     <groupId>com.ds.nas</groupId>
     <artifactId>dependencies</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>${rversion}</version>
     <packaging>pom</packaging>
     <name>dependencies</name>
 

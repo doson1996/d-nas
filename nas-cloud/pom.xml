@@ -6,12 +6,11 @@
     <parent>
         <groupId>com.ds.nas</groupId>
         <artifactId>dependencies</artifactId>
-        <version>1.0.0-RELEASE</version>
+        <version>${rversion}</version>
         <relativePath>../dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>nas-cloud</artifactId>
-    <version>1.0.0-RELEASE</version>
     <packaging>pom</packaging>
     <name>nas-cloud</name>
     <description>能力平台</description>

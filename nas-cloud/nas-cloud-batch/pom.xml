@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.ds.nas</groupId>
         <artifactId>nas-cloud</artifactId>
-        <version>1.0.0-RELEASE</version>
+        <version>${rversion}</version>
     </parent>
 
     <artifactId>nas-cloud-batch</artifactId>

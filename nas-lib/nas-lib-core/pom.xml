@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.ds.nas</groupId>
         <artifactId>nas-lib</artifactId>
-        <version>1.0.0-RELEASE</version>
+        <version>${rversion}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>nas-lib-core</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>${rversion}</version>
     <packaging>jar</packaging>
     <name>nas-lib-core</name>
     <description>web项目核心模块</description>

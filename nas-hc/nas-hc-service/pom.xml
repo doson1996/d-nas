@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.ds.nas</groupId>
         <artifactId>nas-hc</artifactId>
-        <version>1.0.0-RELEASE</version>
+        <version>${rversion}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>nas-hc-service</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>${rversion}</version>
     <packaging>jar</packaging>
     <name>nas-hc-service</name>
 

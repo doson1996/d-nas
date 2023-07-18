@@ -6,11 +6,12 @@
     <parent>
         <groupId>com.ds.nas</groupId>
         <artifactId>nas-auth</artifactId>
-        <version>1.0.0-RELEASE</version>
+        <version>${rversion}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>nas-auth-api</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
