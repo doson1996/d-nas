@@ -35,6 +35,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -132,7 +133,8 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         }
         List<String> idCards = request.getIdCards();
         Integer health = request.getHealth();
-        int res = hcPersonalInfoMapper.updateByIdCards(health, idCards);
+        Date lastNucleicAcidTime = request.getLastNucleicAcidTime();
+        int res = hcPersonalInfoMapper.updateByIdCards(health, idCards, lastNucleicAcidTime);
         if (res > 0) {
             deleteHcCache(request.getIdCards());
             return Result.ok("批量更新成功!");

@@ -33,9 +33,9 @@ public class HealthCodeController {
      */
 
     @Deprecated
-    @GetMapping("apply")
+    @PostMapping("apply")
     public Result<StringResponse> apply(@RequestBody HealthCodeApplyRequest request) {
-        return Result.fail("此方法已废弃");
+        return Result.fail("此方法已废弃...");
     }
 
     /**

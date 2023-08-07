@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,11 +33,13 @@ public interface HcPersonalInfoMapper extends BaseMapper<HcPersonalInfo> {
 
     /**
      * 根据批次号更新
+     *
      * @param health
      * @param idCards
+     * @param lastNucleicAcidTime
      * @return
      */
-    int updateByIdCards(Integer health, List<String> idCards);
+    int updateByIdCards(Integer health, List<String> idCards, Date lastNucleicAcidTime);
 }
 
 
