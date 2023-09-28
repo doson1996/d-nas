@@ -41,6 +41,4 @@ public class AuthController {
         return Result.ok("登录成功!", token);
     }
 
-
-
 }
