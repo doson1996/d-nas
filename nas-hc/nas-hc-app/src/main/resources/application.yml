@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: ali, swagger
+    active: dev, swagger
 
 
 

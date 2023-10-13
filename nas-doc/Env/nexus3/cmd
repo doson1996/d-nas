@@ -1,0 +1,10 @@
+ docker run -d --name nexus3 -p 8081:8081 --restart always  \
+ -v /usr/local/docker/nexus/data:/nexus-data docker.io/sonatype/nexus3
+
+ # 第一次启动权限不够
+  chmod 777 /usr/local/docker/nexus/data
+ # 重启
+  docker restart nexus3
+ # 查看admin密码
+ cat /usr/local/docker/nexus/data/admin.password
+ # 登录之后修改密码
