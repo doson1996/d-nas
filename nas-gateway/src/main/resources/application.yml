@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: ali
+    active: dev
 
 
 
