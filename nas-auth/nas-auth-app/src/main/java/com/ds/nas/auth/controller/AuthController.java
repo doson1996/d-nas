@@ -4,6 +4,7 @@ import cn.hutool.crypto.digest.MD5;
 import com.ds.nas.auth.dao.request.LoginRequest;
 import com.ds.nas.lib.cache.key.RedisAuthKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
+import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
 import io.swagger.annotations.Api;
@@ -30,7 +31,7 @@ public class AuthController {
 
     @ApiOperation("登录")
     @PostMapping("login")
-    public Result<String> login(@RequestBody LoginRequest request) {
+    public Result<StringResponse> login(@RequestBody LoginRequest request) {
         String name = request.getName();
         String password = request.getPassword();
         if (StringUtils.isBlank(name, password)) {
@@ -38,7 +39,7 @@ public class AuthController {
         }
         String token = MD5.create().digestHex16(name + password);
         redisUtil.set(RedisAuthKey.LOGIN_TOKEN_KEY + token, name, 60);
-        return Result.ok("登录成功!", token);
+        return Result.ok("登录成功!", StringResponse.builder().withData(token).build());
     }
 
 }
