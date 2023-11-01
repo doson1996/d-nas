@@ -1,5 +1,6 @@
-package com.ds.nas.lib.mq.producer;
+package com.ds.nas.lib.mq.producer.kafka;
 
+import com.ds.nas.lib.mq.producer.Producer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -13,7 +14,7 @@ import java.util.Properties;
  * @date 2023/1/28
  * @description kafka生产者实现
  */
-//@Component("kafkaProducer")
+@Component("dsKafkaProducer")
 public class DsKafkaProducer implements Producer {
 
     private static final KafkaProducer<String, String> producer = new KafkaProducer<>(defineDefaultConfiguration());
@@ -27,7 +28,7 @@ public class DsKafkaProducer implements Producer {
 
     private static Properties defineDefaultConfiguration() {
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "dy.com:9092");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "ds.com:9092");
         properties.put(ProducerConfig.CLIENT_ID_CONFIG, "default_client");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());

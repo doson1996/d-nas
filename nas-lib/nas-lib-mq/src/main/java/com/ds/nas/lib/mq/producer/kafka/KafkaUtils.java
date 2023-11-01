@@ -1,4 +1,4 @@
-package com.ds.nas.lib.mq.kafka;
+package com.ds.nas.lib.mq.producer.kafka;
 
 import com.ds.nas.lib.mq.producer.Producer;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,6 +17,7 @@ public class KafkaUtils implements Producer {
     @Resource
     private KafkaTemplate<String, String> kafkaTemplate;
 
+    @Override
     public boolean send(String topic, String msg) {
         kafkaTemplate.send(topic, msg);
         return true;
