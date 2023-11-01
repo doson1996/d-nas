@@ -6,6 +6,7 @@ import com.ds.nas.hc.api.io.response.PersonalInfoRegisterResponse;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.DataGenerateUtils;
 import com.ds.nas.lib.common.util.DataGenerateUtilsV1;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -18,13 +19,13 @@ import javax.annotation.Resource;
  * @description
  */
 @Slf4j
-//@Component
-public class HcMock {
+@Component
+public class HcMockTask {
 
     @Resource
     private PersonalInfoClient personalInfoClient;
 
-    @Scheduled(fixedDelay = 1000)
+    @XxlJob("regMock")
     public void regMock() {
         PersonalInfoRegisterRequest request = new PersonalInfoRegisterRequest();
         for (int i = 0; i < 2000; i++) {
