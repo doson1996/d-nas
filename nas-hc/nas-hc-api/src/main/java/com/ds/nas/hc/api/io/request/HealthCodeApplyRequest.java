@@ -2,6 +2,7 @@ package com.ds.nas.hc.api.io.request;
 
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author ds
@@ -9,6 +10,7 @@ import lombok.Data;
  * @description 申领健康码入参
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class HealthCodeApplyRequest extends BaseRequest {
 
     /**

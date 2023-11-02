@@ -1,5 +1,4 @@
 package com.ds.nas.hc.service.impl;
-import com.ds.nas.lib.common.base.request.RequestPrivate;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.IdcardUtil;
@@ -7,7 +6,6 @@ import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.cloud.api.message.sms.dubbo.SmsProvider;
-import com.ds.nas.cloud.api.message.sms.io.request.SendCaptchaRequest;
 import com.ds.nas.hc.dao.domain.HcPersonalInfo;
 import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
 import com.ds.nas.hc.api.io.request.HealthCodeQueryRequest;
@@ -57,7 +55,6 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     @DubboReference(version = "1.0")
     private SmsProvider smsProvider;
 
-
     @Override
     public Result<HealthCodeQueryResponse> queryByIdCard(HealthCodeQueryRequest request) {
         // 基本参数校验
@@ -70,8 +67,8 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     @Override
     public Result<PersonalInfoRegisterResponse> register(PersonalInfoRegisterRequest request) {
-        HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         checkRegisterRequest(request);
+        HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
         BeanUtil.copyProperties(request, hcPersonalInfo);
         DBUtils.onCreate(hcPersonalInfo);
         hcPersonalInfo.setHealth(HealthCodeState.GREEN);
@@ -148,12 +145,24 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
      * @param request
      */
     private void checkRegisterRequest(PersonalInfoRegisterRequest request) {
+        RequestCheck.check(request);
+
         String idCard = request.getIdCard();
         if (StringUtils.isBlank(idCard, request.getName(), request.getPhone())) {
             throw new BusinessException("身份证号、姓名、手机不能为空!");
         }
+
+        // 截取身份证前12位，地区 + 出生年月
+        String key = RedisHcKey.REGISTRATION_CHECK_KEY.concat(idCard.substring(0, 12));
+        // 先判断redis中是否存在
+        if (redisUtil.sIsMember(key, idCard)) {
+            throw new BusinessException("此身份证已注册!");
+        }
+
         HcPersonalInfo hcPersonalInfo = hcPersonalInfoMapper.queryByIdCard(idCard);
         if (hcPersonalInfo != null) {
+            // 添加到redis set中
+            redisUtil.sAdd(key, idCard);
             throw new BusinessException("此身份证已注册!");
         }
     }

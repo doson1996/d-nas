@@ -1,5 +1,6 @@
 package com.ds.nas.lib.common.base.request;
 
+import cn.hutool.core.util.IdcardUtil;
 import cn.hutool.core.util.NumberUtil;
 import com.ds.nas.lib.common.base.annotation.Check;
 import com.ds.nas.lib.common.exception.BusinessException;
@@ -57,6 +58,14 @@ public class RequestCheck {
                         if (value instanceof String && !NumberUtil.isNumber((String) value))
                             throw new BusinessException(msg);
                     }
+
+                    // 判断是否为合格身份证号码(只针对字符串)
+                    if (check.idCard()) {
+                        msg = StringUtils.isNotBlank(check.msg()) ? check.msg() : declaredField.getName() + "字段请传入合格身份证号码!!";
+                        if (value instanceof String && !IdcardUtil.isValidCard((String) value))
+                            throw new BusinessException(msg);
+                    }
+
                 }
             }
         } catch (Exception e) {

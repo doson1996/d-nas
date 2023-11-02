@@ -2,6 +2,7 @@ package com.ds.nas.hc.api.io.request;
 
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import java.util.Date;
  * @description 更新入参
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class PersonalInfoUpdateRequest extends BaseRequest {
 
     /**

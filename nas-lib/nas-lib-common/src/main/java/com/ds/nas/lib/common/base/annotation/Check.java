@@ -43,6 +43,13 @@ public @interface Check {
     boolean onlyNumber() default false;
 
     /**
+     * 是否身份证号码
+     *
+     * @return
+     */
+    boolean idCard() default false;
+
+    /**
      * 字段校验失败返回消息
      *
      * @return

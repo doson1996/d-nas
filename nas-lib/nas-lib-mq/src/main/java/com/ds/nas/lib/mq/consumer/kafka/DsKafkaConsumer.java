@@ -17,7 +17,6 @@ import java.util.Properties;
  * @date 2023/1/28
  * @description kafka消费者实现
  */
-@Component("dsKafkaConsumer")
 public class DsKafkaConsumer implements Consumer {
 
     private final KafkaConsumer<String, String> consumer;

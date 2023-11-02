@@ -18,7 +18,7 @@ public class HealthCodeQueryRequest extends BaseRequest {
     /**
      * 身份证号码
      */
-    @Check(require = true)
+    @Check(require = true, idCard = true)
   //  @ApiModelProperty(value = "身份证号码", required = true)
     private String idCard;
 

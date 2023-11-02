@@ -22,4 +22,8 @@ public interface RedisHcKey extends RedisAppKey {
      */
     String HEALTH_CODE_KEY = HC_KEY_PREFIX + "health-code" + SEPARATOR;
 
+    /**
+     * 身份证号重复注册检测key
+     */
+    String REGISTRATION_CHECK_KEY = HC_KEY_PREFIX + "reg"  + SEPARATOR;
 }
