@@ -22,6 +22,12 @@ public @interface Check {
     String value() default "";
 
     /**
+     * 字段名
+     * @return
+     */
+    String fieldName() default "";
+
+    /**
      * 是否必输
      *
      * @return
@@ -48,6 +54,13 @@ public @interface Check {
      * @return
      */
     boolean idCard() default false;
+
+    /**
+     * 是否手机号码
+     *
+     * @return
+     */
+    boolean isMobile() default false;
 
     /**
      * 字段校验失败返回消息

@@ -67,8 +67,27 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     @Override
     public Result<PersonalInfoRegisterResponse> register(PersonalInfoRegisterRequest request) {
+        // 参数校验
         checkRegisterRequest(request);
-        HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();
+
+        // 重复注册校验
+        String idCard = request.getIdCard();
+        // 截取身份证前12位，地区 + 出生年月
+        String key = getRegCheckCacheKey(idCard);
+        // 先判断redis中是否存在
+        if (redisUtil.sIsMember(key, idCard)) {
+            throw new BusinessException("此身份证已注册!");
+        }
+
+        HcPersonalInfo hcPersonalInfo = hcPersonalInfoMapper.queryByIdCard(idCard);
+        if (hcPersonalInfo != null) {
+            // 添加到redis set中
+            redisUtil.sAdd(key, idCard);
+            throw new BusinessException("此身份证已注册!");
+        }
+
+
+        hcPersonalInfo = new HcPersonalInfo();
         BeanUtil.copyProperties(request, hcPersonalInfo);
         DBUtils.onCreate(hcPersonalInfo);
         hcPersonalInfo.setHealth(HealthCodeState.GREEN);
@@ -76,6 +95,10 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         if (!save(hcPersonalInfo)) {
             return Result.fail("注册失败!");
         }
+
+        // 添加到redis set中
+        redisUtil.sAdd(key, idCard);
+
         PersonalInfoRegisterResponse response = new PersonalInfoRegisterResponse();
         response.setHealth(HealthCodeState.GREEN);
         response.setName(hcPersonalInfo.getName());
@@ -93,7 +116,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         LambdaUpdateWrapper<HcPersonalInfo> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(HcPersonalInfo::getIdCard, request.getIdCard());
         if (update(hcPersonalInfo, wrapper)) {
-            deleteHcCache(Collections.singletonList(hcPersonalInfo.getIdCard()));
+            deleteHealthInfoCache(Collections.singletonList(hcPersonalInfo.getIdCard()));
             PersonalInfoUpdateResponse response = new PersonalInfoUpdateResponse();
             BeanUtil.copyProperties(hcPersonalInfoMapper.queryByIdCard(hcPersonalInfo.getIdCard()), response);
             return Result.ok("更新成功!", response);
@@ -108,10 +131,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
      * @return
      */
     private HcPersonalInfo qryHcPersonalInfo(String idCard) {
-        if (!IdcardUtil.isValidCard(idCard)) {
-            throw new BusinessException("身份证号码无效!");
-        }
-        String key = RedisHcKey.HEALTH_CODE_KEY + idCard;
+        String key = getHealthInfoCacheKey(idCard);
         HcPersonalInfo hcPersonalInfo;
         String hcPersonalInfoJson = redisUtil.get(key);
         if (StringUtils.isBlank(hcPersonalInfoJson)) {
@@ -133,7 +153,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         Date lastNucleicAcidTime = request.getLastNucleicAcidTime();
         int res = hcPersonalInfoMapper.updateByIdCards(health, idCards, lastNucleicAcidTime);
         if (res > 0) {
-            deleteHcCache(request.getIdCards());
+            deleteHealthInfoCache(request.getIdCards());
             return Result.ok("批量更新成功!");
         }
         return Result.fail("批量更新失败!");
@@ -145,40 +165,43 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
      * @param request
      */
     private void checkRegisterRequest(PersonalInfoRegisterRequest request) {
+        // 基本参数校验
         RequestCheck.check(request);
-
-        String idCard = request.getIdCard();
-        if (StringUtils.isBlank(idCard, request.getName(), request.getPhone())) {
-            throw new BusinessException("身份证号、姓名、手机不能为空!");
-        }
-
-        // 截取身份证前12位，地区 + 出生年月
-        String key = RedisHcKey.REGISTRATION_CHECK_KEY.concat(idCard.substring(0, 12));
-        // 先判断redis中是否存在
-        if (redisUtil.sIsMember(key, idCard)) {
-            throw new BusinessException("此身份证已注册!");
-        }
-
-        HcPersonalInfo hcPersonalInfo = hcPersonalInfoMapper.queryByIdCard(idCard);
-        if (hcPersonalInfo != null) {
-            // 添加到redis set中
-            redisUtil.sAdd(key, idCard);
-            throw new BusinessException("此身份证已注册!");
-        }
     }
 
     /**
-     * 删除hc缓存
+     * 删除健康码信息缓存
      *
      * @param idCards
      */
-    private void deleteHcCache(List<String> idCards) {
+    private void deleteHealthInfoCache(List<String> idCards) {
         List<String> keys = new ArrayList<>();
         for (String idCard : idCards) {
-            keys.add(RedisHcKey.HEALTH_CODE_KEY + idCard);
+            keys.add(getHealthInfoCacheKey(idCard));
         }
         //删除缓存
         redisUtil.delete(keys);
+    }
+
+    /**
+     * 生成健康信息缓存key
+     * @param idCard
+     * @return
+     */
+    private String getHealthInfoCacheKey(String idCard) {
+        return RedisHcKey.HEALTH_CODE_KEY
+                + idCard.substring(0, 6) + RedisHcKey.SEPARATOR
+                + idCard.substring(6, 12) + RedisHcKey.SEPARATOR
+                + idCard;
+    }
+
+    /**
+     * 生成重复注册校验缓存key
+     * @param idCard
+     * @return
+     */
+    private String getRegCheckCacheKey(String idCard) {
+        return RedisHcKey.REGISTRATION_CHECK_KEY.concat(idCard.substring(0, 12));
     }
 
 }

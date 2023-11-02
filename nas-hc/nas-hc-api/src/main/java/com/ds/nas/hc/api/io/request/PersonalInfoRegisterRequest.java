@@ -17,13 +17,13 @@ public class PersonalInfoRegisterRequest extends BaseRequest {
     /**
      * 姓名
      */
-    @Check(require = true)
+    @Check(fieldName = "姓名", require = true)
     private String name;
 
     /**
      * 身份证号码
      */
-    @Check(require = true, idCard = true)
+    @Check(fieldName = "身份证号码", require = true, idCard = true)
     private String idCard;
 
     /**
@@ -34,7 +34,7 @@ public class PersonalInfoRegisterRequest extends BaseRequest {
     /**
      * 手机号
      */
-    @Check(require = true)
+    @Check(fieldName = "手机号", require = true, isMobile = true)
     private String phone;
 
 }
