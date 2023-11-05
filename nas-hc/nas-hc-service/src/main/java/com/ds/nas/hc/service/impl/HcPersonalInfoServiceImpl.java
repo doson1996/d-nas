@@ -1,13 +1,10 @@
 package com.ds.nas.hc.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.IdcardUtil;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.cloud.api.message.sms.dubbo.SmsProvider;
-import com.ds.nas.hc.dao.domain.HcPersonalInfo;
-import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
 import com.ds.nas.hc.api.io.request.HealthCodeQueryRequest;
 import com.ds.nas.hc.api.io.request.PersonalInfoBatchUpdateRequest;
 import com.ds.nas.hc.api.io.request.PersonalInfoRegisterRequest;
@@ -16,15 +13,17 @@ import com.ds.nas.hc.api.io.response.HealthCodeQueryResponse;
 import com.ds.nas.hc.api.io.response.PersonalInfoBatchUpdateResponse;
 import com.ds.nas.hc.api.io.response.PersonalInfoRegisterResponse;
 import com.ds.nas.hc.api.io.response.PersonalInfoUpdateResponse;
+import com.ds.nas.hc.dao.domain.HcPersonalInfo;
+import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import com.ds.nas.lib.cache.key.RedisHcKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
+import com.ds.nas.lib.common.base.annotation.CheckParam;
 import com.ds.nas.lib.common.base.db.DBUtils;
-import com.ds.nas.lib.common.base.request.RequestCheck;
+import com.ds.nas.lib.common.base.response.ResponseBuild;
 import com.ds.nas.lib.common.constant.HealthCodeState;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
-import com.ds.nas.lib.common.base.response.ResponseBuild;
 import com.ds.nas.lib.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -55,21 +54,18 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     @DubboReference(version = "1.0")
     private SmsProvider smsProvider;
 
+    @CheckParam
     @Override
     public Result<HealthCodeQueryResponse> queryByIdCard(HealthCodeQueryRequest request) {
-        // 基本参数校验
-        RequestCheck.check(request);
         HealthCodeQueryResponse response = new HealthCodeQueryResponse();
         BeanUtil.copyProperties(qryHcPersonalInfo(request.getIdCard()), response);
         ResponseBuild.onReturn(request, response);
         return Result.ok("查询成功", response);
     }
 
+    @CheckParam
     @Override
     public Result<PersonalInfoRegisterResponse> register(PersonalInfoRegisterRequest request) {
-        // 参数校验
-        checkRegisterRequest(request);
-
         // 重复注册校验
         String idCard = request.getIdCard();
         // 截取身份证前12位，地区 + 出生年月
@@ -160,16 +156,6 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     }
 
     /**
-     * 注册参数校验
-     *
-     * @param request
-     */
-    private void checkRegisterRequest(PersonalInfoRegisterRequest request) {
-        // 基本参数校验
-        RequestCheck.check(request);
-    }
-
-    /**
      * 删除健康码信息缓存
      *
      * @param idCards
@@ -185,6 +171,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     /**
      * 生成健康信息缓存key
+     *
      * @param idCard
      * @return
      */
@@ -197,6 +184,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
 
     /**
      * 生成重复注册校验缓存key
+     *
      * @param idCard
      * @return
      */

@@ -5,6 +5,7 @@ import com.ds.nas.lib.common.base.request.BaseRequest;
 //import io.swagger.annotations.ApiModel;
 //import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author ds
@@ -12,14 +13,15 @@ import lombok.Data;
  * @description 查询入参
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 //@ApiModel(description = "查询入参")
 public class HealthCodeQueryRequest extends BaseRequest {
 
     /**
      * 身份证号码
      */
-    @Check(require = true, idCard = true)
-  //  @ApiModelProperty(value = "身份证号码", required = true)
+    @Check(fieldName = "身份证号码", require = true, idCard = true)
+    // @ApiModelProperty(value = "身份证号码", required = true)
     private String idCard;
 
 }
