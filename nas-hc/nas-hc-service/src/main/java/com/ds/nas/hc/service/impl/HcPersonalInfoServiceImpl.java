@@ -82,7 +82,6 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
             throw new BusinessException("此身份证已注册!");
         }
 
-
         hcPersonalInfo = new HcPersonalInfo();
         BeanUtil.copyProperties(request, hcPersonalInfo);
         DBUtils.onCreate(hcPersonalInfo);
@@ -104,6 +103,7 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
         return Result.ok("注册成功!", response);
     }
 
+    @CheckParam
     @Override
     public Result<PersonalInfoUpdateResponse> updateByIdCard(PersonalInfoUpdateRequest request) {
         HcPersonalInfo hcPersonalInfo = new HcPersonalInfo();

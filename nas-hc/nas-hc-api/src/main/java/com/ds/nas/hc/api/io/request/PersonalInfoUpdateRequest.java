@@ -1,5 +1,6 @@
 package com.ds.nas.hc.api.io.request;
 
+import com.ds.nas.lib.common.base.annotation.Check;
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,18 +17,9 @@ import java.util.Date;
 public class PersonalInfoUpdateRequest extends BaseRequest {
 
     /**
-     * id
-     */
-    private Integer id;
-
-    /**
-     * 姓名
-     */
-    private String name;
-
-    /**
      * 身份证号码
      */
+    @Check(fieldName = "身份证号码", require = true, idCard = true)
     private String idCard;
 
     /**
