@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * @author ds
@@ -53,5 +54,10 @@ public class HealthCodeQueryResponse extends BaseResponse {
      */
     //@ApiModelProperty(value = "最后一次核酸时间")
     private Date lastNucleicAcidTime;
+
+    /**
+     * 最近检测记录
+     */
+    private Set<Date> recentNucleicAcidRecords;
 
 }

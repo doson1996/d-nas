@@ -7,21 +7,15 @@ import lombok.EqualsAndHashCode;
 
 /**
  * @author ds
- * @date 2022/12/11
- * @description
+ * @date 2022/12/4
+ * @description 查询入参
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class DetectionPersonalInfoEntryRequest extends BaseRequest {
+public class RecentNucleicAcidRecordsQueryRequest extends BaseRequest {
 
     /**
-     * 批次号
-     */
-    @Check(fieldName = "批次号", require = true)
-    private String batchNo;
-
-    /**
-     * 身份证号
+     * 身份证号码
      */
     @Check(fieldName = "身份证号码", require = true, idCard = true)
     private String idCard;

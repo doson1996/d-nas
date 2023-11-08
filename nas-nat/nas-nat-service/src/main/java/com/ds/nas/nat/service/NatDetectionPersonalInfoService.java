@@ -2,9 +2,14 @@ package com.ds.nas.nat.service;
 
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
+import com.ds.nas.nat.api.io.request.RecentNucleicAcidRecordsQueryRequest;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ds.nas.nat.api.io.request.DetectionPersonalInfoEntryRequest;
+
+
+import java.util.Date;
+import java.util.Set;
 
 /**
 * @author ds
@@ -20,4 +25,10 @@ public interface NatDetectionPersonalInfoService extends IService<NatDetectionPe
      */
     Result<StringResponse> entry(DetectionPersonalInfoEntryRequest request);
 
+    /**
+     * 最近检测记录
+     * @param request
+     * @return
+     */
+    Result<Set<Date>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request);
 }

@@ -1,9 +1,11 @@
 package com.ds.nas.nat.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ds.nas.lib.common.base.annotation.CheckParam;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
+import com.ds.nas.nat.api.io.request.RecentNucleicAcidRecordsQueryRequest;
 import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper;
@@ -15,6 +17,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.Set;
 
 /**
  * @author ds
@@ -43,6 +47,7 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
      * @return
      */
     // @Transactional(rollbackFor = Exception.class)
+    @CheckParam
     @Override
     public Result<StringResponse> entry(DetectionPersonalInfoEntryRequest request) {
         NatDetectionPersonalInfo personalInfo = new NatDetectionPersonalInfo();
@@ -68,6 +73,12 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
         }
         return Result.ok("录入信息成功!",
                 StringResponse.builder().withData(request.getIdCard()).build());
+    }
+
+    @CheckParam
+    @Override
+    public Result<Set<Date>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request) {
+        return null;
     }
 
     /**
