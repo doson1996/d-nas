@@ -20,4 +20,10 @@ public class RecentNucleicAcidRecordsQueryRequest extends BaseRequest {
     @Check(fieldName = "身份证号码", require = true, idCard = true)
     private String idCard;
 
+    /**
+     * 查询天数
+     */
+    @Check(fieldName = "查询天数", require = true)
+    private Integer days;
+
 }

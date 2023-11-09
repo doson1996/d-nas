@@ -1,5 +1,6 @@
 package com.ds.nas.hc.api.io.response;
 
+import com.ds.nas.hc.dao.entity.RecentNucleicAcid;
 import com.ds.nas.lib.common.base.response.BaseResponse;
 //import io.swagger.annotations.ApiModel;
 //import io.swagger.annotations.ApiModelProperty;
@@ -7,7 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author ds
@@ -58,6 +59,6 @@ public class HealthCodeQueryResponse extends BaseResponse {
     /**
      * 最近检测记录
      */
-    private Set<Date> recentNucleicAcidRecords;
+    private List<RecentNucleicAcid> recentNucleicAcidRecords;
 
 }

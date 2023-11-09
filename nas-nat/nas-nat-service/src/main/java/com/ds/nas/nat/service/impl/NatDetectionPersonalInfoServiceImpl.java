@@ -5,6 +5,7 @@ import com.ds.nas.lib.common.base.annotation.CheckParam;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
+import com.ds.nas.lib.common.util.DateUtils;
 import com.ds.nas.nat.api.io.request.RecentNucleicAcidRecordsQueryRequest;
 import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
@@ -30,7 +31,7 @@ import java.util.Set;
 public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectionPersonalInfoMapper, NatDetectionPersonalInfo>
         implements NatDetectionPersonalInfoService {
 
-    @Value("${table-name.dpi}")
+    @Value("${table-name.dpi : nat_detection_personal_info}")
     private String dpiTableName;
 
     @Resource
@@ -78,6 +79,22 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
     @CheckParam
     @Override
     public Result<Set<Date>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request) {
+        String idCard = request.getIdCard();
+        Integer days = request.getDays();
+        Set<String> tableNames = TableNameUtils.getPreDaysTableName(dpiTableName, days);
+
+
+        /**
+         * SELECT t2.detection_mechanism,t2.detection_time,t2.detection_result from (
+         * SELECT * FROM nat_detection_personal_info_20230313 WHERE id_card = '231124193809292241'
+         * UNION ALL
+         * SELECT * FROM nat_detection_personal_info_20230314 WHERE id_card = '231124193809292241'
+         * UNION ALL
+         * SELECT * FROM nat_detection_personal_info_20230328 WHERE id_card = '231124193809292241'
+         * ) t1
+         *  LEFT JOIN nat_detection_batch_info t2
+         * 	on t1.batch_no = t2.batch_no
+         */
         return null;
     }
 

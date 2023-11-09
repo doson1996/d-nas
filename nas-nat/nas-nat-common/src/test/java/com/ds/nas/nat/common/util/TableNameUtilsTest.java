@@ -2,7 +2,7 @@ package com.ds.nas.nat.common.util;
 
 import org.junit.Test;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author ds
@@ -12,9 +12,11 @@ import java.util.List;
 public class TableNameUtilsTest {
 
     @Test
-    public void test_getPreDays() {
-        List<String> preDays = TableNameUtils.getPreDays(3);
-        System.out.println("preDays = " + preDays);
+    public void test_getPreDaysTableName() {
+        Set<String> tableNames = TableNameUtils.getPreDaysTableName("A", 5);
+        for (String tableName : tableNames) {
+            System.out.println("tableName = " + tableName);
+        }
     }
 
 }
