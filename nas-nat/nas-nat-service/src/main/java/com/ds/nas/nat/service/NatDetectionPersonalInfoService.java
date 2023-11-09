@@ -1,6 +1,7 @@
 package com.ds.nas.nat.service;
 
 import com.ds.nas.lib.common.base.response.StringResponse;
+import com.ds.nas.lib.common.entity.RecentNucleicAcid;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.api.io.request.RecentNucleicAcidRecordsQueryRequest;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
@@ -30,5 +31,5 @@ public interface NatDetectionPersonalInfoService extends IService<NatDetectionPe
      * @param request
      * @return
      */
-    Result<Set<Date>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request);
+    Result<Set<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request);
 }

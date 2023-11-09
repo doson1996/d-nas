@@ -1,6 +1,6 @@
 package com.ds.nas.hc.api.io.response;
 
-import com.ds.nas.hc.dao.entity.RecentNucleicAcid;
+import com.ds.nas.lib.common.entity.RecentNucleicAcid;
 import com.ds.nas.lib.common.base.response.BaseResponse;
 //import io.swagger.annotations.ApiModel;
 //import io.swagger.annotations.ApiModelProperty;

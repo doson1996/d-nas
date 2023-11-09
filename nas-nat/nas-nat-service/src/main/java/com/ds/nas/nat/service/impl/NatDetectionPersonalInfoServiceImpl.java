@@ -4,13 +4,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.lib.common.base.annotation.CheckParam;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.StringResponse;
+import com.ds.nas.lib.common.entity.RecentNucleicAcid;
 import com.ds.nas.lib.common.result.Result;
-import com.ds.nas.lib.common.util.DateUtils;
+import com.ds.nas.nat.api.io.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.api.io.request.RecentNucleicAcidRecordsQueryRequest;
 import com.ds.nas.nat.common.util.TableNameUtils;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import com.ds.nas.nat.dao.mapper.NatDetectionPersonalInfoMapper;
-import com.ds.nas.nat.api.io.request.DetectionPersonalInfoEntryRequest;
 import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +18,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -78,7 +77,7 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
 
     @CheckParam
     @Override
-    public Result<Set<Date>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request) {
+    public Result<Set<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request) {
         String idCard = request.getIdCard();
         Integer days = request.getDays();
         Set<String> tableNames = TableNameUtils.getPreDaysTableName(dpiTableName, days);
