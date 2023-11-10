@@ -25,6 +25,14 @@ public interface NatDetectionPersonalInfoMapper extends BaseMapper<NatDetectionP
     int entry(String tableName, NatDetectionPersonalInfo personalInfo);
 
     /**
+     * 根据idCard查询
+     * @param tableName
+     * @param idCard
+     * @return
+     */
+    NatDetectionPersonalInfo selectByIdCard(String tableName, String idCard);
+
+    /**
      * 根据批次号获取身份证号
      *
      * @param tableName

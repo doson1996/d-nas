@@ -26,6 +26,10 @@
         where batch_no = #{batchNo}
     </select>
 
+    <select id="selectByIdCard" resultMap="BaseResultMap">
+        select * from `${tableName}` where id_card = #{idCard}
+    </select>
+
     <select id="countByBatchNo" resultType="int">
         select count(*)
         from `${tableName}`

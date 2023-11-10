@@ -1,5 +1,6 @@
 package com.ds.nas.nat.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ds.nas.lib.common.base.annotation.CheckParam;
 import com.ds.nas.lib.common.base.db.DBUtils;
@@ -18,6 +19,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -77,10 +80,23 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
 
     @CheckParam
     @Override
-    public Result<Set<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request) {
+    public Result<List<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request) {
+        List<RecentNucleicAcid> recentNucleicAcids = new ArrayList<>();
         String idCard = request.getIdCard();
         Integer days = request.getDays();
         Set<String> tableNames = TableNameUtils.getPreDaysTableName(dpiTableName, days);
+        for (String tableName : tableNames) {
+            // NatDetectionPersonalInfo natDetectionPersonalInfo;
+            try {
+              //  natDetectionPersonalInfo = personalInfoMapper.selectByIdCard(tableName, idCard);
+            } catch (Exception e) {
+                log.error("NatDetectionPersonalInfoServiceImpl.recentNucleicAcidRecordsQuery ex:", e);
+                continue;
+            }
+            RecentNucleicAcid recentNucleicAcid = new RecentNucleicAcid();
+           // BeanUtil.copyProperties(natDetectionPersonalInfo, recentNucleicAcid);
+            recentNucleicAcids.add(recentNucleicAcid);
+        }
 
 
         /**
