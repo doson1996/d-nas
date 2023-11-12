@@ -26,4 +26,11 @@ public interface PersistenceMapper {
      */
     int createTableDpi(String tableName);
 
+    /**
+     * 判断表是否存在
+     * @param tableName
+     * @return
+     */
+    String checkTable(String tableName);
+
 }

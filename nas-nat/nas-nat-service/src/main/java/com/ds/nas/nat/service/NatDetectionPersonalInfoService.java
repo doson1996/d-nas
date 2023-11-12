@@ -30,4 +30,5 @@ public interface NatDetectionPersonalInfoService extends IService<NatDetectionPe
      * @return
      */
     Result<List<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request);
+
 }

@@ -4,8 +4,7 @@ import com.ds.nas.lib.common.entity.RecentNucleicAcid;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.nat.api.io.request.RecentNucleicAcidRecordsQueryRequest;
 
-import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 public interface DetectionPersonalInfoProvider {
 
@@ -14,6 +13,6 @@ public interface DetectionPersonalInfoProvider {
      * @param request
      * @return
      */
-    Result<Set<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request);
+    Result<List<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request);
 
 }

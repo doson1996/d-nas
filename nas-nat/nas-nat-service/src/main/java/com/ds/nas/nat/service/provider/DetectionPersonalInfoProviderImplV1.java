@@ -1,4 +1,4 @@
-package com.ds.nas.nat.service.proivder;
+package com.ds.nas.nat.service.provider;
 
 import com.ds.nas.lib.common.entity.RecentNucleicAcid;
 import com.ds.nas.lib.common.result.Result;
@@ -8,7 +8,7 @@ import com.ds.nas.nat.service.NatDetectionPersonalInfoService;
 import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author ds
@@ -22,9 +22,10 @@ public class DetectionPersonalInfoProviderImplV1 implements DetectionPersonalInf
     private NatDetectionPersonalInfoService natDetectionPersonalInfoService;
 
     @Override
-    public Result<Set<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request) {
+    public Result<List<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request) {
         return natDetectionPersonalInfoService.recentNucleicAcidRecordsQuery(request);
     }
+
 }
 
 

@@ -86,9 +86,9 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
         Integer days = request.getDays();
         Set<String> tableNames = TableNameUtils.getPreDaysTableName(dpiTableName, days);
         for (String tableName : tableNames) {
-            // NatDetectionPersonalInfo natDetectionPersonalInfo;
+             NatDetectionPersonalInfo natDetectionPersonalInfo;
             try {
-              //  natDetectionPersonalInfo = personalInfoMapper.selectByIdCard(tableName, idCard);
+                natDetectionPersonalInfo = personalInfoMapper.selectByIdCard(tableName, idCard);
             } catch (Exception e) {
                 log.error("NatDetectionPersonalInfoServiceImpl.recentNucleicAcidRecordsQuery ex:", e);
                 continue;
@@ -110,7 +110,7 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
          *  LEFT JOIN nat_detection_batch_info t2
          * 	on t1.batch_no = t2.batch_no
          */
-        return null;
+        return Result.okData(recentNucleicAcids);
     }
 
     /**
