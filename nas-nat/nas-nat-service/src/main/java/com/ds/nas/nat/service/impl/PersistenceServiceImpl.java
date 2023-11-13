@@ -34,32 +34,51 @@ public class PersistenceServiceImpl implements PersistenceService {
         String tableName = "";
         try {
             tableName = TableNameUtils.generateTodayTableName(dpiTableName);
+            if (checkTable(tableName)) {
+                return Result.fail("创建表[" + tableName + "]失败, 表已存在!");
+            }
+
             if (StringUtils.isBlank(tableName)) {
                 return Result.fail("创建表[" + tableName + "]失败!");
             }
             persistenceMapper.createTableDpi(tableName);
-            success = StringUtils.isNotBlank(persistenceMapper.checkTable(tableName));
+            success = checkTable(tableName);
         } catch (Exception e) {
             log.error("PersistenceServiceImpl.createTableDpi ex:", e);
             success = false;
         }
 
         return success ? Result.ok("创建表[" + tableName + "]成功!") : Result.fail("创建表[" + tableName + "]失败!");
-
     }
 
     @Override
     public Result<StringResponse> createTable(TableInfo tableInfo) {
         boolean success;
+
+        String tableName = tableInfo.getName();
         try {
+            if (checkTable(tableName)) {
+                return Result.fail("创建表[" + tableName + "]失败, 表已存在!");
+            }
+
             persistenceMapper.createTable(tableInfo);
-            success = StringUtils.isNotBlank(persistenceMapper.checkTable(tableInfo.getName()));
+            success = checkTable(tableName);
         } catch (Exception e) {
             log.error("PersistenceServiceImpl.createTable ex:", e);
             success = false;
         }
 
-        return success ? Result.ok("创建表[" + tableInfo.getName() + "]成功!") : Result.fail("创建表[" + tableInfo.getName() + "]失败!");
+        return success ? Result.ok("创建表[" + tableName + "]成功!") : Result.fail("创建表[" + tableName + "]失败!");
+    }
+
+    /**
+     * 判断表是否存在
+     *
+     * @param tableName
+     * @return
+     */
+    private boolean checkTable(String tableName) {
+        return StringUtils.equals(tableName, persistenceMapper.checkTable(tableName));
     }
 
 }

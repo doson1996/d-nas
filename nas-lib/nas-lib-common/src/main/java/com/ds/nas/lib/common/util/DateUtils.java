@@ -35,4 +35,20 @@ public final class DateUtils extends DateUtil {
         return result;
     }
 
+    /**
+     * 获取当前日期到后几天的日期集合
+     *
+     * @param days 天数
+     * @return
+     */
+    public static Set<String> getAfterDays(int days) {
+        Set<String> result = new HashSet<>(days);
+        result.add(DateUtils.today());
+        for (int i = 1; i < days; i++) {
+            DateTime offset = DateUtils.offset(new Date(), DateField.DAY_OF_YEAR, i);
+            result.add(offset.toDateStr());
+        }
+        return result;
+    }
+
 }
