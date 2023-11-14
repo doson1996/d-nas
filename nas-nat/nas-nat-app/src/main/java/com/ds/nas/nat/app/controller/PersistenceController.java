@@ -30,4 +30,9 @@ public class PersistenceController {
         return persistenceService.createTableDpi();
     }
 
+    @PostMapping("batch-create-table-dpi")
+    public Result<StringResponse> batchCreateTableDpi(int days) {
+        return persistenceService.batchCreateTableDpi(days);
+    }
+
 }

@@ -1,10 +1,12 @@
 package com.ds.nas.nat.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ds.nas.lib.common.entity.RecentNucleicAcid;
 import com.ds.nas.nat.dao.domain.NatDetectionPersonalInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author ds
@@ -31,6 +33,14 @@ public interface NatDetectionPersonalInfoMapper extends BaseMapper<NatDetectionP
      * @return
      */
     NatDetectionPersonalInfo selectByIdCard(String tableName, String idCard);
+
+    /**
+     * 根据idCard查询最近检测记录
+     * @param tableName
+     * @param idCard
+     * @return
+     */
+    List<RecentNucleicAcid> selectRecentNucleicAcids(Set<String> tableNames, String idCard);
 
     /**
      * 根据批次号获取身份证号

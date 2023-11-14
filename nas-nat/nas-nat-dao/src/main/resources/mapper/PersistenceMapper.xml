@@ -28,7 +28,8 @@
             `create_by`   varchar(50)         not null comment '创建人',
             `update_by`   varchar(50)         not null comment '更新人',
             PRIMARY KEY (`id`),
-            CONSTRAINT uk_batch_no_id_card UNIQUE (batch_no,id_card)
+            UNIQUE KEY `uk_batch_no_id_card` (`batch_no`,`id_card`),
+            KEY `idx_id_card` (`id_card`) USING BTREE
         ) ENGINE = InnoDB
           COMMENT ='检测用户信息表';
     </update>

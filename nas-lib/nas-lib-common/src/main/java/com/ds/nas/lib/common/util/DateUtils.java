@@ -28,7 +28,7 @@ public final class DateUtils extends DateUtil {
     public static Set<String> getPreDays(int days) {
         Set<String> result = new HashSet<>(days);
         result.add(DateUtils.today());
-        for (int i = 1; i < days; i++) {
+        for (int i = 1; i <= days; i++) {
             DateTime offset = DateUtils.offset(new Date(), DateField.DAY_OF_YEAR, -i);
             result.add(offset.toDateStr());
         }
@@ -44,7 +44,7 @@ public final class DateUtils extends DateUtil {
     public static Set<String> getAfterDays(int days) {
         Set<String> result = new HashSet<>(days);
         result.add(DateUtils.today());
-        for (int i = 1; i < days; i++) {
+        for (int i = 1; i <= days; i++) {
             DateTime offset = DateUtils.offset(new Date(), DateField.DAY_OF_YEAR, i);
             result.add(offset.toDateStr());
         }

@@ -32,7 +32,7 @@ public class DetectionPersonalInfoController {
     }
 
     @PostMapping("recentNucleicAcidRecordsQuery")
-    public Result<List<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request) {
+    public Result<List<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(@RequestBody RecentNucleicAcidRecordsQueryRequest request) {
         return detectionPersonalInfoService.recentNucleicAcidRecordsQuery(request);
     }
 

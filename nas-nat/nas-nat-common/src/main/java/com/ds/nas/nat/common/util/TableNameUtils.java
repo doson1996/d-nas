@@ -54,7 +54,7 @@ public class TableNameUtils {
      * @param date      日期 yyyy-MM-dd
      * @return 返回当前日期表名 tableName_yyyyMMdd
      */
-    private static String generateTableName(String tableName, String date) {
+    public static String generateTableName(String tableName, String date) {
         return tableName + TABLE_SEPARATOR + date.replaceAll(DATE_SEPARATOR, "");
     }
 
@@ -85,6 +85,20 @@ public class TableNameUtils {
         return tableNames;
     }
 
+    /**
+     * 获取后几天表名
+     *
+     * @param days 天数
+     * @return
+     */
+    public static Set<String> geAfterDaysTableName(String tableName, int days) {
+        Set<String> tableNames = new HashSet<>();
+        Set<String> preDays = DateUtils.getAfterDays(days);
+        for (String dateStr : preDays) {
+            tableNames.add(generateTableName(tableName, dateStr));
+        }
 
+        return tableNames;
+    }
 
 }

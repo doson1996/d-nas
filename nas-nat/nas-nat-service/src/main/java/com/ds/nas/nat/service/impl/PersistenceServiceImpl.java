@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Set;
 
 /**
  * @author ds
@@ -50,6 +51,25 @@ public class PersistenceServiceImpl implements PersistenceService {
 
         return success ? Result.ok("创建表[" + tableName + "]成功!") : Result.fail("创建表[" + tableName + "]失败!");
     }
+
+    @Override
+    public Result<StringResponse> batchCreateTableDpi(int days) {
+        try {
+            Set<String> tableNames = TableNameUtils.geAfterDaysTableName(dpiTableName, days);
+            for (String tableName : tableNames) {
+                if (StringUtils.isBlank(tableName) || checkTable(tableName)) {
+                    continue;
+                }
+
+                persistenceMapper.createTableDpi(tableName);
+            }
+        } catch (Exception e) {
+            log.error("PersistenceServiceImpl.batchCreateTableDpi ex:", e);
+        }
+
+        return Result.ok("创建表成功!");
+    }
+
 
     @Override
     public Result<StringResponse> createTable(TableInfo tableInfo) {

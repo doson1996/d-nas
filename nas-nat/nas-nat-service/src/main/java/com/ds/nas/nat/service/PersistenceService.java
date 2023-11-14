@@ -28,4 +28,11 @@ public interface PersistenceService {
      */
     Result<StringResponse> createTableDpi();
 
+    /**
+     * 创建detection_personal_info当前日期后多少天的表 detection_personal_info_yyyyMMdd
+     * @param days
+     * @return
+     */
+    Result<StringResponse> batchCreateTableDpi(int days);
+
 }

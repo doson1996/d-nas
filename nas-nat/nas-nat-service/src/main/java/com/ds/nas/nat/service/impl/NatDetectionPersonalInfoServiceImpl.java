@@ -33,7 +33,7 @@ import java.util.Set;
 public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectionPersonalInfoMapper, NatDetectionPersonalInfo>
         implements NatDetectionPersonalInfoService {
 
-    @Value("${table-name.dpi : nat_detection_personal_info}")
+    @Value("${table-name.dpi}")
     private String dpiTableName;
 
     @Resource
@@ -78,38 +78,28 @@ public class NatDetectionPersonalInfoServiceImpl extends ServiceImpl<NatDetectio
                 StringResponse.builder().withData(request.getIdCard()).build());
     }
 
+
+    /**
+     * SELECT t2.detection_mechanism,t2.detection_time,t2.detection_result from (
+     * SELECT * FROM nat_detection_personal_info_20231113 WHERE id_card = '231124193809292241'
+     * UNION ALL
+     * SELECT * FROM nat_detection_personal_info_20231114 WHERE id_card = '231124193809292241'
+     * UNION ALL
+     * SELECT * FROM nat_detection_personal_info_20231115 WHERE id_card = '231124193809292241'
+     * ) t1
+     * LEFT JOIN nat_detection_batch_info t2
+     * on t1.batch_no = t2.batch_no
+     *
+     * @param request
+     * @return
+     */
     @CheckParam
     @Override
     public Result<List<RecentNucleicAcid>> recentNucleicAcidRecordsQuery(RecentNucleicAcidRecordsQueryRequest request) {
-        List<RecentNucleicAcid> recentNucleicAcids = new ArrayList<>();
         String idCard = request.getIdCard();
         Integer days = request.getDays();
         Set<String> tableNames = TableNameUtils.getPreDaysTableName(dpiTableName, days);
-        for (String tableName : tableNames) {
-             NatDetectionPersonalInfo natDetectionPersonalInfo;
-            try {
-                natDetectionPersonalInfo = personalInfoMapper.selectByIdCard(tableName, idCard);
-            } catch (Exception e) {
-                log.error("NatDetectionPersonalInfoServiceImpl.recentNucleicAcidRecordsQuery ex:", e);
-                continue;
-            }
-            RecentNucleicAcid recentNucleicAcid = new RecentNucleicAcid();
-           // BeanUtil.copyProperties(natDetectionPersonalInfo, recentNucleicAcid);
-            recentNucleicAcids.add(recentNucleicAcid);
-        }
-
-
-        /**
-         * SELECT t2.detection_mechanism,t2.detection_time,t2.detection_result from (
-         * SELECT * FROM nat_detection_personal_info_20230313 WHERE id_card = '231124193809292241'
-         * UNION ALL
-         * SELECT * FROM nat_detection_personal_info_20230314 WHERE id_card = '231124193809292241'
-         * UNION ALL
-         * SELECT * FROM nat_detection_personal_info_20230328 WHERE id_card = '231124193809292241'
-         * ) t1
-         *  LEFT JOIN nat_detection_batch_info t2
-         * 	on t1.batch_no = t2.batch_no
-         */
+        List<RecentNucleicAcid> recentNucleicAcids = personalInfoMapper.selectRecentNucleicAcids(tableNames, idCard);
         return Result.okData(recentNucleicAcids);
     }
 
