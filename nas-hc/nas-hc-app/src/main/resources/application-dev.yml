@@ -5,6 +5,9 @@ server:
 env:
   host: ds.com
 
+param:
+  days: 5
+
 spring:
   application:
     name: nas-hc

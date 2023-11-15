@@ -2,10 +2,13 @@ package com.ds.nas.lib.common.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class RecentNucleicAcid {
+public class RecentNucleicAcid implements Serializable {
+
+    private static final long serialVersionUID = -3361299757978818383L;
 
     /**
      * 检测时间

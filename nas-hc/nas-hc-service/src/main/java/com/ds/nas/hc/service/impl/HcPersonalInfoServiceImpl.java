@@ -22,11 +22,15 @@ import com.ds.nas.lib.common.base.annotation.CheckParam;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.ResponseBuild;
 import com.ds.nas.lib.common.constant.HealthCodeState;
+import com.ds.nas.lib.common.entity.RecentNucleicAcid;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.util.StringUtils;
+import com.ds.nas.nat.api.dubbo.DetectionPersonalInfoProvider;
+import com.ds.nas.nat.api.io.request.RecentNucleicAcidRecordsQueryRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -54,11 +58,27 @@ public class HcPersonalInfoServiceImpl extends ServiceImpl<HcPersonalInfoMapper,
     @DubboReference(version = "1.0")
     private SmsProvider smsProvider;
 
+    @DubboReference(version = "1.0", timeout = 2000, retries = 0)
+    private DetectionPersonalInfoProvider detectionPersonalInfoProvider;
+
+    @Value("${param.days:5}")
+    private Integer days;
+
     @CheckParam
     @Override
     public Result<HealthCodeQueryResponse> queryByIdCard(HealthCodeQueryRequest request) {
         HealthCodeQueryResponse response = new HealthCodeQueryResponse();
         BeanUtil.copyProperties(qryHcPersonalInfo(request.getIdCard()), response);
+        try {
+            RecentNucleicAcidRecordsQueryRequest recentNucleicAcidRecordsQueryRequest = new RecentNucleicAcidRecordsQueryRequest();
+            recentNucleicAcidRecordsQueryRequest.setIdCard(request.getIdCard());
+            recentNucleicAcidRecordsQueryRequest.setDays(days);
+            Result<List<RecentNucleicAcid>> result = detectionPersonalInfoProvider.recentNucleicAcidRecordsQuery(recentNucleicAcidRecordsQueryRequest);
+            log.info("detectionPersonalInfoProvider.recentNucleicAcidRecordsQuery request：{}, result：{}", recentNucleicAcidRecordsQueryRequest, result);
+            response.setRecentNucleicAcidRecords(result.getData());
+        } catch (Exception e) {
+            log.error("查询最近检测记录异常：", e);
+        }
         ResponseBuild.onReturn(request, response);
         return Result.ok("查询成功", response);
     }
