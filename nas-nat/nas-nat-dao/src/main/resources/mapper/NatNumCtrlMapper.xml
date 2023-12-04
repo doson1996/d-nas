@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ds.nas.nat.dao.mapper.NatNumCtrlMapper">
+
+    <resultMap id="BaseResultMap" type="com.ds.nas.nat.dao.domain.NatNumCtrl">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="firstStart" column="first_start" jdbcType="INTEGER"/>
+            <result property="firstEnd" column="first_end" jdbcType="INTEGER"/>
+            <result property="interval" column="interval" jdbcType="INTEGER"/>
+            <result property="scenario" column="scenario" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,first_start,first_end,
+        interval,scenario
+    </sql>
+</mapper>
