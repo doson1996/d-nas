@@ -8,13 +8,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 号码生成控制一级表
- * @TableName nat_num_ctrl
+ * 批次号段控制表
+ * @TableName nat_num_ctrl_batch
  */
 @EqualsAndHashCode(callSuper = true)
-@TableName(value ="nat_num_ctrl")
+@TableName(value = "nat_num_ctrl_batch")
 @Data
-public class NatNumCtrl extends BaseDomain {
+public class NatNumCtrlBatch extends BaseDomain {
 
     /**
      * id
@@ -28,28 +28,23 @@ public class NatNumCtrl extends BaseDomain {
     private String scenario;
 
     /**
-     * 一级表号段起始
+     * 地区号
      */
-    private Integer firstStart;
+    private String areaCode;
 
     /**
-     * 一级表号段结束
+     * 号段起始
      */
-    private Integer firstEnd;
+    private Integer start;
 
     /**
-     * 号段增长间隔
+     * 号段结束
      */
-    private Integer step;
+    private Integer end;
 
     /**
-     * 是否启用缓存 0.否 1.启用
+     * 号段结束
      */
-    private Integer enableCache;
-
-    /**
-     * 一次缓存生成数量
-     */
-    private Integer cacheQuantity;
+    private Integer current;
 
 }
