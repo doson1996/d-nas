@@ -2,6 +2,7 @@ package com.ds.nas.nat.service;
 
 import com.ds.nas.lib.common.base.response.StringResponse;
 import com.ds.nas.lib.common.result.Result;
+import com.ds.nas.nat.api.io.request.GetNoRequest;
 import com.ds.nas.nat.api.io.request.NumCtrlCreateRequest;
 import com.ds.nas.nat.dao.domain.NatNumCtrl;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -19,5 +20,12 @@ public interface NatNumCtrlService extends IService<NatNumCtrl> {
      * @return
      */
     Result<StringResponse> create(NumCtrlCreateRequest request);
+
+    /**
+     * 获取号码
+     * @param request
+     * @return
+     */
+    Result<StringResponse> getNo(GetNoRequest request);
 
 }

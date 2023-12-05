@@ -43,7 +43,7 @@ public class NatNumCtrlBatch extends BaseDomain {
     private Integer end;
 
     /**
-     * 号段结束
+     * 当前号码
      */
     private Integer current;
 

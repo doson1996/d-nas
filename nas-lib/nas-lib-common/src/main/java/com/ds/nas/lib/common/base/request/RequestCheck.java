@@ -41,7 +41,7 @@ public class RequestCheck {
                         if (value == null)
                             throw new BusinessException(msg);
                         // 如果为字符串的情况
-                        if (value instanceof String && StringUtils.isBlank((String) value))
+                        if (value instanceof String && StringUtils.isEmpty((String) value))
                             throw new BusinessException(msg);
                     }
 

@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class NumCtrlCreateRequest extends BaseRequest {
+public class GetNoRequest extends BaseRequest {
 
     /**
      * 场景
@@ -21,31 +21,14 @@ public class NumCtrlCreateRequest extends BaseRequest {
     private String scenario;
 
     /**
-     * 号段增长步长
+     * 地区号
      */
     @Check(require = true)
-    private Integer step;
+    private String areaCode;
 
     /**
-     * 号段最大值
+     * 获取类型
      */
-    @Check(require = true)
-    private Integer maxNum;
-
-    /**
-     * 是否启用缓存 0.否 1.启用
-     */
-    @Check(require = true)
-    private Integer enableCache;
-
-    /**
-     * 一次缓存生成数量
-     */
-    private Integer cacheQuantity;
-
-    /**
-     * 描述
-     */
-    private String description;
+    private Integer type;
 
 }

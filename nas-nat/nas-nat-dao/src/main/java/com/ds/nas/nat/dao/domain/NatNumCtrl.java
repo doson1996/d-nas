@@ -9,10 +9,11 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 号码生成控制一级表
+ *
  * @TableName nat_num_ctrl
  */
 @EqualsAndHashCode(callSuper = true)
-@TableName(value ="nat_num_ctrl")
+@TableName(value = "nat_num_ctrl")
 @Data
 public class NatNumCtrl extends BaseDomain {
 
@@ -38,6 +39,11 @@ public class NatNumCtrl extends BaseDomain {
     private Integer firstEnd;
 
     /**
+     * 号段最大值
+     */
+    private Integer maxNum;
+
+    /**
      * 号段增长间隔
      */
     private Integer step;
@@ -51,5 +57,10 @@ public class NatNumCtrl extends BaseDomain {
      * 一次缓存生成数量
      */
     private Integer cacheQuantity;
+
+    /**
+     * 描述
+     */
+    private String description;
 
 }
