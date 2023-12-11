@@ -83,36 +83,24 @@ public class NatNumCtrlServiceImpl extends ServiceImpl<NatNumCtrlMapper, NatNumC
             no = natNumCtrl.getFirstStart();
 
             // 更新一级控制表 起始结束值
-            natNumCtrl.setFirstStart(natNumCtrl.getFirstEnd() + 1);
-            natNumCtrl.setFirstEnd(natNumCtrl.getFirstEnd() + natNumCtrl.getStep());
-            DBUtils.onUpdate(natNumCtrl);
-            numCtrlMapper.updateById(natNumCtrl);
+            updateCtrStartEnd(natNumCtrl);
         } else {
             if (enableCache == 1) {
                 Long len = redisUtil.lLen(RedisNatKey.NUM_LIST_KEY);
+                // 二级表序号当前值
+                Integer current = natNumCtrlBatch.getCurrent();
                 // 如果缓存中没有数据
                 if (len == 0) {
                     // 缓存个数 todo 改造成参数表
                     int count = 10;
-                    Integer current = natNumCtrlBatch.getCurrent();
                     // 如果当前值大于 缓存最大值- 缓存个数
                     if (current > natNumCtrlBatch.getEnd() - count) {
-                        // 更新二级控制表 起始结束值
-                        natNumCtrlBatch.setStart(natNumCtrl.getFirstStart());
-                        natNumCtrlBatch.setEnd(natNumCtrl.getFirstEnd());
-                        DBUtils.onUpdate(natNumCtrlBatch);
-                        numCtrlBatchMapper.updateById(natNumCtrlBatch);
-
-                        // 更新一级控制表 起始结束值
-                        natNumCtrl.setFirstStart(natNumCtrl.getFirstEnd() + 1);
-                        natNumCtrl.setFirstEnd(natNumCtrl.getFirstEnd() + natNumCtrl.getStep());
-                        DBUtils.onUpdate(natNumCtrl);
-                        numCtrlMapper.updateById(natNumCtrl);
+                        updateStartEnd(natNumCtrl, natNumCtrlBatch);
                     }
 
                     for (int i = 0; i < count; i++) {
-                        current++;
                         redisUtil.lLeftPush(RedisNatKey.NUM_LIST_KEY, String.valueOf(current));
+                        current++;
                     }
 
                     // 更新二级表current到缓存最大值
@@ -124,20 +112,15 @@ public class NatNumCtrlServiceImpl extends ServiceImpl<NatNumCtrlMapper, NatNumC
                 // 从缓存中取出数据
                 no = Integer.valueOf(redisUtil.lRightPop(RedisNatKey.NUM_LIST_KEY));
 
+                // 如果缓存中的值小于当前值，目前看不会重复，但会存在倒退
+                if (no < current) {
+                    // todo ？
+                }
+
             } else {
                 no = natNumCtrlBatch.getCurrent();
                 if (Objects.equals(no, natNumCtrlBatch.getEnd())) {
-                    // 更新二级控制表 起始结束值
-                    natNumCtrlBatch.setStart(natNumCtrl.getFirstStart());
-                    natNumCtrlBatch.setEnd(natNumCtrl.getFirstEnd());
-                    DBUtils.onUpdate(natNumCtrlBatch);
-                    numCtrlBatchMapper.updateById(natNumCtrlBatch);
-
-                    // 更新一级控制表 起始结束值
-                    natNumCtrl.setFirstStart(natNumCtrl.getFirstEnd() + 1);
-                    natNumCtrl.setFirstEnd(natNumCtrl.getFirstEnd() + natNumCtrl.getStep());
-                    DBUtils.onUpdate(natNumCtrl);
-                    numCtrlMapper.updateById(natNumCtrl);
+                    updateStartEnd(natNumCtrl, natNumCtrlBatch);
                 }
                 natNumCtrlBatch.setCurrent(no + 1);
                 DBUtils.onUpdate(natNumCtrlBatch);
@@ -147,6 +130,36 @@ public class NatNumCtrlServiceImpl extends ServiceImpl<NatNumCtrlMapper, NatNumC
 
         return Result.ok("获取号码成功",
                 StringResponse.builder().withData(String.valueOf(no)).build());
+    }
+
+    /**
+     * 更新一二级表开始结束标记
+     *
+     * @param natNumCtrl
+     * @param natNumCtrlBatch
+     */
+    private void updateStartEnd(NatNumCtrl natNumCtrl, NatNumCtrlBatch natNumCtrlBatch) {
+        // 更新一级控制表 起始结束值
+        updateCtrStartEnd(natNumCtrl);
+
+        // 更新二级控制表 起始结束值
+        natNumCtrlBatch.setStart(natNumCtrl.getFirstStart());
+        natNumCtrlBatch.setEnd(natNumCtrl.getFirstEnd());
+        DBUtils.onUpdate(natNumCtrlBatch);
+        numCtrlBatchMapper.updateById(natNumCtrlBatch);
+    }
+
+    /**
+     * 更新一级表开始结束标记
+     *
+     * @param natNumCtrl
+     */
+    private void updateCtrStartEnd(NatNumCtrl natNumCtrl) {
+        // 更新一级控制表 起始结束值
+        natNumCtrl.setFirstStart(natNumCtrl.getFirstEnd() + 1);
+        natNumCtrl.setFirstEnd(natNumCtrl.getFirstEnd() + natNumCtrl.getStep());
+        DBUtils.onUpdate(natNumCtrl);
+        numCtrlMapper.updateById(natNumCtrl);
     }
 
     /**
