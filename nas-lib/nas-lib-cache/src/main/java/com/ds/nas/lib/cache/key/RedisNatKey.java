@@ -22,4 +22,8 @@ public interface RedisNatKey extends RedisAppKey {
      */
     String BATCH_SEQUENCE_KEY = NAT_KEY_PREFIX + "batch:sequence" + SEPARATOR;
 
+    /**
+     * 生成序号缓存
+     */
+    String NUM_LIST_KEY = NAT_KEY_PREFIX + "num-list";
 }
