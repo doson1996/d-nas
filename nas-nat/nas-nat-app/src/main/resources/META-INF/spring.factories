@@ -1,2 +1,4 @@
 org.springframework.boot.SpringApplicationRunListener=\
-com.ds.nas.nat.app.MySpringApplicationRunListener
+com.ds.nas.nat.app.boot.MySpringApplicationRunListener
+org.springframework.context.ApplicationListener=\
+com.ds.nas.nat.app.boot.MyApplicationListener

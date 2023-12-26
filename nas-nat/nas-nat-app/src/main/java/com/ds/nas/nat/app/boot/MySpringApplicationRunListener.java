@@ -1,8 +1,11 @@
-package com.ds.nas.nat.app;
+package com.ds.nas.nat.app.boot;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
+import org.springframework.boot.availability.AvailabilityChangeEvent;
+import org.springframework.boot.availability.LivenessState;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 
@@ -45,6 +48,8 @@ public class MySpringApplicationRunListener implements SpringApplicationRunListe
 
     @Override
     public void started(ConfigurableApplicationContext context) {
+        context.publishEvent(new MyApplicationEvent(context));
+        AvailabilityChangeEvent.publish(context, LivenessState.CORRECT);
         log.info("started...");
     }
 
@@ -55,6 +60,8 @@ public class MySpringApplicationRunListener implements SpringApplicationRunListe
 
     @Override
     public void failed(ConfigurableApplicationContext context, Throwable exception) {
+        // 项目启动失败，发送邮件通知
         log.info("failed...");
     }
+
 }
