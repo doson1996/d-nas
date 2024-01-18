@@ -1,3 +1,5 @@
+org.springframework.context.ApplicationContextInitializer=\
+com.ds.nas.nat.app.boot.async.init.MyApplicationContextInitializer
 org.springframework.boot.SpringApplicationRunListener=\
 com.ds.nas.nat.app.boot.MySpringApplicationRunListener
 org.springframework.context.ApplicationListener=\
