@@ -83,8 +83,6 @@ dubbo:
     subscribed-services: nas-hc
   consumer:
     check: false  #关闭订阅服务是否启动的检查【检查时，没有服务提供者会报错】
-  provider:
-    filter: myFilter
 
 mybatis-plus:
   global-config:
