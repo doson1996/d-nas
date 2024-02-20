@@ -18,7 +18,7 @@ public class MyBean implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         log.info("myBean afterPropertiesSet start...");
-        TimeUnit.SECONDS.sleep(10);
+        // TimeUnit.SECONDS.sleep(10);
         log.info("myBean afterPropertiesSet start...");
     }
 

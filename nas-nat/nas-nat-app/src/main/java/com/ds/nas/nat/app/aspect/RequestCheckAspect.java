@@ -8,7 +8,6 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 /**
  * @author ds
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Order(10)
 @Aspect
-@Component
 public class RequestCheckAspect {
 
     /**

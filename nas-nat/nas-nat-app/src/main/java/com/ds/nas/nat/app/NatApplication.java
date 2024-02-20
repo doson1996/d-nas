@@ -1,5 +1,6 @@
 package com.ds.nas.nat.app;
 
+import com.ds.nas.nat.app.aspect.EnableRequestCheck;
 import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @date 2022/12/9
  * @description
  */
+@EnableRequestCheck
 @EnableDubbo
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"com.ds.nas.hc.api"})
