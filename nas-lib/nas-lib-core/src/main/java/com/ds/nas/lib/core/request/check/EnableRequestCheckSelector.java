@@ -1,4 +1,4 @@
-package com.ds.nas.nat.app.aspect;
+package com.ds.nas.lib.core.request.check;
 
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;

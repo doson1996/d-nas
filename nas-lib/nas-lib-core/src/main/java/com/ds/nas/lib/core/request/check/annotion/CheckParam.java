@@ -1,4 +1,4 @@
-package com.ds.nas.lib.common.base.annotation;
+package com.ds.nas.lib.core.request.check.annotion;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

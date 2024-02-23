@@ -18,7 +18,7 @@ import com.ds.nas.hc.dao.mapper.HcPersonalInfoMapper;
 import com.ds.nas.hc.service.HcPersonalInfoService;
 import com.ds.nas.lib.cache.key.RedisHcKey;
 import com.ds.nas.lib.cache.redis.RedisUtil;
-import com.ds.nas.lib.common.base.annotation.CheckParam;
+import com.ds.nas.lib.core.request.check.annotion.CheckParam;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.response.ResponseBuild;
 import com.ds.nas.lib.common.constant.HealthCodeState;
