@@ -2,7 +2,6 @@ package com.ds.nas.lib.core.request.check;
 
 import com.ds.nas.lib.core.request.check.annotion.CheckParam;
 import com.ds.nas.lib.common.base.request.BaseRequest;
-import com.ds.nas.lib.common.base.request.RequestCheck;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

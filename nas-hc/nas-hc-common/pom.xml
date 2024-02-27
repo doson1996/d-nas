@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.ds.nas</groupId>
-            <artifactId>nas-lib-common</artifactId>
+            <artifactId>nas-lib-core</artifactId>
         </dependency>
     </dependencies>
 </project>

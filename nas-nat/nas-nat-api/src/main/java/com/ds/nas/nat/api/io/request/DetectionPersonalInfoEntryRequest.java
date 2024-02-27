@@ -1,7 +1,8 @@
 package com.ds.nas.nat.api.io.request;
 
-import com.ds.nas.lib.common.base.annotation.Check;
+
 import com.ds.nas.lib.common.base.request.BaseRequest;
+import com.ds.nas.lib.core.request.check.annotion.Check;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

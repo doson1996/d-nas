@@ -1,12 +1,14 @@
-package com.ds.nas.lib.common.base.request;
+package com.ds.nas.lib.core.request.check;
 
 import cn.hutool.core.util.IdcardUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.PhoneUtil;
-import com.ds.nas.lib.common.base.annotation.Check;
+
+import com.ds.nas.lib.common.base.request.BaseRequest;
 import com.ds.nas.lib.common.exception.BusinessException;
 import com.ds.nas.lib.common.result.ResultMsg;
 import com.ds.nas.lib.common.util.StringUtils;
+import com.ds.nas.lib.core.request.check.annotion.Check;
 
 import java.lang.reflect.Field;
 

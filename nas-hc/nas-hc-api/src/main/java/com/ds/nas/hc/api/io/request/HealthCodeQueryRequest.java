@@ -1,9 +1,10 @@
 package com.ds.nas.hc.api.io.request;
 
-import com.ds.nas.lib.common.base.annotation.Check;
+
 import com.ds.nas.lib.common.base.request.BaseRequest;
 //import io.swagger.annotations.ApiModel;
 //import io.swagger.annotations.ApiModelProperty;
+import com.ds.nas.lib.core.request.check.annotion.Check;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
