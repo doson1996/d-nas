@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.ds.nas</groupId>
-        <artifactId>nas-nat</artifactId>
+        <artifactId>nas-rc</artifactId>
         <version>${rversion}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>nas-nat-service</artifactId>
+    <artifactId>nas-rc-service</artifactId>
     <version>${rversion}</version>
     <packaging>jar</packaging>
-    <name>nas-nat-service</name>
+    <name>nas-rc-service</name>
 
     <dependencies>
         <dependency>
             <groupId>com.ds.nas</groupId>
-            <artifactId>nas-nat-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ds.nas</groupId>
-            <artifactId>nas-hc-api</artifactId>
+            <artifactId>nas-rc-api</artifactId>
         </dependency>
 
         <dependency>
@@ -31,5 +27,5 @@
             <artifactId>nas-lib-cache</artifactId>
         </dependency>
     </dependencies>
-
+    
 </project>

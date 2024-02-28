@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ds.nas</groupId>
+        <artifactId>dependencies</artifactId>
+        <version>${rversion}</version>
+        <relativePath>../dependencies/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>nas-rc</artifactId>
+    <packaging>pom</packaging>
+    <name>nas-rc</name>
+    <description>资源中心</description>
+
+    <modules>
+        <module>nas-rc-api</module>
+        <module>nas-rc-app</module>
+        <module>nas-rc-common</module>
+        <module>nas-rc-dao</module>
+        <module>nas-rc-service</module>
+    </modules>
+
+</project>

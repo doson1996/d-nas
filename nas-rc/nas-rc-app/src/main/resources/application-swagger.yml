@@ -3,7 +3,7 @@ spring:
   swagger:
     enable: true
     base-package: com.ds
-    description: nas-nat
+    description: nas-rc
     author: ds
     # 响应状态 code：message
     response-messages:

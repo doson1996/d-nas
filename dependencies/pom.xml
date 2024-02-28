@@ -48,6 +48,7 @@
         <module>../nas-hc</module>
         <module>../nas-lib</module>
         <module>../nas-nat</module>
+        <module>../nas-rc</module>
     </modules>
 
     <!-- 依赖管理 -->
@@ -199,6 +200,37 @@
             <dependency>
                 <groupId>com.ds.nas</groupId>
                 <artifactId>nas-nat-service</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <!-- rc -->
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-rc-api</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-rc-app</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-rc-common</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-rc-dao</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-rc-service</artifactId>
                 <version>${rversion}</version>
             </dependency>
 
