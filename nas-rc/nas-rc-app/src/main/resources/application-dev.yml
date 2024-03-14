@@ -7,15 +7,15 @@ env:
 
 spring:
   application:
-    name: nas-nat
+    name: nas-rc
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${env.host}:3306/d_nas_nat?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://${env.host}:3306/d_nas_rc?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: 123456
     hikari:
-      pool-name: nas-nat-pool
+      pool-name: nas-rc-pool
       #最小空闲连接数 <类似于线程池的核心线程数>
       minimum-idle: 5
       #最大连接数 <类似于线程池的最大线程数>
@@ -76,7 +76,7 @@ dubbo:
     address: spring-cloud://${env.host}:8848/?username=nacos&password=nacos
     #check: false  #关闭注册中心是否启动的相关检查,false表示不检查注册中心是否启动，就不会报错
   cloud:
-    subscribed-services: nas-hc
+    subscribed-services: nas-rc
   consumer:
     check: false  #关闭订阅服务是否启动的检查【检查时，没有服务提供者会报错】
 
