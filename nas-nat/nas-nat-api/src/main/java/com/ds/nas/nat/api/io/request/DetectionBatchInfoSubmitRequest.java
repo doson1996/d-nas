@@ -2,6 +2,7 @@ package com.ds.nas.nat.api.io.request;
 
 import com.ds.nas.lib.common.base.request.BaseRequest;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author ds
@@ -9,6 +10,7 @@ import lombok.Data;
  * @description 提交
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class DetectionBatchInfoSubmitRequest extends BaseRequest {
 
     /**
