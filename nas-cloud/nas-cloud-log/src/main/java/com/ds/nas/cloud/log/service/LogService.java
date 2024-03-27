@@ -14,6 +14,6 @@ public interface LogService {
      * @param request
      * @return
      */
-    Result<String> save(LogRequest request);
+    Result<String> insert(LogRequest request);
 
 }

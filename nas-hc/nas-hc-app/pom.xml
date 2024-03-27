@@ -20,11 +20,6 @@
             <groupId>com.ds.nas</groupId>
             <artifactId>nas-hc-service</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.ds.nas</groupId>
-            <artifactId>nas-lib-core</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
