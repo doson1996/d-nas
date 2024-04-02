@@ -37,7 +37,7 @@ public class StrategyContext {
     }
 
     /**
-     * 获取默认侧率
+     * 获取默认策略
      * @return
      */
     public static SendStrategy getDefaultStrategy() {

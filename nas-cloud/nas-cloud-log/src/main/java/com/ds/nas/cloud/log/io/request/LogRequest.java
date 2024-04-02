@@ -15,6 +15,11 @@ import java.util.Map;
 public class LogRequest extends BaseRequest {
 
     /**
+     * 存储类型 0.mongo  1.mysql  2.redis
+     */
+    private  Integer type;
+
+    /**
      * 日志json
      */
     private String logJson;
