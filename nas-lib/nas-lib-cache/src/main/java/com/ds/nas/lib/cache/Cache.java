@@ -18,17 +18,17 @@ public interface Cache {
 
     /**
      * 批量删除
-     * @param key
+     * @param keys
      * @return
      */
-    Long delete(Collection<String> key);
+    Integer delete(Collection<String> keys);
 
     /**
      * 设置指定 key 的值
      * @param key
      * @param value
      */
-    void set(String key, Object value);
+    Boolean set(String key, Object value);
 
     /**
      * 获取指定 key 的值
