@@ -11,18 +11,19 @@
     </parent>
 
     <artifactId>nas-cloud-log</artifactId>
+    <packaging>pom</packaging>
     <description>日志平台</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
+    <modules>
+        <module>nas-cloud-log-api</module>
+        <module>nas-cloud-log-app</module>
+        <module>nas-cloud-log-common</module>
+        <module>nas-cloud-log-dao</module>
+        <module>nas-cloud-log-service</module>
+    </modules>
 
-        <dependency>
-            <groupId>com.ds.nas</groupId>
-            <artifactId>nas-lib-cache</artifactId>
-        </dependency>
+    <dependencies>
+
     </dependencies>
 
 </project>

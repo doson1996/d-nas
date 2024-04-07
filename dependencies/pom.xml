@@ -112,6 +112,36 @@
                 <version>${rversion}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-cloud-log-api</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-cloud-log-app</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-cloud-log-common</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-cloud-log-dao</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ds.nas</groupId>
+                <artifactId>nas-cloud-log-service</artifactId>
+                <version>${rversion}</version>
+            </dependency>
+
             <!-- auth -->
             <dependency>
                 <groupId>com.ds.nas</groupId>
