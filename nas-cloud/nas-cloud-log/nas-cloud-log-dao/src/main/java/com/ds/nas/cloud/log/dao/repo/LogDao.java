@@ -2,6 +2,8 @@ package com.ds.nas.cloud.log.dao.repo;
 
 import com.ds.nas.cloud.log.dao.entity.LogInfo;
 
+import java.util.List;
+
 /**
  * @author ds
  * @date 2024/3/25 23:50
@@ -14,5 +16,7 @@ public interface LogDao {
      * @return
      */
     boolean insertOne(LogInfo logInfo);
+
+    List<LogInfo> findAll(String app);
 
 }

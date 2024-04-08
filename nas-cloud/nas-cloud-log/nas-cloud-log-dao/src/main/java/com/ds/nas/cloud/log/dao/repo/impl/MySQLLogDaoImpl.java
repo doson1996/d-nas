@@ -6,6 +6,8 @@ import com.ds.nas.lib.common.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -28,6 +30,11 @@ public class MySQLLogDaoImpl implements LogDao {
         }
 
         return result;
+    }
+
+    @Override
+    public List<LogInfo> findAll(String app) {
+        return new ArrayList<>();
     }
 
 }

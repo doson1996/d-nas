@@ -12,6 +12,8 @@ import com.ds.nas.lib.core.context.SpringContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author ds
  * @date 2024/3/25 23:55
@@ -24,8 +26,9 @@ public class LogServiceImpl implements LogService {
     public Result<String> insert(LogRequest request) {
         String type = LogType.getType(request.getType());
         // 默认存储在mongo
-        if (StringUtils.isBlank(type))
+        if (StringUtils.isBlank(type)) {
             type = LogType.MONGO.getType();
+        }
         LogDao logDao = (LogDao) SpringContext.getContext().getBean(type + "LogDao");
 
         LogInfo logInfo = new LogInfo();
@@ -37,6 +40,12 @@ public class LogServiceImpl implements LogService {
         }
 
         return Result.fail();
+    }
+
+    @Override
+    public Result<List<LogInfo>> findAll(String app) {
+        LogDao logDao = (LogDao) SpringContext.getContext().getBean(LogType.MONGO.getType() + "LogDao");
+        return Result.okData(logDao.findAll(app));
     }
 
 }
