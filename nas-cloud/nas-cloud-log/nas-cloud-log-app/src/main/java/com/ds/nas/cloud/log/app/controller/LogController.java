@@ -1,7 +1,7 @@
 package com.ds.nas.cloud.log.app.controller;
 
-import com.ds.nas.cloud.log.app.io.request.LogRequest;
-import com.ds.nas.cloud.log.app.service.LogService;
+import com.ds.nas.cloud.log.api.io.request.LogRequest;
+import com.ds.nas.cloud.log.service.LogService;
 import com.ds.nas.lib.common.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

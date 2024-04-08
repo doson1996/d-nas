@@ -11,4 +11,16 @@
 
     <artifactId>nas-cloud-log-app</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.ds.nas</groupId>
+            <artifactId>nas-cloud-log-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ds.nas</groupId>
+            <artifactId>nas-cloud-log-service</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

@@ -1,5 +1,6 @@
 package com.ds.nas.cloud.log.dao.repo;
 
+import com.ds.nas.cloud.log.dao.entity.LogInfo;
 
 /**
  * @author ds
@@ -7,6 +8,11 @@ package com.ds.nas.cloud.log.dao.repo;
  */
 public interface LogDao {
 
-    String insertOne(String logJson);
+    /**
+     * 插入一条日志
+     * @param logInfo
+     * @return
+     */
+    boolean insertOne(LogInfo logInfo);
 
 }
