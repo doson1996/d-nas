@@ -1,6 +1,7 @@
 package com.ds.nas.cloud.log.api.io.request;
 
 import com.ds.nas.lib.common.base.request.BaseRequest;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,6 +12,7 @@ import java.util.Map;
  * @date 2024/3/25 23:52
  */
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = true)
 public class LogRequest extends BaseRequest {
 

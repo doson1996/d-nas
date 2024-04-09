@@ -54,7 +54,7 @@ dubbo:
     address: spring-cloud://${env.host}:8848/?username=nacos&password=nacos
     #check: false  #关闭注册中心是否启动的相关检查,false表示不检查注册中心是否启动，就不会报错
   cloud:
-    subscribed-services:  nas-cloud-log
+    subscribed-services: nas-cloud-log
   consumer:
     check: false  #关闭订阅服务是否启动的检查【检查时，没有服务提供者会报错】
 

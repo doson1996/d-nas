@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  * @description
  */
 @Slf4j
-@Component
+//@Component
 public class HcMockTask {
 
     @Resource
