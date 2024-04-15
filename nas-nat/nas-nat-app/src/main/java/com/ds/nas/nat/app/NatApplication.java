@@ -13,6 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @author ds
  * @date 2022/12/9
  * @description
+ * 启动参数：-javaagent:/Users/ds/IdeaProjects/ds-agent/target/agent.jar
  */
 @Slf4j
 @EnableRequestCheck

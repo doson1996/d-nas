@@ -24,6 +24,7 @@ public class LogMock {
         for (int i = 0; i < 10; i++) {
             LogRequest logRequest = LogRequest.builder()
                     .logJson("{\"idCard\":\"411103197002196435\",\"requestId\":\"" + i + "\",\"requestTime\":\"2023-03-21 16:10:12\"}")
+                    .type(2)
                     .build();
             logProvider.save(logRequest);
         }
