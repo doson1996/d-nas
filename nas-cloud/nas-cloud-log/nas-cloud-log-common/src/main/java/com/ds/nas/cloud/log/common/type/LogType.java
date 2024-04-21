@@ -13,7 +13,9 @@ public enum LogType {
 
     MYSQL(1, "mysql"),
 
-    REDIS(2, "redis");
+    REDIS(2, "redis"),
+
+    ES(3, "es");
 
     @Getter
     private Integer code;

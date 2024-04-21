@@ -9,8 +9,13 @@ spring:
   application:
     name: nas-cloud-log
   data:
+  #Mongo配置
     mongodb:
       uri: mongodb://localhost:27017/nas-cloud-log
+  #ES 配置
+  elasticsearch:
+    rest:
+      uris: localhost:9200
   #Redis 配置
   redis:
     # Redis服务器地址
