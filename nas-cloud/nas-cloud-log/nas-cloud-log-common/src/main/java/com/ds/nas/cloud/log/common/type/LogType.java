@@ -7,6 +7,7 @@ import lombok.Getter;
  * @date 2024/4/2
  * @description
  */
+@Getter
 public enum LogType {
 
     MONGO(0, "mongo"),
@@ -17,11 +18,9 @@ public enum LogType {
 
     ES(3, "es");
 
-    @Getter
-    private Integer code;
+    private final Integer code;
 
-    @Getter
-    private String type;
+    private final String type;
 
     LogType(Integer code, String type) {
         this.code = code;

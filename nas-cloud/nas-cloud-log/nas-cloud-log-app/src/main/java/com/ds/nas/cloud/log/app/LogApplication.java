@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 /**
  * @author ds
@@ -14,6 +15,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDubbo
 @EnableDiscoveryClient
+@EnableElasticsearchRepositories(basePackages = "com.ds.nas.cloud.log.dao.repo")
 @DubboComponentScan(basePackages = {"com.ds.nas.cloud.log.service.provider"})
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class},
         scanBasePackages = {
