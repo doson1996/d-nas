@@ -1,10 +1,8 @@
 package com.ds.nas.cloud.log.dao.repo.impl;
 
-import com.alibaba.nacos.shaded.com.google.gson.JsonObject;
 import com.ds.nas.cloud.log.dao.entity.LogInfo;
 import com.ds.nas.cloud.log.dao.repo.LogDao;
 import com.ds.nas.lib.cache.redis.RedisUtil;
-import com.ds.nas.lib.common.util.DateUnit;
 import com.ds.nas.lib.common.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;

@@ -2,10 +2,14 @@ package com.ds.nas.hc.app.aspect;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.ds.nas.cloud.log.api.dubbo.CloudLogProvider;
+import com.ds.nas.cloud.log.api.io.request.LogRequest;
 import com.ds.nas.hc.api.dubbo.HcRequestLogProvider;
 import com.ds.nas.hc.dao.domain.HcRequestLog;
 import com.ds.nas.lib.common.base.db.DBUtils;
+import com.ds.nas.lib.common.base.request.RequestPrivate;
 import com.ds.nas.lib.common.constant.MqTopic;
+import com.ds.nas.lib.common.log.LogType;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.result.ResultCode;
 import com.ds.nas.lib.mq.producer.Producer;
@@ -41,6 +45,9 @@ public class LogAspect {
 
     @DubboReference(version = "1.0")
     private HcRequestLogProvider hcRequestLogProvider;
+
+    @DubboReference(version = "1.0")
+    private CloudLogProvider cloudLogProvider;
 
     @Resource
     @Qualifier("kafka")
@@ -97,10 +104,21 @@ public class LogAspect {
             hcLog.setResponseIp(InetAddress.getLocalHost().getHostAddress());
             hcLog.setExecutionTime(executionTime);
             DBUtils.onCreate(hcLog);
-           // logToFile(hcLog);
+            logToCloud(hcLog);
         } catch (Exception e) {
             log.error("记录日志异常: {}", e.getMessage());
         }
+    }
+
+    private void logToCloud(HcRequestLog hcLog) {
+        LogRequest logRequest = LogRequest.builder()
+                                          .logJson(JSON.toJSONString(hcLog))
+                                          .type(3).build();
+        RequestPrivate requestPrivate = new RequestPrivate();
+        requestPrivate.setRequestApp("nas-hc");
+        logRequest.setRequestPrivate(requestPrivate);
+
+        cloudLogProvider.save(logRequest);
     }
 
     /**
