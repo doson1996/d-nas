@@ -7,8 +7,6 @@ import com.ds.nas.cloud.log.dao.repo.ESLogInfoDao;
 import com.ds.nas.cloud.log.dao.repo.LogDao;
 import com.ds.nas.lib.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;

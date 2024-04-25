@@ -9,7 +9,6 @@ import com.ds.nas.hc.dao.domain.HcRequestLog;
 import com.ds.nas.lib.common.base.db.DBUtils;
 import com.ds.nas.lib.common.base.request.RequestPrivate;
 import com.ds.nas.lib.common.constant.MqTopic;
-import com.ds.nas.lib.common.log.LogType;
 import com.ds.nas.lib.common.result.Result;
 import com.ds.nas.lib.common.result.ResultCode;
 import com.ds.nas.lib.mq.producer.Producer;
@@ -112,8 +111,8 @@ public class LogAspect {
 
     private void logToCloud(HcRequestLog hcLog) {
         LogRequest logRequest = LogRequest.builder()
-                                          .logJson(JSON.toJSONString(hcLog))
-                                          .type(3).build();
+                .logJson(JSON.toJSONString(hcLog))
+                .type(3).build();
         RequestPrivate requestPrivate = new RequestPrivate();
         requestPrivate.setRequestApp("nas-hc");
         logRequest.setRequestPrivate(requestPrivate);
@@ -123,6 +122,7 @@ public class LogAspect {
 
     /**
      * 记录日志到日志文件
+     *
      * @param hcLog
      */
     private void logToFile(HcRequestLog hcLog) {
@@ -158,20 +158,20 @@ public class LogAspect {
             return "unknown";
         }
         String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Forwarded-For");
         }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Real-IP");
         }
 
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
 
