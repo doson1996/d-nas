@@ -23,7 +23,6 @@ spring:
     schema: classpath:sql/schema.sql
     #data: classpath:sql/data.sql
     continueOnError: true
-
     hikari:
       pool-name: nas-nat-pool
       #最小空闲连接数 <类似于线程池的核心线程数>
