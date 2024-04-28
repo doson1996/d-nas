@@ -1,5 +1,4 @@
-#
-号码生成控制一级表
+-- 号码生成控制一级表
 CREATE TABLE `nat_num_ctrl`
 (
     `id`             int(11) NOT NULL AUTO_INCREMENT,
@@ -20,8 +19,7 @@ CREATE TABLE `nat_num_ctrl`
     UNIQUE KEY `uk_scenario` (`scenario`) USING BTREE COMMENT '场景唯一索引'
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-#
-批次号段控制表
+-- 批次号段控制表
 CREATE TABLE `nat_num_ctrl_batch`
 (
     `id`          int(11) NOT NULL AUTO_INCREMENT,

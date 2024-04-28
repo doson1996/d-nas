@@ -15,9 +15,11 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${env.host}:3306/d_nas_nat?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    # 项目启动时自动创建数据库
+    url: jdbc:mysql://${env.host}:3306/d_nas_nat?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&createDatabaseIfNotExist=true
     username: root
     password: 123456
+    # 项目启动时自动创建表
     sqlScriptEncoding: utf-8
     initializationMode: always
     schema: classpath:sql/schema.sql

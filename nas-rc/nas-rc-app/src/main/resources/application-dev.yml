@@ -11,9 +11,16 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${env.host}:3306/d_nas_rc?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    # 项目启动时自动创建数据库
+    url: jdbc:mysql://${env.host}:3306/d_nas_rc?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&createDatabaseIfNotExist=true
     username: root
     password: 123456
+    # 项目启动时自动创建表
+    sqlScriptEncoding: utf-8
+    initializationMode: always
+    schema: classpath:sql/schema.sql
+    #data: classpath:sql/data.sql
+    continueOnError: true
     hikari:
       pool-name: nas-rc-pool
       #最小空闲连接数 <类似于线程池的核心线程数>
