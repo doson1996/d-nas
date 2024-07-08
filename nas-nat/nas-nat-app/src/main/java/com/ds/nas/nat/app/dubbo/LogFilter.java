@@ -11,24 +11,18 @@ import java.util.Map;
  * @description
  */
 @Slf4j
-public class LogFilter implements Filter {
+public class LogFilter extends BizFilter {
 
     @Override
-    public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        before(invocation);
-        Result result = invoker.invoke(invocation);
-        after(result, invocation);
-        return result;
-    }
-
-    private void before(Invocation invocation) {
+    public void before(Invocation invocation) {
         Object[] arguments = invocation.getArguments();
         Map<String, String> attachments = invocation.getAttachments();
         invocation.setAttachment("app", "nas");
         log.info("before, attachments = {}", attachments);
     }
 
-    private void after(Result result, Invocation invocation) {
+    @Override
+    public void after(Result result, Invocation invocation) {
         String app = invocation.getAttachment("app", "default-nas");
         Object rep = result.getValue();
         log.info("after, app = {}, result = {}", app, rep);
