@@ -16,9 +16,9 @@ spring:
     username: root
     password: 123456
     # 项目启动时自动创建表
-    sqlScriptEncoding: utf-8
-    initializationMode: always
-    schema: classpath:sql/schema.sql
+#    sqlScriptEncoding: utf-8
+#    initializationMode: always
+#    schema: classpath:sql/schema.sql
     #data: classpath:sql/data.sql
     continueOnError: true
     hikari:
@@ -54,6 +54,27 @@ spring:
         max-idle: 8
         # 连接池中的最小空闲连接 默认 0
         min-idle: 0
+    # redisson配置
+    redisson:
+      # 如果该值为false，系统将不会创建RedissionClient的bean。
+      enabled: true
+      # mode的可用值为，single/cluster/sentinel/master-slave
+      mode: single
+      # single: 单机模式
+      #   address: redis://localhost:6379
+      # cluster: 集群模式
+      #   每个节点逗号分隔，同时每个节点前必须以redis://开头。
+      #   address: redis://localhost:6379,redis://localhost:6378,...
+      # sentinel:
+      #   每个节点逗号分隔，同时每个节点前必须以redis://开头。
+      #   address: redis://localhost:6379,redis://localhost:6378,...
+      # master-slave:
+      #   每个节点逗号分隔，第一个为主节点，其余为从节点。同时每个节点前必须以redis://开头。
+      #   address: redis://localhost:6379,redis://localhost:6378,...
+      address: redis://${env.host}:6379
+      # redis 密码，空可以不填。
+      password: 123456
+      database: 0
   cloud:
     nacos:
       discovery:

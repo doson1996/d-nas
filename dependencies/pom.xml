@@ -350,6 +350,12 @@
                 <artifactId>swagger-spring-boot-starter</artifactId>
                 <version>${rversion}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.ds</groupId>
+                <artifactId>aegis-spring-boot-starter</artifactId>
+                <version>${rversion}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -1,4 +1,4 @@
-package com.ds.nas.nat.app.controller.advice;
+package com.ds.nas.lib.core.adivce;
 
 import com.ds.nas.lib.common.exception.AuthException;
 import com.ds.nas.lib.common.exception.BusinessException;
@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public Result<Object> handlerException(Exception e) {
-        log.error("系统异常-->> {}" , e.getMessage());
+        log.error("系统异常-->>" + e);
 
         return Result.builder()
                 .withCode(ResultEnum.INTERNAL_SERVER_ERROR.getCode())
@@ -98,7 +98,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public Result<Void> handlerMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
-        String msg = "文件大小超出最大上传限制";
+        String msg = "文件大小超出最大上传限制!";
         return Result.fail(msg);
     }
 
